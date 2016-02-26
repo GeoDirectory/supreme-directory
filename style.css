@@ -9,8 +9,8 @@ Version: 1.0.0
 */
 
 body.sd {
-    background-color : #fff;
-    font-size:15px;
+    background-color: #fff;
+    font-size: 15px;
 }
 
 .sd .site-header {
@@ -20,14 +20,14 @@ body.sd {
 }
 
 .sd header .container {
-    width:100%;
-    padding:0 23px;
-    margin:0;
+    width: 100%;
+    padding: 0 23px;
+    margin: 0;
 }
 
-.sd.home .site-header, .sd.sd-location .site-header  {
+.sd.home .site-header, .sd.sd-location .site-header {
     background-color: transparent;
-    box-shadow:none;
+    box-shadow: none;
     border: 0 none;
     position: absolute;
     top: 0;
@@ -36,12 +36,12 @@ body.sd {
 }
 
 .sd.admin-bar .site-header {
-    top:32px;
+    top: 32px;
 }
 
-.sd .content-404, .sd .content-archive , .sd .content-single, .sd.home .content-box.content-single article.hentry {
-    margin:0 0 30px 0;
-    border:0;
+.sd .content-404, .sd .content-archive, .sd .content-single, .sd.home .content-box.content-single article.hentry {
+    margin: 0 0 30px 0;
+    border: 0;
 }
 
 .sd .site-logo-wrap .site-logo {
@@ -93,7 +93,7 @@ body.sd {
     text-align: center;
 }
 
-.home .featured-area, .sd-location .featured-area  {
+.home .featured-area, .sd-location .featured-area {
     height: 100vh;
 }
 
@@ -113,28 +113,30 @@ body.sd {
     top: 0;
     width: 100%;
     z-index: 0;
-    overflow:hidden;
+    overflow: hidden;
 }
 
 .header-wrap {
     position: relative;
     z-index: 5;
 }
+
 .header-wrap {
     flex-grow: 1;
     justify-content: center;
     display: flex;
     flex-direction: column;
     margin: 0 auto;
-    padding: 0 30px;}
+    padding: 0 30px;
+}
 
 .sd .featured-area h1.entry-title {
     color: #fff;
     font-size: 60px;
     position: relative;
     z-index: 1111;
-    padding:0;
-    margin:0;
+    padding: 0;
+    margin: 0;
 }
 
 .sd h1.entry-title {
@@ -147,7 +149,7 @@ body.sd {
     line-height: 35px;
 }
 
-.sd.home .geodir-loc-bar, .sd.sd-location .geodir-loc-bar  {
+.sd.home .geodir-loc-bar, .sd.sd-location .geodir-loc-bar {
     border: 0 none;
     margin: 0 0 20px;
 }
@@ -159,13 +161,13 @@ body.sd {
     max-width: 590px;
 }
 
-.sd.home .geodir-search, .sd.sd-location .geodir-search  {
+.sd.home .geodir-search, .sd.sd-location .geodir-search {
     margin-right: 0;
 }
 
-.sd .geodir-search input, .sd .geodir-search select  {
+.sd .geodir-search input, .sd .geodir-search select {
     height: 45px;
-    padding:10px 12px;
+    padding: 10px 12px;
 }
 
 .sd.home .geodir-search input.showFilters, .sd.sd-location .geodir-search input.showFilters {
@@ -190,15 +192,15 @@ body.sd {
 }
 
 .sd.home .featured-area .geodir-cat-list-tax, .sd.sd-location .featured-area .geodir-cat-list-tax {
-    display:none;
+    display: none;
 }
 
 .geodir-cat-list ul {
     list-style: outside none none;
-    margin-top:20px;
+    margin-top: 20px;
 }
 
-.sd.home .cat-link, .sd.home .geodir-pcat-show img, .sd.sd-location .cat-link, .sd.sd-location .geodir-pcat-show img  {
+.sd.home .cat-link, .sd.home .geodir-pcat-show img, .sd.sd-location .cat-link, .sd.sd-location .geodir-pcat-show img {
     display: block;
     margin: 0 auto;
 }
@@ -222,7 +224,7 @@ body.sd {
     margin-right: 0;
 }
 
-.sd.home .geodir-pcat-show img, .sd.sd-location .geodir-pcat-show img  {
+.sd.home .geodir-pcat-show img, .sd.sd-location .geodir-pcat-show img {
     height: 35px !important;
 }
 
@@ -246,22 +248,19 @@ body.sd {
     border-bottom: 0 none;
 }
 
-.sd .content-box.content-single .commentlist-wrap, .sd .content .content-single.entry .commentlist-wrap, .sd #geodir_content.content-single .commentlist-wrap, .sd .sidebar .content-single.widget .commentlist-wrap, .sd .dt-sidebar .content-single.widget .commentlist-wrap, .sd .geodir-content-right .content-single.geodir-company_info .commentlist-wrap, .sd .geodir_full_page .content-single.geodir-category-list-in .commentlist-wrap, .sd .geodir_full_page .content-single.geodir-loc-bar .commentlist-wrap, .sd .geodir_preview_section form.content-single .commentlist-wrap, .sd .content-box.content-single #respond, .sd .content .content-single.entry #respond, .sd #geodir_content.content-single #respond, .sd .sidebar .content-single.widget #respond, .sd .dt-sidebar .content-single.widget #respond, .sd .geodir-content-right .content-single.geodir-company_info #respond, .sd .geodir_full_page .content-single.geodir-category-list-in #respond, .sd .geodir_full_page .content-single.geodir-loc-bar #respond, .sd .geodir_preview_section form.content-single #respond, .sd .content-box.content-single p.no-comments, .sd .content .content-single.entry p.no-comments, .sd #geodir_content.content-single p.no-comments, .sd .sidebar .content-single.widget p.no-comments, .sd .dt-sidebar .content-single.widget p.no-comments, .sd .geodir-content-right .content-single.geodir-company_info p.no-comments, .sd .geodir_full_page .content-single.geodir-category-list-in p.no-comments, .sd .geodir_full_page .content-single.geodir-loc-bar p.no-comments, .sd .geodir_preview_section form.content-single p.no-comments, .sd .content-box.content-single article.hentry, .sd .content .content-single.entry article.hentry, .sd #geodir_content.content-single article.hentry, .sd .sidebar .content-single.widget article.hentry, .sd .dt-sidebar .content-single.widget article.hentry, .sd .geodir-content-right .content-single.geodir-company_info article.hentry, .sd .geodir_full_page .content-single.geodir-category-list-in article.hentry, .sd .geodir_full_page .content-single.geodir-loc-bar article.hentry, .sd .geodir_preview_section form.content-single article.hentry, .sd .content-archive .commentlist-wrap, .sd .content-archive #respond, .sd .content-archive p.no-comments, .sd .content-archive article.hentry
-{
+.sd .content-box.content-single .commentlist-wrap, .sd .content .content-single.entry .commentlist-wrap, .sd #geodir_content.content-single .commentlist-wrap, .sd .sidebar .content-single.widget .commentlist-wrap, .sd .dt-sidebar .content-single.widget .commentlist-wrap, .sd .geodir-content-right .content-single.geodir-company_info .commentlist-wrap, .sd .geodir_full_page .content-single.geodir-category-list-in .commentlist-wrap, .sd .geodir_full_page .content-single.geodir-loc-bar .commentlist-wrap, .sd .geodir_preview_section form.content-single .commentlist-wrap, .sd .content-box.content-single #respond, .sd .content .content-single.entry #respond, .sd #geodir_content.content-single #respond, .sd .sidebar .content-single.widget #respond, .sd .dt-sidebar .content-single.widget #respond, .sd .geodir-content-right .content-single.geodir-company_info #respond, .sd .geodir_full_page .content-single.geodir-category-list-in #respond, .sd .geodir_full_page .content-single.geodir-loc-bar #respond, .sd .geodir_preview_section form.content-single #respond, .sd .content-box.content-single p.no-comments, .sd .content .content-single.entry p.no-comments, .sd #geodir_content.content-single p.no-comments, .sd .sidebar .content-single.widget p.no-comments, .sd .dt-sidebar .content-single.widget p.no-comments, .sd .geodir-content-right .content-single.geodir-company_info p.no-comments, .sd .geodir_full_page .content-single.geodir-category-list-in p.no-comments, .sd .geodir_full_page .content-single.geodir-loc-bar p.no-comments, .sd .geodir_preview_section form.content-single p.no-comments, .sd .content-box.content-single article.hentry, .sd .content .content-single.entry article.hentry, .sd #geodir_content.content-single article.hentry, .sd .sidebar .content-single.widget article.hentry, .sd .dt-sidebar .content-single.widget article.hentry, .sd .geodir-content-right .content-single.geodir-company_info article.hentry, .sd .geodir_full_page .content-single.geodir-category-list-in article.hentry, .sd .geodir_full_page .content-single.geodir-loc-bar article.hentry, .sd .geodir_preview_section form.content-single article.hentry, .sd .content-archive .commentlist-wrap, .sd .content-archive #respond, .sd .content-archive p.no-comments, .sd .content-archive article.hentry {
     background-color: #fff;
     font-size: 15px;
     margin: 0 0 30px;
     padding: 0;
-    box-shadow:none;	
+    box-shadow: none;
 }
 
-.sd .entry-content{
+.sd .entry-content {
     margin: 30px auto;
 }
 
-
 /* Search & Listings Page */
-
 
 .sd.search.geodir-page #site-header, .sd.archive.geodir-page #site-header {
     display: flex;
@@ -279,7 +278,7 @@ body.sd {
     top: 32px;
 }
 
-.sd.search.geodir-page .entry-header, .sd.archive.geodir-page .entry-header  {
+.sd.search.geodir-page .entry-header, .sd.archive.geodir-page .entry-header {
     display: none;
 }
 
@@ -287,13 +286,13 @@ body.sd {
     margin: 61px auto 0;
     padding: 0;
     width: 100%;
-    display:flex;
+    display: flex;
 }
 
 .sd.search.geodir-page #geodir_content, .sd.archive.geodir-page #geodir_content {
     flex-basis: 60%;
     width: 60% !important;
-    padding:20px;
+    padding: 20px;
 }
 
 .sd.search.geodir-page .geodir-listings-sidebar-right, .sd.archive.geodir-page .geodir-listings-sidebar-right {
@@ -310,13 +309,13 @@ body.sd {
     top: 93px;
 }
 
-.sd.search.geodir-page #sticky_map_gd_listing_map, .sd.archive.geodir-page #sticky_map_gd_listing_map{
+.sd.search.geodir-page #sticky_map_gd_listing_map, .sd.archive.geodir-page #sticky_map_gd_listing_map {
     min-height: calc(100vh - 61px) !important;
 }
 
 .sd.search.geodir-page #gd_listing_map_wrapper, .sd.search.geodir-page #gd_listing_map, .sd.search.geodir-page #gd_listing_map_loading_div,
 .sd.archive.geodir-page #gd_listing_map_wrapper, .sd.archive.geodir-page #gd_listing_map, .sd.archive.geodir-page #gd_listing_map_loading_div {
-    height:calc(100vh - 61px) !important;
+    height: calc(100vh - 61px) !important;
 }
 
 .sd.search.geodir-page .geodir-loc-bar, .sd.archive.geodir-page .geodir-loc-bar {
@@ -364,12 +363,10 @@ body.sd {
     display: none;
 }
 
-
 .sd .geodir_category_list_view li.geodir-gridview .geodir-content, .sd .geodir_category_list_view li.geodir-gridview .geodir-addinfo {
     margin: 0;
     width: 100%;
 }
-
 
 .sd .geodir_category_list_view li.geodir-gridview h3 {
     font-size: 18px;
@@ -377,14 +374,13 @@ body.sd {
     margin: 0;
 }
 
-.sd .geodir_category_list_view li.geodir-gridview  .geodir-content .geodir_more_info {
+.sd .geodir_category_list_view li.geodir-gridview .geodir-content .geodir_more_info {
     padding: 0 0 5px;
 }
 
-
 .sd .geodir_category_list_view li.geodir-gridview .geodir-rating {
     max-width: 90px !important;
-    float:left;
+    float: left;
     margin: 2px 5px 0 0;
 }
 
@@ -392,7 +388,9 @@ body.sd {
     display: none;
 }
 
-.sd .geodir_category_list_view li.geodir-gridview .geodir-addinfo a.geodir-pcomments {font-size:16px;}
+.sd .geodir_category_list_view li.geodir-gridview .geodir-addinfo a.geodir-pcomments {
+    font-size: 16px;
+}
 
 .sd .geodir_category_list_view li.geodir-gridview .geodir-addinfo a.geodir-pcomments::before {
     content: " -";
@@ -423,6 +421,7 @@ body.sd {
 .sd.search.geodir-page .geodir-loc-bar, .sd.archive.geodir-page .geodir-loc-bar {
     border: 0 none;
 }
+
 .sd.search.geodir-page .geodir-loc-bar-in, .sd.archive.geodir-page .geodir-loc-bar-in {
     background: transparent none repeat scroll 0 0;
     border: 0 none;
@@ -440,7 +439,7 @@ body.sd {
 
 .sd.search.geodir-page .geodir-search, .sd.archive.geodir-page .geodir-search {
     margin-right: 0;
-    width:100%;
+    width: 100%;
 }
 
 .sd.search.geodir-page .search_text, .sd.archive.geodir-page .search_text, .sd.search.geodir-page .snear, .sd.archive.geodir-page .snear {
@@ -453,7 +452,7 @@ body.sd {
     width: 26%;
 }
 
-.sd.search.geodir-page .geodir-search input[type="button"], .sd.search.geodir-page .geodir-search input[type="submit"], 
+.sd.search.geodir-page .geodir-search input[type="button"], .sd.search.geodir-page .geodir-search input[type="submit"],
 .sd.archive.geodir-page .geodir-search input[type="button"], .sd.archive.geodir-page .geodir-search input[type="submit"] {
     margin: 0.5%;
     width: 10%;
@@ -466,28 +465,28 @@ body.sd {
 }
 
 .sd-mobile-search-controls {
-    display:none;
-    margin-bottom:10px;
+    display: none;
+    margin-bottom: 10px;
     overflow: hidden;
 }
 
-a#showMap, a#showSearch, a#hideMap  {
-    width: auto;	
-    font-size:16px;
+a#showMap, a#showSearch, a#hideMap {
+    width: auto;
+    font-size: 16px;
 }
 
 a#showMap, a#hideMap {
-    float:right;
-    position:relative;
-    z-index:1;
+    float: right;
+    position: relative;
+    z-index: 1;
 }
 
-a#showSearch, a#hideMap  {
-    float:left;
+a#showSearch, a#hideMap {
+    float: left;
 }
 
 a#hideMap {
-    display:none;
+    display: none;
 }
 
 /* Details page */
@@ -511,9 +510,10 @@ a#hideMap {
 }
 
 .sd .author-link {
-    margin:10px 0 0;
-    text-align:center;
+    margin: 10px 0 0;
+    text-align: center;
 }
+
 .sd .author-link a {
     color: #82888a;
     font-size: 18px;
@@ -538,7 +538,7 @@ a#hideMap {
 .sd .sd-address {
     float: left;
     margin: 0 20px 0 0;
-    color:#82888a;
+    color: #82888a;
 }
 
 .sd .sd-ratings {
@@ -589,8 +589,8 @@ a#hideMap {
 }
 
 .sd-detail-cta {
-    float:right;
-    width:28%;
+    float: right;
+    width: 28%;
 }
 
 a.dt-btn {
@@ -598,8 +598,9 @@ a.dt-btn {
     margin: 0 auto;
     width: 100%;
 }
+
 a.dt-btn:visited {
-    color:#ffffff;
+    color: #ffffff;
 }
 
 .sd-detail-cta .fa-envelope {
@@ -624,8 +625,7 @@ a.dt-btn:visited {
     width: 54px;
 }
 
-
-.sd.single.geodir-page #geodir_content, .sd.sd-preview #geodir_content{
+.sd.single.geodir-page #geodir_content, .sd.sd-preview #geodir_content {
     width: 63%;
 }
 
@@ -642,12 +642,12 @@ h2.comments-title {
     font-size: 1.7em;
 }
 
-.sd.single.geodir-page #gd-sidebar-wrapper, .sd.sd-preview #gd-sidebar-wrapper  {
+.sd.single.geodir-page #gd-sidebar-wrapper, .sd.sd-preview #gd-sidebar-wrapper {
     margin-left: 9%;
     width: 28%;
 }
 
-.sd.single.geodir-page #geodir-post-gallery a, .sd.sd-preview #geodir-post-gallery a  {
+.sd.single.geodir-page #geodir-post-gallery a, .sd.sd-preview #geodir-post-gallery a {
     border: 0 none;
     margin: 0;
     width: 33.3333%;
@@ -663,7 +663,6 @@ h2.comments-title {
     margin: 30px 0 20px;
 }
 
-
 /* Preview Page */
 
 .geodir_preview_section {
@@ -676,8 +675,8 @@ h2.comments-title {
 }
 
 .sd .featured-area .geodir_preview_section h5.geodir_information {
-    color:#fff;
-    font-size:20px;	
+    color: #fff;
+    font-size: 20px;
 }
 
 .geodir_preview_section form {
@@ -687,9 +686,7 @@ h2.comments-title {
     margin-bottom: 0;
 }
 
-
 /* Blog Archive Page */
-
 
 .sd.blog .content-box.content-single article.hentry {
     border: 0 none;
@@ -700,22 +697,22 @@ h2.comments-title {
 }
 
 .sd.blog .content-box.content-single article.hentry:nth-child(3n+3) {
-    margin-right: 0 ;
+    margin-right: 0;
 }
-
 
 .sd.blog .content-box.content-single {
     margin: 60px 0;
     overflow: hidden;
 }
 
-.sd.blog .content-box.content-single article.hentry .container{
+.sd.blog .content-box.content-single article.hentry .container {
     width: 100%;
 }
 
 .sd.blog .entry-content {
     margin: 20px auto 0;
 }
+
 .sd.blog article h2.entry-title {
     font-size: 25px;
     padding: 0;
@@ -727,15 +724,10 @@ h2.comments-title {
 }
 
 .nav-links a, .nav-links a:last-child {
-    border:0 none;
+    border: 0 none;
 }
 
-
-
-
-
 /* AUTHOR PAGE  */
-
 
 .sd.author .avatar {
     border-radius: 60px;
@@ -743,214 +735,201 @@ h2.comments-title {
     width: 120px;
 }
 
-
-
-
-
-
-
 /* RESPONSIVE STUFF */
-
 
 @media all and (min-width: 768px) and (max-width: 1280px) {
 
-.sd.single.geodir-page .featured-area, .sd.sd-preview .featured-area {
-    height: 60vh;
+    .sd.single.geodir-page .featured-area, .sd.sd-preview .featured-area {
+        height: 60vh;
+    }
+
+    .sd.search.geodir-page .search_text, .sd.archive.geodir-page .search_text, .sd.search.geodir-page .snear, .sd.archive.geodir-page .snear {
+        margin: 0.5%;
+        width: 29%;
+    }
+
+    .sd.search.geodir-page .geodir-search select, .sd.archive.geodir-page .geodir-search select {
+        margin: 0.5%;
+        width: 26%;
+    }
+
+    .sd.search.geodir-page .geodir-search input[type="button"], .sd.search.geodir-page .geodir-search input[type="submit"],
+    .sd.archive.geodir-page .geodir-search input[type="button"], .sd.archive.geodir-page .geodir-search input[type="submit"] {
+        margin: 0.5%;
+        width: 12%;
+    }
 }
 
-.sd.search.geodir-page .search_text, .sd.archive.geodir-page .search_text, .sd.search.geodir-page .snear, .sd.archive.geodir-page .snear {
-    margin: 0.5%;
-    width: 29%;
-}
+@media (max-width: 992px) {
+    .sd.archive.geodir-page aside#gd-sidebar-wrapper, .sd.search.geodir-page aside#gd-sidebar-wrapper {
+        visibility: hidden;
+    }
 
-.sd.search.geodir-page .geodir-search select, .sd.archive.geodir-page .geodir-search select {
-    margin: 0.5%;
-    width: 26%;
-}
+    .sd.search.geodir-page .gd_rating_show, .sd.archive.geodir-page .gd_rating_show {
+        z-index: 0;
+    }
 
-.sd.search.geodir-page .geodir-search input[type="button"], .sd.search.geodir-page .geodir-search input[type="submit"], 
-.sd.archive.geodir-page .geodir-search input[type="button"], .sd.archive.geodir-page .geodir-search input[type="submit"] {
-    margin: 0.5%;
-    width: 12%;
-}
-}
+    .sd.search.geodir-page #geodir_content, .sd.archive.geodir-page #geodir_content {
+        flex-basis: 100%;
+        width: 100% !important;
+    }
 
+    .sd-mobile-search-controls {
+        display: block;
+    }
 
-@media (max-width: 992px){ 
-.sd.archive.geodir-page aside#gd-sidebar-wrapper, .sd.search.geodir-page aside#gd-sidebar-wrapper {
-    visibility: hidden;
-}
+    .sd.archive.geodir-page .geodir_advanced_search_widget, .sd.search.geodir-page .geodir_advanced_search_widget {
+        display: none;
+    }
 
-.sd.search.geodir-page .gd_rating_show, .sd.archive.geodir-page .gd_rating_show{
-    z-index:0;
-}
+    .sd.single.geodir-page .featured-area, .sd.sd-preview .featured-area {
+        height: 50vh;
+    }
 
-.sd.search.geodir-page #geodir_content, .sd.archive.geodir-page #geodir_content {
-    flex-basis: 100%;
-    width: 100% !important;
-}
+    .sd.single.geodir-page #gd-sidebar-wrapper, .sd.sd-preview #gd-sidebar-wrapper {
+        margin-left: 0;
+    }
 
-.sd-mobile-search-controls {
-    display: block;
-}
+    .sd .sd-detail-author {
+        margin: 10px 30px 0 0;
+    }
 
-.sd.archive.geodir-page .geodir_advanced_search_widget, .sd.search.geodir-page .geodir_advanced_search_widget {
-    display:none;
-}
+    .sd .author-avatar, .sd .author-avatar img {
+        height: 50px;
+        width: 50px;
+    }
 
+    .sd .sd-address {
+        float: none;
+    }
 
-.sd.single.geodir-page .featured-area, .sd.sd-preview .featured-area {
-    height: 50vh;
-}
+    .sd-detail-cat-links img {
+        display: inline;
+        margin: 0 5px 0 0;
+        max-height: 20px;
+        float: left;
+    }
 
-.sd.single.geodir-page #gd-sidebar-wrapper, .sd.sd-preview #gd-sidebar-wrapper {
-    margin-left: 0;
-}
+    .sd-detail-cat-links .cat-link {
+        font-size: 18px;
+    }
 
-.sd .sd-detail-author {
-    margin: 10px 30px 0 0;
-}
+    .sd .sd-detail-cta .geodir-addtofav {
+        height: 40px;
+    }
 
-.sd .author-avatar, .sd .author-avatar img {
-    height: 50px;
-    width: 50px;
-}
-
-.sd .sd-address {
-    float: none;
-}
-
-.sd-detail-cat-links img {
-    display: inline;
-    margin: 0 5px 0 0;
-    max-height: 20px;
-    float: left;
-}
-
-.sd-detail-cat-links .cat-link {
-    font-size: 18px;
-}
-
-.sd .sd-detail-cta .geodir-addtofav {
-    height: 40px;
-}
-
-.sd .sd-detail-cta .geodir-addtofav a .fa {
-    font-size: 40px;
-    width: 44px;
-}
-
-}
-
-@media all and (max-width:668px) {
-
-.sd.home .featured-area {
-    display: block;
-    height: auto;
-    padding: 100px 0 30px;
-}
-
-.sd .featured-area h1.entry-title {
-    font-size: 27px;
-    margin-bottom: 15px;
-}
-
-.sd .entry-subtitle {
-    font-size: 15px;
-    line-height:normal;
-}
-
-.sd.home .search_text, .sd.sd-location .search_text, .sd.home .snear, .sd.sd-location .geodir-page .snear {
-    margin: 0.5%;
-    width: 28%;
-}
-
-.sd.home .geodir-search select, .sd.sd-location .geodir-search select {
-    margin: 0.5%;
-    width: 23%;
-}
-
-.sd.home .geodir-search input[type="button"], .sd.sd-location .geodir-search input[type="submit"] {
-    margin: 0.5%;
-    width: 17%;
-}
-
-.sd.home .cat-link, .sd.sd-location .cat-link {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.home-more {
-    display: none;
-}
-
-.sd .geodir_category_list_view li.gridview_onethird, 
-.sd .geodir_category_list_view li.gridview_onefourth,
-.sd .geodir_category_list_view li.gridview_onefifth  {
-    margin: 0;
-    width: 100%;
-}
-
-.sd .sd-detail-author {
-    margin: -130px 30px 0 0;
-    position: absolute;
-    z-index: 99999999999;
-    display: block;
-}
-
-.sd .author-link a {
-    color: #fff;
-    font-size: 18px;
-    text-shadow: 1px 1px #000;
-}
-
-.sd .sd-detail-info {
-    float: none;
-    overflow: hidden;
-}
-
-.sd-detail-cta {
-    float: none;
-    width: 100%;
-    margin: 40px 0 0 0;
-    clear: both;
-}
+    .sd .sd-detail-cta .geodir-addtofav a .fa {
+        font-size: 40px;
+        width: 44px;
+    }
 
 }
 
-@media all and (max-width:375px) {
+@media all and (max-width: 668px) {
 
+    .sd.home .featured-area {
+        display: block;
+        height: auto;
+        padding: 100px 0 30px;
+    }
 
-a#showMap, a#showSearch, a#hideMap {
-    font-size: 13px;
+    .sd .featured-area h1.entry-title {
+        font-size: 27px;
+        margin-bottom: 15px;
+    }
+
+    .sd .entry-subtitle {
+        font-size: 15px;
+        line-height: normal;
+    }
+
+    .sd.home .search_text, .sd.sd-location .search_text, .sd.home .snear, .sd.sd-location .geodir-page .snear {
+        margin: 0.5%;
+        width: 28%;
+    }
+
+    .sd.home .geodir-search select, .sd.sd-location .geodir-search select {
+        margin: 0.5%;
+        width: 23%;
+    }
+
+    .sd.home .geodir-search input[type="button"], .sd.sd-location .geodir-search input[type="submit"] {
+        margin: 0.5%;
+        width: 17%;
+    }
+
+    .sd.home .cat-link, .sd.sd-location .cat-link {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .home-more {
+        display: none;
+    }
+
+    .sd .geodir_category_list_view li.gridview_onethird,
+    .sd .geodir_category_list_view li.gridview_onefourth,
+    .sd .geodir_category_list_view li.gridview_onefifth {
+        margin: 0;
+        width: 100%;
+    }
+
+    .sd .sd-detail-author {
+        margin: -130px 30px 0 0;
+        position: absolute;
+        z-index: 99999999999;
+        display: block;
+    }
+
+    .sd .author-link a {
+        color: #fff;
+        font-size: 18px;
+        text-shadow: 1px 1px #000;
+    }
+
+    .sd .sd-detail-info {
+        float: none;
+        overflow: hidden;
+    }
+
+    .sd-detail-cta {
+        float: none;
+        width: 100%;
+        margin: 40px 0 0 0;
+        clear: both;
+    }
+
 }
 
-.sd.search.geodir-page .search_text, .sd.archive.geodir-page .search_text, .sd.search.geodir-page .snear, .sd.archive.geodir-page .snear,
-.sd.search.geodir-page .geodir-search select, .sd.archive.geodir-page .geodir-search select,
-.sd.search.geodir-page .geodir-search input[type="button"], .sd.search.geodir-page .geodir-search input[type="submit"], 
-.sd.archive.geodir-page .geodir-search input[type="button"], .sd.archive.geodir-page .geodir-search input[type="submit"] {
-    width: 100%;
-}
+@media all and (max-width: 375px) {
 
-.sd .geodir_category_list_view li.gridview_onehalf {
-    margin: 0;
-    width: 100%;
-}
+    a#showMap, a#showSearch, a#hideMap {
+        font-size: 13px;
+    }
 
-.sd.home .geodir-search input[type="text"], .sd.home .geodir-search select, .sd.home .geodir-search input[type="button"],
-.sd.location .geodir-search input[type="text"], .sd.location .geodir-search select, .sd.location .geodir-search input[type="button"] {
-    width: 100%;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-}
+    .sd.search.geodir-page .search_text, .sd.archive.geodir-page .search_text, .sd.search.geodir-page .snear, .sd.archive.geodir-page .snear,
+    .sd.search.geodir-page .geodir-search select, .sd.archive.geodir-page .geodir-search select,
+    .sd.search.geodir-page .geodir-search input[type="button"], .sd.search.geodir-page .geodir-search input[type="submit"],
+    .sd.archive.geodir-page .geodir-search input[type="button"], .sd.archive.geodir-page .geodir-search input[type="submit"] {
+        width: 100%;
+    }
 
-.sd.home .cat-link, .sd.location .cat-link {
-    display:none;
-}
+    .sd .geodir_category_list_view li.gridview_onehalf {
+        margin: 0;
+        width: 100%;
+    }
 
+    .sd.home .geodir-search input[type="text"], .sd.home .geodir-search select, .sd.home .geodir-search input[type="button"],
+    .sd.location .geodir-search input[type="text"], .sd.location .geodir-search select, .sd.location .geodir-search input[type="button"] {
+        width: 100%;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+    }
 
-
+    .sd.home .cat-link, .sd.location .cat-link {
+        display: none;
+    }
 
 }

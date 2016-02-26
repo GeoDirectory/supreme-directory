@@ -9,35 +9,38 @@
  * @package GeoDirectory
  */
 // get header
-get_header();?>
-<div class="featured-area">
-	<div class="featured-img" <?php 
-		if ( has_post_thumbnail() ) { // check if the post has a Post Thumbnail assigned to it.
-		$full_image_url = wp_get_attachment_image_src( get_post_thumbnail_id(), 'full' );		
-		?> style="background-image: url(<?php echo $full_image_url[0]; ?>);" <?php }
-	?>>
-	
-	</div>
-	<div class="header-wrap">
-		<?php
-		if ( is_singular() ) {
-			?>
-			<h1 class="entry-title"><?php echo do_shortcode('[gd_current_location_name]'); ?></h1>
-			<?php
-		} else {
-			?>
-			<h2 class="entry-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-			<?php
-		} if ( get_post_meta( get_the_ID(), 'subtitle', true ) ) { echo '<div class="entry-subtitle">'.get_post_meta( get_the_ID(), 'subtitle', true ).'</div>'; }
-		?>
-		
-		<?php 
-				echo do_shortcode('[gd_advanced_search]');
-				echo do_shortcode('[gd_popular_post_category category_limit=5]');
-				echo '<div class="home-more"><a href="#geodir_content"><i class="fa fa-chevron-down"></i></a></div>';
-		 ?>
-	</div>	
-</div>
+get_header(); ?>
+    <div class="featured-area">
+        <div class="featured-img" <?php
+        if (has_post_thumbnail()) { // check if the post has a Post Thumbnail assigned to it.
+            $full_image_url = wp_get_attachment_image_src(get_post_thumbnail_id(), 'full');
+            ?> style="background-image: url(<?php echo $full_image_url[0]; ?>);" <?php }
+        ?>>
+
+        </div>
+        <div class="header-wrap">
+            <?php
+            if (is_singular()) {
+                ?>
+                <h1 class="entry-title"><?php echo do_shortcode('[gd_current_location_name]'); ?></h1>
+            <?php
+            } else {
+                ?>
+                <h2 class="entry-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+            <?php
+            }
+            if (get_post_meta(get_the_ID(), 'subtitle', true)) {
+                echo '<div class="entry-subtitle">' . get_post_meta(get_the_ID(), 'subtitle', true) . '</div>';
+            }
+            ?>
+
+            <?php
+            echo do_shortcode('[gd_advanced_search]');
+            echo do_shortcode('[gd_popular_post_category category_limit=5]');
+            echo '<div class="home-more"><a href="#geodir_content"><i class="fa fa-chevron-down"></i></a></div>';
+            ?>
+        </div>
+    </div>
 <?php
 ###### WRAPPER OPEN ######
 /** This action is documented in geodirectory-templates/add-listing.php */
