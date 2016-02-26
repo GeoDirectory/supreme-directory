@@ -1,0 +1,956 @@
+/*
+Theme Name: Supreme Directory
+Theme URI: http://wpgeodirectory.com/
+Description: A Supreme Child Theme for Directory Starter
+Author: GeoDirectory
+Author URI: http://wpgeodirectory.com/
+Template: directory-starter
+Version: 1.0.0
+*/
+
+body.sd {
+    background-color : #fff;
+    font-size:15px;
+}
+
+.sd .site-header {
+    border: 0 none;
+    box-shadow: none;
+    height: 61px;
+}
+
+.sd header .container {
+    width:100%;
+    padding:0 23px;
+    margin:0;
+}
+
+.sd.home .site-header, .sd.sd-location .site-header  {
+    background-color: transparent;
+    box-shadow:none;
+    border: 0 none;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 1111;
+}
+
+.sd.admin-bar .site-header {
+    top:32px;
+}
+
+.sd .content-404, .sd .content-archive , .sd .content-single, .sd.home .content-box.content-single article.hentry {
+    margin:0 0 30px 0;
+    border:0;
+}
+
+.sd .site-logo-wrap .site-logo {
+    height: 21px;
+    margin: 20px 0;
+    overflow: hidden;
+}
+
+.sd #primary-nav ul li a {
+    height: 61px;
+    line-height: 61px;
+}
+
+#primary-nav ul .sub-menu {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: none;
+    border-image: none;
+    border-style: none;
+    border-width: 0;
+    box-shadow: none;
+}
+
+.featured-area::before {
+    background-color: black;
+    bottom: 0;
+    content: "";
+    left: 0;
+    opacity: 0.3;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 2;
+}
+
+.single-gd_place .featured-area::before {
+    opacity: 0;
+}
+
+.featured-area {
+    align-items: center;
+    display: flex;
+    min-height: 350px;
+    flex-direction: column;
+    padding: 32px 0;
+    position: relative;
+    text-align: center;
+}
+
+.home .featured-area, .sd-location .featured-area  {
+    height: 100vh;
+}
+
+.sd.single.geodir-page .featured-area, .sd.sd-preview .featured-area {
+    height: 65vh;
+}
+
+.featured-img {
+    background-color: #f9f9f9;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.075);
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 0;
+    overflow:hidden;
+}
+
+.header-wrap {
+    position: relative;
+    z-index: 5;
+}
+.header-wrap {
+    flex-grow: 1;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    padding: 0 30px;}
+
+.sd .featured-area h1.entry-title {
+    color: #fff;
+    font-size: 60px;
+    position: relative;
+    z-index: 1111;
+    padding:0;
+    margin:0;
+}
+
+.sd h1.entry-title {
+    font-size: 30px;
+}
+
+.sd .entry-subtitle {
+    color: #fff;
+    font-size: 20px;
+    line-height: 35px;
+}
+
+.sd.home .geodir-loc-bar, .sd.sd-location .geodir-loc-bar  {
+    border: 0 none;
+    margin: 0 0 20px;
+}
+
+.sd.home .geodir-loc-bar-in, .sd.sd-location .geodir-loc-bar-in {
+    background: transparent none repeat scroll 0 0;
+    border: 0 none;
+    margin: 0 auto;
+    max-width: 590px;
+}
+
+.sd.home .geodir-search, .sd.sd-location .geodir-search  {
+    margin-right: 0;
+}
+
+.sd .geodir-search input, .sd .geodir-search select  {
+    height: 45px;
+    padding:10px 12px;
+}
+
+.sd.home .geodir-search input.showFilters, .sd.sd-location .geodir-search input.showFilters {
+    display: none;
+}
+
+.sd .near-compass {
+    color: #ccc;
+    cursor: pointer;
+    margin: 7px 0 0 15px;
+}
+
+.sd .near-compass:hover {
+    color: #ed6d62;
+}
+
+.sd.home .featured-area .geodir-category-list-in, .sd.sd-location .featured-area .geodir-category-list-in {
+    background: transparent none repeat scroll 0 0;
+    border: 0 none;
+    margin-top: 0;
+    padding: 0;
+}
+
+.sd.home .featured-area .geodir-cat-list-tax, .sd.sd-location .featured-area .geodir-cat-list-tax {
+    display:none;
+}
+
+.geodir-cat-list ul {
+    list-style: outside none none;
+    margin-top:20px;
+}
+
+.sd.home .cat-link, .sd.home .geodir-pcat-show img, .sd.sd-location .cat-link, .sd.sd-location .geodir-pcat-show img  {
+    display: block;
+    margin: 0 auto;
+}
+
+.sd.home .geodir-pcat-show > a, .home-more a, .sd.sd-location .geodir-pcat-show > a {
+    color: #fff;
+}
+
+.sd.home .geodir-pcat-show, .sd.sd-location .geodir-pcat-show {
+    background: rgba(0, 0, 0, 0.5) none repeat scroll 0 center;
+    border-radius: 10px;
+    width: 18.4%;
+    padding: 10px;
+}
+
+.sd.home .geodir-pcat-show:hover, .sd.sd-location .geodir-pcat-show:hover {
+    background: rgba(0, 0, 0, 0.2) none repeat scroll 0 center;
+}
+
+.sd.home .geodir-pcat-show:last-child, .sd.sd-location .geodir-pcat-show:last-child {
+    margin-right: 0;
+}
+
+.sd.home .geodir-pcat-show img, .sd.sd-location .geodir-pcat-show img  {
+    height: 35px !important;
+}
+
+.geodir-cat-list {
+    color: #fff;
+    font-size: 16px;
+}
+
+.geodir-cat-list-more {
+    display: none;
+}
+
+.home-more {
+    bottom: 0;
+    font-size: 50px;
+    position: absolute;
+    right: 46%;
+}
+
+.sd h3.widget-title, .sd h1.entry-title, .sd h2.entry-title, .sd h2.comments-title, .sd #comments h3#reply-title {
+    border-bottom: 0 none;
+}
+
+.sd .content-box.content-single .commentlist-wrap, .sd .content .content-single.entry .commentlist-wrap, .sd #geodir_content.content-single .commentlist-wrap, .sd .sidebar .content-single.widget .commentlist-wrap, .sd .dt-sidebar .content-single.widget .commentlist-wrap, .sd .geodir-content-right .content-single.geodir-company_info .commentlist-wrap, .sd .geodir_full_page .content-single.geodir-category-list-in .commentlist-wrap, .sd .geodir_full_page .content-single.geodir-loc-bar .commentlist-wrap, .sd .geodir_preview_section form.content-single .commentlist-wrap, .sd .content-box.content-single #respond, .sd .content .content-single.entry #respond, .sd #geodir_content.content-single #respond, .sd .sidebar .content-single.widget #respond, .sd .dt-sidebar .content-single.widget #respond, .sd .geodir-content-right .content-single.geodir-company_info #respond, .sd .geodir_full_page .content-single.geodir-category-list-in #respond, .sd .geodir_full_page .content-single.geodir-loc-bar #respond, .sd .geodir_preview_section form.content-single #respond, .sd .content-box.content-single p.no-comments, .sd .content .content-single.entry p.no-comments, .sd #geodir_content.content-single p.no-comments, .sd .sidebar .content-single.widget p.no-comments, .sd .dt-sidebar .content-single.widget p.no-comments, .sd .geodir-content-right .content-single.geodir-company_info p.no-comments, .sd .geodir_full_page .content-single.geodir-category-list-in p.no-comments, .sd .geodir_full_page .content-single.geodir-loc-bar p.no-comments, .sd .geodir_preview_section form.content-single p.no-comments, .sd .content-box.content-single article.hentry, .sd .content .content-single.entry article.hentry, .sd #geodir_content.content-single article.hentry, .sd .sidebar .content-single.widget article.hentry, .sd .dt-sidebar .content-single.widget article.hentry, .sd .geodir-content-right .content-single.geodir-company_info article.hentry, .sd .geodir_full_page .content-single.geodir-category-list-in article.hentry, .sd .geodir_full_page .content-single.geodir-loc-bar article.hentry, .sd .geodir_preview_section form.content-single article.hentry, .sd .content-archive .commentlist-wrap, .sd .content-archive #respond, .sd .content-archive p.no-comments, .sd .content-archive article.hentry
+{
+    background-color: #fff;
+    font-size: 15px;
+    margin: 0 0 30px;
+    padding: 0;
+    box-shadow:none;	
+}
+
+.sd .entry-content{
+    margin: 30px auto;
+}
+
+
+/* Search & Listings Page */
+
+
+.sd.search.geodir-page #site-header, .sd.archive.geodir-page #site-header {
+    display: flex;
+    flex-basis: 61px;
+    flex-shrink: 0;
+    flex-wrap: nowrap;
+    height: 61px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 99999;
+}
+
+.sd.search.geodir-page.admin-bar #site-header, .sd.archive.geodir-page.admin-bar #site-header {
+    top: 32px;
+}
+
+.sd.search.geodir-page .entry-header, .sd.archive.geodir-page .entry-header  {
+    display: none;
+}
+
+.sd.search.geodir-page .geodir-common, .sd.archive.geodir-page .geodir-common {
+    margin: 61px auto 0;
+    padding: 0;
+    width: 100%;
+    display:flex;
+}
+
+.sd.search.geodir-page #geodir_content, .sd.archive.geodir-page #geodir_content {
+    flex-basis: 60%;
+    width: 60% !important;
+    padding:20px;
+}
+
+.sd.search.geodir-page .geodir-listings-sidebar-right, .sd.archive.geodir-page .geodir-listings-sidebar-right {
+    display: block;
+    flex-grow: 1;
+    float: left;
+    position: fixed;
+    right: 0;
+    top: 61px;
+    width: 40% !important;
+}
+
+.sd.search.geodir-page.admin-bar .geodir-listings-sidebar-right, .sd.archive.geodir-page.admin-bar .geodir-listings-sidebar-right {
+    top: 93px;
+}
+
+.sd.search.geodir-page #sticky_map_gd_listing_map, .sd.archive.geodir-page #sticky_map_gd_listing_map{
+    min-height: calc(100vh - 61px) !important;
+}
+
+.sd.search.geodir-page #gd_listing_map_wrapper, .sd.search.geodir-page #gd_listing_map, .sd.search.geodir-page #gd_listing_map_loading_div,
+.sd.archive.geodir-page #gd_listing_map_wrapper, .sd.archive.geodir-page #gd_listing_map, .sd.archive.geodir-page #gd_listing_map_loading_div {
+    height:calc(100vh - 61px) !important;
+}
+
+.sd.search.geodir-page .geodir-loc-bar, .sd.archive.geodir-page .geodir-loc-bar {
+    margin: 0;
+    padding: 0;
+}
+
+.sd .geodir-list-view-select {
+    display: none;
+}
+
+.sd.search.geodir-page .site-footer, .sd.archive.geodir-page .site-footer {
+    display: none;
+}
+
+.sd .geodir_category_list_view li.geodir-gridview {
+    border: 0 none !important;
+}
+
+.sd .geodir_category_list_view li.gridview_onehalf {
+    margin: 0 20px 0 0;
+    width: calc(50% - 12px);
+}
+
+.geodir_category_list_view li.gridview_onethird {
+    margin: 0 15px 0 0;
+    width: calc(33.3% - 12px);
+}
+
+.sd .geodir_category_list_view li.gridview_onefourth {
+    margin: 0 13px 0 0;
+    width: calc(25% - 12px);
+}
+
+.sd .geodir_category_list_view li.gridview_onefifth {
+    margin: 0 12px 0 0;
+    width: calc(20% - 12px);
+}
+
+.sd .geodir_category_list_view li.gridview_onehalf:nth-child(2n+2), .geodir_category_list_view li.gridview_onethird:nth-child(3n+3), .geodir_category_list_view li.gridview_onefourth:nth-child(4n+4), .geodir_category_list_view li.gridview_onefifth:nth-child(5n+5) {
+    margin-right: 0;
+}
+
+.sd.search.geodir-page .geodir_category_list_view li.geodir-gridview .geodir-content .geodir-entry-content, .sd.archive.geodir-page .geodir_category_list_view li.geodir-gridview .geodir-content .geodir-entry-content {
+    display: none;
+}
+
+
+.sd .geodir_category_list_view li.geodir-gridview .geodir-content, .sd .geodir_category_list_view li.geodir-gridview .geodir-addinfo {
+    margin: 0;
+    width: 100%;
+}
+
+
+.sd .geodir_category_list_view li.geodir-gridview h3 {
+    font-size: 18px;
+    line-height: 30px;
+    margin: 0;
+}
+
+.sd .geodir_category_list_view li.geodir-gridview  .geodir-content .geodir_more_info {
+    padding: 0 0 5px;
+}
+
+
+.sd .geodir_category_list_view li.geodir-gridview .geodir-rating {
+    max-width: 90px !important;
+    float:left;
+    margin: 2px 5px 0 0;
+}
+
+.sd .geodir-gridview .fa.fa-comments {
+    display: none;
+}
+
+.sd .geodir_category_list_view li.geodir-gridview .geodir-addinfo a.geodir-pcomments {font-size:16px;}
+
+.sd .geodir_category_list_view li.geodir-gridview .geodir-addinfo a.geodir-pcomments::before {
+    content: " -";
+}
+
+.sd .geodir_category_list_view .geodir-addtofav {
+    position: relative;
+}
+
+.sd a.geodir-addtofav-icon, .sd a.geodir-removetofav-icon {
+    color: transparent;
+    font-size: 1px;
+}
+
+.sd a.geodir-addtofav-icon .fa-heart {
+    color: #fff;
+    font-size: 20px;
+}
+
+.sd a.geodir-removetofav-icon .fa-heart {
+    font-size: 20px;
+}
+
+.sd.archive.geodir-page .geodir_advanced_search_widget, .sd.search.geodir-page .geodir_advanced_search_widget {
+    margin-bottom: 10px;
+}
+
+.sd.search.geodir-page .geodir-loc-bar, .sd.archive.geodir-page .geodir-loc-bar {
+    border: 0 none;
+}
+.sd.search.geodir-page .geodir-loc-bar-in, .sd.archive.geodir-page .geodir-loc-bar-in {
+    background: transparent none repeat scroll 0 0;
+    border: 0 none;
+    box-shadow: none;
+    padding: 0;
+}
+
+.sd .content-box, .sd .content .entry, .sd #geodir_content, .sd .sidebar .widget, .sd .geodir-content-right .geodir-company_info, .sd .geodir_full_page .geodir-category-list-in, .sd .geodir_full_page .geodir-loc-bar {
+    background-color: #ffffff;
+    border-color: transparent;
+    box-shadow: none;
+    margin-bottom: 0px;
+    padding: 0;
+}
+
+.sd.search.geodir-page .geodir-search, .sd.archive.geodir-page .geodir-search {
+    margin-right: 0;
+    width:100%;
+}
+
+.sd.search.geodir-page .search_text, .sd.archive.geodir-page .search_text, .sd.search.geodir-page .snear, .sd.archive.geodir-page .snear {
+    margin: 0.5%;
+    width: 30%;
+}
+
+.sd.search.geodir-page .geodir-search select, .sd.archive.geodir-page .geodir-search select {
+    margin: 0.5%;
+    width: 26%;
+}
+
+.sd.search.geodir-page .geodir-search input[type="button"], .sd.search.geodir-page .geodir-search input[type="submit"], 
+.sd.archive.geodir-page .geodir-search input[type="button"], .sd.archive.geodir-page .geodir-search input[type="submit"] {
+    margin: 0.5%;
+    width: 10%;
+}
+
+.sd .Navi, .sd .nav-links {
+    border-top: 0 none;
+    overflow: hidden;
+    padding-top: 0;
+}
+
+.sd-mobile-search-controls {
+    display:none;
+    margin-bottom:10px;
+    overflow: hidden;
+}
+
+a#showMap, a#showSearch, a#hideMap  {
+    width: auto;	
+    font-size:16px;
+}
+
+a#showMap, a#hideMap {
+    float:right;
+    position:relative;
+    z-index:1;
+}
+
+a#showSearch, a#hideMap  {
+    float:left;
+}
+
+a#hideMap {
+    display:none;
+}
+
+/* Details page */
+
+.sd .sd-detail-details {
+    border-bottom: 1px solid #ccc;
+    margin: 30px 0;
+    overflow: hidden;
+    padding-bottom: 30px;
+}
+
+.sd .sd-detail-author {
+    float: left;
+    margin: 10px 50px 0 0;
+}
+
+.sd .author-avatar {
+    border-radius: 50px;
+    height: 100px;
+    overflow: hidden;
+}
+
+.sd .author-link {
+    margin:10px 0 0;
+    text-align:center;
+}
+.sd .author-link a {
+    color: #82888a;
+    font-size: 18px;
+}
+
+.sd-detail-author .supreme-btn {
+    color: #757575;
+    display: block;
+    margin: 0 auto;
+    width: 45px;
+}
+
+.sd .sd-detail-info .sd-entry-title {
+    margin: 0 0 10px;
+}
+
+.sd .sd-detail-info {
+    float: left;
+    overflow: hidden;
+}
+
+.sd .sd-address {
+    float: left;
+    margin: 0 20px 0 0;
+    color:#82888a;
+}
+
+.sd .sd-ratings {
+    float: left;
+}
+
+.sd .sd-ratings .geodir-rating {
+    float: left;
+    margin: 3px 0 0;
+    max-width: 80px !important;
+}
+
+.sd .sd-contacts {
+    clear: left;
+}
+
+.sd .sd-contacts a {
+    color: #82888a;
+    margin: 0 5px 0 0
+}
+
+.sd-contacts > a:last-child {
+    margin-left: 2px;
+}
+
+.sd-detail-cat-links {
+    margin: 10px 0 0;
+}
+
+.sd-detail-cat-links > ul {
+    list-style: outside none none;
+    margin: 0;
+}
+
+.sd-detail-cat-links li {
+    float: left;
+    margin: 0 30px 0 0;
+}
+
+.sd-detail-cat-links img {
+    display: block;
+    margin: 0 auto;
+    max-height: 35px;
+}
+
+.sd-detail-cat-links li a {
+    color: #82888a;
+}
+
+.sd-detail-cta {
+    float:right;
+    width:28%;
+}
+
+a.dt-btn {
+    font-size: 20px;
+    margin: 0 auto;
+    width: 100%;
+}
+a.dt-btn:visited {
+    color:#ffffff;
+}
+
+.sd-detail-cta .fa-envelope {
+    margin: 0 5px 0 0;
+}
+
+.sd-detail-cta .geodir_email {
+    margin: 20px auto;
+    width: 216px;
+}
+
+.sd .sd-detail-cta .geodir-addtofav {
+    display: block;
+    height: 50px;
+    width: 100%;
+}
+
+.sd .sd-detail-cta .geodir-addtofav a .fa {
+    display: block;
+    font-size: 50px;
+    margin: 0 auto;
+    width: 54px;
+}
+
+
+.sd.single.geodir-page #geodir_content, .sd.sd-preview #geodir_content{
+    width: 63%;
+}
+
+.sd .geodir-common p {
+    font-size: 15px;
+    line-height: 24px;
+}
+
+.sd.single.geodir-page #reviewsTab, .sd.sd-preview #reviewsTab {
+    margin: 30px 0;
+}
+
+h2.comments-title {
+    font-size: 1.7em;
+}
+
+.sd.single.geodir-page #gd-sidebar-wrapper, .sd.sd-preview #gd-sidebar-wrapper  {
+    margin-left: 9%;
+    width: 28%;
+}
+
+.sd.single.geodir-page #geodir-post-gallery a, .sd.sd-preview #geodir-post-gallery a  {
+    border: 0 none;
+    margin: 0;
+    width: 33.3333%;
+}
+
+#geodir-post-gallery a .geodir_thumbnail {
+    margin: 1% 3%;
+    max-width: 94%;
+    min-width: 94%;
+}
+
+.sd-map-in-sidebar-detail {
+    margin: 30px 0 20px;
+}
+
+
+/* Preview Page */
+
+.geodir_preview_section {
+    background: transparent none repeat scroll 0 0;
+    border: 0 none;
+    box-shadow: none;
+    max-width: 50%;
+    position: relative;
+    z-index: 2;
+}
+
+.sd .featured-area .geodir_preview_section h5.geodir_information {
+    color:#fff;
+    font-size:20px;	
+}
+
+.geodir_preview_section form {
+    background: transparent none repeat scroll 0 0;
+    border: 0 none;
+    box-shadow: none;
+    margin-bottom: 0;
+}
+
+
+/* Blog Archive Page */
+
+
+.sd.blog .content-box.content-single article.hentry {
+    border: 0 none;
+    clear: none;
+    float: left;
+    margin: 0 5% 50px 0;
+    width: 30%;
+}
+
+.sd.blog .content-box.content-single article.hentry:nth-child(3n+3) {
+    margin-right: 0 ;
+}
+
+
+.sd.blog .content-box.content-single {
+    margin: 60px 0;
+    overflow: hidden;
+}
+
+.sd.blog .content-box.content-single article.hentry .container{
+    width: 100%;
+}
+
+.sd.blog .entry-content {
+    margin: 20px auto 0;
+}
+.sd.blog article h2.entry-title {
+    font-size: 25px;
+    padding: 0;
+    text-align: center;
+}
+
+.sd.blog .entry-footer {
+    text-align: center;
+}
+
+.nav-links a, .nav-links a:last-child {
+    border:0 none;
+}
+
+
+
+
+
+/* AUTHOR PAGE  */
+
+
+.sd.author .avatar {
+    border-radius: 60px;
+    margin: 0 auto;
+    width: 120px;
+}
+
+
+
+
+
+
+
+/* RESPONSIVE STUFF */
+
+
+@media all and (min-width: 768px) and (max-width: 1280px) {
+
+.sd.single.geodir-page .featured-area, .sd.sd-preview .featured-area {
+    height: 60vh;
+}
+
+.sd.search.geodir-page .search_text, .sd.archive.geodir-page .search_text, .sd.search.geodir-page .snear, .sd.archive.geodir-page .snear {
+    margin: 0.5%;
+    width: 29%;
+}
+
+.sd.search.geodir-page .geodir-search select, .sd.archive.geodir-page .geodir-search select {
+    margin: 0.5%;
+    width: 26%;
+}
+
+.sd.search.geodir-page .geodir-search input[type="button"], .sd.search.geodir-page .geodir-search input[type="submit"], 
+.sd.archive.geodir-page .geodir-search input[type="button"], .sd.archive.geodir-page .geodir-search input[type="submit"] {
+    margin: 0.5%;
+    width: 12%;
+}
+}
+
+
+@media (max-width: 992px){ 
+.sd.archive.geodir-page aside#gd-sidebar-wrapper, .sd.search.geodir-page aside#gd-sidebar-wrapper {
+    visibility: hidden;
+}
+
+.sd.search.geodir-page .gd_rating_show, .sd.archive.geodir-page .gd_rating_show{
+    z-index:0;
+}
+
+.sd.search.geodir-page #geodir_content, .sd.archive.geodir-page #geodir_content {
+    flex-basis: 100%;
+    width: 100% !important;
+}
+
+.sd-mobile-search-controls {
+    display: block;
+}
+
+.sd.archive.geodir-page .geodir_advanced_search_widget, .sd.search.geodir-page .geodir_advanced_search_widget {
+    display:none;
+}
+
+
+.sd.single.geodir-page .featured-area, .sd.sd-preview .featured-area {
+    height: 50vh;
+}
+
+.sd.single.geodir-page #gd-sidebar-wrapper, .sd.sd-preview #gd-sidebar-wrapper {
+    margin-left: 0;
+}
+
+.sd .sd-detail-author {
+    margin: 10px 30px 0 0;
+}
+
+.sd .author-avatar, .sd .author-avatar img {
+    height: 50px;
+    width: 50px;
+}
+
+.sd .sd-address {
+    float: none;
+}
+
+.sd-detail-cat-links img {
+    display: inline;
+    margin: 0 5px 0 0;
+    max-height: 20px;
+    float: left;
+}
+
+.sd-detail-cat-links .cat-link {
+    font-size: 18px;
+}
+
+.sd .sd-detail-cta .geodir-addtofav {
+    height: 40px;
+}
+
+.sd .sd-detail-cta .geodir-addtofav a .fa {
+    font-size: 40px;
+    width: 44px;
+}
+
+}
+
+@media all and (max-width:668px) {
+
+.sd.home .featured-area {
+    display: block;
+    height: auto;
+    padding: 100px 0 30px;
+}
+
+.sd .featured-area h1.entry-title {
+    font-size: 27px;
+    margin-bottom: 15px;
+}
+
+.sd .entry-subtitle {
+    font-size: 15px;
+    line-height:normal;
+}
+
+.sd.home .search_text, .sd.sd-location .search_text, .sd.home .snear, .sd.sd-location .geodir-page .snear {
+    margin: 0.5%;
+    width: 28%;
+}
+
+.sd.home .geodir-search select, .sd.sd-location .geodir-search select {
+    margin: 0.5%;
+    width: 23%;
+}
+
+.sd.home .geodir-search input[type="button"], .sd.sd-location .geodir-search input[type="submit"] {
+    margin: 0.5%;
+    width: 17%;
+}
+
+.sd.home .cat-link, .sd.sd-location .cat-link {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.home-more {
+    display: none;
+}
+
+.sd .geodir_category_list_view li.gridview_onethird, 
+.sd .geodir_category_list_view li.gridview_onefourth,
+.sd .geodir_category_list_view li.gridview_onefifth  {
+    margin: 0;
+    width: 100%;
+}
+
+.sd .sd-detail-author {
+    margin: -130px 30px 0 0;
+    position: absolute;
+    z-index: 99999999999;
+    display: block;
+}
+
+.sd .author-link a {
+    color: #fff;
+    font-size: 18px;
+    text-shadow: 1px 1px #000;
+}
+
+.sd .sd-detail-info {
+    float: none;
+    overflow: hidden;
+}
+
+.sd-detail-cta {
+    float: none;
+    width: 100%;
+    margin: 40px 0 0 0;
+    clear: both;
+}
+
+}
+
+@media all and (max-width:375px) {
+
+
+a#showMap, a#showSearch, a#hideMap {
+    font-size: 13px;
+}
+
+.sd.search.geodir-page .search_text, .sd.archive.geodir-page .search_text, .sd.search.geodir-page .snear, .sd.archive.geodir-page .snear,
+.sd.search.geodir-page .geodir-search select, .sd.archive.geodir-page .geodir-search select,
+.sd.search.geodir-page .geodir-search input[type="button"], .sd.search.geodir-page .geodir-search input[type="submit"], 
+.sd.archive.geodir-page .geodir-search input[type="button"], .sd.archive.geodir-page .geodir-search input[type="submit"] {
+    width: 100%;
+}
+
+.sd .geodir_category_list_view li.gridview_onehalf {
+    margin: 0;
+    width: 100%;
+}
+
+.sd.home .geodir-search input[type="text"], .sd.home .geodir-search select, .sd.home .geodir-search input[type="button"],
+.sd.location .geodir-search input[type="text"], .sd.location .geodir-search select, .sd.location .geodir-search input[type="button"] {
+    width: 100%;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.sd.home .cat-link, .sd.location .cat-link {
+    display:none;
+}
+
+
+
+
+}
