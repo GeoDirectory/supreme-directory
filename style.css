@@ -609,7 +609,7 @@ a.dt-btn:visited {
 
 .sd-detail-cta .geodir_email {
     margin: 20px auto;
-    width: 216px;
+    width: 220px;
 }
 
 .sd .sd-detail-cta .geodir-addtofav {
@@ -932,4 +932,47 @@ h2.comments-title {
         display: none;
     }
 
+}
+
+/*added by giri*/
+.sd .site-header .site-description {
+    display: none;
+}
+#comments .commentlist div.avatar-wrap {
+    margin-right: 0;
+}
+#reviewsTab #comments ol.commentlist li.comment,
+.wpl_reviews #comments ol.commentlist li.comment,
+.gdbp-wrapper-reviews #comments ol.commentlist li.comment {
+    border-bottom: none;
+}
+
+#reviewsTab .gd-rating-text {
+    display: none;
+}
+.sd-cta-favsandshare {
+    list-style-type: none;
+    overflow: hidden;
+    text-align: center;
+    margin: 0;
+    margin-top: 10px;
+}
+
+.sd-cta-favsandshare li {
+    display: inline;
+    padding: 10px;
+}
+.sd-cta-favsandshare a,
+.sd-cta-favsandshare a:visited {
+    color: #82888a;
+}
+.sd-cta-favsandshare li .fa {
+    font-size: 30px !important;
+}
+
+.sd-detail-author a.dt-btn {
+    font-size: 15px;
+    line-height: normal;
+    padding: 5px;
+    margin-top: 5px;
 }

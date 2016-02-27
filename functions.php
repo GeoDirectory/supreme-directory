@@ -118,26 +118,37 @@ function sup_add_feat_img_head($page)
             } ?>
         </div>
         <?php
-
+        $user_id = get_current_user_id();
         $post_avgratings = geodir_get_post_rating($post->ID);
         $post_ratings = geodir_get_rating_stars($post_avgratings, $post->ID);
         ob_start();
-        geodir_comments_number($post->rating_count);
+        if (!$preview) {
+            geodir_comments_number($post->rating_count);
+        } else {
+
+        }
         $n_comments = ob_get_clean();
-        $entry_author = get_avatar(get_the_author_meta('email'), 100);
-        $author_link = get_author_posts_url(get_the_author_meta('ID'));
-        $author_name = get_the_author();
+        if (!$preview) {
+            $author_name = get_the_author();
+            $entry_author = get_avatar(get_the_author_meta('email'), 100);
+            $author_link = get_author_posts_url(get_the_author_meta('ID'));
+            $post_type = $post->post_type;
+            $post_tax = $post_type . "category";
+            $post_cats = $post->$post_tax;
+        } else {
+            $author_name = get_the_author_meta('display_name',$user_id);
+            $entry_author = get_avatar(get_the_author_meta('email',$user_id), 100);
+            $author_link = get_author_posts_url($user_id);
+            $post_type = $post->listing_type;
+            $post_tax = $post_type . "category";
+            $post_cats = $post->post_category[$post_tax];
+        }
         $postlink = get_permalink(geodir_add_listing_page_id());
         $editlink = geodir_getlink($postlink, array('pid' => $post->ID), false);
-        $user_id = get_current_user_id();
-        $post_type = $post->post_type;
-        $post_type_data = get_post_type_object($post_type);
-        $post_type_slug = $post_type_data->rewrite['slug'];
-        $post_tax = $post_type . "category";
-        $post_cats = $post->$post_tax;
+//        $post_type_data = get_post_type_object($post_type);
+//        $post_type_slug = $post_type_data->rewrite['slug'];
         $cats_arr = array_filter(explode(",", $post_cats));
         $cat_icons = geodir_get_term_icon();
-
         ?>
         <div class="sd-detail-details">
         <div class="container">
@@ -148,14 +159,53 @@ function sup_add_feat_img_head($page)
                 if (is_user_logged_in() && $user_id == $post->post_author) {
                     ?>
                     <a href="<?php echo $editlink; ?>" class="supreme-btn supreme-btn-small"><i
-                            class="fa fa-edit"></i> <?php echo __('Edit', directory - starter); ?></a>
+                            class="fa fa-edit"></i> <?php echo __('Edit', 'directory-starter'); ?></a>
                 <?php } ?>
+                <?php
+                        if (function_exists('geodir_load_translation_geodirclaim')) {
+                            $geodir_post_type = array();
+                            if(get_option('geodir_post_types_claim_listing'))
+                                $geodir_post_type =	get_option('geodir_post_types_claim_listing');
+                            $posttype = (isset($post->post_type)) ? $post->post_type : '';
+                            if(in_array($posttype, $geodir_post_type) && !$preview) {
+                                $is_owned = geodir_get_post_meta( $post->ID, 'claimed', true );
+                                if ( get_option( 'geodir_claim_enable' ) == 'yes' && $is_owned == '0' ) {
+
+                                    if ( is_user_logged_in() ) {
+                                        $user_link_display = get_option('geodir_disable_user_links_section');
+                                        if ($user_link_display == '1') {
+                                            echo '<div class="geodir-company_info">';
+                                            echo '<input type="hidden" name="geodir_claim_popup_post_id" value="' . $post->ID . '" />';
+                                            echo '<div class="geodir_display_claim_popup_forms"></div>';
+                                            echo '<a href="javascript:void(0);" class="dt-btn geodir_claim_enable"> ' . __('Claim', 'directory-starter') . '</a>';
+                                            echo '</div>';
+                                        } else {
+                                            echo '<a href="javascript:void(0);" class="dt-btn geodir_claim_enable"> ' . __('Claim', 'directory-starter') . '</a>';
+                                        }
+
+                                    } else {
+
+                                        $site_login_url = geodir_login_url();
+                                        echo '<a href="' . $site_login_url . '" class="dt-btn"><i class="fa fa-question-circle"></i> ' . __('Claim', 'directory-starter') . '</a>';
+
+                                    }
+                                } else {
+                                    echo "Verified";
+                                }
+                            }
+                        }
+                        ?>
             </div>
             <!-- sd-detail-suthor end -->
             <div class="sd-detail-info">
                 <?php
                 echo '<h1 class="sd-entry-title">' . get_the_title() . '</h1>';
-                echo '<div class="sd-address">' . $post->post_city . ', ' . $post->post_region . ', ' . $post->post_country . '</div>';
+                $sd_address = '<div class="sd-address">';
+                if(isset($post->post_city) && $post->post_city){ $sd_address .= $post->post_city; }
+                if(isset($post->post_region) && $post->post_region){ $sd_address .= ', ' . $post->post_region; }
+                if(isset($post->post_country) && $post->post_country){ $sd_address .= ', ' . $post->post_country; }
+                $sd_address .= '</div>';
+                echo $sd_address;
                 echo '<div class="sd-ratings">' . $post_ratings . ' - <a href="' . get_comments_link() . '" class="geodir-pcomments">' . $n_comments . '</a></div>';
                 echo '<div class="sd-contacts">';
                 if (isset($post->geodir_website) && $post->geodir_website) {
@@ -183,13 +233,31 @@ function sup_add_feat_img_head($page)
                 echo '</ul></div> <!-- sd-detail-cat-links end --> </div> <!-- sd-detail-info end -->';
                 echo '<div class="sd-detail-cta"><a class="dt-btn" href="' . get_the_permalink() . '#respond">' . __('Write a Review', 'supreme-directory') . '</a>';
                 ?>
-                <div class="geodir_more_info geodir_email"><span style="" class="geodir-i-email"><i
-                            class="fa fa-envelope"></i><a href="javascript:void(1);" class="b_send_inquiry2"
-                                                          onclick="jQuery( '.b_send_inquiry' ).click();">Send
-                            Enquiry</a> | <a class="b_sendtofriend" href="javascript:void(0);">Send To Friend</a></span>
+                <div class="geodir_more_info geodir_email">
+                <?php if (isset($post->geodir_email) && $post->geodir_email) { ?>
+                    <span style="" class="geodir-i-email">
+                    <i class="fa fa-envelope"></i>
+                    <a href="javascript:void(1);" class="b_send_inquiry2"
+                       onclick="jQuery( '.b_send_inquiry' ).click();">Send Enquiry</a> |
+                    <a class="b_sendtofriend" href="javascript:void(0);">Send To Friend</a></span>
+                <?php } ?>
                 </div>
+
                 <?php
                 geodir_favourite_html($post->post_author, $post->ID);
+                ?>
+                <ul class="sd-cta-favsandshare">
+                <?php if (!$preview) { ?>
+                    <li><a target="_blank" href="http://www.facebook.com/sharer.php?u=<?php the_permalink();?>&t=<?php the_title(); ?>"><i class="fa fa-facebook"></i></a></li>
+                    <li><a target="_blank" href="http://twitter.com/share?text=<?php echo urlencode(get_the_title()); ?>&url=<?php echo urlencode(get_the_permalink()); ?>"><i class="fa fa-twitter"></i></a></li>
+                    <li><a target="_blank" href="https://plus.google.com/share?url=<?php echo urlencode(get_the_permalink()); ?>"><i class="fa fa-google-plus"></i></a></li>
+                <?php } else { ?>
+                    <li><a target="_blank" href=""><i class="fa fa-facebook"></i></a></li>
+                    <li><a target="_blank" href=""><i class="fa fa-twitter"></i></a></li>
+                    <li><a target="_blank" href=""><i class="fa fa-google-plus"></i></a></li>
+                <?php } ?>
+                </ul>
+                <?php
                 echo '</div><!-- sd-detail-cta end -->';?>
 
 
@@ -397,10 +465,11 @@ function sd_map1_right()
 
     $geodir_post_detail_fields = geodir_show_listing_info('detail');
 
+    $thumb_image = '';
+
     if (geodir_is_page('detail')) {
 
         $post_images = geodir_get_images($post->ID, 'thumbnail');
-        $thumb_image = '';
         if (!empty($post_images)) {
             foreach ($post_images as $image) {
                 $thumb_image .= '<a href="' . $image->src . '">';
@@ -416,7 +485,7 @@ function sd_map1_right()
 
         if (isset($post->post_images) && !empty($post->post_images))
             $post_images = explode(",", $post->post_images);
-        $thumb_image = '';
+
         if (!empty($post_images)) {
             foreach ($post_images as $image) {
                 if ($image != '') {
@@ -430,8 +499,10 @@ function sd_map1_right()
     }
 
     ?>
-
-    <div id="geodir-post-gallery" class="clearfix"><?php echo $thumb_image; ?></div> <?php
+    <?php if (geodir_is_page('detail') || geodir_is_page('preview')) { ?>
+        <div id="geodir-post-gallery" class="clearfix"><?php echo $thumb_image; ?></div>
+    <?php } ?>
+    <?php
 
 }
 
