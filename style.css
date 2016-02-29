@@ -976,3 +976,149 @@ h2.comments-title {
     padding: 5px;
     margin-top: 5px;
 }
+
+.sd-my-account-link .avatar {
+    width: 20px;
+    border-radius: 15px;
+    margin: 0 4px -5px 0;
+    border: 1px solid #fff;
+}
+.sd-my-account-link .fa-caret-down {
+    margin: 0 0 0 5px;
+    font-size: 12px;
+}
+.sd-my-account-dd {
+    display: none;
+    position: absolute;
+    z-index: 111;
+    right: 0;
+    width: 270px;
+    background: #2F2F2F;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-top: none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 15px;
+}
+
+.sd-my-account-dd .avatar {
+    background: none repeat scroll 0 0 #e3e3e3;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    margin: 0 10px 0 0;
+    padding: 3px;
+    float: left;
+}
+.sd-my-account-dd h4 {
+    font-weight: bold;
+    font-size: 1.3em;
+    clear: none;
+    margin-bottom: 10px;
+    margin-top: 0;
+}
+.sd #primary-nav ul li .sd-my-account-dd h4 a {
+    font-size: 16px;
+}
+.sd #primary-nav ul li .sd-my-account-dd a {
+    text-transform: initial;
+    line-height: normal;
+    height: auto;
+}
+.sd-my-account-dd-menu-group {
+    clear: both;
+}
+.sd #primary-nav .sd-my-account-dd-menu-bp-group {
+    margin: 12px 0 0;
+    border-top: 1px solid #151515;
+    padding-top: 11px;
+    padding-bottom: 11px;
+}
+.sd #primary-nav .sd-my-account-dd-menu-group .fa {
+    margin-right: 7px;
+}
+.sd-my-account-dd-menu-group + .sd-my-account-dd-menu-group {
+    margin: 12px 0 0;
+    border-top: 1px solid #151515;
+    padding-top: 11px;
+}
+#primary-nav ul .sd-my-account-dd-menu-group li {
+    padding: 5px;
+    display: block;
+    float: none;
+}
+.sd-dd-avatar-wrap {
+    overflow: hidden;
+}
+.sd-my-account-dd-inner h4.sd-my-account-title {
+    border-bottom: 1px solid #151515;
+    text-align: center;
+    padding-bottom: 10px;
+}
+.sd-my-account-dd-inner p.rember {
+    line-height: normal;
+    padding: 0;
+}
+
+.sd-my-account-dd-inner p.rember input {
+    margin-top: 3px;
+    margin-left: 0;
+}
+.sd-my-account-dd-inner p.error_msg {
+    margin-bottom: 0;
+}
+.sd-my-account-dd-inner .form_row {
+    padding-bottom: 10px;
+}
+
+.sd-my-account-dd-inner form {
+    padding: 10px 0;
+    min-height: 200px;
+}
+.sd-ratings .gd-fa-star-rating {
+    float: left;
+}
+
+.sd-verified-badge {
+    width: 35px;
+    height: 35px;
+}
+.sd-verified-badge i {
+    position: absolute;
+    left: 0;
+}
+.sd-verified-badge .fa-check-circle {
+    color: #82888a;
+}
+.supreme-edit-btn {
+    color: #777;
+    padding: 4px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    background-image: none;
+    border-radius: 4px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+    width: auto !important;
+    display: inline-block !important;
+    margin-top: 5px !important;
+}
+
+.sd .sd-detail-author {
+    text-align: center;
+}
+.sd .sd-detail-cta .geodir-addtofav {
+    height: 30px;
+}
+.sd .sd-detail-cta .geodir-addtofav a .fa {
+    font-size: 30px;
+    width: 34px;
+}
+.sd-detail-cat-links {
+    overflow: hidden;
+    margin-top: 35px;
+}
