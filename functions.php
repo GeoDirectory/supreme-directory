@@ -145,8 +145,6 @@ function sup_add_feat_img_head($page)
         }
         $postlink = get_permalink(geodir_add_listing_page_id());
         $editlink = geodir_getlink($postlink, array('pid' => $post->ID), false);
-//        $post_type_data = get_post_type_object($post_type);
-//        $post_type_slug = $post_type_data->rewrite['slug'];
         $cats_arr = array_filter(explode(",", $post_cats));
         $cat_icons = geodir_get_term_icon();
         ?>
@@ -158,48 +156,59 @@ function sup_add_feat_img_head($page)
                 printf('<div class="author-link"><a href="%s">%s</a></div>', $author_link, $author_name);
                 if (is_user_logged_in() && $user_id == $post->post_author) {
                     ?>
-                    <a href="<?php echo $editlink; ?>" class="supreme-btn supreme-btn-small"><i
+                    <a href="<?php echo $editlink; ?>" class="supreme-btn supreme-btn-small supreme-edit-btn"><i
                             class="fa fa-edit"></i> <?php echo __('Edit', 'directory-starter'); ?></a>
-                <?php } ?>
-                <?php
-                        if (function_exists('geodir_load_translation_geodirclaim')) {
-                            $geodir_post_type = array();
-                            if(get_option('geodir_post_types_claim_listing'))
-                                $geodir_post_type =	get_option('geodir_post_types_claim_listing');
-                            $posttype = (isset($post->post_type)) ? $post->post_type : '';
-                            if(in_array($posttype, $geodir_post_type) && !$preview) {
-                                $is_owned = geodir_get_post_meta( $post->ID, 'claimed', true );
-                                if ( get_option( 'geodir_claim_enable' ) == 'yes' && $is_owned == '0' ) {
+                <?php } elseif (function_exists('geodir_load_translation_geodirclaim')) {
+                    $geodir_post_type = array();
+                    if(get_option('geodir_post_types_claim_listing'))
+                        $geodir_post_type =	get_option('geodir_post_types_claim_listing');
+                    $posttype = (isset($post->post_type)) ? $post->post_type : '';
+                    if(in_array($posttype, $geodir_post_type) && !$preview) {
+                        $is_owned = geodir_get_post_meta( $post->ID, 'claimed', true );
+                        if ( get_option( 'geodir_claim_enable' ) == 'yes' && $is_owned == '0' ) {
 
-                                    if ( is_user_logged_in() ) {
-                                        $user_link_display = get_option('geodir_disable_user_links_section');
-                                        if ($user_link_display == '1') {
-                                            echo '<div class="geodir-company_info">';
-                                            echo '<input type="hidden" name="geodir_claim_popup_post_id" value="' . $post->ID . '" />';
-                                            echo '<div class="geodir_display_claim_popup_forms"></div>';
-                                            echo '<a href="javascript:void(0);" class="dt-btn geodir_claim_enable"> ' . __('Claim', 'directory-starter') . '</a>';
-                                            echo '</div>';
-                                        } else {
-                                            echo '<a href="javascript:void(0);" class="dt-btn geodir_claim_enable"> ' . __('Claim', 'directory-starter') . '</a>';
-                                        }
-
-                                    } else {
-
-                                        $site_login_url = geodir_login_url();
-                                        echo '<a href="' . $site_login_url . '" class="dt-btn"><i class="fa fa-question-circle"></i> ' . __('Claim', 'directory-starter') . '</a>';
-
-                                    }
+                            if ( is_user_logged_in() ) {
+                                $user_link_display = get_option('geodir_disable_user_links_section');
+                                if ($user_link_display == '1') {
+                                    echo '<div class="geodir-company_info">';
+                                    echo '<input type="hidden" name="geodir_claim_popup_post_id" value="' . $post->ID . '" />';
+                                    echo '<div class="geodir_display_claim_popup_forms"></div>';
+                                    echo '<a href="javascript:void(0);" class="supreme-btn supreme-btn-small supreme-edit-btn geodir_claim_enable"> ' . __('Claim', 'directory-starter') . '</a>';
+                                    echo '</div>';
                                 } else {
-                                    echo "Verified";
+                                    echo '<a href="javascript:void(0);" class="supreme-btn supreme-btn-small supreme-edit-btn geodir_claim_enable"> ' . __('Claim', 'directory-starter') . '</a>';
                                 }
+
+                            } else {
+
+                                $site_login_url = geodir_login_url();
+                                echo '<a href="' . $site_login_url . '" class="supreme-btn supreme-btn-small supreme-edit-btn"><i class="fa fa-question-circle"></i> ' . __('Claim', 'directory-starter') . '</a>';
+
                             }
                         }
+                    }
+                }
                         ?>
             </div>
             <!-- sd-detail-suthor end -->
             <div class="sd-detail-info">
                 <?php
-                echo '<h1 class="sd-entry-title">' . get_the_title() . '</h1>';
+                echo '<h1 class="sd-entry-title">' . get_the_title();
+                ?>
+                <?php if (!$preview && function_exists('geodir_load_translation_geodirclaim')) {
+					$is_owned = geodir_get_post_meta( $post->ID, 'claimed', true );
+						if ($is_owned == '1') {
+					?>
+					<span class="fa fa-stack sd-verified-badge">
+						<i class="fa fa-circle fa-inverse"></i>
+						<i class="fa fa-check-circle"></i>
+					</span>
+					<?php
+						}
+				}
+				?>
+                <?php
+                echo '</h1>';
                 $sd_address = '<div class="sd-address">';
                 if(isset($post->post_city) && $post->post_city){ $sd_address .= $post->post_city; }
                 if(isset($post->post_region) && $post->post_region){ $sd_address .= ', ' . $post->post_region; }
@@ -231,15 +240,15 @@ function sup_add_feat_img_head($page)
                     echo '</a></li>';
                 }
                 echo '</ul></div> <!-- sd-detail-cat-links end --> </div> <!-- sd-detail-info end -->';
-                echo '<div class="sd-detail-cta"><a class="dt-btn" href="' . get_the_permalink() . '#respond">' . __('Write a Review', 'supreme-directory') . '</a>';
+                echo '<div class="sd-detail-cta"><a class="dt-btn" href="' . get_the_permalink() . '#respond">' . __('Write a Review', 'directory-starter') . '</a>';
                 ?>
                 <div class="geodir_more_info geodir_email">
                 <?php if (isset($post->geodir_email) && $post->geodir_email) { ?>
                     <span style="" class="geodir-i-email">
                     <i class="fa fa-envelope"></i>
                     <a href="javascript:void(1);" class="b_send_inquiry2"
-                       onclick="jQuery( '.b_send_inquiry' ).click();">Send Enquiry</a> |
-                    <a class="b_sendtofriend" href="javascript:void(0);">Send To Friend</a></span>
+                       onclick="jQuery( '.b_send_inquiry' ).click();"><?php echo __('Send Enquiry', 'directory-starter'); ?></a> |
+                    <a class="b_sendtofriend" href="javascript:void(0);"><?php echo __('Send To Friend', 'directory-starter'); ?></a></span>
                 <?php } ?>
                 </div>
 
@@ -248,13 +257,13 @@ function sup_add_feat_img_head($page)
                 ?>
                 <ul class="sd-cta-favsandshare">
                 <?php if (!$preview) { ?>
-                    <li><a target="_blank" href="http://www.facebook.com/sharer.php?u=<?php the_permalink();?>&t=<?php the_title(); ?>"><i class="fa fa-facebook"></i></a></li>
-                    <li><a target="_blank" href="http://twitter.com/share?text=<?php echo urlencode(get_the_title()); ?>&url=<?php echo urlencode(get_the_permalink()); ?>"><i class="fa fa-twitter"></i></a></li>
-                    <li><a target="_blank" href="https://plus.google.com/share?url=<?php echo urlencode(get_the_permalink()); ?>"><i class="fa fa-google-plus"></i></a></li>
+                    <li><a target="_blank" title="<?php echo __('Share on Facebook', 'directory-starter'); ?>" href="http://www.facebook.com/sharer.php?u=<?php the_permalink();?>&t=<?php the_title(); ?>"><i class="fa fa-facebook"></i></a></li>
+                    <li><a target="_blank" title="<?php echo __('Share on Twitter', 'directory-starter'); ?>" href="http://twitter.com/share?text=<?php echo urlencode(get_the_title()); ?>&url=<?php echo urlencode(get_the_permalink()); ?>"><i class="fa fa-twitter"></i></a></li>
+                    <li><a target="_blank" title="<?php echo __('Share on Google Plus', 'directory-starter'); ?>" href="https://plus.google.com/share?url=<?php echo urlencode(get_the_permalink()); ?>"><i class="fa fa-google-plus"></i></a></li>
                 <?php } else { ?>
-                    <li><a target="_blank" href=""><i class="fa fa-facebook"></i></a></li>
-                    <li><a target="_blank" href=""><i class="fa fa-twitter"></i></a></li>
-                    <li><a target="_blank" href=""><i class="fa fa-google-plus"></i></a></li>
+                    <li><a target="_blank" title="<?php echo __('Share on Facebook', 'directory-starter'); ?>" href=""><i class="fa fa-facebook"></i></a></li>
+                    <li><a target="_blank" title="<?php echo __('Share on Twitter', 'directory-starter'); ?>" href=""><i class="fa fa-twitter"></i></a></li>
+                    <li><a target="_blank" title="<?php echo __('Share on Google Plus', 'directory-starter'); ?>" href=""><i class="fa fa-google-plus"></i></a></li>
                 <?php } ?>
                 </ul>
                 <?php
@@ -648,3 +657,153 @@ function supreme_entry_meta()
     }
 
 }
+
+// Add "My Account" to primary menu.
+add_filter( 'wp_nav_menu_items', 'sd_add_my_account_link', 10, 2 );
+function sd_add_my_account_link ( $items, $args ) {
+    if ($args->theme_location == 'primary-menu') {
+         ob_start();
+         ?>
+         <li class="sd-my-account menu-item">
+         <?php
+         if ( is_user_logged_in() ) {
+         global $current_user;
+         get_currentuserinfo();
+         $avatar = get_avatar( $current_user->ID, 60 );
+         ?>
+        <a class="sd-my-account-link" href="">
+            <?php
+            echo $avatar;
+            if ( class_exists( 'BuddyPress' ) ) {
+                $user_link = bp_get_loggedin_user_link();
+            } else {
+                $user_link = get_author_posts_url( $current_user->ID );
+            }
+            ?>
+            <?php echo __('My Account', 'directory-starter'); ?>
+            <i class="fa fa-caret-down"></i>
+        </a>
+        <div class="sd-my-account-dd">
+            <div class="sd-my-account-dd-inner">
+                <div class="sd-dd-avatar-wrap">
+                    <a href="<?php echo $user_link; ?>" rel="nofollow"><?php echo $avatar; ?></a>
+                    <h4>
+                        <a href="<?php echo $user_link; ?>" rel="nofollow"><?php echo $current_user->display_name; ?></a>
+                    </h4>
+                </div>
+                <?php if ( class_exists( 'BuddyPress' ) ) { ?>
+                <ul class="sd-my-account-dd-menu-group sd-my-account-dd-menu-bp-group">
+                        <li class="sd-my-account-dd-menu-link">
+                            <a href="<?php echo $user_link; ?>">
+                                <i class="fa fa-user"></i> <?php echo __('About Me', 'directory-starter'); ?>
+                            </a>
+                        </li>
+                        <li class="sd-my-account-dd-menu-link">
+                            <a href="<?php echo $user_link.'settings/'; ?>">
+                                <i class="fa fa-cog"></i> <?php echo __('Account Settings', 'directory-starter'); ?>
+                            </a>
+                        </li>
+                </ul>
+                <?php } ?>
+                <ul class="sd-my-account-dd-menu-group">
+                    <li class="sd-my-account-dd-menu-link">
+                        <a href="<?php echo wp_logout_url(home_url()); ?>">
+                            <i class="fa fa-sign-out"></i> <?php echo __('Log Out', 'directory-starter'); ?>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <?php } else {
+        if (isset($_GET['redirect_to']) && $_GET['redirect_to'] != '') {
+            $redirect_to = $_GET['redirect_to'];
+        } else {
+            //echo $_SERVER['HTTP_HOST'] ;
+            $redirect_to = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '';
+            if (strpos($redirect_to, $_SERVER['HTTP_HOST']) === false) {
+                $redirect_to = home_url();
+            }
+
+        }
+            ?>
+        <a class="sd-my-account-link" href="">
+            <?php echo __('My Account', 'directory-starter'); ?>
+            <i class="fa fa-caret-down"></i>
+        </a>
+        <div class="sd-my-account-dd">
+            <div class="sd-my-account-dd-inner">
+            <h4 class="sd-my-account-title">Sign In</h4>
+            <?php
+    if (isset($_REQUEST['emsg']) && $_REQUEST['emsg'] == 'fw') {
+        echo "<p class=\"error_msg\"> " . INVALID_USER_FPW_MSG . " </p>";
+    } elseif (isset($_REQUEST['logemsg']) && $_REQUEST['logemsg'] == 1) {
+        echo "<p class=\"error_msg\"> " . INVALID_USER_PW_MSG . " </p>";
+    }
+
+    if (isset($_REQUEST['checkemail']) && $_REQUEST['checkemail'] == 'confirm')
+        echo '<p class="sucess_msg">' . PW_SEND_CONFIRM_MSG . '</p>';
+
+    ?>
+                <form name="cus_loginform" action="<?php echo esc_url(geodir_curPageURL()); ?>"
+              method="post">
+
+            <div class="form_row clearfix">
+                <input placeholder='<?php echo USERNAME_TEXT; ?>' type="text" name="log" id="user_login"
+                       value="<?php global $user_login;
+                       if (!isset($user_login)) {
+                           $user_login = '';
+                       }
+                       echo esc_attr($user_login); ?>" size="20" class="textfield"/>
+                <span class="user_loginInfo"></span>
+            </div>
+
+            <div class="form_row clearfix">
+                <input placeholder='<?php echo PASSWORD_TEXT; ?>' type="password" name="pwd" id="user_pass"
+                       class="textfield input-text" value="" size="20"/>
+                <span class="user_passInfo"></span>
+            </div>
+
+            <p class="rember">
+                <input name="rememberme" type="checkbox" id="rememberme" value="forever" class="fl"/>
+                <?php echo REMEMBER_ON_COMPUTER_TEXT; ?>
+            </p>
+
+
+            <input class="geodir_button" type="submit" value="<?php echo SIGN_IN_BUTTON; ?>" name="submit"/>
+            <input type="hidden" name="redirect_to" value="<?php echo esc_url($redirect_to); ?>"/>
+            <input type="hidden" name="testcookie" value="1"/>
+        </form>
+            </div>
+        </div>
+            <?php
+        }
+        ?>
+        </li>
+        <?php
+        $html = ob_get_clean();
+        $items .= $html;
+    }
+    return $items;
+}
+
+function sd_add_my_account_js()
+{
+    ?>
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            jQuery('a.sd-my-account-link').click(function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                jQuery('.sd-my-account-dd').toggle();
+            });
+            jQuery(document).click(function (e) {
+                if (e.target.class != 'sd-my-account-dd' && !jQuery('.sd-my-account-dd').find(e.target).length) {
+                    jQuery('.sd-my-account-dd').hide();
+                }
+            });
+        });
+    </script>
+<?php
+}
+add_action('wp_footer', 'sd_add_my_account_js');
