@@ -16,7 +16,7 @@ body.sd {
 .sd .site-header {
     border: 0 none;
     box-shadow: none;
-    height: 61px;
+    /*height: 61px;*/
 }
 
 .sd header .container {
@@ -977,8 +977,9 @@ h2.comments-title {
     margin-top: 5px;
 }
 
-.sd-my-account-link .avatar {
+.sd .sd-my-account-link .avatar {
     width: 20px;
+    height: 20px;
     border-radius: 15px;
     margin: 0 4px -5px 0;
     border: 1px solid #fff;

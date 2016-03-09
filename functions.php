@@ -39,6 +39,19 @@ function sd_custom_body_class($classes)
     return $classes;
 }
 
+
+if (!defined('GEODIRECTORY_VERSION')){
+    function geodir_force_update_remove_notice() {
+        $class = 'notice notice-error';
+        $message = "The theme requires GeoDirectory plugin! Please install it before you continue or you will have a bad time...";
+
+        printf( '<div class="%1$s"><p>%2$s</p></div>', $class, $message );
+    }
+    add_action( 'admin_notices', 'geodir_force_update_remove_notice' );
+    return;
+}
+
+
 //remove breadcrumb from search, listings and detail page
 remove_action('geodir_search_before_main_content', 'geodir_breadcrumb', 20);
 remove_action('geodir_listings_before_main_content', 'geodir_breadcrumb', 20);
@@ -68,11 +81,11 @@ function sd_mobile_map_buttons()
 {
     echo '<div class="sd-mobile-search-controls">
 			<a class="dt-btn" id="showSearch" href="#">
-				<i class="fa fa-search"></i> ' . __('SEARCH LISTINGS', directory - starter) . '</a>
+				<i class="fa fa-search"></i> ' . __('SEARCH LISTINGS', 'directory-starter') . '</a>
 			<a class="dt-btn" id="hideMap" href="#"><i class="fa fa-th-large">
-				</i> ' . __('SHOW LISTINGS', directory - starter) . '</a>
+				</i> ' . __('SHOW LISTINGS', 'directory-starter') . '</a>
 			<a class="dt-btn" id="showMap" href="#"><i class="fa fa-map-o">
-				</i> ' . __('SHOW MAP', directory - starter) . '</a>
+				</i> ' . __('SHOW MAP', 'directory-starter') . '</a>
 			</div>';
 }
 
@@ -243,13 +256,13 @@ function sup_add_feat_img_head($page)
                 echo '<div class="sd-detail-cta"><a class="dt-btn" href="' . get_the_permalink() . '#respond">' . __('Write a Review', 'directory-starter') . '</a>';
                 ?>
                 <div class="geodir_more_info geodir_email">
-                <?php if (isset($post->geodir_email) && $post->geodir_email) { ?>
                     <span style="" class="geodir-i-email">
                     <i class="fa fa-envelope"></i>
-                    <a href="javascript:void(1);" class="b_send_inquiry2"
-                       onclick="jQuery( '.b_send_inquiry' ).click();"><?php echo __('Send Enquiry', 'directory-starter'); ?></a> |
-                    <a class="b_sendtofriend" href="javascript:void(0);"><?php echo __('Send To Friend', 'directory-starter'); ?></a></span>
-                <?php } ?>
+                        <?php if (isset($post->geodir_email) && $post->geodir_email) { ?>
+                    <a href="javascript:void(0);" class="b_send_inquiry2"
+                       onclick="jQuery( '.geodir-details-sidebar-listing-info .b_send_inquiry' ).click();"><?php echo __('Send Enquiry', 'directory-starter'); ?></a> | <?php } ?>
+                    <a class="b_sendtofriend" href="javascript:void(0);"  onclick="jQuery( '.geodir-details-sidebar-listing-info .b_sendtofriend' ).click();"><?php echo __('Send To Friend', 'directory-starter'); ?></a></span>
+
                 </div>
 
                 <?php
@@ -447,7 +460,6 @@ function my_geodir_show_detail_page_tabs()
         /** This action is documented in geodirectory_template_actions.php */
         echo apply_filters('the_content', stripslashes($video));// we apply the_content filter so oembed works also;
         echo wpautop(stripslashes($special_offers));
-        //geodir_draw_map($map_args);
         ?>
         <div id="reviewsTab"><?php comments_template();?></div><?php
         //echo $related_listing;
@@ -659,7 +671,7 @@ function supreme_entry_meta()
 }
 
 // Add "My Account" to primary menu.
-add_filter( 'wp_nav_menu_items', 'sd_add_my_account_link', 10, 2 );
+add_filter( 'wp_nav_menu_items', 'sd_add_my_account_link', 1001, 2 );
 function sd_add_my_account_link ( $items, $args ) {
     if ($args->theme_location == 'primary-menu') {
          ob_start();
@@ -807,3 +819,109 @@ function sd_add_my_account_js()
 <?php
 }
 add_action('wp_footer', 'sd_add_my_account_js');
+
+
+
+function sd_set_theme_mods(){
+    print_r(get_theme_mods());
+    $ds_theme_mods = get_theme_mods();
+    if(!empty($ds_theme_mods )){
+        update_option('ds_theme_mod_backup',$ds_theme_mods );
+    }
+
+    $sd_theme_mods = array(
+        "dt_header_height"      => "61px",
+        "dt_header_height"      => "61px",
+    );
+}
+
+
+// fire the login function from GD core when loggin in
+add_action('init', 'sd_header_login_handler');
+function sd_header_login_handler() {
+    if(!geodir_is_page('login') && isset($_REQUEST['log'])) {
+        geodir_user_signup();
+    }
+}
+
+// add pagin html to top of listings
+add_action('geodir_before_listing', 'geodir_pagination',100);
+
+// add fave html to image
+add_action('geodir_after_badge_on_image','sd_listing_img_fav',10,1);
+function sd_listing_img_fav($post){
+    if(isset($post->ID)){
+        geodir_favourite_html($post->post_author, $post->ID);
+    }
+}
+
+// remove pinpoint and normal fav html from listings
+remove_action('geodir_after_favorite_html','geodir_output_favourite_html_listings',1);
+remove_action('geodir_after_favorite_html','geodir_output_pinpoint_html_listings',1);
+
+
+add_action('geodir_wrapper_open', 'sd_add_featured_area_html',1,1);
+
+
+function sd_add_featured_area_html($page){
+    if($page=='home-page'){
+
+        if(function_exists('geodir_get_location_seo')) {
+            $seo = geodir_get_location_seo();
+            if (isset($seo->seo_image_tagline) && $seo->seo_image_tagline) {
+                $sub_title = $seo->seo_image_tagline;
+            }
+            if (isset($seo->seo_image) && $seo->seo_image) {
+                $full_image_url = wp_get_attachment_image_src($seo->seo_image, 'full');
+            }
+        }
+
+        if(isset($full_image_url)){
+
+        }elseif(has_post_thumbnail()){
+            $full_image_url = wp_get_attachment_image_src(get_post_thumbnail_id(), 'full');
+        }else{
+            $full_image_url[0] = get_stylesheet_directory_uri()."/featured.jpg";
+        }
+
+        if(!isset($sub_title) && get_post_meta(get_the_ID(), 'subtitle', true)){
+            $sub_title = get_post_meta(get_the_ID(), 'subtitle', true);
+        }
+
+
+        ?>
+    <div class="featured-area">
+        <div class="featured-img" style="background-image: url(<?php echo $full_image_url[0]; ?>);" >
+
+        </div>
+        <div class="header-wrap">
+            <?php
+        if (is_singular()) { ?>
+            <h1 class="entry-title"><?php echo do_shortcode('[gd_current_location_name]'); ?></h1>
+        <?php } else { ?>
+            <h2 class="entry-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+        <?php }
+
+
+        if (isset($sub_title)) {
+            echo '<div class="entry-subtitle">' . $sub_title . '</div>';
+        }
+        ?>
+
+        <?php
+        echo do_shortcode('[gd_advanced_search]');
+        echo do_shortcode('[gd_popular_post_category category_limit=5]');
+        echo '<div class="home-more"><a href="#geodir_content"><i class="fa fa-chevron-down"></i></a></div>';
+        ?>
+        </div>
+    </div>
+<?php
+    }
+}
+
+
+function sd_theme_activation(){
+    //set home and location page fatured image
+
+    //set the theme mod heights/settings
+}
