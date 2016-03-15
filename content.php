@@ -1,7 +1,7 @@
 <article <?php post_class(); ?>>
 
-    <?php if (function_exists('is_buddypress')) {
-        if (!is_buddypress()) { ?>
+    <?php
+        if ((function_exists('is_buddypress') && !is_buddypress()) || !function_exists('is_buddypress')) { ?>
 
 
             <header>
@@ -38,7 +38,7 @@
                         ?>
                     </div>
                 </div>
-            </header> <?php }
+            </header> <?php
     } ?>
     <div class="container" id="home-scroll">
         <div class="entry-content entry-summary">

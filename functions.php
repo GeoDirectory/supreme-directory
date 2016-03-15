@@ -246,7 +246,7 @@ function sup_add_feat_img_head($page)
                 echo '<div class="sd-detail-cat-links"><ul>';
                 foreach ($cats_arr as $cat) {
                     $term_arr = get_term($cat, $post_tax);
-                    $term_icon = $cat_icons[$cat];
+                    $term_icon = isset($cat_icons[$cat]) ? $cat_icons[$cat] : '';
                     $term_url = get_term_link(intval($cat), $post_tax);
                     echo '<li><a href="' . $term_url . '"><img src="' . $term_icon . '">';
                     echo '<span class="cat-link">' . $term_arr->name . '</span>';
@@ -814,7 +814,8 @@ function sd_add_my_account_js()
                     jQuery('.sd-my-account-dd').hide();
                 }
             });
-        });
+
+            });
     </script>
 <?php
 }
@@ -925,3 +926,12 @@ function sd_theme_activation(){
 
     //set the theme mod heights/settings
 }
+
+// hide toolbar in frontend
+add_filter('show_admin_bar', '__return_false');
+
+
+// remove core term description
+remove_action('geodir_listings_page_description', 'geodir_action_listings_description', 10);
+// remove location maanger term description
+remove_action( 'wp_print_scripts', 'geodir_location_remove_action_listings_description', 100 );

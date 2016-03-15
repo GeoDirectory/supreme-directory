@@ -86,7 +86,7 @@ body.sd {
 .featured-area {
     align-items: center;
     display: flex;
-    min-height: 350px;
+    /*min-height: 350px;*/
     flex-direction: column;
     padding: 32px 0;
     position: relative;
@@ -99,11 +99,12 @@ body.sd {
 
 .sd.single.geodir-page .featured-area, .sd.sd-preview .featured-area {
     height: 65vh;
+    width: 100%;
 }
 
 .featured-img {
     background-color: #f9f9f9;
-    background-position: center center;
+    background-position: 50% 20%;
     background-repeat: no-repeat;
     background-size: cover;
     border-bottom: 1px solid rgba(0, 0, 0, 0.075);
@@ -267,7 +268,7 @@ body.sd {
     flex-basis: 61px;
     flex-shrink: 0;
     flex-wrap: nowrap;
-    height: 61px;
+    /*height: 61px;*/
     position: fixed;
     top: 0;
     width: 100%;
@@ -283,7 +284,7 @@ body.sd {
 }
 
 .sd.search.geodir-page .geodir-common, .sd.archive.geodir-page .geodir-common {
-    margin: 61px auto 0;
+    margin: 0;
     padding: 0;
     width: 100%;
     display: flex;
@@ -301,7 +302,7 @@ body.sd {
     float: left;
     position: fixed;
     right: 0;
-    top: 61px;
+    /*top: 61px;*/
     width: 40% !important;
 }
 
