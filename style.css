@@ -8,6 +8,18 @@ Template: directory-starter
 Version: 1.0.0
 */
 
+
+/* hide titles */
+body.geodir_custom_posts #geodir_content > header.entry-header{
+    display: none;
+}
+
+body.search.geodir_custom_posts #geodir_content > header.entry-header,
+body.author.geodir_custom_posts #geodir_content > header.entry-header{
+    display: block;
+}
+
+
 body.sd {
     background-color: #fff;
     font-size: 15px;
@@ -155,7 +167,7 @@ body.sd {
     margin: 0 0 20px;
 }
 
-.sd.home .geodir-loc-bar-in, .sd.sd-location .geodir-loc-bar-in {
+.sd.home .featured-area .geodir-loc-bar-in, .sd.sd-location .featured-area .geodir-loc-bar-in {
     background: transparent none repeat scroll 0 0;
     border: 0 none;
     margin: 0 auto;
@@ -178,7 +190,11 @@ body.sd {
 .sd .near-compass {
     color: #ccc;
     cursor: pointer;
-    margin: 7px 0 0 15px;
+    margin: 24px 0 0 25px;
+}
+
+.sd .near-compass .fa {
+    font-size: 20px;
 }
 
 .sd .near-compass:hover {
@@ -201,40 +217,40 @@ body.sd {
     margin-top: 20px;
 }
 
-.sd.home .cat-link, .sd.home .geodir-pcat-show img, .sd.sd-location .cat-link, .sd.sd-location .geodir-pcat-show img {
+.sd.home .featured-area .cat-link, .sd.home .featured-area .geodir-pcat-show img, .sd.sd-location .featured-area .cat-link, .sd.sd-location .featured-area .geodir-pcat-show img {
     display: block;
     margin: 0 auto;
 }
 
-.sd.home .geodir-pcat-show > a, .home-more a, .sd.sd-location .geodir-pcat-show > a {
+.sd.home .featured-area .geodir-pcat-show > a, .home-more a, .sd.sd-location .featured-area .geodir-pcat-show > a {
     color: #fff;
 }
 
-.sd.home .geodir-pcat-show, .sd.sd-location .geodir-pcat-show {
+.sd.home .featured-area .geodir-pcat-show, .sd.sd-location .featured-area .geodir-pcat-show {
     background: rgba(0, 0, 0, 0.5) none repeat scroll 0 center;
     border-radius: 10px;
     width: 18.4%;
     padding: 10px;
 }
 
-.sd.home .geodir-pcat-show:hover, .sd.sd-location .geodir-pcat-show:hover {
+.sd.home .featured-area .geodir-pcat-show:hover, .sd.sd-location  .featured-area .geodir-pcat-show:hover {
     background: rgba(0, 0, 0, 0.2) none repeat scroll 0 center;
 }
 
-.sd.home .geodir-pcat-show:last-child, .sd.sd-location .geodir-pcat-show:last-child {
+.sd.home .featured-area .geodir-pcat-show:last-child, .sd.sd-location  .featured-area .geodir-pcat-show:last-child {
     margin-right: 0;
 }
 
-.sd.home .geodir-pcat-show img, .sd.sd-location .geodir-pcat-show img {
+.sd.home .featured-area .geodir-pcat-show img, .sd.sd-location .featured-area .geodir-pcat-show img {
     height: 35px !important;
 }
 
-.geodir-cat-list {
+.featured-area .geodir-cat-list {
     color: #fff;
     font-size: 16px;
 }
 
-.geodir-cat-list-more {
+.featured-area .geodir-cat-list-more {
     display: none;
 }
 
@@ -280,7 +296,7 @@ body.sd {
 }
 
 .sd.search.geodir-page .entry-header, .sd.archive.geodir-page .entry-header {
-    display: none;
+    /*display: none;*/
 }
 
 .sd.search.geodir-page .geodir-common, .sd.archive.geodir-page .geodir-common {
@@ -296,14 +312,21 @@ body.sd {
     padding: 20px;
 }
 
-.sd.search.geodir-page .geodir-listings-sidebar-right, .sd.archive.geodir-page .geodir-listings-sidebar-right {
+.sd.search.geodir-page .geodir-listings-sidebar-left,
+.sd.archive.geodir-page .geodir-listings-sidebar-left,
+.sd.search.geodir-page .geodir-listings-sidebar-right,
+.sd.archive.geodir-page .geodir-listings-sidebar-right {
     display: block;
     flex-grow: 1;
     float: left;
-    position: fixed;
+    /*position: fixed;*/
+    position: relative;
     right: 0;
     /*top: 61px;*/
     width: 40% !important;
+    flex-basis: 40%;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
 }
 
 .sd.search.geodir-page.admin-bar .geodir-listings-sidebar-right, .sd.archive.geodir-page.admin-bar .geodir-listings-sidebar-right {
@@ -529,6 +552,12 @@ a#hideMap {
     display: block;
     margin: 0 auto;
     width: 45px;
+}
+
+.sd-detail-author .geodir-company_info {
+    display: inline-block;
+    border: none;
+    padding: 0;
 }
 
 .sd .sd-detail-info .sd-entry-title {
@@ -784,6 +813,15 @@ h2.comments-title {
 }
 
 @media (max-width: 992px) {
+
+    .sd.search.geodir-page .geodir-listings-sidebar-right,
+    .sd.archive.geodir-page .geodir-listings-sidebar-right,
+    .sd.search.geodir-page .geodir-listings-sidebar-left,
+    .sd.archive.geodir-page .geodir-listings-sidebar-left {
+        position: absolute;
+        margin-bottom: 0 !important;
+    }
+
     .sd.archive.geodir-page aside#gd-sidebar-wrapper, .sd.search.geodir-page aside#gd-sidebar-wrapper {
         visibility: hidden;
     }

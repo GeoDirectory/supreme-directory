@@ -14,6 +14,9 @@ jQuery(document).ready(function () {
         jQuery("#showSearch").css("display", "none");
         jQuery("#hideMap").css("display", "block");
         jQuery( "#hideMap" ).appendTo( ".gd_listing_map_TopLeft" );
+
+       // jQuery("#geodir_content").css("display", "none");
+        //jQuery("#gd-sidebar-wrapper").css("display", "block");
     });
 
     jQuery("#hideMap").click(function () {
@@ -22,6 +25,9 @@ jQuery(document).ready(function () {
         jQuery("#showSearch").css("display", "block");
         jQuery("#hideMap").css("display", "none");
         jQuery( "#hideMap" ).appendTo( ".sd-mobile-search-controls" );
+
+       // jQuery("#geodir_content").css("display", "block");
+        //jQuery("#gd-sidebar-wrapper").css("display", "none");
     });
 
     jQuery("#showSearch").click(function () {
@@ -52,16 +58,22 @@ jQuery(document).ready(function () {
 function sd_adjust_head(){
     var headHeight = jQuery('#site-header').height();
 
+
+    if(headHeight>0){headHeight = headHeight-1;}
+    jQuery("#geodir_wrapper").css({
+        'margin-top': headHeight+"px"
+    });
+
     jQuery("#geodir_content").css({
         height: "calc(100vh - "+headHeight+"px)",
-        'margin-top': headHeight+"px",
+       // 'margin-top': headHeight+"px",
         'overflow-y': "scroll",
         '-webkit-overflow-scrolling': "touch"
     });
 
     jQuery("#gd-sidebar-wrapper").css({
         height: "calc(100vh - "+headHeight+"px)",
-        'margin-top': headHeight+"px",
+       // 'margin-top': headHeight+"px",
         'overflow': "hidden"
     });
 
