@@ -10,19 +10,13 @@
 
 
 /*#############################################
-IF YOU WISH TO MAKE CHANGES THAT WONT BE OVERWRITTEN PLEASE UNCOMMENT THE BELOW LINE AND ADD THE FILE user-functions.php TO THIS THEME (YOU WILL HAVE TO UNCOMMENT ON UPDATES)
-#############################################*/
-//require_once( get_stylesheet_directory() . '/user-functions.php' );
-
-
-/*#############################################
 SUPREME DIRECTORY CODE STARTS
 #############################################*/
 
 /*
  * Define some constants for later use.
  */
-if (!defined('SD_DEFAULT_FEATURED_IMAGE')) define('SD_DEFAULT_FEATURED_IMAGE', get_stylesheet_directory_uri() . "/featured.jpg");
+if (!defined('SD_DEFAULT_FEATURED_IMAGE')) define('SD_DEFAULT_FEATURED_IMAGE', get_stylesheet_directory_uri() . "/images/featured.jpg");
 if (!defined('SD_VERSION')) define('SD_VERSION', "0.0.1");
 if (!defined('SD_CHILD')) define('SD_CHILD', 'supreme-directory');
 
@@ -1052,18 +1046,6 @@ remove_action('geodir_after_favorite_html', 'geodir_output_favourite_html_listin
 remove_action('geodir_after_favorite_html', 'geodir_output_pinpoint_html_listings', 1);
 
 
-/**
- * Runs on theme activation.
- *
- * @since 1.0.0
- */
-function sd_theme_activation()
-{
-    //set home and location page fatured image
-
-    //set the theme mod heights/settings
-}
-
 // hide toolbar in frontend
 add_filter('show_admin_bar', '__return_false');
 
@@ -1131,17 +1113,64 @@ function sd_gd_adv_search_btn_value()
 
 add_filter('gd_adv_search_btn_value', 'sd_gd_adv_search_btn_value', 10);
 
+/**
+ * Return the font awesome search icon HTML.
+ *
+ * Replace advanced search button with fontawesome cog.
+ *
+ * @since 1.0.0
+ * @return string The font awesome cog sign.
+ */
+function sd_gd_adv_search_s_btn_value()
+{
+    return "&#xf002;";
+}
 
+add_filter('geodir_search_default_search_button_text', 'sd_gd_adv_search_s_btn_value', 10);
+
+
+/**
+ * Runs on theme activation.
+ *
+ * @since 1.0.0
+ */
+function sd_theme_activation()
+{
+
+    //set the theme mod heights/settings
+    sd_set_theme_mods();
+}
+add_action('after_switch_theme', 'sd_theme_activation');
+
+/**
+ * Sets the default setting for the theme.
+ *
+ * @since 1.0.0
+ */
 function sd_set_theme_mods()
 {
-    print_r(get_theme_mods());
+
     $ds_theme_mods = get_theme_mods();
-    if (!empty($ds_theme_mods)) {
+    if (!empty($ds_theme_mods) && !get_option('ds_theme_mod_backup')) {
         update_option('ds_theme_mod_backup', $ds_theme_mods);
     }
 
     $sd_theme_mods = array(
         "dt_header_height" => "61px",
-        "dt_header_height" => "61px",
+        "dt_p_nav_height" => "61px",
+        "dt_p_nav_line_height" => "61px",
+        "logo" => get_stylesheet_directory_uri()."/images/logo.png"
     );
+
+    /**
+     * Parse incoming $args into an array and merge it with defaults
+     */
+    $sd_theme_mods = wp_parse_args(  $ds_theme_mods,$sd_theme_mods );
+
+    foreach($sd_theme_mods as $key=>$val){
+      set_theme_mod( $key, $val );
+    }
+
 }
+//add_action('init', 'sd_set_theme_mods'); // testing only remove for release
+
