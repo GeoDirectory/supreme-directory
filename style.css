@@ -10,12 +10,12 @@ Version: 1.0.0
 
 
 /* hide titles */
-body.geodir_custom_posts #geodir_content > header.entry-header{
+body.sd #geodir_content > header.entry-header{
     display: none;
 }
 
-body.search.geodir_custom_posts #geodir_content > header.entry-header,
-body.author.geodir_custom_posts #geodir_content > header.entry-header{
+body.author.sd #geodir_content > header.entry-header,
+body.search-results.sd #geodir_content > header.entry-header{
     display: block;
 }
 
@@ -348,7 +348,11 @@ body.sd {
 }
 
 .sd .geodir-list-view-select {
-    display: none;
+    /*display: none;*/
+}
+
+.gd-pagination-details{
+    float: right;
 }
 
 .sd.search.geodir-page .site-footer, .sd.archive.geodir-page .site-footer {
@@ -471,6 +475,7 @@ body.sd {
     width: 30%;
 }
 
+
 .sd.search.geodir-page .geodir-search select, .sd.archive.geodir-page .geodir-search select {
     margin: 0.5%;
     width: 26%;
@@ -482,10 +487,87 @@ body.sd {
     width: 10%;
 }
 
+
+/* search with advanced settings */
+
+.sd.search.geodir-page .geodir-adv-form .search_text,
+.sd.archive.geodir-page .geodir-adv-form .search_text,
+.sd.search.geodir-page .geodir-adv-form .snear,
+.sd.archive.geodir-page .geodir-adv-form .snear {
+
+}
+
+/*
+#################################################
+SEARCH STANDARD
+#################################################
+*/
+@media only screen and (min-width: 1040px)
+{
+    #geodir_content .geodir-search input.search_text{margin-left: 0px;}
+    #geodir_content .geodir-search input[type="text"]{width:43%;}
+}
+
+/*
+#################################################
+CUSTOM POST TYPES
+#################################################
+*/
+@media only screen and (min-width: 1040px)
+{
+    .geodir_custom_posts #geodir_content .geodir-search input.search_text{margin-left: 0.5%;}
+    .geodir_custom_posts #geodir_content .geodir-search input[type="text"]{width:30%;}
+    .geodir_custom_posts #geodir_content .geodir-search .search_by_post {margin-left: 0px;}
+}
+
+/*
+#################################################
+ADVANCED SEARCH FILTERS
+#################################################
+*/
+@media only screen and (min-width: 1040px)
+{
+    .geodir_advance_search #geodir_content .geodir-search .search_by_post {width:20%;}
+    .geodir_advance_search #geodir_content .geodir-search .showFilters {width:6%;}
+    .geodir_advance_search #geodir_content .geodir-search input[type="text"]{width:40%;}
+}
+
+
+/*
+#################################################
+ADVANCED SEARCH FILTERS && CUSTOM POST TYPES
+#################################################
+*/
+@media only screen and (min-width: 1040px)
+{
+    .geodir_custom_posts.geodir_advance_search #geodir_content .geodir-search .search_by_post {width:20%;}
+    .geodir_custom_posts.geodir_advance_search #geodir_content .geodir-search .showFilters {width:6%;}
+    .geodir_custom_posts.geodir_advance_search #geodir_content .geodir-search input[type="text"]{width:29%;}
+}
+
+
+.showFilters{
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 20px !important;
+    line-height: 0 !important;
+}
+
 .sd .Navi, .sd .nav-links {
     border-top: 0 none;
     overflow: hidden;
     padding-top: 0;
+}
+
+.sd .Navi {
+    margin-bottom: 30px;
+}
+
+.sd .geodir-common .clearfix .Navi {
+    display: none;
 }
 
 .sd-mobile-search-controls {
@@ -534,7 +616,10 @@ a#hideMap {
 .sd .author-avatar {
     border-radius: 50px;
     height: 100px;
+    width: 100px;
     overflow: hidden;
+    margin: 0 auto;
+    border: 1px solid #82888a;
 }
 
 .sd .author-link {
@@ -1140,17 +1225,20 @@ h2.comments-title {
 .sd-ratings .gd-fa-star-rating {
     float: left;
 }
-
 .sd-verified-badge {
-    width: 35px;
+    cursor: pointer;
     height: 35px;
+    margin: 0 0 0 28px;
+    position: absolute;
+    width: 35px;
 }
 .sd-verified-badge i {
+    font-size: 35px;
     position: absolute;
     left: 0;
 }
 .sd-verified-badge .fa-check-circle {
-    color: #82888a;
+    color: #258023;
 }
 .supreme-edit-btn {
     color: #777;

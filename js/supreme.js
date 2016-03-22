@@ -1,5 +1,19 @@
 jQuery(document).ready(function () {
 
+    if ( jQuery( "a.sd-my-account-link" ).length ) {
+        jQuery('a.sd-my-account-link').click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            jQuery('.sd-my-account-dd').toggle();
+        });
+
+        jQuery(document).click(function (e) {
+            if (e.target.class != 'sd-my-account-dd' && !jQuery('.sd-my-account-dd').find(e.target).length) {
+                jQuery('.sd-my-account-dd').hide();
+            }
+        });
+    }
+
     jQuery(".search_by_post").change(function () {
         if (jQuery(".geodir-cat-list-tax").length) {
             var postType = jQuery(this).val()
@@ -15,8 +29,6 @@ jQuery(document).ready(function () {
         jQuery("#hideMap").css("display", "block");
         jQuery( "#hideMap" ).appendTo( ".gd_listing_map_TopLeft" );
 
-       // jQuery("#geodir_content").css("display", "none");
-        //jQuery("#gd-sidebar-wrapper").css("display", "block");
     });
 
     jQuery("#hideMap").click(function () {
@@ -26,8 +38,6 @@ jQuery(document).ready(function () {
         jQuery("#hideMap").css("display", "none");
         jQuery( "#hideMap" ).appendTo( ".sd-mobile-search-controls" );
 
-       // jQuery("#geodir_content").css("display", "block");
-        //jQuery("#gd-sidebar-wrapper").css("display", "none");
     });
 
     jQuery("#showSearch").click(function () {
@@ -142,5 +152,12 @@ function sd_adjust_head(){
             });
         };
     }
+
+    jQuery("#geodir_wrapper_scroll").click(function(event) {
+        event.preventDefault();
+        jQuery('html, body').animate({
+            scrollTop: jQuery("#geodir_wrapper").offset().top
+        }, 1000);
+    });
 
 })();
