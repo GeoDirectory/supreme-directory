@@ -455,10 +455,10 @@ function sup_add_feat_img_head($page)
             </div>
             <div class="header-wrap">
                 <?php
-                if (is_singular()) { ?>
-                    <h1 class="entry-title"><?php echo do_shortcode('[gd_current_location_name]'); ?></h1>
+                if (is_singular() && $location = do_shortcode('[gd_current_location_name]')) {  ?>
+                    <h1 class="entry-title"><?php echo $location; ?></h1>
                 <?php } else { ?>
-                    <h2 class="entry-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+                    <h1 class="entry-title"><?php the_title(); ?></h1>
                 <?php }
 
                 if (isset($sub_title)) {
@@ -1139,6 +1139,10 @@ function sd_theme_activation()
 
     //set the theme mod heights/settings
     sd_set_theme_mods();
+    // add some page and set them if default settings set
+    sd_activation_install();
+
+
 }
 add_action('after_switch_theme', 'sd_theme_activation');
 
@@ -1172,5 +1176,70 @@ function sd_set_theme_mods()
     }
 
 }
-//add_action('init', 'sd_set_theme_mods'); // testing only remove for release
 
+/**
+ * Sets the default settings if they are not already set.
+ *
+ * @since 1.0.0
+ */
+function sd_activation_install(){
+
+    if(get_post_status( 1 )!='publish'){return;}// if Hello World post is not published then we bail
+
+    // Use a static front page
+    delete_option('sd-installed');
+    $is_installed = get_option('sd-installed');
+    if(!$is_installed){
+        // install pages
+        if( $gd_home = geodir_home_page_id()){
+            update_option( 'page_on_front', $gd_home);
+            update_option( 'show_on_front', 'page' );
+
+            update_post_meta( $gd_home, 'subtitle', __('This sub title is set under the homepage meta field', 'directory-starter') );
+
+            // Set the blog page
+            $my_post = array(
+                'post_title'    => __('Blog', 'directory-starter') ,
+                'post_content'  => '',
+                'post_status'   => 'publish',
+                'post_type'   => 'page'
+            );
+
+            // Insert the post into the database if not exists
+            $blog   = get_page_by_title( 'Blog' );
+            if(!$blog){
+                $blog_page_id = wp_insert_post( $my_post );
+                if($blog_page_id){
+                    update_option( 'page_for_posts', $blog_page_id );
+                }
+            }
+        }
+
+
+        // remove some widgets for clean look
+        $sidebars_widgets = get_option('sidebars_widgets');
+        if(isset($sidebars_widgets['geodir_listing_top'])){
+            $sidebars_widgets['geodir_listing_top'] = array();
+        }
+        if(isset($sidebars_widgets['geodir_search_top'])){
+            $sidebars_widgets['geodir_search_top'] = array();
+        }
+        if(isset($sidebars_widgets['geodir_detail_sidebar'])){
+            $sidebars_widgets['geodir_detail_sidebar'] = array();
+        }
+        update_option('sidebars_widgets', $sidebars_widgets);
+
+
+        // Set the installed flag
+        update_option('sd-installed',true);
+
+    }
+
+}
+//add_action('init', 'sd_set_theme_mods'); // testing only remove for release
+//print_r(get_option('sidebars_widgets'));
+
+
+//remove send to friend/enquiry from details page
+add_filter("geodir_show_geodir_email",'__return_false');
+remove_action('geodir_after_detail_page_more_info', 'geodir_payment_sidebar_show_send_to_friend', 11);

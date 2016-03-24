@@ -41,26 +41,14 @@ jQuery(document).ready(function () {
     });
 
     jQuery("#showSearch").click(function () {
-        jQuery(".sd.archive.geodir-page .geodir_advanced_search_widget").toggle();
+        jQuery(".sd.archive.geodir-page .geodir_advanced_search_widget").toggle(0,function() {
+            // Animation complete.
+            if ( typeof geodir_reposition_compass == 'function' ) {
+                geodir_reposition_compass();
+            }
+        });
     });
 
-    jQuery("#showMap").click(function () {
-        jQuery(".sd.search.geodir-page aside#gd-sidebar-wrapper").css("visibility", "visible");
-        jQuery("#showMap").css("display", "none");
-        jQuery("#showSearch").css("display", "none");
-        jQuery("#hideMap").css("display", "block");
-    });
-
-    jQuery("#hideMap").click(function () {
-        jQuery(".sd.search.geodir-page aside#gd-sidebar-wrapper").css("visibility", "hidden");
-        jQuery("#showMap").css("display", "block");
-        jQuery("#showSearch").css("display", "block");
-        jQuery("#hideMap").css("display", "none");
-    });
-
-    jQuery("#showSearch").click(function () {
-        jQuery(".sd.search.geodir-page .geodir_advanced_search_widget").toggle();
-    });
 
 });
 
@@ -98,6 +86,15 @@ function sd_adjust_head(){
         // 'margin-top': headHeight+"px",
         'overflow': "hidden"
     });
+
+
+    // fix the advanced search near me dropdown
+    if ( jQuery( ".gd-near-me-dropdown" ).length ) {
+        var ddHeadHeight = headHeight-8;
+        jQuery(".gd-near-me-dropdown").css({
+            'margin-top': -ddHeadHeight+"px"
+        });
+    }
 
 
 
