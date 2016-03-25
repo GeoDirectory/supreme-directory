@@ -1168,7 +1168,7 @@ h2.comments-title {
 
 /* AUTHOR PAGE  */
 
-.sd.author .avatar {
+.sd.author .featured-area .avatar {
     border-radius: 60px;
     margin: 0 auto;
     /*width: 120px;  breaks the images*/

@@ -89,8 +89,10 @@ function sd_custom_body_class($classes)
         } else {
             $classes[] = 'sd-left-sidebar';
         }
+    } elseif (geodir_is_page('add-listing')) {
+        $classes[] = 'sd-add';
     }
-    // return the modified $classes array
+        // return the modified $classes array
     return $classes;
 }
 
