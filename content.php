@@ -36,7 +36,7 @@
                         <?php if (is_front_page()) {
                             echo do_shortcode('[gd_advanced_search]');
                             echo do_shortcode('[gd_popular_post_category category_limit=5]');
-                            echo '<div class="home-more"><a href="#home-scroll"><i class="fa fa-chevron-down"></i></a></div>';
+                            echo '<div class="home-more"  id="sd-home-scroll" ><a href="#sd-home-scroll"><i class="fa fa-chevron-down"></i></a></div>';
                         }
                         ?>
                     </div>

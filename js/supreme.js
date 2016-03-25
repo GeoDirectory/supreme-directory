@@ -23,7 +23,7 @@ jQuery(document).ready(function () {
     });
 
     jQuery("#showMap").click(function () {
-        jQuery(".sd.archive.geodir-page aside#gd-sidebar-wrapper").css("visibility", "visible");
+        jQuery(".sd.archive.geodir-page aside#gd-sidebar-wrapper,.sd.search.geodir-page aside#gd-sidebar-wrapper").css("visibility", "visible");
         jQuery("#showMap").css("display", "none");
         jQuery("#showSearch").css("display", "none");
         jQuery("#hideMap").css("display", "block");
@@ -32,7 +32,7 @@ jQuery(document).ready(function () {
     });
 
     jQuery("#hideMap").click(function () {
-        jQuery(".sd.archive.geodir-page aside#gd-sidebar-wrapper").css("visibility", "hidden");
+        jQuery(".sd.archive.geodir-page aside#gd-sidebar-wrapper,.sd.search.geodir-page aside#gd-sidebar-wrapper").css("visibility", "hidden");
         jQuery("#showMap").css("display", "block");
         jQuery("#showSearch").css("display", "block");
         jQuery("#hideMap").css("display", "none");
@@ -41,7 +41,7 @@ jQuery(document).ready(function () {
     });
 
     jQuery("#showSearch").click(function () {
-        jQuery(".sd.archive.geodir-page .geodir_advanced_search_widget").toggle(0,function() {
+        jQuery(".sd.archive.geodir-page .geodir_advanced_search_widget,.sd.search.geodir-page .geodir_advanced_search_widget").toggle(0,function() {
             // Animation complete.
             if ( typeof geodir_reposition_compass == 'function' ) {
                 geodir_reposition_compass();
@@ -150,10 +150,10 @@ function sd_adjust_head(){
         };
     }
 
-    jQuery("#geodir_wrapper_scroll").click(function(event) {
+    jQuery("#sd-home-scroll").click(function(event) {
         event.preventDefault();
         jQuery('html, body').animate({
-            scrollTop: jQuery("#geodir_wrapper").offset().top
+            scrollTop: jQuery(".featured-area").outerHeight()
         }, 1000);
     });
 

@@ -455,7 +455,7 @@ function sup_add_feat_img_head($page)
             </div>
             <div class="header-wrap">
                 <?php
-                if (is_singular() && $location = do_shortcode('[gd_current_location_name]')) {  ?>
+                if (is_singular() && $location = do_shortcode('[gd_current_location_name]')) { ?>
                     <h1 class="entry-title"><?php echo $location; ?></h1>
                 <?php } else { ?>
                     <h1 class="entry-title"><?php the_title(); ?></h1>
@@ -469,7 +469,7 @@ function sup_add_feat_img_head($page)
                 <?php
                 echo do_shortcode('[gd_advanced_search]');
                 echo do_shortcode('[gd_popular_post_category category_limit=5]');
-                echo '<div class="home-more" id="geodir_wrapper_scroll"><a href="#geodir_wrapper" ><i class="fa fa-chevron-down"></i></a></div>';
+                echo '<div class="home-more" id="sd-home-scroll"><a href="#sd-home-scroll" ><i class="fa fa-chevron-down"></i></a></div>';
                 ?>
             </div>
         </div>
@@ -1144,6 +1144,7 @@ function sd_theme_activation()
 
 
 }
+
 add_action('after_switch_theme', 'sd_theme_activation');
 
 /**
@@ -1163,16 +1164,16 @@ function sd_set_theme_mods()
         "dt_header_height" => "61px",
         "dt_p_nav_height" => "61px",
         "dt_p_nav_line_height" => "61px",
-        "logo" => get_stylesheet_directory_uri()."/images/logo.png"
+        "logo" => get_stylesheet_directory_uri() . "/images/logo.png"
     );
 
     /**
      * Parse incoming $args into an array and merge it with defaults
      */
-    $sd_theme_mods = wp_parse_args(  $ds_theme_mods,$sd_theme_mods );
+    $sd_theme_mods = wp_parse_args($ds_theme_mods, $sd_theme_mods);
 
-    foreach($sd_theme_mods as $key=>$val){
-      set_theme_mod( $key, $val );
+    foreach ($sd_theme_mods as $key => $val) {
+        set_theme_mod($key, $val);
     }
 
 }
@@ -1182,64 +1183,115 @@ function sd_set_theme_mods()
  *
  * @since 1.0.0
  */
-function sd_activation_install(){
-
-    if(get_post_status( 1 )!='publish'){return;}// if Hello World post is not published then we bail
+function sd_activation_install()
+{
+    // if Hello World post is not published then we bail
+    if (get_post_status(1) != 'publish' || get_the_title(1)!=__('Hello world!')) {
+        return;
+    }
 
     // Use a static front page
-    delete_option('sd-installed');
+    //delete_option('sd-installed'); // @todo remove, only for testing
     $is_installed = get_option('sd-installed');
-    if(!$is_installed){
+    if (!$is_installed) {
         // install pages
-        if( $gd_home = geodir_home_page_id()){
-            update_option( 'page_on_front', $gd_home);
-            update_option( 'show_on_front', 'page' );
 
-            update_post_meta( $gd_home, 'subtitle', __('This sub title is set under the homepage meta field', 'directory-starter') );
-
-            // Set the blog page
-            $my_post = array(
-                'post_title'    => __('Blog', 'directory-starter') ,
-                'post_content'  => '',
-                'post_status'   => 'publish',
-                'post_type'   => 'page'
+        // Insert the home page into the database if not exists
+        $home = get_page_by_title('Find Local Treasures!');
+        if (!$home) {
+            // Set the home page
+            $sd_home = array(
+                'post_title' => __('Find Local Treasures!', 'directory-starter'),
+                'post_content' => '',
+                'post_status' => 'publish',
+                'post_type' => 'page'
             );
+            $home_page_id = wp_insert_post($sd_home);
+            if ($home_page_id) {
+                update_post_meta($home_page_id, 'subtitle', __('Discover the best places to stay, eat, shop and events near you.', 'directory-starter'));
+                update_option('page_on_front', $home_page_id);
+                update_option('show_on_front', 'page');
+            }
+        }
 
-            // Insert the post into the database if not exists
-            $blog   = get_page_by_title( 'Blog' );
-            if(!$blog){
-                $blog_page_id = wp_insert_post( $my_post );
-                if($blog_page_id){
-                    update_option( 'page_for_posts', $blog_page_id );
-                }
+        // Insert the blog page into the database if not exists
+        $blog = get_page_by_title('Blog');
+        if (!$blog) {
+            // Set the blog page
+            $sd_blog = array(
+                'post_title' => __('Blog', 'directory-starter'),
+                'post_content' => '',
+                'post_status' => 'publish',
+                'post_type' => 'page'
+            );
+            $blog_page_id = wp_insert_post($sd_blog);
+            if ($blog_page_id) {
+                update_option('page_for_posts', $blog_page_id);
             }
         }
 
 
         // remove some widgets for clean look
         $sidebars_widgets = get_option('sidebars_widgets');
-        if(isset($sidebars_widgets['geodir_listing_top'])){
+        if (isset($sidebars_widgets['geodir_listing_top'])) {
             $sidebars_widgets['geodir_listing_top'] = array();
         }
-        if(isset($sidebars_widgets['geodir_search_top'])){
+        if (isset($sidebars_widgets['geodir_search_top'])) {
             $sidebars_widgets['geodir_search_top'] = array();
         }
-        if(isset($sidebars_widgets['geodir_detail_sidebar'])){
+        if (isset($sidebars_widgets['geodir_detail_sidebar'])) {
             $sidebars_widgets['geodir_detail_sidebar'] = array();
         }
         update_option('sidebars_widgets', $sidebars_widgets);
 
 
+        // set the menu if it doew not exist
+        // Check if the menu exists
+        $menu_name = 'SD Menu';
+        $menu_exists = wp_get_nav_menu_object( $menu_name );
+
+        // If it doesn't exist, let's create it.
+        if( !$menu_exists){
+            $menu_id = wp_create_nav_menu($menu_name);
+
+            // Set up default menu items
+            $home_page_menu_id = (isset($home_page_id)) ? $home_page_id : $home->ID;
+
+
+            wp_update_nav_menu_item($menu_id, 0, array(
+                'menu-item-title' =>  __('Home'),
+                'menu-item-classes' => 'home',
+                'menu-item-object' => 'page',
+                'menu-item-object-id' => $home_page_menu_id,
+                'menu-item-type' => 'post_type',
+                'menu-item-status' => 'publish'));
+
+            $blog_page_menu_id = (isset($blog_page_id)) ? $blog_page_id : $blog->ID;
+            wp_update_nav_menu_item($menu_id, 0, array(
+                'menu-item-title' =>  __('Blog'),
+                'menu-item-object' => 'page',
+                'menu-item-object-id' => $blog_page_menu_id,
+                'menu-item-type' => 'post_type',
+                'menu-item-status' => 'publish'));
+
+
+            // if no primary-menu is set then set one
+            if ( $menu_id && !has_nav_menu( 'primary-menu' ) ) {
+                set_theme_mod( 'nav_menu_locations', array('primary-menu' => $menu_id));
+                update_option('geodir_theme_location_nav',array('primary-menu'));
+            }
+
+        }
+
+
         // Set the installed flag
-        update_option('sd-installed',true);
+        update_option('sd-installed', true);
 
     }
 
 }
-//add_action('init', 'sd_set_theme_mods'); // testing only remove for release
-//print_r(get_option('sidebars_widgets'));
 
 
 //remove send to friend/enquiry from details page
-add_filter("geodir_show_geodir_email",'__return_false');
+add_filter("geodir_show_geodir_email", '__return_false');
 remove_action('geodir_after_detail_page_more_info', 'geodir_payment_sidebar_show_send_to_friend', 11);

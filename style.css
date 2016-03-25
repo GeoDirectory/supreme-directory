@@ -229,7 +229,7 @@ body.sd {
     font-size: 12px;
 }
 
-span.geodir_term_class {
+.sd.home .featured-area span.geodir_term_class, .sd.sd-location .featured-area span.geodir_term_class {
     display: none;
 }
 
@@ -315,6 +315,14 @@ span.geodir_term_class {
 
 .sd .entry-content {
     margin: 30px auto;
+}
+
+.sd .geodir_location_description {
+    margin-bottom: 40px;
+}
+
+.sd .geodir_location_description .widget-title {
+    display: none;
 }
 
 /* Search & Listings Page */
@@ -1163,7 +1171,7 @@ h2.comments-title {
 .sd.author .avatar {
     border-radius: 60px;
     margin: 0 auto;
-    width: 120px;
+    /*width: 120px;  breaks the images*/
 }
 
 ::-webkit-scrollbar {
