@@ -63,7 +63,7 @@ add_action('wp_enqueue_scripts', 'sd_enqueue_styles');
  */
 function sd_theme_setup()
 {
-    // load_child_theme_textdomain( SD_CHILD, get_stylesheet_directory() . '/languages' ); // uncomment this if you plan to use translation
+    load_child_theme_textdomain( SD_CHILD, get_stylesheet_directory() . '/languages' );
 }
 
 add_action('after_setup_theme', 'sd_theme_setup');
@@ -995,6 +995,11 @@ function sd_add_my_account_link($items, $args)
                                name="submit"/>
                         <input type="hidden" name="redirect_to" value="<?php echo esc_url($redirect_to); ?>"/>
                         <input type="hidden" name="testcookie" value="1"/>
+
+                        <p class="sd-register">
+                        <a href="<?php echo geodir_login_url(array('signup' => true)); ?>"
+                           class="goedir-newuser-link"><?php echo NEW_USER_TEXT; ?></a>
+                        </p>
                     </form>
                 </div>
             </div>

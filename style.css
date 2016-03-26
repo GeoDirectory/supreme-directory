@@ -5,7 +5,7 @@ Description: A Supreme Child Theme for Directory Starter
 Author: GeoDirectory
 Author URI: http://wpgeodirectory.com/
 Template: directory-starter
-Version: 1.0.0
+Version: 0.0.1
 */
 
 /* hide titles */
@@ -14,7 +14,8 @@ body.sd #geodir_content > header.entry-header {
 }
 
 body.author.sd #geodir_content > header.entry-header,
-body.search-results.sd #geodir_content > header.entry-header {
+body.search-results.sd #geodir_content > header.entry-header,
+body.sd-add.sd #geodir_content > header.entry-header {
     display: block;
 }
 
@@ -1171,7 +1172,7 @@ h2.comments-title {
 .sd.author .featured-area .avatar {
     border-radius: 60px;
     margin: 0 auto;
-    /*width: 120px;  breaks the images*/
+    width: 120px; 
 }
 
 ::-webkit-scrollbar {
@@ -1210,6 +1211,20 @@ h2.comments-title {
 .geodir-search .snear.near-country, .gd-small-country {
     background-color: #fff;
     color: #0e950e;
+}
+
+/* FULL SCREEN MAP  */
+body.body_fullscreen #geodir_wrapper{
+    margin-top: 0 !important;
+}
+body.body_fullscreen #geodir_content,
+body.body_fullscreen #site-header{
+    display: none;
+}
+body.body_fullscreen #gd-sidebar-wrapper,
+body.body_fullscreen #sticky_map_gd_listing_map,
+body.body_fullscreen #gd_listing_map_wrapper{
+    height: 100vh !important;
 }
 
 /* RESPONSIVE STUFF */

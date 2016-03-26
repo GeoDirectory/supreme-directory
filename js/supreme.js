@@ -112,9 +112,6 @@ function sd_adjust_head(){
         });
     }
 
-    console.log(screen.height);
-    console.log(jQuery(window).height());
-
 
     if ( jQuery( ".featured-img" ).length ) {
 
