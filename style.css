@@ -230,6 +230,10 @@ body.sd {
     font-size: 12px;
 }
 
+.sd .featured-area  .geodir-cat-list ul li:nth-child(5n) {
+    margin-right: 0;
+}
+
 .sd.home .featured-area span.geodir_term_class, .sd.sd-location .featured-area span.geodir_term_class {
     display: none;
 }
@@ -616,7 +620,7 @@ ADVANCED SEARCH FILTERS
 #################################################
 */
 
-.geodir_advance_search #geodir_content .geodir-search .search_by_post, {
+.geodir_advance_search #geodir_content .geodir-search .search_by_post {
     width: 20%;
 }
 
@@ -1015,6 +1019,10 @@ h2.comments-title {
 .sd.single.geodir-page #gd-sidebar-wrapper, .sd.sd-preview #gd-sidebar-wrapper {
     margin-left: 9%;
     width: 28%;
+}
+
+.sd.single.geodir-page #gd-sidebar-wrapper.geodir-sidebar-left, .sd.sd-preview #gd-sidebar-wrapper.geodir-sidebar-left {
+    margin-left: 0;
 }
 
 .sd.single.geodir-page #geodir-post-gallery a, .sd.sd-preview #geodir-post-gallery a {
