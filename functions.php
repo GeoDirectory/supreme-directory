@@ -887,8 +887,8 @@ function sd_add_my_account_link($items, $args)
         <li class="sd-my-account menu-item">
             <?php
         if (is_user_logged_in()) {
-            global $current_user;
-            get_currentuserinfo();
+
+            $current_user = wp_get_current_user();
             $avatar = get_avatar($current_user->ID, 60);
             ?>
             <a class="sd-my-account-link" href="">
