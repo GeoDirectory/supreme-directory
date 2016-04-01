@@ -1050,7 +1050,7 @@ add_action('geodir_after_badge_on_image', 'sd_listing_img_fav', 10, 1);
 
 // remove pinpoint and normal fav html from listings
 remove_action('geodir_after_favorite_html', 'geodir_output_favourite_html_listings', 1);
-remove_action('geodir_after_favorite_html', 'geodir_output_pinpoint_html_listings', 1);
+remove_action('geodir_listing_after_pinpoint', 'geodir_output_pinpoint_html_listings', 1);
 
 
 // hide toolbar in frontend
@@ -1291,6 +1291,8 @@ function sd_activation_install()
         }
 
 
+        // set the map pin to bounce on listing hover on listings pages
+        update_option('geodir_listing_hover_bounce_map_pin', 1);
         // Set the installed flag
         update_option('sd-installed', true);
 
