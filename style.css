@@ -5,8 +5,19 @@ Description: A Supreme Child Theme for Directory Starter
 Author: GeoDirectory
 Author URI: http://wpgeodirectory.com/
 Template: directory-starter
-Version: 1.0.0
+Version: 0.2.0
 */
+
+/* hide titles */
+body.sd #geodir_content > header.entry-header {
+    display: none;
+}
+
+body.author.sd #geodir_content > header.entry-header,
+body.search-results.sd #geodir_content > header.entry-header,
+body.sd-add.sd #geodir_content > header.entry-header {
+    display: block;
+}
 
 body.sd {
     background-color: #fff;
@@ -16,7 +27,7 @@ body.sd {
 .sd .site-header {
     border: 0 none;
     box-shadow: none;
-    height: 61px;
+    /*height: 61px;*/
 }
 
 .sd header .container {
@@ -60,7 +71,7 @@ body.sd {
     -moz-border-left-colors: none;
     -moz-border-right-colors: none;
     -moz-border-top-colors: none;
-    border-color: none;
+    border-color: transparent;
     border-image: none;
     border-style: none;
     border-width: 0;
@@ -72,7 +83,7 @@ body.sd {
     bottom: 0;
     content: "";
     left: 0;
-    opacity: 0.3;
+    opacity: 0.5;
     position: absolute;
     right: 0;
     top: 0;
@@ -99,11 +110,12 @@ body.sd {
 
 .sd.single.geodir-page .featured-area, .sd.sd-preview .featured-area {
     height: 65vh;
+    width: 100%;
 }
 
 .featured-img {
     background-color: #f9f9f9;
-    background-position: center center;
+    background-position: 50% 20%;
     background-repeat: no-repeat;
     background-size: cover;
     border-bottom: 1px solid rgba(0, 0, 0, 0.075);
@@ -143,6 +155,11 @@ body.sd {
     font-size: 30px;
 }
 
+.sd.search h1.entry-title, .sd.author h1.entry-title {
+    font-size: 18px;
+    margin: 0;
+}
+
 .sd .entry-subtitle {
     color: #fff;
     font-size: 20px;
@@ -154,7 +171,7 @@ body.sd {
     margin: 0 0 20px;
 }
 
-.sd.home .geodir-loc-bar-in, .sd.sd-location .geodir-loc-bar-in {
+.sd.home .featured-area .geodir-loc-bar-in, .sd.sd-location .featured-area .geodir-loc-bar-in {
     background: transparent none repeat scroll 0 0;
     border: 0 none;
     margin: 0 auto;
@@ -177,7 +194,11 @@ body.sd {
 .sd .near-compass {
     color: #ccc;
     cursor: pointer;
-    margin: 7px 0 0 15px;
+    margin: 24px 0 0 27px;
+}
+
+.sd .near-compass .fa {
+    font-size: 18px;
 }
 
 .sd .near-compass:hover {
@@ -200,40 +221,52 @@ body.sd {
     margin-top: 20px;
 }
 
-.sd.home .cat-link, .sd.home .geodir-pcat-show img, .sd.sd-location .cat-link, .sd.sd-location .geodir-pcat-show img {
+.sd.home .featured-area .cat-link, .sd.home .featured-area .geodir-pcat-show img, .sd.sd-location .featured-area .cat-link, .sd.sd-location .featured-area .geodir-pcat-show img {
     display: block;
     margin: 0 auto;
 }
 
-.sd.home .geodir-pcat-show > a, .home-more a, .sd.sd-location .geodir-pcat-show > a {
+.sd .featured-area  .geodir-cat-list ul li {
+    font-size: 12px;
+}
+
+.sd .featured-area  .geodir-cat-list ul li:nth-child(5n) {
+    margin-right: 0;
+}
+
+.sd.home .featured-area span.geodir_term_class, .sd.sd-location .featured-area span.geodir_term_class {
+    display: none;
+}
+
+.sd.home .featured-area .geodir-pcat-show > a, .home-more a, .sd.sd-location .featured-area .geodir-pcat-show > a {
     color: #fff;
 }
 
-.sd.home .geodir-pcat-show, .sd.sd-location .geodir-pcat-show {
+.sd.home .featured-area .geodir-pcat-show, .sd.sd-location .featured-area .geodir-pcat-show {
     background: rgba(0, 0, 0, 0.5) none repeat scroll 0 center;
     border-radius: 10px;
     width: 18.4%;
     padding: 10px;
 }
 
-.sd.home .geodir-pcat-show:hover, .sd.sd-location .geodir-pcat-show:hover {
+.sd.home .featured-area .geodir-pcat-show:hover, .sd.sd-location .featured-area .geodir-pcat-show:hover {
     background: rgba(0, 0, 0, 0.2) none repeat scroll 0 center;
 }
 
-.sd.home .geodir-pcat-show:last-child, .sd.sd-location .geodir-pcat-show:last-child {
+.sd.home .featured-area .geodir-pcat-show:last-child, .sd.sd-location .featured-area .geodir-pcat-show:last-child {
     margin-right: 0;
 }
 
-.sd.home .geodir-pcat-show img, .sd.sd-location .geodir-pcat-show img {
+.sd.home .featured-area .geodir-pcat-show img, .sd.sd-location .featured-area .geodir-pcat-show img {
     height: 35px !important;
 }
 
-.geodir-cat-list {
+.featured-area .geodir-cat-list {
     color: #fff;
     font-size: 16px;
 }
 
-.geodir-cat-list-more {
+.featured-area .geodir-cat-list-more {
     display: none;
 }
 
@@ -256,8 +289,45 @@ body.sd {
     box-shadow: none;
 }
 
+.sd-my-account-dd-inner h4.sd-my-account-title {
+    border-bottom: 1px solid #151515;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.sd-my-account-dd-inner p.rember {
+    line-height: normal;
+    padding: 0;
+}
+
+.sd-my-account-dd-inner p.rember input {
+    margin-top: 3px;
+    margin-left: 0;
+}
+
+.sd-my-account-dd-inner p.error_msg {
+    margin-bottom: 0;
+}
+
+.sd-my-account-dd-inner .form_row {
+    padding-bottom: 10px;
+}
+
+.sd-my-account-dd-inner form {
+    padding: 10px 0;
+    min-height: 200px;
+}
+
 .sd .entry-content {
     margin: 30px auto;
+}
+
+.sd .geodir_location_description {
+    margin-bottom: 40px;
+}
+
+.sd .geodir_location_description .widget-title {
+    display: none;
 }
 
 /* Search & Listings Page */
@@ -267,7 +337,7 @@ body.sd {
     flex-basis: 61px;
     flex-shrink: 0;
     flex-wrap: nowrap;
-    height: 61px;
+    /*height: 61px;*/
     position: fixed;
     top: 0;
     width: 100%;
@@ -279,11 +349,11 @@ body.sd {
 }
 
 .sd.search.geodir-page .entry-header, .sd.archive.geodir-page .entry-header {
-    display: none;
+    /*display: none;*/
 }
 
 .sd.search.geodir-page .geodir-common, .sd.archive.geodir-page .geodir-common {
-    margin: 61px auto 0;
+    margin: 0;
     padding: 0;
     width: 100%;
     display: flex;
@@ -295,14 +365,21 @@ body.sd {
     padding: 20px;
 }
 
-.sd.search.geodir-page .geodir-listings-sidebar-right, .sd.archive.geodir-page .geodir-listings-sidebar-right {
+.sd.search.geodir-page .geodir-listings-sidebar-left,
+.sd.archive.geodir-page .geodir-listings-sidebar-left,
+.sd.search.geodir-page .geodir-listings-sidebar-right,
+.sd.archive.geodir-page .geodir-listings-sidebar-right {
     display: block;
     flex-grow: 1;
     float: left;
-    position: fixed;
+    /*position: fixed;*/
+    position: relative;
     right: 0;
-    top: 61px;
+    /*top: 61px;*/
     width: 40% !important;
+    flex-basis: 40%;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
 }
 
 .sd.search.geodir-page.admin-bar .geodir-listings-sidebar-right, .sd.archive.geodir-page.admin-bar .geodir-listings-sidebar-right {
@@ -310,12 +387,12 @@ body.sd {
 }
 
 .sd.search.geodir-page #sticky_map_gd_listing_map, .sd.archive.geodir-page #sticky_map_gd_listing_map {
-    min-height: calc(100vh - 61px) !important;
+    /*min-height: calc(100vh - 61px) !important;*/
 }
 
 .sd.search.geodir-page #gd_listing_map_wrapper, .sd.search.geodir-page #gd_listing_map, .sd.search.geodir-page #gd_listing_map_loading_div,
 .sd.archive.geodir-page #gd_listing_map_wrapper, .sd.archive.geodir-page #gd_listing_map, .sd.archive.geodir-page #gd_listing_map_loading_div {
-    height: calc(100vh - 61px) !important;
+    /* height: calc(100vh - 61px) !important;*/
 }
 
 .sd.search.geodir-page .geodir-loc-bar, .sd.archive.geodir-page .geodir-loc-bar {
@@ -324,7 +401,11 @@ body.sd {
 }
 
 .sd .geodir-list-view-select {
-    display: none;
+    /*display: none;*/
+}
+
+.gd-pagination-details {
+    float: right;
 }
 
 .sd.search.geodir-page .site-footer, .sd.archive.geodir-page .site-footer {
@@ -379,7 +460,7 @@ body.sd {
 }
 
 .sd .geodir_category_list_view li.geodir-gridview .geodir-rating {
-    max-width: 90px !important;
+    width: 91px !important;
     float: left;
     margin: 2px 5px 0 0;
 }
@@ -442,26 +523,156 @@ body.sd {
     width: 100%;
 }
 
-.sd.search.geodir-page .search_text, .sd.archive.geodir-page .search_text, .sd.search.geodir-page .snear, .sd.archive.geodir-page .snear {
+/* search with advanced settings */
+
+.sd.search.geodir-page .geodir-adv-form .search_text,
+.sd.archive.geodir-page .geodir-adv-form .search_text,
+.sd.search.geodir-page .geodir-adv-form .snear,
+.sd.archive.geodir-page .geodir-adv-form .snear {
+
+}
+
+/*
+#################################################
+SEARCH STANDARD
+#################################################
+*/
+
+#geodir_content .geodir-search .search_by_post,
+#geodir_content .geodir-search input[type="text"],
+#geodir_content .geodir-search input[type="button"] {
     margin: 0.5%;
+}
+
+#geodir_content .geodir-search input[type="button"] {
+    width: 10%;
+}
+
+#geodir_content .geodir-search input.search_text {
+    margin-left: 0px;
+}
+
+#geodir_content .geodir-search input[type="text"] {
+    width: 43%;
+}
+
+.featured-area .geodir-search {
+    width: 100%;
+}
+
+.featured-area .geodir-search .search_by_post,
+.featured-area .geodir-search input[type="text"],
+.featured-area .geodir-search input[type="button"] {
+    margin: 0.5%;
+}
+
+.featured-area .geodir-search input[type="button"] {
+    width: 10%;
+}
+
+.featured-area .geodir-search input.search_text {
+    margin-left: 0.5%;
+}
+
+.featured-area .geodir-search input {
+    width: 43%;
+}
+
+.featured-area .geodir-search input.search_text {
+    margin-left: 0px;
+}
+
+/*
+#################################################
+CUSTOM POST TYPES
+#################################################
+*/
+
+.geodir_custom_posts #geodir_content .geodir-search input.search_text {
+    margin-left: 0.5%;
+}
+
+.geodir_custom_posts #geodir_content .geodir-search input[type="text"] {
     width: 30%;
 }
 
-.sd.search.geodir-page .geodir-search select, .sd.archive.geodir-page .geodir-search select {
-    margin: 0.5%;
+.geodir_custom_posts #geodir_content .geodir-search .search_by_post {
+    margin-left: 0px;
     width: 26%;
 }
 
-.sd.search.geodir-page .geodir-search input[type="button"], .sd.search.geodir-page .geodir-search input[type="submit"],
-.sd.archive.geodir-page .geodir-search input[type="button"], .sd.archive.geodir-page .geodir-search input[type="submit"] {
-    margin: 0.5%;
-    width: 10%;
+.geodir_custom_posts .featured-area .geodir-search input.search_text {
+    margin-left: 0.5%;
+}
+
+.geodir_custom_posts .featured-area .geodir-search input[type="text"] {
+    width: 30%;
+}
+
+.geodir_custom_posts .featured-area .geodir-search .search_by_post {
+    margin-left: 0px;
+    width: 26%;
+}
+
+/*
+#################################################
+ADVANCED SEARCH FILTERS
+#################################################
+*/
+
+.geodir_advance_search #geodir_content .geodir-search .search_by_post {
+    width: 20%;
+}
+
+.geodir_advance_search #geodir_content .geodir-search .showFilters {
+    width: 6%;
+}
+
+.geodir_advance_search #geodir_content .geodir-search input[type="text"] {
+    width: 40%;
+}
+
+/*
+#################################################
+ADVANCED SEARCH FILTERS && CUSTOM POST TYPES
+#################################################
+*/
+
+.geodir_custom_posts.geodir_advance_search #geodir_content .geodir-search .search_by_post {
+    width: 20%;
+}
+
+.geodir_custom_posts.geodir_advance_search #geodir_content .geodir-search .showFilters {
+    width: 6%;
+}
+
+.geodir_custom_posts.geodir_advance_search #geodir_content .geodir-search input[type="text"] {
+    width: 29%;
+}
+
+.geodir_submit_search,
+.showFilters {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 20px !important;
+    line-height: 0 !important;
 }
 
 .sd .Navi, .sd .nav-links {
     border-top: 0 none;
     overflow: hidden;
     padding-top: 0;
+}
+
+.sd .Navi {
+    margin-bottom: 30px;
+}
+
+.sd .geodir-common .clearfix .Navi {
+    display: none;
 }
 
 .sd-mobile-search-controls {
@@ -487,7 +698,161 @@ a#showSearch, a#hideMap {
 
 a#hideMap {
     display: none;
+    position: absolute;
+    z-index: 1;
+    left: 20px;
+    top: 20px;
 }
+
+/*added by giri*/
+.sd .site-header .site-description {
+    display: none;
+}
+
+#reviewsTab #comments .commentlist div.avatar-wrap {
+    margin-right: 0;
+}
+
+#reviewsTab #comments ol.commentlist li.comment,
+.wpl_reviews #comments ol.commentlist li.comment,
+.gdbp-wrapper-reviews #comments ol.commentlist li.comment {
+    border-bottom: none;
+}
+
+#reviewsTab .gd-rating-text {
+    display: none;
+}
+
+.sd-cta-favsandshare {
+    list-style-type: none;
+    overflow: hidden;
+    text-align: center;
+    margin: 0;
+    margin-top: 10px;
+}
+
+.sd-cta-favsandshare li {
+    display: inline;
+    padding: 10px;
+}
+
+.sd-cta-favsandshare a,
+.sd-cta-favsandshare a:visited {
+    color: #82888a;
+}
+
+.sd-cta-favsandshare li .fa {
+    font-size: 30px !important;
+}
+
+.sd-detail-author a.dt-btn {
+    font-size: 15px;
+    line-height: normal;
+    padding: 5px;
+    margin-top: 5px;
+}
+
+.sd .sd-my-account-link .avatar {
+    width: 20px;
+    height: 20px;
+    border-radius: 15px;
+    margin: 0 4px -5px 0;
+    border: 1px solid #fff;
+}
+
+.sd-my-account-link .fa-caret-down {
+    margin: 0 0 0 5px;
+    font-size: 12px;
+}
+
+.sd-my-account-dd {
+    display: none;
+    position: absolute;
+    z-index: 111;
+    right: 0;
+    width: 270px;
+    background: #2F2F2F;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-top: none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 15px;
+}
+
+.sd-my-account-dd .avatar {
+    background: none repeat scroll 0 0 #e3e3e3;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    margin: 0 10px 0 0;
+    padding: 3px;
+    float: left;
+}
+
+.sd-my-account-dd h4 {
+    font-weight: bold;
+    font-size: 1.3em;
+    clear: none;
+    margin-bottom: 10px;
+    margin-top: 0;
+}
+
+.sd #primary-nav ul li .sd-my-account-dd h4 a {
+    font-size: 16px;
+}
+
+.sd #primary-nav ul li .sd-my-account-dd a {
+    text-transform: initial;
+    line-height: normal;
+    height: auto;
+}
+
+.sd-my-account-dd-menu-group {
+    clear: both;
+}
+
+.sd #primary-nav .sd-my-account-dd-menu-bp-group {
+    margin: 12px 0 0;
+    border-top: 1px solid #151515;
+    padding-top: 11px;
+    padding-bottom: 11px;
+}
+
+.sd #primary-nav .sd-my-account-dd-menu-group .fa {
+    margin-right: 7px;
+}
+
+.sd-my-account-dd-menu-group + .sd-my-account-dd-menu-group {
+    margin: 12px 0 0;
+    border-top: 1px solid #151515;
+    padding-top: 11px;
+}
+
+#primary-nav ul .sd-my-account-dd-menu-group li {
+    padding: 5px;
+    display: block;
+    float: none;
+}
+
+.sd-dd-avatar-wrap {
+    overflow: hidden;
+}
+
+
+/*
+#################################################
+MOBILE MENU
+#################################################
+*/
+
+.mm-opened .sd.search.geodir-page #site-header, .mm-opened .sd.archive.geodir-page #site-header{
+    position: relative;
+}
+
+.mm-opened .sd.search.geodir-page #geodir_wrapper, .mm-opened .sd.archive.geodir-page #geodir_wrapper{
+    margin-top: 0 !important;
+}
+
 
 /* Details page */
 
@@ -506,7 +871,10 @@ a#hideMap {
 .sd .author-avatar {
     border-radius: 50px;
     height: 100px;
+    width: 100px;
     overflow: hidden;
+    margin: 0 auto;
+    border: 1px solid #82888a;
 }
 
 .sd .author-link {
@@ -524,6 +892,12 @@ a#hideMap {
     display: block;
     margin: 0 auto;
     width: 45px;
+}
+
+.sd-detail-author .geodir-company_info {
+    display: inline-block;
+    border: none;
+    padding: 0;
 }
 
 .sd .sd-detail-info .sd-entry-title {
@@ -647,6 +1021,10 @@ h2.comments-title {
     width: 28%;
 }
 
+.sd.single.geodir-page #gd-sidebar-wrapper.geodir-sidebar-left, .sd.sd-preview #gd-sidebar-wrapper.geodir-sidebar-left {
+    margin-left: 0;
+}
+
 .sd.single.geodir-page #geodir-post-gallery a, .sd.sd-preview #geodir-post-gallery a {
     border: 0 none;
     margin: 0;
@@ -661,6 +1039,64 @@ h2.comments-title {
 
 .sd-map-in-sidebar-detail {
     margin: 30px 0 20px;
+}
+
+.sd-ratings .gd-fa-star-rating {
+    float: left;
+}
+
+.sd-verified-badge {
+    cursor: pointer;
+    height: 35px;
+    margin: 0 0 0 28px;
+    position: absolute;
+    width: 35px;
+}
+
+.sd-verified-badge i {
+    font-size: 35px;
+    position: absolute;
+    left: 0;
+}
+
+.sd-verified-badge .fa-check-circle {
+    color: #258023;
+}
+
+.supreme-edit-btn {
+    color: #777;
+    padding: 4px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    background-image: none;
+    border-radius: 4px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+    width: auto !important;
+    display: inline-block !important;
+    margin-top: 5px !important;
+}
+
+.sd .sd-detail-author {
+    text-align: center;
+}
+
+.sd .sd-detail-cta .geodir-addtofav {
+    height: 30px;
+}
+
+.sd .sd-detail-cta .geodir-addtofav a .fa {
+    font-size: 30px;
+    width: 34px;
+}
+
+.sd-detail-cat-links {
+    overflow: hidden;
+    margin-top: 35px;
 }
 
 /* Preview Page */
@@ -688,7 +1124,7 @@ h2.comments-title {
 
 /* Blog Archive Page */
 
-.sd.blog .content-box.content-single article.hentry {
+.sd.blog .content-box.content-single article.hentry, .sd.category .content-box.content-archive article.hentry {
     border: 0 none;
     clear: none;
     float: left;
@@ -696,30 +1132,30 @@ h2.comments-title {
     width: 30%;
 }
 
-.sd.blog .content-box.content-single article.hentry:nth-child(3n+3) {
+.sd.blog .content-box.content-single article.hentry:nth-child(3n+3), .sd.category .content-box.content-archive article.hentry:nth-child(3n+3) {
     margin-right: 0;
 }
 
-.sd.blog .content-box.content-single {
+.sd.blog .content-box.content-single, .sd.category .content-box.content-archive {
     margin: 60px 0;
     overflow: hidden;
 }
 
-.sd.blog .content-box.content-single article.hentry .container {
+.sd.blog .content-box.content-single article.hentry .container, .sd.category .content-box.content-archive article.hentry .container {
     width: 100%;
 }
 
-.sd.blog .entry-content {
+.sd.blog .entry-content, .sd.category .entry-content {
     margin: 20px auto 0;
 }
 
-.sd.blog article h2.entry-title {
+.sd.blog article h2.entry-title, .sd.category article h2.entry-title {
     font-size: 25px;
     padding: 0;
     text-align: center;
 }
 
-.sd.blog .entry-footer {
+.sd.blog .entry-footer, .sd.category .entry-footer, .sd.single-post .entry-footer {
     text-align: center;
 }
 
@@ -727,12 +1163,76 @@ h2.comments-title {
     border: 0 none;
 }
 
+/* Blog Single Page */
+
+.sd.single-post #comments.comments-area {
+    margin: 0 auto;
+    max-width: 800px;
+}
+
+#comments.normal-comments ol.commentlist {
+    list-style: outside none none;
+    margin-left: 0;
+}
+
 /* AUTHOR PAGE  */
 
-.sd.author .avatar {
+.sd.author .featured-area .avatar {
     border-radius: 60px;
     margin: 0 auto;
-    width: 120px;
+    width: 120px; 
+}
+
+::-webkit-scrollbar {
+    width: 15px;
+    height: 15px;
+    border-bottom: 1px solid #eee;
+    border-top: 1px solid #eee;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background-color: #C3C3C3;
+    border: 2px solid #eee;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Location Manager - Advanced search */
+
+.geodir-search .snear.near-country, .gd-small-country {
+    opacity: 1;
+}
+
+.geodir-search .snear.near-city, .gd-small-city {
+    background-color: #fff;
+    color: #0393b7;
+}
+
+.geodir-search .snear.near-region, .gd-small-region {
+    background-color: #fff;
+    color: #c39405;
+}
+
+.geodir-search .snear.near-country, .gd-small-country {
+    background-color: #fff;
+    color: #0e950e;
+}
+
+/* FULL SCREEN MAP  */
+body.body_fullscreen #geodir_wrapper{
+    margin-top: 0 !important;
+}
+body.body_fullscreen #geodir_content,
+body.body_fullscreen #site-header{
+    display: none;
+}
+body.body_fullscreen #gd-sidebar-wrapper,
+body.body_fullscreen #sticky_map_gd_listing_map,
+body.body_fullscreen #gd_listing_map_wrapper{
+    height: 100vh !important;
 }
 
 /* RESPONSIVE STUFF */
@@ -743,24 +1243,18 @@ h2.comments-title {
         height: 60vh;
     }
 
-    .sd.search.geodir-page .search_text, .sd.archive.geodir-page .search_text, .sd.search.geodir-page .snear, .sd.archive.geodir-page .snear {
-        margin: 0.5%;
-        width: 29%;
-    }
-
-    .sd.search.geodir-page .geodir-search select, .sd.archive.geodir-page .geodir-search select {
-        margin: 0.5%;
-        width: 26%;
-    }
-
-    .sd.search.geodir-page .geodir-search input[type="button"], .sd.search.geodir-page .geodir-search input[type="submit"],
-    .sd.archive.geodir-page .geodir-search input[type="button"], .sd.archive.geodir-page .geodir-search input[type="submit"] {
-        margin: 0.5%;
-        width: 12%;
-    }
 }
 
 @media (max-width: 992px) {
+
+    .sd.search.geodir-page .geodir-listings-sidebar-right,
+    .sd.archive.geodir-page .geodir-listings-sidebar-right,
+    .sd.search.geodir-page .geodir-listings-sidebar-left,
+    .sd.archive.geodir-page .geodir-listings-sidebar-left {
+        position: absolute;
+        margin-bottom: 0 !important;
+    }
+
     .sd.archive.geodir-page aside#gd-sidebar-wrapper, .sd.search.geodir-page aside#gd-sidebar-wrapper {
         visibility: hidden;
     }
@@ -843,21 +1337,6 @@ h2.comments-title {
         line-height: normal;
     }
 
-    .sd.home .search_text, .sd.sd-location .search_text, .sd.home .snear, .sd.sd-location .geodir-page .snear {
-        margin: 0.5%;
-        width: 28%;
-    }
-
-    .sd.home .geodir-search select, .sd.sd-location .geodir-search select {
-        margin: 0.5%;
-        width: 23%;
-    }
-
-    .sd.home .geodir-search input[type="button"], .sd.sd-location .geodir-search input[type="submit"] {
-        margin: 0.5%;
-        width: 17%;
-    }
-
     .sd.home .cat-link, .sd.sd-location .cat-link {
         overflow: hidden;
         text-overflow: ellipsis;
@@ -909,7 +1388,7 @@ h2.comments-title {
     }
 
     .sd.search.geodir-page .search_text, .sd.archive.geodir-page .search_text, .sd.search.geodir-page .snear, .sd.archive.geodir-page .snear,
-    .sd.search.geodir-page .geodir-search select, .sd.archive.geodir-page .geodir-search select,
+    .sd .featured-area  .geodir-cat-list ul li,
     .sd.search.geodir-page .geodir-search input[type="button"], .sd.search.geodir-page .geodir-search input[type="submit"],
     .sd.archive.geodir-page .geodir-search input[type="button"], .sd.archive.geodir-page .geodir-search input[type="submit"] {
         width: 100%;
@@ -932,193 +1411,13 @@ h2.comments-title {
         display: none;
     }
 
+    body.sd .featured-area .geodir-listing-search .geodir-search .search_by_post,
+    body.sd #geodir_content .geodir-listing-search .geodir-search .search_by_post,
+    body.sd #geodir_content .geodir-listing-search .geodir-search input[type="button"],
+    body.sd #geodir_content .geodir-listing-search .geodir-search input[type="text"] {
+        width: 100%;
+        margin: 0.5%;
+    }
+
 }
 
-/*added by giri*/
-.sd .site-header .site-description {
-    display: none;
-}
-#comments .commentlist div.avatar-wrap {
-    margin-right: 0;
-}
-#reviewsTab #comments ol.commentlist li.comment,
-.wpl_reviews #comments ol.commentlist li.comment,
-.gdbp-wrapper-reviews #comments ol.commentlist li.comment {
-    border-bottom: none;
-}
-
-#reviewsTab .gd-rating-text {
-    display: none;
-}
-.sd-cta-favsandshare {
-    list-style-type: none;
-    overflow: hidden;
-    text-align: center;
-    margin: 0;
-    margin-top: 10px;
-}
-
-.sd-cta-favsandshare li {
-    display: inline;
-    padding: 10px;
-}
-.sd-cta-favsandshare a,
-.sd-cta-favsandshare a:visited {
-    color: #82888a;
-}
-.sd-cta-favsandshare li .fa {
-    font-size: 30px !important;
-}
-
-.sd-detail-author a.dt-btn {
-    font-size: 15px;
-    line-height: normal;
-    padding: 5px;
-    margin-top: 5px;
-}
-
-.sd-my-account-link .avatar {
-    width: 20px;
-    border-radius: 15px;
-    margin: 0 4px -5px 0;
-    border: 1px solid #fff;
-}
-.sd-my-account-link .fa-caret-down {
-    margin: 0 0 0 5px;
-    font-size: 12px;
-}
-.sd-my-account-dd {
-    display: none;
-    position: absolute;
-    z-index: 111;
-    right: 0;
-    width: 270px;
-    background: #2F2F2F;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    border-top: none;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    padding: 15px;
-}
-
-.sd-my-account-dd .avatar {
-    background: none repeat scroll 0 0 #e3e3e3;
-    border: 1px solid #ccc;
-    border-radius: 30px;
-    margin: 0 10px 0 0;
-    padding: 3px;
-    float: left;
-}
-.sd-my-account-dd h4 {
-    font-weight: bold;
-    font-size: 1.3em;
-    clear: none;
-    margin-bottom: 10px;
-    margin-top: 0;
-}
-.sd #primary-nav ul li .sd-my-account-dd h4 a {
-    font-size: 16px;
-}
-.sd #primary-nav ul li .sd-my-account-dd a {
-    text-transform: initial;
-    line-height: normal;
-    height: auto;
-}
-.sd-my-account-dd-menu-group {
-    clear: both;
-}
-.sd #primary-nav .sd-my-account-dd-menu-bp-group {
-    margin: 12px 0 0;
-    border-top: 1px solid #151515;
-    padding-top: 11px;
-    padding-bottom: 11px;
-}
-.sd #primary-nav .sd-my-account-dd-menu-group .fa {
-    margin-right: 7px;
-}
-.sd-my-account-dd-menu-group + .sd-my-account-dd-menu-group {
-    margin: 12px 0 0;
-    border-top: 1px solid #151515;
-    padding-top: 11px;
-}
-#primary-nav ul .sd-my-account-dd-menu-group li {
-    padding: 5px;
-    display: block;
-    float: none;
-}
-.sd-dd-avatar-wrap {
-    overflow: hidden;
-}
-.sd-my-account-dd-inner h4.sd-my-account-title {
-    border-bottom: 1px solid #151515;
-    text-align: center;
-    padding-bottom: 10px;
-}
-.sd-my-account-dd-inner p.rember {
-    line-height: normal;
-    padding: 0;
-}
-
-.sd-my-account-dd-inner p.rember input {
-    margin-top: 3px;
-    margin-left: 0;
-}
-.sd-my-account-dd-inner p.error_msg {
-    margin-bottom: 0;
-}
-.sd-my-account-dd-inner .form_row {
-    padding-bottom: 10px;
-}
-
-.sd-my-account-dd-inner form {
-    padding: 10px 0;
-    min-height: 200px;
-}
-.sd-ratings .gd-fa-star-rating {
-    float: left;
-}
-
-.sd-verified-badge {
-    width: 35px;
-    height: 35px;
-}
-.sd-verified-badge i {
-    position: absolute;
-    left: 0;
-}
-.sd-verified-badge .fa-check-circle {
-    color: #82888a;
-}
-.supreme-edit-btn {
-    color: #777;
-    padding: 4px 12px;
-    margin-bottom: 0;
-    font-size: 14px;
-    font-weight: 400;
-    text-align: center;
-    white-space: nowrap;
-    background-image: none;
-    border-radius: 4px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    margin-right: 10px;
-    width: auto !important;
-    display: inline-block !important;
-    margin-top: 5px !important;
-}
-
-.sd .sd-detail-author {
-    text-align: center;
-}
-.sd .sd-detail-cta .geodir-addtofav {
-    height: 30px;
-}
-.sd .sd-detail-cta .geodir-addtofav a .fa {
-    font-size: 30px;
-    width: 34px;
-}
-.sd-detail-cat-links {
-    overflow: hidden;
-    margin-top: 35px;
-}

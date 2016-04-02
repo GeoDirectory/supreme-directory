@@ -6,7 +6,10 @@
 	<span class="featured-img" <?php
     if (has_post_thumbnail()) { // check if the post has a Post Thumbnail assigned to it.
         $full_image_url = wp_get_attachment_image_src(get_post_thumbnail_id(), 'full');
-        ?> style="background-image: url(<?php echo $full_image_url[0]; ?>);" <?php }
+    }else{
+        $full_image_url[0] = SD_DEFAULT_FEATURED_IMAGE;
+    }
+        ?> style="background-image: url(<?php echo $full_image_url[0]; ?>);" <?php
     ?>>
 	
 	</span>

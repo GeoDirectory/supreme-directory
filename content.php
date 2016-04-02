@@ -1,7 +1,7 @@
 <article <?php post_class(); ?>>
 
-    <?php if (function_exists('is_buddypress')) {
-        if (!is_buddypress()) { ?>
+    <?php
+        if ((function_exists('is_buddypress') && !is_buddypress()) || !function_exists('is_buddypress')) { ?>
 
 
             <header>
@@ -10,7 +10,10 @@
                     <div class="featured-img" <?php
                     if (has_post_thumbnail()) { // check if the post has a Post Thumbnail assigned to it.
                         $full_image_url = wp_get_attachment_image_src(get_post_thumbnail_id(), 'full');
-                        ?> style="background-image: url(<?php echo $full_image_url[0]; ?>);" <?php }
+                    }else{
+                        $full_image_url[0] = SD_DEFAULT_FEATURED_IMAGE;
+                    }
+                        ?> style="background-image: url(<?php echo $full_image_url[0]; ?>);" <?php
                     ?>>
 
                     </div>
@@ -33,12 +36,12 @@
                         <?php if (is_front_page()) {
                             echo do_shortcode('[gd_advanced_search]');
                             echo do_shortcode('[gd_popular_post_category category_limit=5]');
-                            echo '<div class="home-more"><a href="#home-scroll"><i class="fa fa-chevron-down"></i></a></div>';
+                            echo '<div class="home-more"  id="sd-home-scroll" ><a href="#sd-home-scroll"><i class="fa fa-chevron-down"></i></a></div>';
                         }
                         ?>
                     </div>
                 </div>
-            </header> <?php }
+            </header> <?php
     } ?>
     <div class="container" id="home-scroll">
         <div class="entry-content entry-summary">

@@ -1,0 +1,9 @@
+v0.2.0
+Details page design problems if GD set to use left sidebar - FIXED
+Main home cats box can fall to next line if text is long - FIXED
+get_currentuserinfo() Depreciated and removed/changed - FIXED
+Pinpoint link not removed from listings pages - FIXED
+Set map pin to bounce on mouse hover on listings page on install - CHANGED
+
+v0.0.1
+Beta release

@@ -1,5 +1,20 @@
 <?php get_header(); ?>
+    <div class="featured-area">
+        <div class="featured-img" <?php
+        $page_for_posts = get_option('page_for_posts');
+        if (has_post_thumbnail($page_for_posts)) { // check if the post has a Post Thumbnail assigned to it.
+            $full_image_url = wp_get_attachment_image_src(get_post_thumbnail_id($page_for_posts), 'full');
+        }else{
+            $full_image_url[0] = SD_DEFAULT_FEATURED_IMAGE;
+        }
+            ?> style="background-image: url(<?php echo $full_image_url[0]; ?>);" <?php
+        ?>>
 
+        </div>
+        <div class="header-wrap">
+            <h1 class="entry-title"><?php the_archive_title(); ?></h1>
+        </div>
+    </div>
     <div class="container">
         <div class="content-box content-archive">
             <?php if (!have_posts()) : ?>
