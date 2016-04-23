@@ -1270,6 +1270,11 @@ body.body_fullscreen #gd_listing_map_wrapper{
     color: #ed6d62;
     font-size: 15px;
 }
+
+#mm-primary-nav li.sd-my-account{
+    display: none;
+}
+
 /* RESPONSIVE STUFF */
 
 @media all and (min-width: 768px) and (max-width: 1280px) {
