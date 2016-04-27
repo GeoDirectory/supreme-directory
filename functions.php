@@ -283,6 +283,7 @@ function sup_add_feat_img_head($page)
         $cats_arr = array_filter(explode(",", $post_cats));
         $cat_icons = geodir_get_term_icon();
         ?>
+        <?php do_action('sd-detail-details-before'); ?>
         <div class="sd-detail-details">
         <div class="container">
             <div class="sd-detail-author">
@@ -321,7 +322,7 @@ function sup_add_feat_img_head($page)
 
                                 echo '<div class="geodir-company_info">';
                                 echo '<div class="geodir_display_claim_popup_forms"></div>';
-                                echo '<a href="javascript:void(0);" class="supreme-btn supreme-btn-small supreme-edit-btn geodir_claim_enable"> ' . __('Claim', 'directory-starter') . '</a>';
+                                echo '<a href="javascript:void(0);" class="supreme-btn supreme-btn-small supreme-edit-btn geodir_claim_enable"><i class="fa fa-question-circle"></i> ' . __('Claim', 'directory-starter') . '</a>';
                                 echo '</div>';
                                 echo '<input type="hidden" name="geodir_claim_popup_post_id" value="' . $post->ID . '" />';
 
@@ -382,14 +383,20 @@ function sup_add_feat_img_head($page)
                 echo '</ul></div> <!-- sd-detail-cat-links end --> </div> <!-- sd-detail-info end -->';
                 echo '<div class="sd-detail-cta"><a class="dt-btn" href="' . get_the_permalink() . '#respond">' . __('Write a Review', 'directory-starter') . '</a>';
                 ?>
-                <div class="geodir_more_info geodir_email">
+                <div class="geodir_more_info geodir-company_info geodir_email" style="padding: 0;border: none">
+                <?php
+                if (!$preview) {
+                    $html = '<input type="hidden" name="geodir_popup_post_id" value="' . $post->ID . '" />
+                    <div class="geodir_display_popup_forms"></div>';
+                    echo $html;
+                }
+                ?>
                     <span style="" class="geodir-i-email">
                     <i class="fa fa-envelope"></i>
-                        <?php if (isset($post->geodir_email) && $post->geodir_email) { ?>
-                            <a href="javascript:void(0);" class="b_send_inquiry2"
-                               onclick="jQuery( '.geodir-details-sidebar-listing-info .b_send_inquiry' ).click();"><?php echo __('Send Enquiry', 'directory-starter'); ?></a> | <?php } ?>
-                        <a class="b_sendtofriend" href="javascript:void(0);"
-                           onclick="jQuery( '.geodir-details-sidebar-listing-info .b_sendtofriend' ).click();"><?php echo __('Send To Friend', 'directory-starter'); ?></a></span>
+                        <?php if (isset($post->geodir_email) && $post->geodir_email) {
+                        ?>
+                            <a href="javascript:void(0);" class="b_send_inquiry"><?php echo __('Send Enquiry', 'directory-starter'); ?></a> | <?php } ?>
+                        <a class="b_sendtofriend" href="javascript:void(0);"><?php echo __('Send To Friend', 'directory-starter'); ?></a></span>
 
                 </div>
 
@@ -497,6 +504,7 @@ remove_action('geodir_details_main_content', 'geodir_action_details_slider', 30)
 function my_change_sidebar_content_order()
 {
     return array(
+        'geodir_edit_post_link',
         'geodir_detail_page_more_info',
     );
 }
@@ -1304,3 +1312,88 @@ function sd_activation_install()
 //remove send to friend/enquiry from details page
 add_filter("geodir_show_geodir_email", '__return_false');
 remove_action('geodir_after_detail_page_more_info', 'geodir_payment_sidebar_show_send_to_friend', 11);
+
+function sd_detail_display_notices() {
+    if (geodir_is_page('detail')) {
+        if (isset($_GET['geodir_claim_request']) && $_GET['geodir_claim_request'] == 'success') {
+        ?>
+        <div class="alert alert-success" style="text-align: center">
+            <?php echo CLAIM_LISTING_SUCCESS; ?>
+        </div>
+        <?php
+        }
+
+        if (isset($_GET['send_inquiry']) && $_GET['send_inquiry'] == 'success') {
+        ?>
+        <div class="alert alert-success" style="text-align: center">
+            <?php echo SEND_INQUIRY_SUCCESS; ?>
+        </div>
+        <?php
+        }
+
+        if (isset($_GET['sendtofrnd']) && $_GET['sendtofrnd'] == 'success') {
+        ?>
+        <div class="alert alert-success" style="text-align: center">
+            <?php echo SEND_FRIEND_SUCCESS; ?>
+        </div>
+        <?php
+        }
+    }
+}
+add_action('sd-detail-details-before', 'sd_detail_display_notices');
+
+//usage editor: [gd_claim_link class="" icon="false"]
+//usage php: echo do_shortcode('[gd_claim_link class="" icon="false"]');
+function geodir_claim_link_sc($atts) {
+    if (function_exists('geodir_load_translation_geodirclaim')) {
+        global $post, $preview;
+
+        $defaults = array(
+            'class' => 'supreme-btn supreme-btn-small supreme-edit-btn',
+            'icon' => "true",
+            'link_text' => __('Claim', 'directory-starter')
+        );
+        $params = shortcode_atts($defaults, $atts);
+
+        ob_start();
+
+        $geodir_post_type = array();
+        if (get_option('geodir_post_types_claim_listing'))
+            $geodir_post_type = get_option('geodir_post_types_claim_listing');
+        $posttype = (isset($post->post_type)) ? $post->post_type : '';
+        if (in_array($posttype, $geodir_post_type) && !$preview) {
+            $is_owned = geodir_get_post_meta($post->ID, 'claimed', true);
+            if (get_option('geodir_claim_enable') == 'yes' && $is_owned == '0') {
+
+                if (is_user_logged_in()) {
+
+                    echo '<div class="geodir-company_info" style="border: none;margin: 0;padding: 0">';
+                    echo '<div class="geodir_display_claim_popup_forms"></div>';
+                    echo '<a href="javascript:void(0);" class="'.$params['class'].' geodir_claim_enable">';
+                    if ($params['icon'] == 'true') {
+                        echo '<i class="fa fa-question-circle"></i>';
+                    }
+                    echo $params['link_text'];
+                    echo '</a>';
+                    echo '</div>';
+                    echo '<input type="hidden" name="geodir_claim_popup_post_id" value="' . $post->ID . '" />';
+
+                } else {
+
+                    $site_login_url = geodir_login_url();
+                    echo '<a href="' . $site_login_url . '" class="'.$params['class'].'">';
+                    if ($params['icon'] == 'true') {
+                        echo '<i class="fa fa-question-circle"></i>';
+                    }
+                    echo $params['link_text'];
+                    echo '</a>';
+
+                }
+            }
+        }
+        $output = ob_get_contents();
+        ob_end_clean();
+        return $output;
+    }
+}
+add_shortcode('gd_claim_link', 'geodir_claim_link_sc');

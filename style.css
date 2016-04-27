@@ -1235,6 +1235,46 @@ body.body_fullscreen #gd_listing_map_wrapper{
     height: 100vh !important;
 }
 
+#primary-nav .sd-my-account-dd-inner ul {
+    float: none;
+}
+
+#gd-account-nav.mm-opened h2.widgettitle {
+    color: #ffffff;
+    margin: 10px 0;
+    font-size: 23px;
+}
+#gd-account-nav.mm-opened .geodir-chosen-container {
+    padding: 10px 10px 10px 20px;
+}
+#gd-account-nav.mm-opened .geodir-chosen-container-single .chosen-drop {
+    margin-top: -11px;
+}
+#gd-account-nav.mm-opened .mm-list i.fa {
+    display: none;
+}
+#gd-account-nav.mm-opened .mm-list>li>a,
+#gd-account-nav.mm-opened .mm-list>li>span {
+    display: inline-block;
+}
+#gd-account-nav.mm-opened .chosen-drop {
+    color: #757575;
+}
+
+#mm-primary-nav .sd-my-account-link .fa-caret-down {
+    display: none;
+}
+
+.sd .geodir-details-sidebar-user-links a.geodir-addtofav-icon,
+.sd .geodir-details-sidebar-user-links a.geodir-removetofav-icon {
+    color: #ed6d62;
+    font-size: 15px;
+}
+
+#mm-primary-nav li.sd-my-account{
+    display: none;
+}
+
 /* RESPONSIVE STUFF */
 
 @media all and (min-width: 768px) and (max-width: 1280px) {
@@ -1317,6 +1357,12 @@ body.body_fullscreen #gd_listing_map_wrapper{
         width: 44px;
     }
 
+    .sd.blog .content-box.content-single article.hentry, .sd.category .content-box.content-archive article.hentry {
+        float: left;
+        margin: 0 3% 50px 3%;
+        width: 44%;
+    }
+
 }
 
 @media all and (max-width: 668px) {
@@ -1377,6 +1423,12 @@ body.body_fullscreen #gd_listing_map_wrapper{
         width: 100%;
         margin: 40px 0 0 0;
         clear: both;
+    }
+
+    .sd.blog .content-box.content-single article.hentry, .sd.category .content-box.content-archive article.hentry {
+        float: none;
+        margin: 0 5% 50px 5%;
+        width: 90%;
     }
 
 }

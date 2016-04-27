@@ -1,3 +1,10 @@
+v0.3.0
+Franchise link not showing up in sidebar - FIXED
+There is no confirmation message on the page displayed for send enquiry & send to friend - FIXED
+gd_claim_link shortcode added - ADDED
+Blog page not responsive on mobile - FIXED
+Account Nav and Primary Menu not displayed correctly in mobile - FIXED
+
 v0.2.0
 Details page design problems if GD set to use left sidebar - FIXED
 Main home cats box can fall to next line if text is long - FIXED
