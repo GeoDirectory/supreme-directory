@@ -1,5 +1,7 @@
 jQuery(document).ready(function () {
 
+    var headHeight = jQuery('#site-header').height();
+
     if ( jQuery( "a.sd-my-account-link" ).length ) {
         jQuery('a.sd-my-account-link').click(function (e) {
             e.preventDefault();
@@ -49,6 +51,14 @@ jQuery(document).ready(function () {
         });
     });
 
+    // fix the advanced search autocompleater results
+    if ( jQuery( ".ac_results" ).length ) {
+        var ddHeadHeight = headHeight-8;
+        jQuery(".ac_results").css({
+            'margin-top': -ddHeadHeight+"px"
+        });
+    }
+
 
 });
 
@@ -89,9 +99,18 @@ function sd_adjust_head(){
 
 
     // fix the advanced search near me dropdown
+    
     if ( jQuery( ".gd-near-me-dropdown" ).length ) {
         var ddHeadHeight = headHeight-8;
         jQuery(".gd-near-me-dropdown").css({
+            'margin-top': -ddHeadHeight+"px"
+        });
+    }
+
+    // fix the advanced search autocompleater results
+    if ( jQuery( ".ac_results" ).length ) {
+        var ddHeadHeight = headHeight-8;
+        jQuery(".ac_results").css({
             'margin-top': -ddHeadHeight+"px"
         });
     }

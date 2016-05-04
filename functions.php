@@ -729,6 +729,12 @@ function sd_img_gallery_output()
 
 add_action('geodir_detail_sidebar_inside', 'sd_img_gallery_output', 1);
 
+// add recurring dates to sidebar if events installed
+if(function_exists('geodir_event_show_shedule_date')){
+    add_action('geodir_detail_sidebar_inside', 'geodir_event_show_shedule_date', '1.5');
+}
+
+
 /**
  * Output the details page map HTML.
  *
@@ -1301,6 +1307,8 @@ function sd_activation_install()
 
         // set the map pin to bounce on listing hover on listings pages
         update_option('geodir_listing_hover_bounce_map_pin', 1);
+        // set the advanced paging to show on listings pages
+        update_option('geodir_pagination_advance_info', 'before');
         // Set the installed flag
         update_option('sd-installed', true);
 
