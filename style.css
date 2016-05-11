@@ -62,7 +62,7 @@ body.sd {
 }
 
 .sd #primary-nav ul li a {
-    height: 61px;
+    min-height: 61px;
     line-height: 61px;
 }
 
@@ -319,7 +319,7 @@ body.sd {
 }
 
 .sd .entry-content {
-    margin: 30px auto;
+    margin: 0px auto;
 }
 
 .sd .geodir_location_description {
@@ -855,6 +855,17 @@ MOBILE MENU
 
 
 /* Details page */
+
+.featured-area .sd-event-dates-head p {
+    color: #ffffff;
+    font-size: 22px;
+    line-height: 30px;
+}
+
+.sd .geodir-tabs-content.entry-content.geodir-tabs-list li {
+    margin: 0;
+    width: 100%;
+}
 
 .sd .sd-detail-details {
     border-bottom: 1px solid #ccc;

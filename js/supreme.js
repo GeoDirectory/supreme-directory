@@ -1,6 +1,6 @@
 jQuery(document).ready(function () {
 
-    var headHeight = jQuery('#site-header').height();
+
 
     if ( jQuery( "a.sd-my-account-link" ).length ) {
         jQuery('a.sd-my-account-link').click(function (e) {
@@ -52,12 +52,7 @@ jQuery(document).ready(function () {
     });
 
     // fix the advanced search autocompleater results
-    if ( jQuery( ".ac_results" ).length ) {
-        var ddHeadHeight = headHeight-8;
-        jQuery(".ac_results").css({
-            'margin-top': -ddHeadHeight+"px"
-        });
-    }
+    sd_set_search_pos();
 
 
 });
@@ -99,24 +94,7 @@ function sd_adjust_head(){
 
 
     // fix the advanced search near me dropdown
-    
-    if ( jQuery( ".gd-near-me-dropdown" ).length ) {
-        var ddHeadHeight = headHeight-8;
-        jQuery(".gd-near-me-dropdown").css({
-            'margin-top': -ddHeadHeight+"px"
-        });
-    }
-
-    // fix the advanced search autocompleater results
-    if ( jQuery( ".ac_results" ).length ) {
-        var ddHeadHeight = headHeight-8;
-        jQuery(".ac_results").css({
-            'margin-top': -ddHeadHeight+"px"
-        });
-    }
-
-
-
+    sd_set_search_pos();
 
 }
 
@@ -174,3 +152,26 @@ function sd_adjust_head(){
     });
 
 })();
+
+function sd_set_search_pos(){
+
+    var headHeight = jQuery('#site-header').height();
+    var ddHeadHeight = headHeight;
+    var hedPos = jQuery('#site-header').css('position');
+    if(hedPos=='absolute'){
+        ddHeadHeight = 0;
+    }
+
+    if ( jQuery( ".gd-near-me-dropdown" ).length ) {
+        jQuery(".gd-near-me-dropdown").css({
+            'margin-top': -ddHeadHeight+"px"
+        });
+    }
+
+    // fix the advanced search autocompleater results
+    if ( jQuery( ".ac_results" ).length ) {
+        jQuery(".ac_results").css({
+            'margin-top': -ddHeadHeight+"px"
+        });
+    }
+}
