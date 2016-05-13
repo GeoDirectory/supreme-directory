@@ -1,5 +1,4 @@
 <article <?php post_class(); ?>>
-
     <?php
         if ((function_exists('is_buddypress') && !is_buddypress()) || !function_exists('is_buddypress')) { ?>
 

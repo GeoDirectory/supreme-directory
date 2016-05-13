@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Supreme Directory 0.2.0\n"
+"Project-Id-Version: Supreme Directory 0.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-01 10:38-0000\n"
-"PO-Revision-Date: 2016-04-01 10:38-0000\n"
+"POT-Creation-Date: 2016-05-13 20:47+0100\n"
+"PO-Revision-Date: 2016-05-13 20:47+0100\n"
 "Last-Translator: \n"
 "Language-Team: GD Team <info@wpgeodirectory.com>\n"
 "Language: en_US\n"
@@ -12,21 +12,21 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e;_n:1,2;_n_noop:1,2;"
 "_nx:1,2;_nx_noop:1,2;_x;esc_attr_e;esc_attr__\n"
-"X-Poedit-Basepath: ../\n"
+"X-Poedit-Basepath: ..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 1.7.5\n"
+"X-Generator: Poedit 1.8.7.1\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: archive.php:22 index.php:29 page.php:7 single.php:7
+#: archive.php:22 index.php:28 page.php:6 single.php:6
 msgid "Sorry, no results were found."
 msgstr ""
 
-#: archive.php:37 index.php:44 single.php:29
+#: archive.php:37 index.php:43 single.php:28
 msgid "Previous"
 msgstr ""
 
-#: archive.php:38 index.php:45 single.php:26
+#: archive.php:38 index.php:44 single.php:25
 msgid "Next"
 msgstr ""
 
@@ -47,11 +47,11 @@ msgstr ""
 msgid "Reviews"
 msgstr ""
 
-#: content.php:60
+#: content.php:59
 msgid "Pages:"
 msgstr ""
 
-#: content.php:69 functions.php:308
+#: content.php:68 functions.php:441
 msgid "Edit"
 msgstr ""
 
@@ -67,111 +67,111 @@ msgstr ""
 msgid "SHOW MAP"
 msgstr ""
 
-#: functions.php:295
+#: functions.php:428
 msgid "Verified Owner"
 msgstr ""
 
-#: functions.php:324 functions.php:331
+#: functions.php:457 functions.php:464 functions.php:1365
 msgid "Claim"
 msgstr ""
 
-#: functions.php:383
+#: functions.php:516
 msgid "Write a Review"
 msgstr ""
 
-#: functions.php:390
+#: functions.php:530
 msgid "Send Enquiry"
 msgstr ""
 
-#: functions.php:392
+#: functions.php:531
 msgid "Send To Friend"
 msgstr ""
 
-#: functions.php:401 functions.php:411
+#: functions.php:540 functions.php:550
 msgid "Share on Facebook"
 msgstr ""
 
-#: functions.php:404 functions.php:413
+#: functions.php:543 functions.php:552
 msgid "Share on Twitter"
 msgstr ""
 
-#: functions.php:407 functions.php:415
+#: functions.php:546 functions.php:554
 msgid "Share on Google Plus"
 msgstr ""
 
-#: functions.php:817
+#: functions.php:818
 msgid "Featured"
 msgstr ""
 
-#: functions.php:823
+#: functions.php:824
 msgid "Format"
 msgstr ""
 
-#: functions.php:840
+#: functions.php:841
 msgid "Posted on"
 msgstr ""
 
-#: functions.php:849
+#: functions.php:850
 msgid "Author"
 msgstr ""
 
-#: functions.php:855 functions.php:863
+#: functions.php:856 functions.php:864
 msgid ", "
 msgstr ""
 
-#: functions.php:858
+#: functions.php:859
 msgid "Categories"
 msgstr ""
 
-#: functions.php:866
+#: functions.php:867
 msgid "Tags"
 msgstr ""
 
-#: functions.php:903 functions.php:952
+#: functions.php:904 functions.php:953
 msgid "My Account"
 msgstr ""
 
-#: functions.php:919
+#: functions.php:920
 msgid "About Me"
 msgstr ""
 
-#: functions.php:924
+#: functions.php:925
 msgid "Account Settings"
 msgstr ""
 
-#: functions.php:932
+#: functions.php:933
 msgid "Log Out"
 msgstr ""
 
-#: functions.php:1088
+#: functions.php:1089
 msgid "Near Me"
 msgstr ""
 
-#: functions.php:1196
+#: functions.php:1209
 msgid "Hello world!"
 msgstr ""
 
-#: functions.php:1211
+#: functions.php:1224
 msgid "Find Local Treasures!"
 msgstr ""
 
-#: functions.php:1218
+#: functions.php:1231
 msgid "Discover the best places to stay, eat, shop and events near you."
 msgstr ""
 
-#: functions.php:1229 functions.php:1278
+#: functions.php:1242 functions.php:1291
 msgid "Blog"
 msgstr ""
 
-#: functions.php:1269
+#: functions.php:1282
 msgid "Home"
 msgstr ""
 
-#: single.php:27
+#: single.php:26
 msgid "Next post:"
 msgstr ""
 
-#: single.php:30
+#: single.php:29
 msgid "Previous post:"
 msgstr ""
 

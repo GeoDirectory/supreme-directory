@@ -1,5 +1,4 @@
 <?php get_header(); ?>
-
     <div class="featured-area">
         <div class="featured-img" <?php
         $page_for_posts = get_option('page_for_posts');
@@ -47,5 +46,4 @@
             ?>
         </div>
     </div>
-
 <?php get_footer(); ?>
