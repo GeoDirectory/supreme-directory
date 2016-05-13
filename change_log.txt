@@ -7,6 +7,7 @@ Account Nav and Primary Menu not displayed correctly in mobile - FIXED
 Set geodir_pagination_advance_info ption on install - CHANGED
 Advanced search dropdowns not aligned correctly - FIXED
 Event dates added to featured area of details page - ADDED
+Google analytics not showing - FIXED
 
 v0.2.0
 Details page design problems if GD set to use left sidebar - FIXED

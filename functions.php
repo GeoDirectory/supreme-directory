@@ -401,14 +401,14 @@ function sup_add_feat_img_head($page)
             $author_link = get_author_posts_url(get_the_author_meta('ID'));
             $post_type = $post->post_type;
             $post_tax = $post_type . "category";
-            $post_cats = $post->$post_tax;
+            $post_cats = $post->{$post_tax};
         } else {
             $author_name = get_the_author_meta('display_name', $user_id);
             $entry_author = get_avatar(get_the_author_meta('email', $user_id), 100);
             $author_link = get_author_posts_url($user_id);
             $post_type = $post->listing_type;
             $post_tax = $post_type . "category";
-            $post_cats = $post->post_category[$post_tax];
+            $post_cats = isset($post->post_category) ? $post->post_category[$post_tax] : $post->{$post_tax};
         }
         $postlink = get_permalink(geodir_add_listing_page_id());
         $editlink = geodir_getlink($postlink, array('pid' => $post->ID), false);
@@ -633,15 +633,15 @@ remove_action('geodir_details_main_content', 'geodir_action_details_slider', 30)
  * @since 1.0.0
  * @return array
  */
-function my_change_sidebar_content_order()
+function my_change_sidebar_content_order($arr)
 {
-    return array(
-        'geodir_edit_post_link',
-        'geodir_detail_page_more_info',
-    );
+
+    $arr = array_diff($arr, array('geodir_social_sharing_buttons','geodir_share_this_button','geodir_detail_page_review_rating'));
+
+    return $arr;
 }
 
-add_filter('geodir_detail_page_sidebar_content', 'my_change_sidebar_content_order');
+add_filter('geodir_detail_page_sidebar_content', 'my_change_sidebar_content_order',10,1);
 
 // Remove taxonomies from detail page content
 remove_action('geodir_details_main_content', 'geodir_action_details_taxonomies', 40);
