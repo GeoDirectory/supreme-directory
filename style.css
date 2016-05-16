@@ -289,6 +289,10 @@ body.sd {
     box-shadow: none;
 }
 
+.sd-my-account-dd-inner a.goedir-forgot-link{
+    float: left;
+}
+
 .sd-my-account-dd-inner h4.sd-my-account-title {
     border-bottom: 1px solid #151515;
     text-align: center;

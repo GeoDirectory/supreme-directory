@@ -54,6 +54,15 @@ jQuery(document).ready(function () {
     // fix the advanced search autocompleater results
     sd_set_search_pos();
 
+    if ( jQuery( ".sd-detail-cta" ).length ) {
+        jQuery(".sd-detail-cta").click(function () {
+            jQuery('.geodir-tab-head [data-tab="#reviews"]').closest('dd').trigger('click');
+            setTimeout(function(){jQuery('html,body').animate({scrollTop:jQuery('#respond').offset().top}, 'slow');console.log('scroll')}, 200);
+
+        });
+    }
+
+
 
 });
 

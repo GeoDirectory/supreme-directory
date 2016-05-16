@@ -1,3 +1,7 @@
+v0.4.0
+Write a review button not working when content shown as tabs - FIXED
+Forgot password link not showing on desktop - FIXED
+
 v0.3.0
 Franchise link not showing up in sidebar - FIXED
 There is no confirmation message on the page displayed for send enquiry & send to friend - FIXED

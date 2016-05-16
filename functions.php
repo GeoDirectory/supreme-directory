@@ -513,7 +513,7 @@ function sup_add_feat_img_head($page)
                     echo '</a></li>';
                 }
                 echo '</ul></div> <!-- sd-detail-cat-links end --> </div> <!-- sd-detail-info end -->';
-                echo '<div class="sd-detail-cta"><a class="dt-btn" href="' . get_the_permalink() . '#respond">' . __('Write a Review', 'directory-starter') . '</a>';
+                echo '<div class="sd-detail-cta"><a class="dt-btn" href="' . get_the_permalink() . '#reviews">' . __('Write a Review', 'directory-starter') . '</a>';
                 ?>
                 <div class="geodir_more_info geodir-company_info geodir_email" style="padding: 0;border: none">
                 <?php
@@ -1000,6 +1000,8 @@ function sd_add_my_account_link($items, $args)
                         <p class="sd-register">
                         <a href="<?php echo geodir_login_url(array('signup' => true)); ?>"
                            class="goedir-newuser-link"><?php echo NEW_USER_TEXT; ?></a>
+                           <a href="<?php echo geodir_login_url(array('forgot' => true)); ?>"
+                       class="goedir-forgot-link"><?php echo FORGOT_PW_TEXT; ?></a>
                         </p>
                     </form>
                 </div>
