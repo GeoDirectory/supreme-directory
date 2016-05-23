@@ -26,23 +26,23 @@ $full_image_url = SD_DEFAULT_FEATURED_IMAGE;
 
                         <?php
                         // user profile text
-                        echo "<h1>".ucfirst(esc_attr(sprintf( __("%s's Profile", 'directory-starter'), $author_obj->user_nicename )))."</h1>";
+                        echo "<h1>".ucfirst(esc_attr(sprintf( __("%s's Profile", 'supreme-directory'), $author_obj->user_nicename )))."</h1>";
 
                         // user listings
-                            echo "<h3>".__("Listings", "directory-starter")."</h3>";
+                            echo "<h3>".__("Listings", "supreme-directory")."</h3>";
                             geodir_user_show_listings($author_obj->ID,'link');
 
                         // user favs
                         $fav_count = geodir_user_favourite_listing_count($author_obj->ID);
                         if(!empty($fav_count )){
-                            echo "<h3>".__("Favorites", "directory-starter")."</h3>";
+                            echo "<h3>".__("Favorites", "supreme-directory")."</h3>";
                             geodir_user_show_favourites($author_obj->ID,'link');
                         }
                         ?>
 
 
                         <h3><?php echo ucfirst($author_obj->nickname); ?>
-                            's <?php _e("Reviews", "directory-starter"); ?> (coming soon)</h3>
+                            's <?php _e("Reviews", "supreme-directory"); ?> (coming soon)</h3>
 
                     </div>
                 </div>

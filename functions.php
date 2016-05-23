@@ -194,11 +194,11 @@ function sd_mobile_map_buttons()
 {
     echo '<div class="sd-mobile-search-controls">
 			<a class="dt-btn" id="showSearch" href="#">
-				<i class="fa fa-search"></i> ' . __('SEARCH LISTINGS', 'directory-starter') . '</a>
+				<i class="fa fa-search"></i> ' . __('SEARCH LISTINGS', 'supreme-directory') . '</a>
 			<a class="dt-btn" id="hideMap" href="#"><i class="fa fa-th-large">
-				</i> ' . __('SHOW LISTINGS', 'directory-starter') . '</a>
+				</i> ' . __('SHOW LISTINGS', 'supreme-directory') . '</a>
 			<a class="dt-btn" id="showMap" href="#"><i class="fa fa-map-o">
-				</i> ' . __('SHOW MAP', 'directory-starter') . '</a>
+				</i> ' . __('SHOW MAP', 'supreme-directory') . '</a>
 			</div>';
 }
 
@@ -410,6 +410,11 @@ function sup_add_feat_img_head($page)
             $post_tax = $post_type . "category";
             $post_cats = isset($post->post_category) ? $post->post_category[$post_tax] : $post->{$post_tax};
         }
+
+        $author_name = apply_filters('sd_detail_author_name', $author_name);
+        $entry_author = apply_filters('sd_detail_entry_author', $entry_author);
+        $author_link = apply_filters('sd_detail_author_link', $author_link);
+
         $postlink = get_permalink(geodir_add_listing_page_id());
         $editlink = geodir_getlink($postlink, array('pid' => $post->ID), false);
         $cats_arr = array_filter(explode(",", $post_cats));
@@ -425,7 +430,7 @@ function sup_add_feat_img_head($page)
                     if ($is_owned == '1') {
                         ?>
                         <span class="fa fa-stack sd-verified-badge"
-                              title="<?php _e('Verified Owner', 'directory-starter'); ?>">
+                              title="<?php _e('Verified Owner', 'supreme-directory'); ?>">
 						<i class="fa fa-circle fa-inverse"></i>
 						<i class="fa fa-check-circle"></i>
 					</span>
@@ -438,7 +443,7 @@ function sup_add_feat_img_head($page)
                 if (is_user_logged_in() && geodir_listing_belong_to_current_user()) {
                     ?>
                     <a href="<?php echo $editlink; ?>" class="supreme-btn supreme-btn-small supreme-edit-btn"><i
-                            class="fa fa-edit"></i> <?php echo __('Edit', 'directory-starter'); ?></a>
+                            class="fa fa-edit"></i> <?php echo __('Edit', 'supreme-directory'); ?></a>
                 <?php }
 
                 if (function_exists('geodir_load_translation_geodirclaim')) {
@@ -454,14 +459,14 @@ function sup_add_feat_img_head($page)
 
                                 echo '<div class="geodir-company_info">';
                                 echo '<div class="geodir_display_claim_popup_forms"></div>';
-                                echo '<a href="javascript:void(0);" class="supreme-btn supreme-btn-small supreme-edit-btn geodir_claim_enable"><i class="fa fa-question-circle"></i> ' . __('Claim', 'directory-starter') . '</a>';
+                                echo '<a href="javascript:void(0);" class="supreme-btn supreme-btn-small supreme-edit-btn geodir_claim_enable"><i class="fa fa-question-circle"></i> ' . __('Claim', 'supreme-directory') . '</a>';
                                 echo '</div>';
                                 echo '<input type="hidden" name="geodir_claim_popup_post_id" value="' . $post->ID . '" />';
 
                             } else {
 
                                 $site_login_url = geodir_login_url();
-                                echo '<a href="' . $site_login_url . '" class="supreme-btn supreme-btn-small supreme-edit-btn"><i class="fa fa-question-circle"></i> ' . __('Claim', 'directory-starter') . '</a>';
+                                echo '<a href="' . $site_login_url . '" class="supreme-btn supreme-btn-small supreme-edit-btn"><i class="fa fa-question-circle"></i> ' . __('Claim', 'supreme-directory') . '</a>';
 
                             }
                         }
@@ -513,7 +518,7 @@ function sup_add_feat_img_head($page)
                     echo '</a></li>';
                 }
                 echo '</ul></div> <!-- sd-detail-cat-links end --> </div> <!-- sd-detail-info end -->';
-                echo '<div class="sd-detail-cta"><a class="dt-btn" href="' . get_the_permalink() . '#reviews">' . __('Write a Review', 'directory-starter') . '</a>';
+                echo '<div class="sd-detail-cta"><a class="dt-btn" href="' . get_the_permalink() . '#reviews">' . __('Write a Review', 'supreme-directory') . '</a>';
                 ?>
                 <div class="geodir_more_info geodir-company_info geodir_email" style="padding: 0;border: none">
                 <?php
@@ -527,8 +532,8 @@ function sup_add_feat_img_head($page)
                     <i class="fa fa-envelope"></i>
                         <?php if (isset($post->geodir_email) && $post->geodir_email) {
                         ?>
-                            <a href="javascript:void(0);" class="b_send_inquiry"><?php echo __('Send Enquiry', 'directory-starter'); ?></a> | <?php } ?>
-                        <a class="b_sendtofriend" href="javascript:void(0);"><?php echo __('Send To Friend', 'directory-starter'); ?></a></span>
+                            <a href="javascript:void(0);" class="b_send_inquiry"><?php echo __('Send Enquiry', 'supreme-directory'); ?></a> | <?php } ?>
+                        <a class="b_sendtofriend" href="javascript:void(0);"><?php echo __('Send To Friend', 'supreme-directory'); ?></a></span>
 
                 </div>
 
@@ -537,21 +542,21 @@ function sup_add_feat_img_head($page)
                 ?>
                 <ul class="sd-cta-favsandshare">
                     <?php if (!$preview) { ?>
-                        <li><a target="_blank" title="<?php echo __('Share on Facebook', 'directory-starter'); ?>"
+                        <li><a target="_blank" title="<?php echo __('Share on Facebook', 'supreme-directory'); ?>"
                                href="http://www.facebook.com/sharer.php?u=<?php the_permalink(); ?>&t=<?php the_title(); ?>"><i
                                     class="fa fa-facebook"></i></a></li>
-                        <li><a target="_blank" title="<?php echo __('Share on Twitter', 'directory-starter'); ?>"
+                        <li><a target="_blank" title="<?php echo __('Share on Twitter', 'supreme-directory'); ?>"
                                href="http://twitter.com/share?text=<?php echo urlencode(get_the_title()); ?>&url=<?php echo urlencode(get_the_permalink()); ?>"><i
                                     class="fa fa-twitter"></i></a></li>
-                        <li><a target="_blank" title="<?php echo __('Share on Google Plus', 'directory-starter'); ?>"
+                        <li><a target="_blank" title="<?php echo __('Share on Google Plus', 'supreme-directory'); ?>"
                                href="https://plus.google.com/share?url=<?php echo urlencode(get_the_permalink()); ?>"><i
                                     class="fa fa-google-plus"></i></a></li>
                     <?php } else { ?>
-                        <li><a target="_blank" title="<?php echo __('Share on Facebook', 'directory-starter'); ?>"
+                        <li><a target="_blank" title="<?php echo __('Share on Facebook', 'supreme-directory'); ?>"
                                href=""><i class="fa fa-facebook"></i></a></li>
-                        <li><a target="_blank" title="<?php echo __('Share on Twitter', 'directory-starter'); ?>"
+                        <li><a target="_blank" title="<?php echo __('Share on Twitter', 'supreme-directory'); ?>"
                                href=""><i class="fa fa-twitter"></i></a></li>
-                        <li><a target="_blank" title="<?php echo __('Share on Google Plus', 'directory-starter'); ?>"
+                        <li><a target="_blank" title="<?php echo __('Share on Google Plus', 'supreme-directory'); ?>"
                                href=""><i class="fa fa-google-plus"></i></a></li>
                     <?php } ?>
                 </ul>
@@ -815,13 +820,13 @@ add_action('geodir_detail_sidebar_inside', 'sd_map_in_detail_page_sidebar', 2);
 function supreme_entry_meta()
 {
     if (is_sticky() && is_home() && !is_paged()) {
-        printf('<span class="sticky-post">%s</span>', __('Featured', 'directory-starter'));
+        printf('<span class="sticky-post">%s</span>', __('Featured', 'supreme-directory'));
     }
 
     $format = get_post_format();
     if (current_theme_supports('post-formats', $format)) {
         printf('<span class="entry-format">%1$s<a href="%2$s">%3$s</a></span>',
-            sprintf('<span class="screen-reader-text">%s </span>', _x('Format', 'Used before post format.', 'directory-starter')),
+            sprintf('<span class="screen-reader-text">%s </span>', _x('Format', 'Used before post format.', 'supreme-directory')),
             esc_url(get_post_format_link($format)),
             get_post_format_string($format)
         );
@@ -838,7 +843,7 @@ function supreme_entry_meta()
         );
 
         printf('<span class="posted-on"><span class="screen-reader-text">%1$s </span><a href="%2$s" rel="bookmark">%3$s</a></span>',
-            _x('Posted on', 'Used before publish date.', 'directory-starter'),
+            _x('Posted on', 'Used before publish date.', 'supreme-directory'),
             esc_url(get_permalink()),
             $time_string
         );
@@ -847,24 +852,24 @@ function supreme_entry_meta()
     if ('post' == get_post_type()) {
         if (is_singular() || is_multi_author()) {
             printf('<span class="byline"><span class="author vcard"><span class="screen-reader-text">%1$s </span><a class="url fn n" href="%2$s">%3$s</a></span></span>',
-                _x('Author', 'Used before post author name.', 'directory-starter'),
+                _x('Author', 'Used before post author name.', 'supreme-directory'),
                 esc_url(get_author_posts_url(get_the_author_meta('ID'))),
                 get_the_author()
             );
         }
 
-        $categories_list = get_the_category_list(_x(', ', 'Used between list items, there is a space after the comma.', 'directory-starter'));
+        $categories_list = get_the_category_list(_x(', ', 'Used between list items, there is a space after the comma.', 'supreme-directory'));
         if ($categories_list) {
             printf('<span class="cat-links"><span class="screen-reader-text">%1$s </span>%2$s</span>',
-                _x('Categories', 'Used before category names.', 'directory-starter'),
+                _x('Categories', 'Used before category names.', 'supreme-directory'),
                 $categories_list
             );
         }
 
-        $tags_list = get_the_tag_list('', _x(', ', 'Used between list items, there is a space after the comma.', 'directory-starter'));
+        $tags_list = get_the_tag_list('', _x(', ', 'Used between list items, there is a space after the comma.', 'supreme-directory'));
         if ($tags_list) {
             printf('<span class="tags-links"><span class="screen-reader-text">%1$s </span>%2$s</span>',
-                _x('Tags', 'Used before tag names.', 'directory-starter'),
+                _x('Tags', 'Used before tag names.', 'supreme-directory'),
                 $tags_list
             );
         }
@@ -901,7 +906,7 @@ function sd_add_my_account_link($items, $args)
                     $user_link = get_author_posts_url($current_user->ID);
                 }
                 ?>
-                <?php echo __('My Account', 'directory-starter'); ?>
+                <?php echo __('My Account', 'supreme-directory'); ?>
                 <i class="fa fa-caret-down"></i>
             </a>
             <div class="sd-my-account-dd">
@@ -917,12 +922,12 @@ function sd_add_my_account_link($items, $args)
                         <ul class="sd-my-account-dd-menu-group sd-my-account-dd-menu-bp-group">
                             <li class="sd-my-account-dd-menu-link">
                                 <a href="<?php echo $user_link; ?>">
-                                    <i class="fa fa-user"></i> <?php echo __('About Me', 'directory-starter'); ?>
+                                    <i class="fa fa-user"></i> <?php echo __('About Me', 'supreme-directory'); ?>
                                 </a>
                             </li>
                             <li class="sd-my-account-dd-menu-link">
                                 <a href="<?php echo $user_link . 'settings/'; ?>">
-                                    <i class="fa fa-cog"></i> <?php echo __('Account Settings', 'directory-starter'); ?>
+                                    <i class="fa fa-cog"></i> <?php echo __('Account Settings', 'supreme-directory'); ?>
                                 </a>
                             </li>
                         </ul>
@@ -930,7 +935,7 @@ function sd_add_my_account_link($items, $args)
                     <ul class="sd-my-account-dd-menu-group">
                         <li class="sd-my-account-dd-menu-link">
                             <a href="<?php echo wp_logout_url(home_url()); ?>">
-                                <i class="fa fa-sign-out"></i> <?php echo __('Log Out', 'directory-starter'); ?>
+                                <i class="fa fa-sign-out"></i> <?php echo __('Log Out', 'supreme-directory'); ?>
                             </a>
                         </li>
                     </ul>
@@ -950,7 +955,7 @@ function sd_add_my_account_link($items, $args)
             }
             ?>
             <a class="sd-my-account-link" href="">
-                <?php echo __('My Account', 'directory-starter'); ?>
+                <?php echo __('My Account', 'supreme-directory'); ?>
                 <i class="fa fa-caret-down"></i>
             </a>
             <div class="sd-my-account-dd">
@@ -1223,14 +1228,14 @@ function sd_activation_install()
         if (!$home) {
             // Set the home page
             $sd_home = array(
-                'post_title' => __('Find Local Treasures!', 'directory-starter'),
+                'post_title' => __('Find Local Treasures!', 'supreme-directory'),
                 'post_content' => '',
                 'post_status' => 'publish',
                 'post_type' => 'page'
             );
             $home_page_id = wp_insert_post($sd_home);
             if ($home_page_id) {
-                update_post_meta($home_page_id, 'subtitle', __('Discover the best places to stay, eat, shop and events near you.', 'directory-starter'));
+                update_post_meta($home_page_id, 'subtitle', __('Discover the best places to stay, eat, shop and events near you.', 'supreme-directory'));
                 update_option('page_on_front', $home_page_id);
                 update_option('show_on_front', 'page');
             }
@@ -1241,7 +1246,7 @@ function sd_activation_install()
         if (!$blog) {
             // Set the blog page
             $sd_blog = array(
-                'post_title' => __('Blog', 'directory-starter'),
+                'post_title' => __('Blog', 'supreme-directory'),
                 'post_content' => '',
                 'post_status' => 'publish',
                 'post_type' => 'page'
@@ -1364,7 +1369,7 @@ function geodir_claim_link_sc($atts) {
         $defaults = array(
             'class' => 'supreme-btn supreme-btn-small supreme-edit-btn',
             'icon' => "true",
-            'link_text' => __('Claim', 'directory-starter')
+            'link_text' => __('Claim', 'supreme-directory')
         );
         $params = shortcode_atts($defaults, $atts);
 
@@ -1410,3 +1415,10 @@ function geodir_claim_link_sc($atts) {
     }
 }
 add_shortcode('gd_claim_link', 'geodir_claim_link_sc');
+
+function sd_footer_widget_class($classes)
+{
+    return "col-lg-3 col-md-4";
+}
+
+add_filter('dt_footer_widget_class', 'sd_footer_widget_class');

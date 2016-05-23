@@ -3,7 +3,7 @@
         <div class="content-box content-single">
             <?php if (!have_posts()) : ?>
                 <div class="alert-error">
-                    <p><?php _e('Sorry, no results were found.', 'directory-starter'); ?></p>
+                    <p><?php _e('Sorry, no results were found.', 'supreme-directory'); ?></p>
                 </div>
                 <?php get_search_form(); ?>
             <?php endif; ?>
@@ -22,11 +22,11 @@
 
                 // Previous/next post navigation.
                 the_post_navigation(array(
-                    'next_text' => '<span class="meta-nav" aria-hidden="true">' . __('Next', 'directory-starter') . '</span> ' .
-                        '<span class="screen-reader-text">' . __('Next post:', 'directory-starter') . '</span> ' .
+                    'next_text' => '<span class="meta-nav" aria-hidden="true">' . __('Next', 'supreme-directory') . '</span> ' .
+                        '<span class="screen-reader-text">' . __('Next post:', 'supreme-directory') . '</span> ' .
                         '<span class="post-title">%title</span>',
-                    'prev_text' => '<span class="meta-nav" aria-hidden="true">' . __('Previous', 'directory-starter') . '</span> ' .
-                        '<span class="screen-reader-text">' . __('Previous post:', 'directory-starter') . '</span> ' .
+                    'prev_text' => '<span class="meta-nav" aria-hidden="true">' . __('Previous', 'supreme-directory') . '</span> ' .
+                        '<span class="screen-reader-text">' . __('Previous post:', 'supreme-directory') . '</span> ' .
                         '<span class="post-title">%title</span>',
                 ));
 
