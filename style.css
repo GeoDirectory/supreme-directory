@@ -1467,14 +1467,14 @@ body.body_fullscreen #gd_listing_map_wrapper{
     }
 
     .sd.home .geodir-search input[type="text"], .sd.home .geodir-search select, .sd.home .geodir-search input[type="button"],
-    .sd.location .geodir-search input[type="text"], .sd.location .geodir-search select, .sd.location .geodir-search input[type="button"] {
+    .sd.sd-location .geodir-search input[type="text"], .sd.sd-location .geodir-search select, .sd.sd-location .geodir-search input[type="button"] {
         width: 100%;
         -moz-box-sizing: border-box;
         -webkit-box-sizing: border-box;
         box-sizing: border-box;
     }
 
-    .sd.home .cat-link, .sd.location .cat-link {
+    .sd.home .cat-link, .sd.sd-location .cat-link {
         display: none;
     }
 
