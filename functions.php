@@ -278,6 +278,11 @@ function sup_add_feat_img_head($page)
             $post_tax = $post_type . "category";
             $post_cats = $post->post_category[$post_tax];
         }
+
+        $author_name = apply_filters('sd_detail_author_name', $author_name);
+        $entry_author = apply_filters('sd_detail_entry_author', $entry_author);
+        $author_link = apply_filters('sd_detail_author_link', $author_link);
+
         $postlink = get_permalink(geodir_add_listing_page_id());
         $editlink = geodir_getlink($postlink, array('pid' => $post->ID), false);
         $cats_arr = array_filter(explode(",", $post_cats));
@@ -1397,3 +1402,10 @@ function geodir_claim_link_sc($atts) {
     }
 }
 add_shortcode('gd_claim_link', 'geodir_claim_link_sc');
+
+function sd_footer_widget_class($classes)
+{
+    return "col-lg-3 col-md-4";
+}
+
+add_filter('dt_footer_widget_class', 'sd_footer_widget_class');
