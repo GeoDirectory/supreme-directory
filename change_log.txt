@@ -1,9 +1,18 @@
+v0.4.0
+Write a review button not working when content shown as tabs - FIXED
+Forgot password link not showing on desktop - FIXED
+CSS: .sd-location changed to .sd.sd-location - FIXED
+
 v0.3.0
 Franchise link not showing up in sidebar - FIXED
 There is no confirmation message on the page displayed for send enquiry & send to friend - FIXED
 gd_claim_link shortcode added - ADDED
 Blog page not responsive on mobile - FIXED
 Account Nav and Primary Menu not displayed correctly in mobile - FIXED
+Set geodir_pagination_advance_info ption on install - CHANGED
+Advanced search dropdowns not aligned correctly - FIXED
+Event dates added to featured area of details page - ADDED
+Google analytics not showing - FIXED
 
 v0.2.0
 Details page design problems if GD set to use left sidebar - FIXED

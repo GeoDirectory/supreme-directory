@@ -5,7 +5,7 @@ Description: A Supreme Child Theme for Directory Starter
 Author: GeoDirectory
 Author URI: http://wpgeodirectory.com/
 Template: directory-starter
-Version: 0.2.0
+Version: 0.3.0
 */
 
 /* hide titles */
@@ -62,7 +62,7 @@ body.sd {
 }
 
 .sd #primary-nav ul li a {
-    height: 61px;
+    min-height: 61px;
     line-height: 61px;
 }
 
@@ -289,6 +289,10 @@ body.sd {
     box-shadow: none;
 }
 
+.sd-my-account-dd-inner a.goedir-forgot-link{
+    float: left;
+}
+
 .sd-my-account-dd-inner h4.sd-my-account-title {
     border-bottom: 1px solid #151515;
     text-align: center;
@@ -319,7 +323,7 @@ body.sd {
 }
 
 .sd .entry-content {
-    margin: 30px auto;
+    margin: 0px auto;
 }
 
 .sd .geodir_location_description {
@@ -855,6 +859,17 @@ MOBILE MENU
 
 
 /* Details page */
+
+.featured-area .sd-event-dates-head p {
+    color: #ffffff;
+    font-size: 22px;
+    line-height: 30px;
+}
+
+.sd .geodir-tabs-content.entry-content.geodir-tabs-list li {
+    margin: 0;
+    width: 100%;
+}
 
 .sd .sd-detail-details {
     border-bottom: 1px solid #ccc;
@@ -1452,14 +1467,14 @@ body.body_fullscreen #gd_listing_map_wrapper{
     }
 
     .sd.home .geodir-search input[type="text"], .sd.home .geodir-search select, .sd.home .geodir-search input[type="button"],
-    .sd.location .geodir-search input[type="text"], .sd.location .geodir-search select, .sd.location .geodir-search input[type="button"] {
+    .sd.sd-location .geodir-search input[type="text"], .sd.sd-location .geodir-search select, .sd.sd-location .geodir-search input[type="button"] {
         width: 100%;
         -moz-box-sizing: border-box;
         -webkit-box-sizing: border-box;
         box-sizing: border-box;
     }
 
-    .sd.home .cat-link, .sd.location .cat-link {
+    .sd.home .cat-link, .sd.sd-location .cat-link {
         display: none;
     }
 
