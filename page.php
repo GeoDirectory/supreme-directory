@@ -1,5 +1,4 @@
 <?php get_header(); ?>
-
     <div class="sd-container">
         <div class="content-box content-single">
             <?php if (!have_posts()) : ?>
@@ -26,5 +25,4 @@
             ?>
         </div>
     </div>
-
 <?php get_footer(); ?>

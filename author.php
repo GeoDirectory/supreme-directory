@@ -1,5 +1,4 @@
 <?php get_header();
-
 $full_image_url = SD_DEFAULT_FEATURED_IMAGE;
 ?>
 
@@ -52,5 +51,4 @@ $full_image_url = SD_DEFAULT_FEATURED_IMAGE;
 
         </div>
     </div>
-
 <?php get_footer(); ?>

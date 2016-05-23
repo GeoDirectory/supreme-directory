@@ -17,7 +17,7 @@ SUPREME DIRECTORY CODE STARTS
  * Define some constants for later use.
  */
 if (!defined('SD_DEFAULT_FEATURED_IMAGE')) define('SD_DEFAULT_FEATURED_IMAGE', get_stylesheet_directory_uri() . "/images/featured.jpg");
-if (!defined('SD_VERSION')) define('SD_VERSION', "0.2.0");
+if (!defined('SD_VERSION')) define('SD_VERSION', "0.3.0");
 if (!defined('SD_CHILD')) define('SD_CHILD', 'supreme-directory');
 
 /**
@@ -214,6 +214,132 @@ add_action('geodir_search_content', 'sd_mobile_map_buttons', 5);
 remove_action('geodir_detail_before_main_content', 'geodir_action_geodir_preview_code', 9);
 
 
+add_action('sd_details_featured_area_text','sd_add_event_dates_featured_area');
+function sd_add_event_dates_featured_area(){
+global $post,$geodir_date_format,$geodir_date_time_format;
+?>
+
+ <div class="header-wrap sd-event-dates-head">
+                <?php
+
+               if(isset($post->recurring_dates)){
+$recuring_data = maybe_unserialize( $post->recurring_dates );
+//print_r($recuring_data);
+    if ( !empty( $recuring_data ) && ( isset( $recuring_data['event_recurring_dates'] ) && $recuring_data['event_recurring_dates'] != '' ) || ( isset( $post->is_recurring ) && !empty( $post->is_recurring ) ) ) {
+    $event_recurring_dates = explode( ',', $recuring_data['event_recurring_dates'] );
+    $geodir_num_dates = 0;
+        $starttimes = '';
+        $endtimes = '';
+        $astarttimes = array();
+        $aendtimes = array();
+        $output = '';
+      // Check recurring enabled
+        $recurring_pkg = geodir_event_recurring_pkg( $post );
+
+        $hide_past_dates = true;
+
+            if ( !isset( $recuring_data['repeat_type'] ) ) {
+                $recuring_data['repeat_type'] = 'custom';
+            }
+
+            $repeat_type = isset( $recuring_data['repeat_type'] ) && in_array( $recuring_data['repeat_type'], array( 'day', 'week', 'month', 'year', 'custom' ) ) ? $recuring_data['repeat_type'] : 'year'; // day, week, month, year, custom
+
+            $different_times = isset( $recuring_data['different_times'] ) && !empty( $recuring_data['different_times'] ) ? true : false;
+
+            if ( $repeat_type == 'custom' && $different_times ) {
+                $astarttimes = isset( $recuring_data['starttimes'] ) ? $recuring_data['starttimes'] : array();
+                $aendtimes = isset( $recuring_data['endtimes'] ) ? $recuring_data['endtimes'] : array();
+            } else {
+                $starttimes = isset( $recuring_data['starttime'] ) ? $recuring_data['starttime'] : '';
+                $endtimes = isset( $recuring_data['endtime'] ) ? $recuring_data['endtime'] : '';
+            }
+
+    if(isset($_REQUEST['gde']) && $_REQUEST['gde']){
+    //print_r($event_recurring_dates);
+    if(in_array($_REQUEST['gde'],$event_recurring_dates)){
+    $event_recurring_dates = array(esc_html($_REQUEST['gde']));
+    }
+    }
+
+    foreach( $event_recurring_dates as $key => $date ) {
+                $geodir_num_dates++;
+
+                if ( $repeat_type == 'custom' && $different_times ) {
+                    if ( !empty( $astarttimes ) && isset( $astarttimes[$key] ) ) {
+                        $starttimes = $astarttimes[$key];
+                        $endtimes = $aendtimes[$key];
+                    } else {
+                        $starttimes = '';
+                        $endtimes = '';
+                    }
+                }
+
+                $duration = isset( $recuring_data['duration_x'] ) && (int)$recuring_data['duration_x'] > 0 ? (int)$recuring_data['duration_x'] : 1;
+                $duration--;
+                $enddate = date_i18n( 'Y-m-d', strtotime( $date . ' + ' . $duration . ' day' ) );
+
+                // Hide past dates
+                if ( $hide_past_dates && strtotime( $enddate ) < strtotime( date_i18n( 'Y-m-d', current_time( 'timestamp' ) ) ) ) {
+                    $geodir_num_dates--;
+                    continue;
+                }
+
+                $sdate = strtotime( $date . ' ' . $starttimes );
+                $edate = strtotime( $enddate . ' ' . $endtimes );
+
+                $start_date = date_i18n( $geodir_date_time_format, $sdate );
+                $end_date = date_i18n( $geodir_date_time_format, $edate );
+
+                $full_day = false;
+                $same_datetime = false;
+
+                if ( $starttimes == $endtimes && ( $starttimes == '' || $starttimes == '00:00:00' || $starttimes == '00:00' ) ) {
+                    $full_day = true;
+                }
+
+                if ( $start_date == $end_date && $full_day ) {
+                    $same_datetime = true;
+                }
+
+                $link_date = date_i18n( 'Y-m-d', $sdate );
+                $title_date = date_i18n( $geodir_date_format, $sdate );
+                if ( $full_day ) {
+                    $start_date = $title_date;
+                    $end_date = date_i18n( $geodir_date_format, $edate );
+                }
+
+
+
+                $recurring_class = 'gde-recurr-link';
+                $recurring_class_cont = 'gde-recurring-cont';
+                if ( isset( $_REQUEST['gde'] ) && $_REQUEST['gde'] == $link_date ) {
+                    $recurring_event_link = 'javascript:void(0);';
+                    $recurring_class .= ' gde-recurr-act';
+                    $recurring_class_cont .= ' gde-recurr-cont-act';
+                }
+
+                $output .= '<p class="' . $recurring_class_cont . '">';
+                $output .= '<i class="fa fa-caret-right"></i> ' . $start_date;
+                if ( !$same_datetime ) {
+                    $output .= '<br />';
+                    $output .= '<i class="fa fa-caret-left"></i> ' . $end_date;
+                }
+                $output .= '</p>';
+                if($geodir_num_dates>0){break;}
+            }
+    }
+
+    echo $output;
+
+}
+
+                ?>
+            </div>
+            <?php
+
+
+}
+
 /**
  * Output the header featured area image HTML.
  *
@@ -248,9 +374,15 @@ function sup_add_feat_img_head($page)
         <div class="featured-area">
 
             <div class="featured-img" style="background-image: url(<?php echo $full_image_url; ?>);"></div>
+
             <?php if ($preview) {
                 echo geodir_action_geodir_preview_code();
-            } ?>
+            }else{
+            do_action('sd_details_featured_area_text');
+            }
+
+
+             ?>
         </div>
         <?php
         $user_id = get_current_user_id();
@@ -269,14 +401,14 @@ function sup_add_feat_img_head($page)
             $author_link = get_author_posts_url(get_the_author_meta('ID'));
             $post_type = $post->post_type;
             $post_tax = $post_type . "category";
-            $post_cats = $post->$post_tax;
+            $post_cats = $post->{$post_tax};
         } else {
             $author_name = get_the_author_meta('display_name', $user_id);
             $entry_author = get_avatar(get_the_author_meta('email', $user_id), 100);
             $author_link = get_author_posts_url($user_id);
             $post_type = $post->listing_type;
             $post_tax = $post_type . "category";
-            $post_cats = $post->post_category[$post_tax];
+            $post_cats = isset($post->post_category) ? $post->post_category[$post_tax] : $post->{$post_tax};
         }
 
         $author_name = apply_filters('sd_detail_author_name', $author_name);
@@ -386,7 +518,7 @@ function sup_add_feat_img_head($page)
                     echo '</a></li>';
                 }
                 echo '</ul></div> <!-- sd-detail-cat-links end --> </div> <!-- sd-detail-info end -->';
-                echo '<div class="sd-detail-cta"><a class="dt-btn" href="' . get_the_permalink() . '#respond">' . __('Write a Review', 'directory-starter') . '</a>';
+                echo '<div class="sd-detail-cta"><a class="dt-btn" href="' . get_the_permalink() . '#reviews">' . __('Write a Review', 'directory-starter') . '</a>';
                 ?>
                 <div class="geodir_more_info geodir-company_info geodir_email" style="padding: 0;border: none">
                 <?php
@@ -506,169 +638,19 @@ remove_action('geodir_details_main_content', 'geodir_action_details_slider', 30)
  * @since 1.0.0
  * @return array
  */
-function my_change_sidebar_content_order()
+function my_change_sidebar_content_order($arr)
 {
-    return array(
-        'geodir_edit_post_link',
-        'geodir_detail_page_more_info',
-    );
+
+    $arr = array_diff($arr, array('geodir_social_sharing_buttons','geodir_share_this_button','geodir_detail_page_review_rating'));
+
+    return $arr;
 }
 
-add_filter('geodir_detail_page_sidebar_content', 'my_change_sidebar_content_order');
+add_filter('geodir_detail_page_sidebar_content', 'my_change_sidebar_content_order',10,1);
 
 // Remove taxonomies from detail page content
 remove_action('geodir_details_main_content', 'geodir_action_details_taxonomies', 40);
-// Remove tabs and reorder the content in a tall vertical page
-remove_action('geodir_details_main_content', 'geodir_show_detail_page_tabs', 60);
 
-/**
- * Adds tab-less content back to the details page.
- *
- * @since 1.0.0
- */
-function sd_geodir_show_detail_page_tabs()
-{
-
-    global $post, $post_images, $video, $special_offers, $related_listing, $geodir_post_detail_fields;
-
-    $post_id = !empty($post) && isset($post->ID) ? (int)$post->ID : 0;
-    $request_post_id = !empty($_REQUEST['p']) ? (int)$_REQUEST['p'] : 0;
-    $is_backend_preview = (is_single() && !empty($_REQUEST['post_type']) && !empty($_REQUEST['preview']) && !empty($_REQUEST['p'])) && is_super_admin() ? true : false; // skip if preview from backend
-
-    if ($is_backend_preview && !$post_id > 0 && $request_post_id > 0) {
-        $post = geodir_get_post_info($request_post_id);
-        setup_postdata($post);
-    }
-
-    $geodir_post_detail_fields = geodir_show_listing_info('detail');
-
-    if (geodir_is_page('detail')) {
-
-        $video = geodir_get_video($post->ID);
-        $special_offers = geodir_get_special_offers($post->ID);
-        $related_listing_array = array();
-        if (get_option('geodir_add_related_listing_posttypes'))
-            $related_listing_array = get_option('geodir_add_related_listing_posttypes');
-
-        $related_listing = '';
-        if (in_array($post->post_type, $related_listing_array)) {
-            $request = array('post_number' => get_option('geodir_related_post_count'),
-                'relate_to' => get_option('geodir_related_post_relate_to'),
-                'layout' => get_option('geodir_related_post_listing_view'),
-                'add_location_filter' => get_option('geodir_related_post_location_filter'),
-                'list_sort' => get_option('geodir_related_post_sortby'),
-                'character_count' => get_option('geodir_related_post_excerpt'));
-
-            $related_listing = geodir_related_posts_display($request);
-        }
-
-        $post_images = geodir_get_images($post->ID, 'thumbnail');
-        $count_images = count((array)$post_images);
-        $thumb_image = '';
-        if (!empty($post_images)) {
-            foreach ($post_images as $image) {
-                $thumb_image .= '<a href="' . $image->src . '">';
-                $thumb_image .= geodir_show_image($image, 'thumbnail', true, false);
-                $thumb_image .= '</a>';
-            }
-        }
-
-        $map_args = array();
-        $map_args['map_canvas_name'] = 'detail_page_map_canvas';
-        $map_args['width'] = '600';
-        $map_args['height'] = '300';
-        if ($post->post_mapzoom) {
-            $map_args['zoom'] = '' . $post->post_mapzoom . '';
-        }
-        $map_args['autozoom'] = false;
-        $map_args['child_collapse'] = '0';
-        $map_args['enable_cat_filters'] = false;
-        $map_args['enable_text_search'] = false;
-        $map_args['enable_post_type_filters'] = false;
-        $map_args['enable_location_filters'] = false;
-        $map_args['enable_jason_on_load'] = true;
-        $map_args['enable_map_direction'] = true;
-        $map_args['map_class_name'] = 'geodir-map-detail-page';
-
-    } elseif (geodir_is_page('preview')) {
-
-        $video = isset($post->geodir_video) ? $post->geodir_video : '';
-        $special_offers = isset($post->geodir_special_offers) ? $post->geodir_special_offers : '';
-
-        if (isset($post->post_images))
-            $post->post_images = trim($post->post_images, ",");
-
-        if (isset($post->post_images) && !empty($post->post_images))
-            $post_images = explode(",", $post->post_images);
-        $count_images = count($post_images);
-        $thumb_image = '';
-        if (!empty($post_images)) {
-            foreach ($post_images as $image) {
-                if ($image != '') {
-                    $thumb_image .= '<a href="' . $image . '">';
-                    $thumb_image .= geodir_show_image(array('src' => $image), 'thumbnail', true, false);
-                    $thumb_image .= '</a>';
-                }
-            }
-        }
-
-        global $map_jason;
-        $map_jason[] = $post->marker_json;
-
-        $address_latitude = isset($post->post_latitude) ? $post->post_latitude : '';
-        $address_longitude = isset($post->post_longitude) ? $post->post_longitude : '';
-        $mapview = isset($post->post_mapview) ? $post->post_mapview : '';
-        $mapzoom = isset($post->post_mapzoom) ? $post->post_mapzoom : '';
-        if (!$mapzoom) {
-            $mapzoom = 12;
-        }
-
-        $map_args = array();
-        $map_args['map_canvas_name'] = 'preview_map_canvas';
-        $map_args['width'] = '950';
-        $map_args['height'] = '300';
-        $map_args['child_collapse'] = '0';
-        $map_args['maptype'] = $mapview;
-        $map_args['autozoom'] = false;
-        $map_args['zoom'] = "$mapzoom";
-        $map_args['latitude'] = $address_latitude;
-        $map_args['longitude'] = $address_longitude;
-        $map_args['enable_cat_filters'] = false;
-        $map_args['enable_text_search'] = false;
-        $map_args['enable_post_type_filters'] = false;
-        $map_args['enable_location_filters'] = false;
-        $map_args['enable_jason_on_load'] = true;
-        $map_args['enable_map_direction'] = true;
-        $map_args['map_class_name'] = 'geodir-map-preview-page';
-
-    }
-
-    ?>
-
-    <div class="geodir-singleview" id="gd-singleview" style="position:relative;">
-        <?php if (geodir_is_page('detail')) {
-            the_content();
-        } else {
-            /** This action is documented in geodirectory_template_actions.php */
-            echo apply_filters('the_content', stripslashes($post->post_desc));
-        }
-
-        echo $geodir_post_detail_fields;
-        /** This action is documented in geodirectory_template_actions.php */
-        echo apply_filters('the_content', stripslashes($video));// we apply the_content filter so oembed works also;
-        echo wpautop(stripslashes($special_offers));
-        ?>
-        <div id="reviewsTab"><?php if (!geodir_is_page('preview')) {
-                comments_template();
-            }?></div><?php
-        //echo $related_listing;
-        ?>
-
-    </div>
-<?php
-}
-
-add_action('geodir_details_main_content', 'sd_geodir_show_detail_page_tabs', 60);
 
 /**
  * Output the listings images as a gallery.
@@ -679,7 +661,8 @@ add_action('geodir_details_main_content', 'sd_geodir_show_detail_page_tabs', 60)
  */
 function sd_img_gallery_output()
 {
-
+$excluded_tabs = get_option('geodir_detail_page_tabs_excluded',true);
+if(is_array($excluded_tabs) && in_array('post_images',$excluded_tabs)){
     global $post, $post_images, $video, $special_offers, $related_listing, $geodir_post_detail_fields;
 
     $post_id = !empty($post) && isset($post->ID) ? (int)$post->ID : 0;
@@ -731,8 +714,15 @@ function sd_img_gallery_output()
     <div id="geodir-post-gallery" class="clearfix"><?php echo $thumb_image; ?></div>
 <?php }
 }
+}
 
 add_action('geodir_detail_sidebar_inside', 'sd_img_gallery_output', 1);
+
+// add recurring dates to sidebar if events installed
+if(function_exists('geodir_event_show_shedule_date')){
+    add_action('geodir_detail_sidebar_inside', 'geodir_event_show_shedule_date', '1.5');
+}
+
 
 /**
  * Output the details page map HTML.
@@ -742,6 +732,8 @@ add_action('geodir_detail_sidebar_inside', 'sd_img_gallery_output', 1);
 function sd_map_in_detail_page_sidebar()
 {
 
+$excluded_tabs = get_option('geodir_detail_page_tabs_excluded',true);
+if(is_array($excluded_tabs) && in_array('post_map',$excluded_tabs)){
     global $post, $post_images, $video, $special_offers, $related_listing, $geodir_post_detail_fields;
 
     $post_id = !empty($post) && isset($post->ID) ? (int)$post->ID : 0;
@@ -811,6 +803,7 @@ function sd_map_in_detail_page_sidebar()
 
         </div>
     <?php }
+    }
 }
 
 add_action('geodir_detail_sidebar_inside', 'sd_map_in_detail_page_sidebar', 2);
@@ -1012,6 +1005,8 @@ function sd_add_my_account_link($items, $args)
                         <p class="sd-register">
                         <a href="<?php echo geodir_login_url(array('signup' => true)); ?>"
                            class="goedir-newuser-link"><?php echo NEW_USER_TEXT; ?></a>
+                           <a href="<?php echo geodir_login_url(array('forgot' => true)); ?>"
+                       class="goedir-forgot-link"><?php echo FORGOT_PW_TEXT; ?></a>
                         </p>
                     </form>
                 </div>
@@ -1147,6 +1142,18 @@ function sd_gd_adv_search_s_btn_value()
 }
 
 add_filter('geodir_search_default_search_button_text', 'sd_gd_adv_search_s_btn_value', 10);
+
+
+function sd_theme_deactivation($newname, $newtheme) {
+        // undo set the details page to use list and not tabs
+        update_option('geodir_disable_tabs', '0');
+        // undo disable some details page tabs that we show in the sidebar
+        update_option('geodir_detail_page_tabs_excluded', array());
+        // undo Set the installed flag
+        update_option('sd-installed', false);
+
+}
+add_action("switch_theme", "sd_theme_deactivation", 10 , 2);
 
 
 /**
@@ -1306,6 +1313,12 @@ function sd_activation_install()
 
         // set the map pin to bounce on listing hover on listings pages
         update_option('geodir_listing_hover_bounce_map_pin', 1);
+        // set the advanced paging to show on listings pages
+        update_option('geodir_pagination_advance_info', 'before');
+        // set the details page to use list and not tabs
+        update_option('geodir_disable_tabs', '1');
+        // disable some details page tabs that we show in the sidebar
+        update_option('geodir_detail_page_tabs_excluded', array('post_images','post_map','related_listing'));
         // Set the installed flag
         update_option('sd-installed', true);
 
