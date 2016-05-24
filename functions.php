@@ -960,7 +960,7 @@ function sd_add_my_account_link($items, $args)
             </a>
             <div class="sd-my-account-dd">
                 <div class="sd-my-account-dd-inner">
-                    <h4 class="sd-my-account-title">Sign In</h4>
+                    <h4 class="sd-my-account-title"><?php echo __('Sign In', 'supreme-directory'); ?></h4>
                     <?php
                     if (isset($_REQUEST['emsg']) && $_REQUEST['emsg'] == 'fw') {
                         echo "<p class=\"error_msg\"> " . INVALID_USER_FPW_MSG . " </p>";
