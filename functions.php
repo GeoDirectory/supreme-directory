@@ -1008,6 +1008,7 @@ function sd_add_my_account_link($items, $args)
                            <a href="<?php echo geodir_login_url(array('forgot' => true)); ?>"
                        class="goedir-forgot-link"><?php echo FORGOT_PW_TEXT; ?></a>
                         </p>
+                        <?php do_action('social_connect_form'); ?>
                     </form>
                 </div>
             </div>
