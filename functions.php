@@ -960,7 +960,7 @@ function sd_add_my_account_link($items, $args)
             </a>
             <div class="sd-my-account-dd">
                 <div class="sd-my-account-dd-inner">
-                    <h4 class="sd-my-account-title">Sign In</h4>
+                    <h4 class="sd-my-account-title"><?php echo __('Sign In', 'supreme-directory'); ?></h4>
                     <?php
                     if (isset($_REQUEST['emsg']) && $_REQUEST['emsg'] == 'fw') {
                         echo "<p class=\"error_msg\"> " . INVALID_USER_FPW_MSG . " </p>";
@@ -1008,6 +1008,7 @@ function sd_add_my_account_link($items, $args)
                            <a href="<?php echo geodir_login_url(array('forgot' => true)); ?>"
                        class="goedir-forgot-link"><?php echo FORGOT_PW_TEXT; ?></a>
                         </p>
+                        <?php do_action('social_connect_form'); ?>
                     </form>
                 </div>
             </div>

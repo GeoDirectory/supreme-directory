@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Supreme Directory 0.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-13 20:47+0100\n"
-"PO-Revision-Date: 2016-05-13 20:47+0100\n"
+"POT-Creation-Date: 2016-05-24 17:34+0530\n"
+"PO-Revision-Date: 2016-05-24 17:35+0530\n"
 "Last-Translator: \n"
 "Language-Team: GD Team <info@wpgeodirectory.com>\n"
 "Language: en_US\n"
@@ -15,7 +15,7 @@ msgstr ""
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 1.8.1\n"
 "X-Poedit-SearchPath-0: .\n"
 
 #: archive.php:22 index.php:28 page.php:6 single.php:6
@@ -30,20 +30,20 @@ msgstr ""
 msgid "Next"
 msgstr ""
 
-#: author.php:30
+#: author.php:29
 #, php-format
 msgid "%s's Profile"
 msgstr ""
 
-#: author.php:33
+#: author.php:32
 msgid "Listings"
 msgstr ""
 
-#: author.php:39
+#: author.php:38
 msgid "Favorites"
 msgstr ""
 
-#: author.php:46
+#: author.php:45
 msgid "Reviews"
 msgstr ""
 
@@ -51,7 +51,7 @@ msgstr ""
 msgid "Pages:"
 msgstr ""
 
-#: content.php:68 functions.php:441
+#: content.php:68 functions.php:446
 msgid "Edit"
 msgstr ""
 
@@ -67,103 +67,107 @@ msgstr ""
 msgid "SHOW MAP"
 msgstr ""
 
-#: functions.php:428
+#: functions.php:433
 msgid "Verified Owner"
 msgstr ""
 
-#: functions.php:457 functions.php:464 functions.php:1365
+#: functions.php:462 functions.php:469 functions.php:1372
 msgid "Claim"
 msgstr ""
 
-#: functions.php:516
+#: functions.php:521
 msgid "Write a Review"
 msgstr ""
 
-#: functions.php:530
+#: functions.php:535
 msgid "Send Enquiry"
 msgstr ""
 
-#: functions.php:531
+#: functions.php:536
 msgid "Send To Friend"
 msgstr ""
 
-#: functions.php:540 functions.php:550
+#: functions.php:545 functions.php:555
 msgid "Share on Facebook"
 msgstr ""
 
-#: functions.php:543 functions.php:552
+#: functions.php:548 functions.php:557
 msgid "Share on Twitter"
 msgstr ""
 
-#: functions.php:546 functions.php:554
+#: functions.php:551 functions.php:559
 msgid "Share on Google Plus"
 msgstr ""
 
-#: functions.php:818
+#: functions.php:823
 msgid "Featured"
 msgstr ""
 
-#: functions.php:824
+#: functions.php:829
 msgid "Format"
 msgstr ""
 
-#: functions.php:841
+#: functions.php:846
 msgid "Posted on"
 msgstr ""
 
-#: functions.php:850
+#: functions.php:855
 msgid "Author"
 msgstr ""
 
-#: functions.php:856 functions.php:864
+#: functions.php:861 functions.php:869
 msgid ", "
 msgstr ""
 
-#: functions.php:859
+#: functions.php:864
 msgid "Categories"
 msgstr ""
 
-#: functions.php:867
+#: functions.php:872
 msgid "Tags"
 msgstr ""
 
-#: functions.php:904 functions.php:953
+#: functions.php:909 functions.php:958
 msgid "My Account"
 msgstr ""
 
-#: functions.php:920
+#: functions.php:925
 msgid "About Me"
 msgstr ""
 
-#: functions.php:925
+#: functions.php:930
 msgid "Account Settings"
 msgstr ""
 
-#: functions.php:933
+#: functions.php:938
 msgid "Log Out"
 msgstr ""
 
-#: functions.php:1089
+#: functions.php:963
+msgid "Sign In"
+msgstr ""
+
+#: functions.php:1096
 msgid "Near Me"
 msgstr ""
 
-#: functions.php:1209
+#: functions.php:1216
 msgid "Hello world!"
 msgstr ""
 
-#: functions.php:1224
+#: functions.php:1231
 msgid "Find Local Treasures!"
 msgstr ""
 
-#: functions.php:1231
+#: functions.php:1238
 msgid "Discover the best places to stay, eat, shop and events near you."
 msgstr ""
 
-#: functions.php:1242 functions.php:1291
+#: functions.php:1249 functions.php:1298
 msgid "Blog"
 msgstr ""
 
-#: functions.php:1282
+#: functions.php:1289
 msgid "Home"
 msgstr ""
 
