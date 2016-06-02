@@ -1,3 +1,4 @@
+<?php global $dt_blog_sidebar_position,$sd_sidebar_class;?>
 <article <?php post_class(); ?>>
     <?php
         if ((function_exists('is_buddypress') && !is_buddypress()) || !function_exists('is_buddypress')) { ?>
@@ -43,7 +44,17 @@
             </header> <?php
     } ?>
     <div class="container" id="home-scroll">
-        <div class="entry-content entry-summary">
+
+        <?php
+        if($dt_blog_sidebar_position=='left'){?>
+        <div class="sd-sidebar sd-sidebar-left">
+            <div class="sidebar blog-sidebar page-sidebar">
+                <?php get_sidebar('pages');?>
+            </div>
+        </div>
+        <?php }?>
+
+        <div class="entry-content entry-summary <?php echo $sd_sidebar_class;?>">
             <?php
             global $more;
             $more = 0;
@@ -62,10 +73,49 @@
                 'link_after' => '</span>',
             ));
             ?>
+            <footer class="entry-footer">
+                <?php directory_theme_entry_meta(); ?>
+                <?php edit_post_link(__('Edit', 'supreme-directory'), '<span class="edit-link">', '</span>'); ?>
+
+
+
+                <?php
+                if(!is_page()){
+                    // Previous/next post navigation.
+                    the_post_navigation(array(
+                        'next_text' => '<span class="meta-nav" aria-hidden="true">' . __('Next', 'supreme-directory') . '</span> ' .
+                            '<span class="screen-reader-text">' . __('Next post:', 'supreme-directory') . '</span> ' .
+                            '<span class="post-title">%title</span>',
+                        'prev_text' => '<span class="meta-nav" aria-hidden="true">' . __('Previous', 'supreme-directory') . '</span> ' .
+                            '<span class="screen-reader-text">' . __('Previous post:', 'supreme-directory') . '</span> ' .
+                            '<span class="post-title">%title</span>',
+                    )); 
+                }
+
+
+
+                // If comments are open or we have at least one comment, load up the comment template.
+                if (comments_open() || get_comments_number()) : ?>
+                <div class="comments-container">
+                    <?php comments_template(); ?>
+                </div>
+                    <?php endif;
+                ?>
+
+
+
+
+            </footer>
         </div>
-        <footer class="entry-footer">
-            <?php directory_theme_entry_meta(); ?>
-            <?php edit_post_link(__('Edit', 'supreme-directory'), '<span class="edit-link">', '</span>'); ?>
-        </footer>
+
+        <?php
+        if($dt_blog_sidebar_position=='right'){?>
+            <div class="sd-sidebar sd-sidebar-right">
+                <div class="sidebar blog-sidebar page-sidebar">
+                    <?php get_sidebar('pages');?>
+                </div>
+            </div>
+        <?php }?>
+
     </div>
 </article>

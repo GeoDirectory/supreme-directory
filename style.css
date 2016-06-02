@@ -324,7 +324,57 @@ body.sd {
 
 .sd .entry-content {
     margin: 0px auto;
+    margin-bottom: -30px;
+    padding-bottom: 30px;
 }
+
+/*
+#################################################
+SIDEBARS CSS START
+#################################################
+*/
+.sd .entry-content.sidebar-right{
+    float: left;
+    padding-right: 1%;
+    border-right:1px solid #eee;
+}
+
+.sd .entry-content.sidebar-left{
+    float: right;
+    padding-left: 1%;
+    border-left:1px solid #eee;
+}
+
+.sd .sd-sidebar-left{
+    float: left;
+    margin-right: 1%;
+}
+
+.sd .sd-sidebar-right{
+    float: right;
+    margin-left: 1%;
+}
+
+.sd .entry-content.sidebar-active{
+    width: 74%;
+}
+
+.sd .sd-sidebar{
+    width: 24%;
+}
+/*
+#################################################
+SIDEBARS CSS END
+#################################################
+*/
+
+#home-scroll:after{
+    content: " ";
+    display: block;
+    height: 0;
+    clear: both;
+}
+
 
 .sd .geodir_location_description {
     margin-bottom: 40px;
@@ -1060,7 +1110,7 @@ h2.comments-title {
     float: left;
 }
 
-.sd-verified-badge {
+.fa-stack.sd-verified-badge {
     cursor: pointer;
     height: 35px;
     margin: 0 0 0 28px;
@@ -1171,7 +1221,7 @@ h2.comments-title {
 }
 
 .sd.blog .entry-footer, .sd.category .entry-footer, .sd.single-post .entry-footer {
-    text-align: center;
+    /*text-align: center;*/
 }
 
 .nav-links a, .nav-links a:last-child {
@@ -1298,6 +1348,8 @@ body.body_fullscreen #gd_listing_map_wrapper{
         height: 60vh;
     }
 
+
+
 }
 
 @media (max-width: 992px) {
@@ -1377,6 +1429,36 @@ body.body_fullscreen #gd_listing_map_wrapper{
         margin: 0 3% 50px 3%;
         width: 44%;
     }
+
+/*
+#################################################
+SIDEBARS CSS START
+#################################################
+*/
+
+
+    .sd .entry-content.sidebar-active{
+        float: none;
+        width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+        border-right:none;
+        border-left:none;
+    }
+
+    .sd .sd-sidebar{
+        float: none;
+        width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+        border-right:none;
+        border-left:none;;
+    }
+/*
+#################################################
+SIDEBARS CSS END
+#################################################
+*/
 
 }
 

@@ -1,4 +1,18 @@
-<?php get_header(); ?>
+<?php get_header();
+
+do_action('dt_page_before_main_content');
+
+global $dt_blog_sidebar_position,$sd_sidebar_class;
+$dt_enable_blog_sidebar = esc_attr(get_theme_mod('dt_enable_blog_sidebar', DT_ENABLE_BLOG_SIDEBAR));
+if($dt_enable_blog_sidebar){
+    $dt_blog_sidebar_position = esc_attr(get_theme_mod('dt_blog_sidebar_position', DT_BLOG_SIDEBAR_POSITION));
+    $sd_sidebar_class = 'sidebar-active sidebar-'.$dt_blog_sidebar_position;
+}else{
+    $dt_blog_sidebar_position = '';
+    $sd_sidebar_class = '';
+}
+
+?>
     <div class="sd-container">
         <div class="content-box content-single">
             <?php if (!have_posts()) : ?>
@@ -14,26 +28,14 @@
             // Include the page content template.
             get_template_part('content');
 
-            // If comments are open or we have at least one comment, load up the comment template.
-            if (comments_open() || get_comments_number()) : ?>
-            <div class="container">
-                <?php comments_template(); ?>
-                <?php endif;
+           
 
-                // Previous/next post navigation.
-                the_post_navigation(array(
-                    'next_text' => '<span class="meta-nav" aria-hidden="true">' . __('Next', 'supreme-directory') . '</span> ' .
-                        '<span class="screen-reader-text">' . __('Next post:', 'supreme-directory') . '</span> ' .
-                        '<span class="post-title">%title</span>',
-                    'prev_text' => '<span class="meta-nav" aria-hidden="true">' . __('Previous', 'supreme-directory') . '</span> ' .
-                        '<span class="screen-reader-text">' . __('Previous post:', 'supreme-directory') . '</span> ' .
-                        '<span class="post-title">%title</span>',
-                ));
+                
 
                 // End the loop.
                 endwhile;
                 ?>
-            </div>
+            
         </div>
     </div>
 <?php get_footer(); ?>
