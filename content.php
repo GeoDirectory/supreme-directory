@@ -49,7 +49,7 @@
         if($dt_blog_sidebar_position=='left'){?>
         <div class="sd-sidebar sd-sidebar-left">
             <div class="sidebar blog-sidebar page-sidebar">
-                <?php get_sidebar('pages');?>
+                <?php if(is_page()){get_sidebar('pages');}else{get_sidebar();}?>
             </div>
         </div>
         <?php }?>
@@ -112,7 +112,7 @@
         if($dt_blog_sidebar_position=='right'){?>
             <div class="sd-sidebar sd-sidebar-right">
                 <div class="sidebar blog-sidebar page-sidebar">
-                    <?php get_sidebar('pages');?>
+                    <?php if(is_page()){get_sidebar('pages');}else{get_sidebar();} ?>
                 </div>
             </div>
         <?php }?>

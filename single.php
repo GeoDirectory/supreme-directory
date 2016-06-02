@@ -28,14 +28,8 @@ if($dt_enable_blog_sidebar){
             // Include the page content template.
             get_template_part('content');
 
-           
-
-                
-
-                // End the loop.
-                endwhile;
-                ?>
-            
+            endwhile;
+            ?>
         </div>
     </div>
 <?php get_footer(); ?>
