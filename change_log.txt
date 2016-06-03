@@ -8,6 +8,7 @@ If CPT has no address sidebar map still shows - FIXED
 Default page now has sidebar - CHANGED
 Added full width page template - ADDED
 Pages now have their own sidebar - ADDED
+Header Top Bar not necessary - REMOVED
 
 v0.3.0
 Franchise link not showing up in sidebar - FIXED

@@ -1431,3 +1431,14 @@ function sd_footer_widget_class($classes)
 }
 
 add_filter('dt_footer_widget_class', 'sd_footer_widget_class');
+
+//Remove Header Top from directory starter
+function sd_dt_remove_header_top_from_customizer( $wp_customize ) {
+    $wp_customize->remove_section( 'dt_header_top_section' );
+}
+add_action( 'customize_register', 'sd_dt_remove_header_top_from_customizer', 20);
+
+function sd_dt_enable_header_top_return_zero() {
+    return "0";
+}
+add_filter('theme_mod_dt_enable_header_top', 'sd_dt_enable_header_top_return_zero');
