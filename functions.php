@@ -435,8 +435,13 @@ function sup_add_feat_img_head($page)
 						<i class="fa fa-check-circle"></i>
 					</span>
                     <?php
+                    }else{
+                    $author_link = '#';
+                    $author_name = __('Claim Me', 'supreme-directory');
+                    $entry_author = '<img src="'.get_stylesheet_directory_uri() . "/images/gravatar2.png".'"  height="100" width="100">';
                     }
                 }
+
                 printf('<div class="author-avatar"><a href="%s">%s</a></div>', $author_link, $entry_author);
                 printf('<div class="author-link"><a href="%s">%s</a></div>', $author_link, $author_name);
 
@@ -745,6 +750,9 @@ if(is_array($excluded_tabs) && in_array('post_map',$excluded_tabs)){
         setup_postdata($post);
     }
 
+if(!isset($post->post_latitude) || $post->post_latitude=''){
+    return '';// if not address, bail.
+}
     $geodir_post_detail_fields = geodir_show_listing_info('detail');
 
     if (geodir_is_page('detail')) {

@@ -4,6 +4,10 @@ Forgot password link not showing on desktop - FIXED
 CSS: .sd-location changed to .sd.sd-location - FIXED
 Translation strings not working - FIXED
 social buttons not showing on My Account login box - FIXED
+If CPT has no address sidebar map still shows - FIXED
+Default page now has sidebar - CHANGED
+Added full width page template - ADDED
+Pages now have their own sidebar - ADDED
 
 v0.3.0
 Franchise link not showing up in sidebar - FIXED
