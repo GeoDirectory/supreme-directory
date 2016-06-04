@@ -62,6 +62,16 @@ jQuery(document).ready(function () {
         });
     }
 
+    // if ( jQuery( "div.sd-my-account-dd" ).length ) {
+    // setTimeout(function(){
+    //
+    //     var $myAccount = jQuery('div.sd-my-account-dd').clone();
+    //     jQuery('#mm-primary-nav .sd-my-account.menu-item').html($myAccount );
+    //     console.log($myAccount);
+    // }, 100);
+    //
+    // }
+
 
 
 });
