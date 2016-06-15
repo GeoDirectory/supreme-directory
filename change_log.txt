@@ -1,3 +1,6 @@
+v1.0.0
+Initial release to wp.org
+
 v0.4.0
 Write a review button not working when content shown as tabs - FIXED
 Forgot password link not showing on desktop - FIXED
@@ -11,6 +14,8 @@ Pages now have their own sidebar - ADDED
 Header Top Bar not necessary - REMOVED
 Now works without GeoDirectory installed - CHNAGED
 RTL CSS added - ADDED
+Page/post meta setting "sd_remove_head" will remove the featured image area for that post/page - ADDED
+Claim listing button will now redirect back and open claim form - FIXED
 
 v0.3.0
 Franchise link not showing up in sidebar - FIXED

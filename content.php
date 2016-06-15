@@ -1,7 +1,7 @@
-<?php global $dt_blog_sidebar_position,$sd_sidebar_class;?>
+<?php global $dt_blog_sidebar_position,$sd_sidebar_class,$post;?>
 <article <?php post_class(); ?>>
     <?php
-        if ((function_exists('is_buddypress') && !is_buddypress()) || !function_exists('is_buddypress')) { ?>
+        if (((function_exists('is_buddypress') && !is_buddypress()) || !function_exists('is_buddypress')) && !get_post_meta($post->ID,'sd_remove_head',true)) { ?>
 
 
             <header>
@@ -80,7 +80,8 @@
 
 
                 <?php
-                if(!is_page()){
+                global $post;
+                if(is_single() && isset($post->post_type) && $post->post_type='post'){
                     // Previous/next post navigation.
                     the_post_navigation(array(
                         'next_text' => '<span class="meta-nav" aria-hidden="true">' . __('Next', 'supreme-directory') . '</span> ' .

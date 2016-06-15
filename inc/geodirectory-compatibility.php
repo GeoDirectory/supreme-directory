@@ -692,3 +692,308 @@ function geodir_claim_link_sc($atts) {
     }
 }
 add_shortcode('gd_claim_link', 'geodir_claim_link_sc');
+
+
+
+
+/**
+ * Output the header featured area image HTML.
+ *
+ * Add featured banner and listing details above wrapper.
+ *
+ * @since 1.0.0
+ * @param string $page The GeoDirectory page being called.
+ */
+function sup_add_feat_img_head($page)
+{
+    if ($page == 'details-page') {
+
+        global $preview, $post;
+        $default_img_url = SD_DEFAULT_FEATURED_IMAGE;
+        if ($preview) {
+            geodir_action_geodir_set_preview_post();//Set the $post value if previewing a post.
+            $post_images = array();
+            if (isset($post->post_images) && !empty($post->post_images)) {
+                $post->post_images = trim($post->post_images, ",");
+                $post_images = explode(",", $post->post_images);
+            }
+            $full_image_url = (isset($post_images[0])) ? $post_images[0] : $default_img_url;
+        } else {
+            if (has_post_thumbnail()) {
+                $full_image_urls = wp_get_attachment_image_src(get_post_thumbnail_id(), 'full');
+                $full_image_url = $full_image_urls[0];
+            } else {
+                $full_image_url = $default_img_url;
+            }
+        }
+
+        ?>
+        <div class="featured-area">
+
+            <div class="featured-img" style="background-image: url(<?php echo $full_image_url; ?>);"></div>
+
+            <?php if ($preview) {
+                echo geodir_action_geodir_preview_code();
+            }else{
+            do_action('sd_details_featured_area_text');
+            }
+
+
+             ?>
+        </div>
+        <?php
+        $user_id = get_current_user_id();
+        $post_avgratings = geodir_get_post_rating($post->ID);
+        $post_ratings = geodir_get_rating_stars($post_avgratings, $post->ID);
+        ob_start();
+        if (!$preview) {
+            geodir_comments_number($post->rating_count);
+        } else {
+
+        }
+        $n_comments = ob_get_clean();
+        if (!$preview) {
+            $author_name = get_the_author();
+            $entry_author = get_avatar(get_the_author_meta('email'), 100);
+            $author_link = get_author_posts_url(get_the_author_meta('ID'));
+            $post_type = $post->post_type;
+            $post_tax = $post_type . "category";
+            $post_cats = $post->{$post_tax};
+        } else {
+            $author_name = get_the_author_meta('display_name', $user_id);
+            $entry_author = get_avatar(get_the_author_meta('email', $user_id), 100);
+            $author_link = get_author_posts_url($user_id);
+            $post_type = $post->listing_type;
+            $post_tax = $post_type . "category";
+            $post_cats = isset($post->post_category) ? $post->post_category[$post_tax] : $post->{$post_tax};
+        }
+
+        $author_name = apply_filters('sd_detail_author_name', $author_name);
+        $entry_author = apply_filters('sd_detail_entry_author', $entry_author);
+        $author_link = apply_filters('sd_detail_author_link', $author_link);
+
+        $postlink = get_permalink(geodir_add_listing_page_id());
+        $editlink = geodir_getlink($postlink, array('pid' => $post->ID), false);
+        $cats_arr = array_filter(explode(",", $post_cats));
+        $cat_icons = geodir_get_term_icon();
+        ?>
+        <?php do_action('sd-detail-details-before'); ?>
+        <div class="sd-detail-details">
+        <div class="container">
+            <div class="sd-detail-author">
+                <?php
+                if (!$preview && function_exists('geodir_load_translation_geodirclaim')) {
+                    $is_owned = geodir_get_post_meta($post->ID, 'claimed', true);
+                    if ($is_owned == '1') {
+                        ?>
+                        <span class="fa fa-stack sd-verified-badge"
+                              title="<?php _e('Verified Owner', 'supreme-directory'); ?>">
+						<i class="fa fa-circle fa-inverse"></i>
+						<i class="fa fa-check-circle"></i>
+					</span>
+                    <?php
+                    }else{
+                    $author_link = '#';
+                    $author_name = __('Claim Me', 'supreme-directory');
+                    $entry_author = '<img src="'.get_stylesheet_directory_uri() . "/images/gravatar2.png".'"  height="100" width="100">';
+                    }
+                }
+
+                printf('<div class="author-avatar"><a href="%s">%s</a></div>', $author_link, $entry_author);
+                printf('<div class="author-link"><a href="%s">%s</a></div>', $author_link, $author_name);
+
+                if (is_user_logged_in() && geodir_listing_belong_to_current_user() ) {
+                    ?>
+                    <a href="<?php echo $editlink; ?>" class="supreme-btn supreme-btn-small supreme-edit-btn"><i
+                            class="fa fa-edit"></i> <?php echo __('Edit', 'supreme-directory'); ?></a>
+                <?php }
+
+                if (function_exists('geodir_load_translation_geodirclaim')) {
+                    $geodir_post_type = array();
+                    if (get_option('geodir_post_types_claim_listing'))
+                        $geodir_post_type = get_option('geodir_post_types_claim_listing');
+                    $posttype = (isset($post->post_type)) ? $post->post_type : '';
+                    if (in_array($posttype, $geodir_post_type) && !$preview) {
+                        $is_owned = geodir_get_post_meta($post->ID, 'claimed', true);
+                        if (get_option('geodir_claim_enable') == 'yes' && $is_owned != '1') {
+
+                            if (is_user_logged_in()) {
+
+                                echo '<div class="geodir-company_info">';
+                                echo '<div class="geodir_display_claim_popup_forms"></div>';
+                                echo '<a href="javascript:void(0);" class="supreme-btn supreme-btn-small supreme-edit-btn geodir_claim_enable"><i class="fa fa-question-circle"></i> ' . __('Claim', 'supreme-directory') . '</a>';
+                                echo '</div>';
+                                echo '<input type="hidden" name="geodir_claim_popup_post_id" value="' . $post->ID . '" />';
+                                if (!empty($_REQUEST['gd_go']) && $_REQUEST['gd_go'] == 'claim' && !isset($_REQUEST['geodir_claim_request'])) {
+					                echo '<script type="text/javascript">jQuery(function(){jQuery(".supreme-btn.geodir_claim_enable").trigger("click");});</script>';
+				                }
+                            } else {
+                            $current_url = remove_query_arg(array('gd_go'), geodir_curPageURL());
+				            $current_url = add_query_arg(array('gd_go' => 'claim'), $current_url);
+				            $login_to_claim_url = geodir_login_url(array('redirect_to' => urlencode_deep($current_url)));
+				            $login_to_claim_url = apply_filters('geodir_claim_login_to_claim_url', $login_to_claim_url, $post->ID);
+
+                                $site_login_url = $login_to_claim_url;
+                                echo '<a href="' . $site_login_url . '" class="supreme-btn supreme-btn-small supreme-edit-btn"><i class="fa fa-question-circle"></i> ' . __('Claim', 'supreme-directory') . '</a>';
+
+                            }
+                        }
+                    }
+                }
+                ?>
+            </div>
+            <!-- sd-detail-suthor end -->
+            <div class="sd-detail-info">
+                <?php
+                echo '<h1 class="sd-entry-title">' . get_the_title();
+                ?>
+                <?php
+                echo '</h1>';
+                $sd_address = '<div class="sd-address">';
+                if (isset($post->post_city) && $post->post_city) {
+                    $sd_address .= $post->post_city;
+                }
+                if (isset($post->post_region) && $post->post_region) {
+                    $sd_address .= ', ' . $post->post_region;
+                }
+                if (isset($post->post_country) && $post->post_country) {
+                    $sd_address .= ', ' . $post->post_country;
+                }
+                $sd_address .= '</div>';
+                echo $sd_address;
+                echo '<div class="sd-ratings">' . $post_ratings . ' - <a href="' . get_comments_link() . '" class="geodir-pcomments">' . $n_comments . '</a></div>';
+                echo '<div class="sd-contacts">';
+                if (isset($post->geodir_website) && $post->geodir_website) {
+                    echo '<a href="' . $post->geodir_website . '"><i class="fa fa-external-link-square"></i></a>';
+                }
+                if (isset($post->geodir_facebook) && $post->geodir_facebook) {
+                    echo '<a href="' . $post->geodir_facebook . '"><i class="fa fa-facebook-official"></i></a>';
+                }
+                if (isset($post->geodir_twitter) && $post->geodir_twitter) {
+                    echo '<a href="' . $post->geodir_twitter . '"><i class="fa fa-twitter-square"></i></a>';
+                }
+                if (isset($post->geodir_contact) && $post->geodir_contact) {
+                    echo '<a href="tel:' . $post->geodir_contact . '"><i class="fa fa-phone-square"></i>&nbsp;:&nbsp;' . $post->geodir_contact . '</a>';
+                }
+                echo '</div>';
+                echo '<div class="sd-detail-cat-links"><ul>';
+                foreach ($cats_arr as $cat) {
+                    $term_arr = get_term($cat, $post_tax);
+                    $term_icon = isset($cat_icons[$cat]) ? $cat_icons[$cat] : '';
+                    $term_url = get_term_link(intval($cat), $post_tax);
+                    echo '<li><a href="' . $term_url . '"><img src="' . $term_icon . '">';
+                    echo '<span class="cat-link">' . $term_arr->name . '</span>';
+                    echo '</a></li>';
+                }
+                echo '</ul></div> <!-- sd-detail-cat-links end --> </div> <!-- sd-detail-info end -->';
+                echo '<div class="sd-detail-cta"><a class="dt-btn" href="' . get_the_permalink() . '#reviews">' . __('Write a Review', 'supreme-directory') . '</a>';
+                ?>
+                <div class="geodir_more_info geodir-company_info geodir_email" style="padding: 0;border: none">
+                <?php
+                if (!$preview) {
+                    $html = '<input type="hidden" name="geodir_popup_post_id" value="' . $post->ID . '" />
+                    <div class="geodir_display_popup_forms"></div>';
+                    echo $html;
+                }
+                ?>
+                    <span style="" class="geodir-i-email">
+                    <i class="fa fa-envelope"></i>
+                        <?php if (isset($post->geodir_email) && $post->geodir_email) {
+                        ?>
+                            <a href="javascript:void(0);" class="b_send_inquiry"><?php echo __('Send Enquiry', 'supreme-directory'); ?></a> | <?php } ?>
+                        <a class="b_sendtofriend" href="javascript:void(0);"><?php echo __('Send To Friend', 'supreme-directory'); ?></a></span>
+
+                </div>
+
+                <?php
+                geodir_favourite_html($post->post_author, $post->ID);
+                ?>
+                <ul class="sd-cta-favsandshare">
+                    <?php if (!$preview) { ?>
+                        <li><a target="_blank" title="<?php echo __('Share on Facebook', 'supreme-directory'); ?>"
+                               href="http://www.facebook.com/sharer.php?u=<?php the_permalink(); ?>&t=<?php the_title(); ?>"><i
+                                    class="fa fa-facebook"></i></a></li>
+                        <li><a target="_blank" title="<?php echo __('Share on Twitter', 'supreme-directory'); ?>"
+                               href="http://twitter.com/share?text=<?php echo urlencode(get_the_title()); ?>&url=<?php echo urlencode(get_the_permalink()); ?>"><i
+                                    class="fa fa-twitter"></i></a></li>
+                        <li><a target="_blank" title="<?php echo __('Share on Google Plus', 'supreme-directory'); ?>"
+                               href="https://plus.google.com/share?url=<?php echo urlencode(get_the_permalink()); ?>"><i
+                                    class="fa fa-google-plus"></i></a></li>
+                    <?php } else { ?>
+                        <li><a target="_blank" title="<?php echo __('Share on Facebook', 'supreme-directory'); ?>"
+                               href=""><i class="fa fa-facebook"></i></a></li>
+                        <li><a target="_blank" title="<?php echo __('Share on Twitter', 'supreme-directory'); ?>"
+                               href=""><i class="fa fa-twitter"></i></a></li>
+                        <li><a target="_blank" title="<?php echo __('Share on Google Plus', 'supreme-directory'); ?>"
+                               href=""><i class="fa fa-google-plus"></i></a></li>
+                    <?php } ?>
+                </ul>
+                <?php
+                echo '</div><!-- sd-detail-cta end -->'; ?>
+
+            </div>
+            <!-- container end -->
+        </div><!-- sd-detail-details end -->
+
+
+
+    <?php } elseif ($page == 'home-page') {
+
+        if (function_exists('geodir_get_location_seo')) {
+            $seo = geodir_get_location_seo();
+            if (isset($seo->seo_image_tagline) && $seo->seo_image_tagline) {
+                $sub_title = $seo->seo_image_tagline;
+            }
+            if (isset($seo->seo_image) && $seo->seo_image) {
+                $full_image_url = wp_get_attachment_image_src($seo->seo_image, 'full');
+            }
+        }
+
+        if (isset($full_image_url)) {
+
+        } elseif (has_post_thumbnail()) {
+            $full_image_url = wp_get_attachment_image_src(get_post_thumbnail_id(), 'full');
+        } else {
+            $full_image_url[0] = SD_DEFAULT_FEATURED_IMAGE;
+        }
+
+        if (!isset($sub_title) && get_post_meta(get_the_ID(), 'subtitle', true)) {
+            $sub_title = get_post_meta(get_the_ID(), 'subtitle', true);
+        }
+
+
+        ?>
+        <div class="featured-area">
+            <div class="featured-img" style="background-image: url(<?php echo $full_image_url[0]; ?>);">
+
+            </div>
+            <div class="header-wrap">
+            <?php do_action('sd_homepage_content');?>
+
+            </div>
+        </div>
+    <?php
+    }
+
+}
+
+
+function sd_homepage_featured_content(){
+
+                if (is_singular() && $location = do_shortcode('[gd_current_location_name]')) { ?>
+                    <h1 class="entry-title"><?php echo $location; ?></h1>
+                <?php } else { ?>
+                    <h1 class="entry-title"><?php the_title(); ?></h1>
+                <?php }
+
+                if (isset($sub_title)) {
+                    echo '<div class="entry-subtitle">' . $sub_title . '</div>';
+                }
+
+            echo do_shortcode('[gd_advanced_search]');
+            echo do_shortcode('[gd_popular_post_category category_limit=5]');
+            echo '<div class="home-more" id="sd-home-scroll"><a href="#sd-home-scroll" ><i class="fa fa-chevron-down"></i></a></div>';
+
+}
+add_action('sd_homepage_content','sd_homepage_featured_content');
+
