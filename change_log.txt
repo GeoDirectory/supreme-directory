@@ -1,7 +1,4 @@
 v1.0.0
-Initial release to wp.org
-
-v0.4.0
 Write a review button not working when content shown as tabs - FIXED
 Forgot password link not showing on desktop - FIXED
 CSS: .sd-location changed to .sd.sd-location - FIXED

@@ -108,13 +108,6 @@ add_action('after_setup_theme', 'sd_theme_setup');
 
 
 
-
-
-
-
-
-
-
 /*################################
       BLOG FUNCTONS
 ##################################*/
