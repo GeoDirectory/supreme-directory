@@ -17,7 +17,7 @@ SUPREME DIRECTORY CODE STARTS
  * Define some constants for later use.
  */
 if (!defined('SD_DEFAULT_FEATURED_IMAGE')) define('SD_DEFAULT_FEATURED_IMAGE', get_stylesheet_directory_uri() . "/images/featured.jpg");
-if (!defined('SD_VERSION')) define('SD_VERSION', "1.0.0");
+if (!defined('SD_VERSION')) define('SD_VERSION', "1.0.1");
 if (!defined('SD_CHILD')) define('SD_CHILD', 'supreme-directory');
 
 /**
@@ -487,6 +487,7 @@ function sd_activation_install()
             if ( $menu_id && !has_nav_menu( 'primary-menu' ) ) {
                 set_theme_mod( 'nav_menu_locations', array('primary-menu' => $menu_id));
                 update_option('geodir_theme_location_nav',array('primary-menu'));
+                set_theme_mod('dt_logo_margin_top', '20px');
             }
 
         }

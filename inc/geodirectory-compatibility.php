@@ -900,8 +900,8 @@ function sup_add_feat_img_head($page)
                     <i class="fa fa-envelope"></i>
                         <?php if (isset($post->geodir_email) && $post->geodir_email) {
                         ?>
-                            <a href="javascript:void(0);" class="b_send_inquiry"><?php echo __('Send Enquiry', 'supreme-directory'); ?></a> | <?php } ?>
-                        <a class="b_sendtofriend" href="javascript:void(0);"><?php echo __('Send To Friend', 'supreme-directory'); ?></a></span>
+                            <a href="javascript:void(0);" class="b_send_inquiry"><?php echo SEND_INQUIRY; ?></a> | <?php } ?>
+                        <a class="b_sendtofriend" href="javascript:void(0);"><?php echo SEND_TO_FRIEND; ?></a></span>
 
                 </div>
 
@@ -986,6 +986,7 @@ function sd_homepage_featured_content(){
                     <h1 class="entry-title"><?php the_title(); ?></h1>
                 <?php }
 
+                $sub_title = get_post_meta(get_the_ID(), 'subtitle', true);
                 if (isset($sub_title)) {
                     echo '<div class="entry-subtitle">' . $sub_title . '</div>';
                 }

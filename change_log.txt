@@ -1,4 +1,11 @@
-v1.0.0
+v1.0.2
+Logo height set to 20px fixed - CHANGED
+Logo margin height now uses customizer settings - CHANGED
+Send to fiend / enquiry text now used GD core constants - CHANGED
+Homepage and location page subtitle post meta now shown - CHANGED
+social connect buttons incorrect action fixed - FIXED
+
+v1.0.1
 Write a review button not working when content shown as tabs - FIXED
 Forgot password link not showing on desktop - FIXED
 CSS: .sd-location changed to .sd.sd-location - FIXED
@@ -13,6 +20,7 @@ Now works without GeoDirectory installed - CHNAGED
 RTL CSS added - ADDED
 Page/post meta setting "sd_remove_head" will remove the featured image area for that post/page - ADDED
 Claim listing button will now redirect back and open claim form - FIXED
+Added licence to style.css - ADDED
 
 v0.3.0
 Franchise link not showing up in sidebar - FIXED
