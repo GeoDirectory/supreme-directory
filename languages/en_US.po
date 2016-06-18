@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Supreme Directory 1.0.1\n"
+"Project-Id-Version: Supreme Directory 1.0.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-17 16:44+0100\n"
-"PO-Revision-Date: 2016-06-17 16:44+0100\n"
+"POT-Creation-Date: 2016-06-18 17:26+0100\n"
+"PO-Revision-Date: 2016-06-18 17:26+0100\n"
 "Last-Translator: \n"
 "Language-Team: GD Team <info@wpgeodirectory.com>\n"
 "Language: en_US\n"
@@ -202,14 +202,6 @@ msgstr ""
 
 #: inc/geodirectory-compatibility.php:889
 msgid "Write a Review"
-msgstr ""
-
-#: inc/geodirectory-compatibility.php:903
-msgid "Send Enquiry"
-msgstr ""
-
-#: inc/geodirectory-compatibility.php:904
-msgid "Send To Friend"
 msgstr ""
 
 #: inc/geodirectory-compatibility.php:913
