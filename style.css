@@ -1,11 +1,16 @@
 /*
 Theme Name: Supreme Directory
-Theme URI: http://wpgeodirectory.com/
+Theme URI: https://wpgeodirectory.com/downloads/supreme-directory/
 Description: A Supreme Child Theme for Directory Starter
 Author: GeoDirectory
-Author URI: http://wpgeodirectory.com/
+Author URI: https://wpgeodirectory.com/
 Template: directory-starter
-Version: 0.3.0
+Version: 1.0.0
+Text Domain: supreme-directory
+Tags: one-column, two-columns, three-columns, left-sidebar, right-sidebar, custom-header, custom-menu, editor-style, featured-images, microformats, post-formats, rtl-language-support, translation-ready
+
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something cool, have fun, and share what you've learned with others.
 */
 
 /* hide titles */
@@ -48,6 +53,10 @@ body.sd {
 
 .sd.admin-bar .site-header {
     top: 32px;
+}
+
+.home.sd.admin-bar .site-header {
+    top: 0;
 }
 
 .sd .content-404, .sd .content-archive, .sd .content-single, .sd.home .content-box.content-single article.hentry {
@@ -293,6 +302,10 @@ body.sd {
     float: left;
 }
 
+.sd-my-account-dd-inner a.goedir-newuser-link{
+    float: right;
+}
+
 .sd-my-account-dd-inner h4.sd-my-account-title {
     border-bottom: 1px solid #151515;
     text-align: center;
@@ -326,6 +339,11 @@ body.sd {
     margin: 0px auto;
     margin-bottom: -30px;
     padding-bottom: 30px;
+    padding-top: 35px;
+}
+
+.sd .entry-content > p:first-child {
+    /*padding-top: 35px;*/
 }
 
 /*
@@ -916,7 +934,7 @@ MOBILE MENU
     line-height: 30px;
 }
 
-.sd .geodir-tabs-content.entry-content.geodir-tabs-list li {
+.sd .geodir-tabs-content.entry-content.geodir-tabs-list > li {
     margin: 0;
     width: 100%;
 }
@@ -1337,8 +1355,37 @@ body.body_fullscreen #gd_listing_map_wrapper{
 }
 
 #mm-primary-nav li.sd-my-account{
+    /*display: none;*/
+}
+
+#mm-primary-nav li.sd-my-account .sd-my-account-dd{
+    display: block !important;
+    width: 100%;
+}
+
+
+#mm-primary-nav li.sd-my-account .sd-my-account-dd .mm-subtitle{
     display: none;
 }
+
+#mm-primary-nav .sd-my-account-dd{
+    display: block !important;
+    width: 100%;
+}
+
+#mm-primary-nav .sd-my-account-dd .mm-subtitle,
+#primary-nav #sd-my-account div.mm-subtitle{
+    display: none;
+}
+
+
+/*
+#################################################
+RTL SUPPORT
+#################################################
+*/
+
+
 
 /* RESPONSIVE STUFF */
 
