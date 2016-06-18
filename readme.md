@@ -1,16 +1,14 @@
 # [Supreme Directory](https://wpgeodirectory.com/downloads/supreme-directory/) #
 
-Supreme Directory is a WordPress Directory theme and its available for Free.  This is a child theme of Directory Starter theme and Its directory features heavily depends on our Free plugin GeoDirectory.
+Supreme Directory is a WordPress Directory theme and its available for Free of cost.  This is a child theme of [Directory Starter](https://wordpress.org/themes/directory-starter/) theme and Its directory features heavily depends on our Free plugin [GeoDirectory](https://wordpress.org/plugins/geodirectory/).
 Supreme Directory Documentation can be found [here](https://docs.wpgeodirectory.com/supreme-directory-overview/)
-
-## Installation ##
 
 ## Prerequisites ##
 
 * [Directory Starter (Parent Theme)](https://wordpress.org/themes/directory-starter/) (Required)
 * [GeoDirectory](https://wordpress.org/plugins/geodirectory/) (Optional but Recommended)
 
-### Minimum Requirements ###
+## Minimum Requirements ##
 
 * WordPress 3.1 or greater
 * PHP version 5.2.4 or greater
