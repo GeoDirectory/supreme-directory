@@ -312,7 +312,7 @@ function sd_add_my_account_link($items, $args)
                            <a href="<?php echo sd_login_url(array('forgot' => true)); ?>"
                        class="goedir-forgot-link"><?php _e('Forgot Password?', 'supreme-directory'); ?></a>
                         </p>
-                        <?php do_action('social_connect_form'); ?>
+                        <?php do_action('login_form'); ?>
                     </form>
                 </div>
             </div>
