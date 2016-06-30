@@ -191,7 +191,7 @@ body.sd {
     margin-right: 0;
 }
 
-.sd .geodir-search input, .sd .geodir-search select {
+.sd .geodir-search input, .sd .geodir-advance-search input, .sd .geodir-search select {
     height: 45px;
     padding: 10px 12px;
 }
