@@ -1,5 +1,6 @@
 v1.0.3
 Fav link on details page scrolls to reviews - FIXED
+Advanced search button style issue - FIXED
 
 v1.0.2
 Logo height set to 20px fixed - CHANGED
