@@ -1,9 +1,12 @@
+v1.0.3
+Fav link on details page scrolls to reviews - FIXED
+
 v1.0.2
 Logo height set to 20px fixed - CHANGED
 Logo margin height now uses customizer settings - CHANGED
 Send to fiend / enquiry text now used GD core constants - CHANGED
 Homepage and location page subtitle post meta now shown - CHANGED
-social connect buttons incorrect action fixed - FIXED
+Social connect buttons incorrect action fixed - FIXED
 
 v1.0.1
 Write a review button not working when content shown as tabs - FIXED
