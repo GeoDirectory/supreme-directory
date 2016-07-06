@@ -1379,6 +1379,15 @@ body.body_fullscreen #gd_listing_map_wrapper{
 }
 
 
+/* WooCommerce */
+.woocommerce-pagination {
+    margin-bottom: 20px;
+}
+.woosingle-featured-area {
+    margin-bottom: 30px;
+}
+
+
 /*
 #################################################
 RTL SUPPORT
