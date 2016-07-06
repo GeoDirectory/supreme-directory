@@ -987,6 +987,31 @@ function sd_homepage_featured_content(){
                 <?php }
 
                 $sub_title = get_post_meta(get_the_ID(), 'subtitle', true);
+
+                if (geodir_is_page('location') && defined('GEODIRLOCATION_VERSION')) {
+                    $loc = geodir_get_current_location_terms();
+                    $location_type = geodir_what_is_current_location();
+                    $country_slug = '';
+                    $region_slug = '';
+                    if ($location_type == 'city') {
+                        $slug = $loc['gd_city'];
+                        $region_slug = $loc['gd_region'];
+                        $country_slug = $loc['gd_country'];
+
+                    } else if ($location_type == 'region') {
+                        $slug = $loc['gd_region'];
+                        $country_slug = $loc['gd_country'];
+                    } else {
+                        $slug = $loc['gd_country'];
+
+                    }
+                    $seo = geodir_location_seo_by_slug($slug, $location_type, $country_slug, $region_slug);
+                    $tagline = $seo->seo_image_tagline;
+                    if ($tagline) {
+                        $sub_title = stripslashes($tagline);
+                    }
+
+                }
                 if (isset($sub_title)) {
                     echo '<div class="entry-subtitle">' . $sub_title . '</div>';
                 }
