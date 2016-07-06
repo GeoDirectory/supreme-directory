@@ -558,3 +558,19 @@ function sd_safari_back_button_scroll_fix() {
 }
 add_filter('wp_footer', 'sd_safari_back_button_scroll_fix');
 
+/**
+ * This function removes date section added by event manager in sidebar.
+ *
+ * @since 1.0.3
+ */
+function sd_geodir_event_date_remove($template) {
+
+    if(geodir_get_current_posttype() == 'gd_event' && defined('GDEVENTS_VERSION')){
+
+        remove_filter('geodir_detail_page_sidebar_content', 'geodir_event_detail_page_sitebar_content', 2);
+
+    }
+
+    return $template;
+}
+add_filter( 'template_include', 'sd_geodir_event_date_remove',0);
