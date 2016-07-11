@@ -526,3 +526,35 @@ function sd_dt_enable_header_top_return_zero() {
 }
 add_filter('theme_mod_dt_enable_header_top', 'sd_dt_enable_header_top_return_zero');
 
+
+/**
+ * This function fixes scroll bar issue by resizing window.
+ *
+ * In safari scroll bar are not working properly when the user click back button.
+ * This function fixes that issue by resizing window.
+ * Refer this thread https://wpgeodirectory.com/support/topic/possible-bug/
+ *
+ * @since 1.0.3
+ */
+function sd_safari_back_button_scroll_fix() {
+    if (geodir_is_page('listing') || geodir_is_page('search')) {
+    ?>
+    <script type="text/javascript">
+        jQuery( document ).ready(function() {
+            var is_chrome = navigator.userAgent.indexOf('Chrome') > -1;
+            var is_safari = navigator.userAgent.indexOf("Safari") > -1 && !is_chrome;
+            if (is_safari) {
+                window.onpageshow = function(event) {
+                    if (event.persisted) {
+                        jQuery(window).trigger('resize');
+                    }
+                };
+            }
+        });
+
+    </script>
+    <?php
+    }
+}
+add_filter('wp_footer', 'sd_safari_back_button_scroll_fix');
+
