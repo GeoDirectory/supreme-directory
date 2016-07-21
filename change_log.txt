@@ -3,6 +3,8 @@ Fav link on details page scrolls to reviews - FIXED
 Advanced search button style issue - FIXED
 Use location image tagline for Location description - ADDED
 Safari scrollbar not working properly when back button pressed - FIXED
+Duplicate dates in sidebar - FIXED
+WooCommerce compatibility - ADDED
 
 v1.0.2
 Logo height set to 20px fixed - CHANGED
