@@ -99,10 +99,10 @@ function sd_theme_actions()
 
     // author page
     if (get_option('geodir_show_author_right_section', true)) {
-        add_action('geodir_author_sidebar_right_inside', 'sd_map_show');
+        //add_action('geodir_author_sidebar_right_inside', 'sd_map_show');
         remove_action('geodir_author_sidebar_left', 'geodir_action_author_sidebar_left', 10);
     } else {
-        add_action('geodir_author_sidebar_left_inside', 'sd_map_show');
+       // add_action('geodir_author_sidebar_left_inside', 'sd_map_show');
         remove_action('geodir_author_sidebar_right', 'geodir_action_author_sidebar_right', 10);
     }
 
@@ -807,7 +807,12 @@ function sup_add_feat_img_head($page)
                 printf('<div class="author-avatar"><a href="%s">%s</a></div>', $author_link, $entry_author);
                 printf('<div class="author-link"><a href="%s">%s</a></div>', $author_link, $author_name);
 
-                if (is_user_logged_in() && geodir_listing_belong_to_current_user() ) {
+
+                if (is_user_logged_in() && geodir_listing_belong_to_current_user()) {
+                global $preview;
+                if( $preview ){
+                $editlink = '#';
+                }
                     ?>
                     <a href="<?php echo $editlink; ?>" class="supreme-btn supreme-btn-small supreme-edit-btn"><i
                             class="fa fa-edit"></i> <?php echo __('Edit', 'supreme-directory'); ?></a>
