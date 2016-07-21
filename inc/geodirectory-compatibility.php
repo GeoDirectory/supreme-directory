@@ -774,6 +774,11 @@ function sup_add_feat_img_head($page)
 
         $postlink = get_permalink(geodir_add_listing_page_id());
         $editlink = geodir_getlink($postlink, array('pid' => $post->ID), false);
+
+        if (is_array($post_cats)) {
+            $post_cats = implode(',', $post_cats);
+        }
+
         $cats_arr = array_filter(explode(",", $post_cats));
         $cat_icons = geodir_get_term_icon();
         ?>
