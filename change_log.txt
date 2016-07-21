@@ -6,6 +6,8 @@ Safari scrollbar not working properly when back button pressed - FIXED
 Duplicate dates in sidebar - FIXED
 WooCommerce compatibility - ADDED
 Edit listing link on preview page should not be an proper link - FIXED
+Google pagespeed insight problems - FIXED
+Detail page Category not working for category types other than Ajax chained - FIXED
 
 v1.0.2
 Logo height set to 20px fixed - CHANGED
