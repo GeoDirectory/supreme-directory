@@ -454,9 +454,9 @@ SIDEBARS CSS END
     margin-right: 0 !important;
 }
 
-.sd.search.geodir-page.admin-bar .geodir-listings-sidebar-right, .sd.archive.geodir-page.admin-bar .geodir-listings-sidebar-right {
-    top: 93px;
-}
+/*.sd.search.geodir-page.admin-bar .geodir-listings-sidebar-right, .sd.archive.geodir-page.admin-bar .geodir-listings-sidebar-right {*/
+    /*top: 93px;*/
+/*}*/
 
 .sd.search.geodir-page #sticky_map_gd_listing_map, .sd.archive.geodir-page #sticky_map_gd_listing_map {
     /*min-height: calc(100vh - 61px) !important;*/
@@ -1386,6 +1386,8 @@ body.body_fullscreen #gd_listing_map_wrapper{
     margin-bottom: 30px;
 }
 
+/* screen reader text causing sidebar to apear */
+.screen-reader-text{height: 0px;}
 
 /*
 #################################################
