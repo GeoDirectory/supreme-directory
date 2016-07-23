@@ -25,30 +25,24 @@ jQuery(document).ready(function () {
     });
 
     jQuery("#showMap").click(function () {
-        jQuery(".sd.archive.geodir-page aside#gd-sidebar-wrapper,.sd.search.geodir-page aside#gd-sidebar-wrapper").css("visibility", "visible");
-        jQuery("#showMap").css("display", "none");
-        jQuery("#showSearch").css("display", "none");
-        jQuery("#hideMap").css("display", "block");
+        jQuery('body').addClass('sd-map-only').removeClass('sd-listings-only');
         jQuery( "#hideMap" ).appendTo( ".gd_listing_map_TopLeft" );
 
     });
 
     jQuery("#hideMap").click(function () {
-        jQuery(".sd.archive.geodir-page aside#gd-sidebar-wrapper,.sd.search.geodir-page aside#gd-sidebar-wrapper").css("visibility", "hidden");
-        jQuery("#showMap").css("display", "block");
-        jQuery("#showSearch").css("display", "block");
-        jQuery("#hideMap").css("display", "none");
+        jQuery('body').addClass('sd-listings-only').removeClass('sd-map-only');
         jQuery( "#hideMap" ).appendTo( ".sd-mobile-search-controls" );
 
     });
 
     jQuery("#showSearch").click(function () {
-        jQuery(".sd.archive.geodir-page .geodir_advanced_search_widget,.sd.search.geodir-page .geodir_advanced_search_widget").toggle(0,function() {
-            // Animation complete.
-            if ( typeof geodir_reposition_compass == 'function' ) {
-                geodir_reposition_compass();
-            }
-        });
+        jQuery("body").toggleClass('sd-show-search');
+
+        if ( typeof geodir_reposition_compass == 'function' ) {
+                    geodir_reposition_compass();
+        }
+
     });
 
     // fix the advanced search autocompleater results
@@ -62,24 +56,29 @@ jQuery(document).ready(function () {
         });
     }
 
-    // if ( jQuery( "div.sd-my-account-dd" ).length ) {
-    // setTimeout(function(){
-    //
-    //     var $myAccount = jQuery('div.sd-my-account-dd').clone();
-    //     jQuery('#mm-primary-nav .sd-my-account.menu-item').html($myAccount );
-    //     console.log($myAccount);
-    // }, 100);
-    //
-    // }
-
-
-
 });
 
 
 function sd_adjust_head(){
     var headHeight = jQuery('#site-header').height();
 
+    if ( jQuery( "body").hasClass('admin-bar') ) {
+
+        // if admin bar present then set margin top to 0 so we can adjust things later
+        if(jQuery('html').css("margin-top")!='0px'){
+            jQuery('html').attr('style', jQuery('html').attr('style') + '; ' + 'margin-top: 0 !important');
+        }
+
+
+        var winWidth = jQuery( window ).width();
+
+        if(winWidth>782){
+            headHeight = headHeight + 32;
+        }else{
+            headHeight = headHeight + 46;
+        }
+
+    }
 
     if(headHeight>0){headHeight = headHeight-1;}
     jQuery("#geodir_wrapper").css({
