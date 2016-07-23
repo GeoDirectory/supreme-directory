@@ -1378,7 +1378,6 @@ body.body_fullscreen #gd_listing_map_wrapper{
     display: none;
 }
 
-
 /* WooCommerce */
 .woocommerce-pagination {
     margin-bottom: 20px;
@@ -1582,6 +1581,14 @@ SIDEBARS CSS END
         float: none;
         margin: 0 5% 50px 5%;
         width: 90%;
+    }
+
+    /*google pagespeed insights*/
+    .sd .sd-ratings {
+        margin: 5px 0;
+    }
+    .copyright .container p {
+        line-height: 25px;
     }
 
 }
