@@ -6,6 +6,12 @@ Safari scrollbar not working properly when back button pressed - FIXED
 Duplicate dates in sidebar - FIXED
 WooCommerce compatibility - ADDED
 Edit listing link on preview page should not be an proper link - FIXED
+Google pagespeed insight problems - FIXED
+Detail page Category not working for category types other than Ajax chained - FIXED
+CSS and author sidebar bug fixes - FIXED
+My account mobile manu back button sometimes not working - FIXED
+Preview page on mobile buttons can be hidden - FIXED
+Prev/Next buttons not click-able - FIXED
 
 v1.0.2
 Logo height set to 20px fixed - CHANGED
