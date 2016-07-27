@@ -12,6 +12,7 @@ CSS and author sidebar bug fixes - FIXED
 My account mobile manu back button sometimes not working - FIXED
 Preview page on mobile buttons can be hidden - FIXED
 Prev/Next buttons not click-able - FIXED
+Header issue on buddypress groups home - FIXED
 
 v1.0.2
 Logo height set to 20px fixed - CHANGED
