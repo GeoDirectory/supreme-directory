@@ -574,3 +574,13 @@ function sd_geodir_event_date_remove($template) {
     return $template;
 }
 add_filter( 'template_include', 'sd_geodir_event_date_remove',0);
+
+add_filter( 'body_class', 'sd_remove_bp_home_class', 10, 2 );
+function sd_remove_bp_home_class( $wp_classes, $extra_classes ) {
+
+    if (class_exists('BuddyPress') && bp_is_group_home()) {
+        $wp_classes = array_diff($wp_classes, array('home'));
+    }
+
+    return $wp_classes;
+}
