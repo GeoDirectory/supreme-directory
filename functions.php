@@ -187,8 +187,10 @@ function supreme_entry_meta()
  */
 function sd_add_my_account_link($items, $args)
 {
+
     if ($args->theme_location == 'primary-menu') {
         ob_start();
+        $menu_slug = $args->menu->slug;
         ?>
         <li  class="sd-my-account menu-item">
             <?php
@@ -210,7 +212,7 @@ function sd_add_my_account_link($items, $args)
                 <i class="fa fa-caret-down"></i>
             </a>
             <div id="sd-my-account" class="Panel">
-            <div class="mm-subtitle"><a class="mm-subclose" href="#mm-menu-sd-menu"><?php _e('<  Back','supreme-directory');?></a></div>
+            <div class="mm-subtitle"><a class="mm-subclose" href="#mm-menu-<?php echo $menu_slug;?>"><?php _e('<  Back','supreme-directory');?></a></div>
             <div class="sd-my-account-dd">
                 <div class="sd-my-account-dd-inner">
                     <div class="sd-dd-avatar-wrap">
@@ -262,7 +264,7 @@ function sd_add_my_account_link($items, $args)
                 <i class="fa fa-caret-down"></i>
             </a>
             <div id="sd-my-account" class="Panel">
-            <div class="mm-subtitle"><a class="mm-subclose" href="#mm-menu-sd-menu"><?php _e('<  Back','supreme-directory');?></a></div>
+            <div class="mm-subtitle"><a class="mm-subclose" href="#mm-menu-<?php echo $menu_slug;?>"><?php _e('<  Back','supreme-directory');?></a></div>
             <div class="sd-my-account-dd">
                 <div class="sd-my-account-dd-inner">
                     <h4 class="sd-my-account-title"><?php echo __('Sign In', 'supreme-directory'); ?></h4>
