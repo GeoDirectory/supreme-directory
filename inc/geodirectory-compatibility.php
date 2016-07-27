@@ -76,8 +76,11 @@ function sd_theme_actions()
     unregister_sidebar('geodir_search_left_sidebar');
     unregister_sidebar('geodir_search_right_sidebar');
 
-    unregister_sidebar('geodir_author_left_sidebar');
-    unregister_sidebar('geodir_author_right_sidebar');
+    if(isset($_REQUEST['geodir_dashbord'])){
+	    unregister_sidebar('geodir_author_left_sidebar');
+	    unregister_sidebar('geodir_author_right_sidebar');
+    }
+
 
     // listings page
     if (get_option('geodir_show_listing_right_section', true)) {
@@ -99,10 +102,14 @@ function sd_theme_actions()
 
     // author page
     if (get_option('geodir_show_author_right_section', true)) {
-        //add_action('geodir_author_sidebar_right_inside', 'sd_map_show');
+        if(isset($_REQUEST['geodir_dashbord'])){
+            add_action('geodir_author_sidebar_right_inside', 'sd_map_show');
+        }
         remove_action('geodir_author_sidebar_left', 'geodir_action_author_sidebar_left', 10);
     } else {
-       // add_action('geodir_author_sidebar_left_inside', 'sd_map_show');
+        if(isset($_REQUEST['geodir_dashbord'])){
+            add_action('geodir_author_sidebar_left_inside', 'sd_map_show');
+        }
         remove_action('geodir_author_sidebar_right', 'geodir_action_author_sidebar_right', 10);
     }
 

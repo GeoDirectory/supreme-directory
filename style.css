@@ -335,7 +335,7 @@ body.sd {
     min-height: 200px;
 }
 
-.sd .entry-content {
+.sd .container div.entry-content {
     margin: 0px auto;
     margin-bottom: -30px;
     padding-bottom: 30px;
@@ -452,10 +452,6 @@ SIDEBARS CSS END
     flex-basis: 40%;
     margin-left: 0 !important;
     margin-right: 0 !important;
-}
-
-.sd.search.geodir-page.admin-bar .geodir-listings-sidebar-right, .sd.archive.geodir-page.admin-bar .geodir-listings-sidebar-right {
-    top: 93px;
 }
 
 .sd.search.geodir-page #sticky_map_gd_listing_map, .sd.archive.geodir-page #sticky_map_gd_listing_map {
@@ -1386,6 +1382,8 @@ body.body_fullscreen #gd_listing_map_wrapper{
     margin-bottom: 30px;
 }
 
+/* screen reader text causing sidebar to apear */
+.screen-reader-text{height: 0px;}
 
 /*
 #################################################
@@ -1434,7 +1432,7 @@ RTL SUPPORT
         display: block;
     }
 
-    .sd.archive.geodir-page .geodir_advanced_search_widget, .sd.search.geodir-page .geodir_advanced_search_widget {
+    .sd.archive.geodir-page .geodir_advance_search_widget, .sd.search.geodir-page .geodir_advance_search_widget {
         display: none;
     }
 
@@ -1515,6 +1513,53 @@ SIDEBARS CSS END
 #################################################
 */
 
+/*
+#################################################
+MOBILE TOGGLE MAP/LISTINGS START
+#################################################
+*/
+    .sd-map-only.sd.archive.geodir-page aside#gd-sidebar-wrapper,.sd-map-only.sd.search.geodir-page aside#gd-sidebar-wrapper{
+        visibility: visible;
+    }
+
+    .sd-map-only #showMap, .sd-map-only #showSearch{
+        display: none;
+    }
+
+    .sd-map-only #hideMap{
+        display: block;
+    }
+
+
+    .sd-listings-only.sd.archive.geodir-page aside#gd-sidebar-wrapper,.sd-listings-only.sd.search.geodir-page aside#gd-sidebar-wrapper{
+        visibility: hidden;
+    }
+
+    .sd-listings-only #showMap, .sd-map-only #showSearch{
+        display: block;
+    }
+
+    .sd-listings-only #hideMap{
+        display: none;
+    }
+
+
+
+    .sd-show-search.sd.archive.geodir-page .geodir_advance_search_widget, .sd-show-search.sd.search.geodir-page .geodir_advance_search_widget{
+        display: block;
+    }
+    /*
+    #################################################
+    MOBILE TOGGLE MAP/LISTINGS END
+    #################################################
+    */
+
+    .geodir_preview_section{
+        width: 100%;
+        max-width: 100%;
+        padding-top: 0px;
+        overflow-y: auto;
+    }
 }
 
 @media all and (max-width: 668px) {
@@ -1589,6 +1634,10 @@ SIDEBARS CSS END
     }
     .copyright .container p {
         line-height: 25px;
+    }
+
+    .geodir_preview_section{
+        margin-top: -50px;
     }
 
 }
