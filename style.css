@@ -5,7 +5,7 @@ Description: A Supreme Child Theme for Directory Starter
 Author: GeoDirectory
 Author URI: https://wpgeodirectory.com/
 Template: directory-starter
-Version: 1.0.2
+Version: 1.0.3
 License: GPLv2 or greater
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: supreme-directory
@@ -1184,7 +1184,6 @@ h2.comments-title {
     background: transparent none repeat scroll 0 0;
     border: 0 none;
     box-shadow: none;
-    max-width: 50%;
     position: relative;
     z-index: 2;
 }
@@ -1206,9 +1205,9 @@ h2.comments-title {
 .sd.blog .content-box.content-single article.hentry, .sd.category .content-box.content-archive article.hentry {
     border: 0 none;
     clear: none;
-    float: left;
     margin: 0 5% 50px 0;
     width: 30%;
+    display: inline-table;
 }
 
 .sd.blog .content-box.content-single article.hentry:nth-child(3n+3), .sd.category .content-box.content-archive article.hentry:nth-child(3n+3) {
@@ -1478,7 +1477,6 @@ RTL SUPPORT
     }
 
     .sd.blog .content-box.content-single article.hentry, .sd.category .content-box.content-archive article.hentry {
-        float: left;
         margin: 0 3% 50px 3%;
         width: 44%;
     }
@@ -1640,6 +1638,13 @@ MOBILE TOGGLE MAP/LISTINGS START
         margin-top: -50px;
     }
 
+}
+
+
+@media all and (max-width: 600px) {
+    .home.sd.admin-bar .site-header {
+        top: 46px;
+    }
 }
 
 @media all and (max-width: 375px) {

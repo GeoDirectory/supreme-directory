@@ -17,7 +17,7 @@ SUPREME DIRECTORY CODE STARTS
  * Define some constants for later use.
  */
 if (!defined('SD_DEFAULT_FEATURED_IMAGE')) define('SD_DEFAULT_FEATURED_IMAGE', get_stylesheet_directory_uri() . "/images/featured.jpg");
-if (!defined('SD_VERSION')) define('SD_VERSION', "1.0.2");
+if (!defined('SD_VERSION')) define('SD_VERSION', "1.0.3");
 if (!defined('SD_CHILD')) define('SD_CHILD', 'supreme-directory');
 
 /**
@@ -576,3 +576,13 @@ function sd_geodir_event_date_remove($template) {
     return $template;
 }
 add_filter( 'template_include', 'sd_geodir_event_date_remove',0);
+
+add_filter( 'body_class', 'sd_remove_bp_home_class', 10, 2 );
+function sd_remove_bp_home_class( $wp_classes, $extra_classes ) {
+
+    if (class_exists('BuddyPress') && bp_is_group_home()) {
+        $wp_classes = array_diff($wp_classes, array('home'));
+    }
+
+    return $wp_classes;
+}
