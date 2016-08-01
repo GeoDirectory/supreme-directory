@@ -510,12 +510,6 @@ function sd_activation_install()
 
 }
 
-function sd_footer_widget_class($classes)
-{
-    return "col-lg-3 col-md-4";
-}
-
-add_filter('dt_footer_widget_class', 'sd_footer_widget_class');
 
 //Remove Header Top from directory starter
 function sd_dt_remove_header_top_from_customizer( $wp_customize ) {
