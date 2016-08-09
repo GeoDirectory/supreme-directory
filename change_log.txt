@@ -1,3 +1,6 @@
+V1.0.4
+Footer widget areas now responsive as 4-2-1 - CHANGED
+
 v1.0.3
 Fav link on details page scrolls to reviews - FIXED
 Advanced search button style issue - FIXED
