@@ -868,13 +868,13 @@ function sup_add_feat_img_head($page)
                 echo '</h1>';
                 $sd_address = '<div class="sd-address">';
                 if (isset($post->post_city) && $post->post_city) {
-                    $sd_address .= $post->post_city;
+                    $sd_address .= apply_filters('sd_detail_city_name', $post->post_city, $post);
                 }
                 if (isset($post->post_region) && $post->post_region) {
-                    $sd_address .= ', ' . $post->post_region;
+                    $sd_address .= ', ' . apply_filters('sd_detail_region_name', $post->post_region, $post);
                 }
                 if (isset($post->post_country) && $post->post_country) {
-                    $sd_address .= ', ' . $post->post_country;
+                    $sd_address .= ', ' . apply_filters('sd_detail_country_name', $post->post_country, $post);
                 }
                 $sd_address .= '</div>';
                 echo $sd_address;

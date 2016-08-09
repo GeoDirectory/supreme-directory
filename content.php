@@ -58,7 +58,7 @@
             <?php
             global $more;
             $more = 0;
-            if (is_singular()) {
+            if (is_singular() || is_bbpress()) {
                 the_content();
             } else {
                 directory_theme_post_thumbnail();
