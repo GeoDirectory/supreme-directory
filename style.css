@@ -43,7 +43,7 @@ body.sd {
     margin: 0;
 }
 
-.sd.home .site-header, .sd.sd-location .site-header {
+.sd-homepage .site-header, .sd.sd-location .site-header {
     background-color: transparent;
     box-shadow: none;
     border: 0 none;
@@ -57,7 +57,7 @@ body.sd {
     top: 32px;
 }
 
-.home.sd.admin-bar .site-header {
+.sd-homepage.admin-bar .site-header {
     top: 0;
 }
 
@@ -113,7 +113,7 @@ body.sd {
     text-align: center;
 }
 
-.home .featured-area, .sd-location .featured-area {
+.sd-homepage .featured-area, .sd-location .featured-area {
     height: 100vh;
 }
 

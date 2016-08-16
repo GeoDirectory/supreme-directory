@@ -1048,3 +1048,11 @@ function sd_homepage_featured_content(){
 
 }
 add_action('sd_homepage_content','sd_homepage_featured_content');
+
+function add_sd_home_class($classes) {
+    if (geodir_is_page('home')) {
+        $classes[] = 'sd-homepage';
+    }
+    return $classes;
+}
+add_filter( 'body_class', 'add_sd_home_class' );

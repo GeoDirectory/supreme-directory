@@ -33,7 +33,7 @@
                         }
                         ?>
 
-                        <?php if (is_front_page()) {
+                        <?php if (geodir_is_page('home')) {
                             echo do_shortcode('[gd_advanced_search]');
                             echo do_shortcode('[gd_popular_post_category category_limit=5]');
                             echo '<div class="home-more"  id="sd-home-scroll" ><a href="#sd-home-scroll"><i class="fa fa-chevron-down"></i></a></div>';
