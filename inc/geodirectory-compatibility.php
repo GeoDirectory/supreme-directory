@@ -164,6 +164,7 @@ function sd_add_event_dates_featured_area(){
     ?>
 
     <div class="header-wrap sd-event-dates-head">
+        <?php do_action('sd_detail_header_wrap_inner'); ?>
         <?php
 
         if(isset($post->recurring_dates)){
@@ -876,26 +877,26 @@ function sup_add_feat_img_head($page)
                 echo '</h1>';
                 $sd_address = '<div class="sd-address">';
                 if (isset($post->post_city) && $post->post_city) {
-                    $sd_address .= $post->post_city;
+                    $sd_address .= apply_filters('sd_detail_city_name', $post->post_city, $post);
                 }
                 if (isset($post->post_region) && $post->post_region) {
-                    $sd_address .= ', ' . $post->post_region;
+                    $sd_address .= ', ' . apply_filters('sd_detail_region_name', $post->post_region, $post);
                 }
                 if (isset($post->post_country) && $post->post_country) {
-                    $sd_address .= ', ' . $post->post_country;
+                    $sd_address .= ', ' . apply_filters('sd_detail_country_name', $post->post_country, $post);
                 }
                 $sd_address .= '</div>';
                 echo $sd_address;
-                echo '<div class="sd-ratings">' . $post_ratings . ' - <a href="' . get_comments_link() . '" class="geodir-pcomments">' . $n_comments . '</a></div>';
+                echo '<div class="sd-ratings">' . $post_ratings . ' <a href="' . get_comments_link() . '" class="geodir-pcomments">' . $n_comments . '</a></div>';
                 echo '<div class="sd-contacts">';
                 if (isset($post->geodir_website) && $post->geodir_website) {
-                    echo '<a href="' . $post->geodir_website . '"><i class="fa fa-external-link-square"></i></a>';
+                    echo '<a target="_blank" href="' . $post->geodir_website . '"><i class="fa fa-external-link-square"></i></a>';
                 }
                 if (isset($post->geodir_facebook) && $post->geodir_facebook) {
-                    echo '<a href="' . $post->geodir_facebook . '"><i class="fa fa-facebook-official"></i></a>';
+                    echo '<a target="_blank" href="' . $post->geodir_facebook . '"><i class="fa fa-facebook-official"></i></a>';
                 }
                 if (isset($post->geodir_twitter) && $post->geodir_twitter) {
-                    echo '<a href="' . $post->geodir_twitter . '"><i class="fa fa-twitter-square"></i></a>';
+                    echo '<a target="_blank" href="' . $post->geodir_twitter . '"><i class="fa fa-twitter-square"></i></a>';
                 }
                 if (isset($post->geodir_contact) && $post->geodir_contact) {
                     echo '<a href="tel:' . $post->geodir_contact . '"><i class="fa fa-phone-square"></i>&nbsp;:&nbsp;' . $post->geodir_contact . '</a>';
@@ -1048,3 +1049,10 @@ function sd_homepage_featured_content(){
 }
 add_action('sd_homepage_content','sd_homepage_featured_content');
 
+function add_sd_home_class($classes) {
+    if (geodir_is_page('home')) {
+        $classes[] = 'sd-homepage';
+    }
+    return $classes;
+}
+add_filter( 'body_class', 'add_sd_home_class' );

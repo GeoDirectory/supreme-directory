@@ -33,7 +33,7 @@
                         }
                         ?>
 
-                        <?php if (is_front_page()) {
+                        <?php if (geodir_is_page('home')) {
                             echo do_shortcode('[gd_advanced_search]');
                             echo do_shortcode('[gd_popular_post_category category_limit=5]');
                             echo '<div class="home-more"  id="sd-home-scroll" ><a href="#sd-home-scroll"><i class="fa fa-chevron-down"></i></a></div>';
@@ -58,7 +58,7 @@
             <?php
             global $more;
             $more = 0;
-            if (is_singular()) {
+            if (is_singular() || is_bbpress()) {
                 the_content();
             } else {
                 directory_theme_post_thumbnail();

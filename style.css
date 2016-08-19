@@ -43,7 +43,7 @@ body.sd {
     margin: 0;
 }
 
-.sd.home .site-header, .sd.sd-location .site-header {
+.sd-homepage .site-header, .sd.sd-location .site-header {
     background-color: transparent;
     box-shadow: none;
     border: 0 none;
@@ -57,7 +57,7 @@ body.sd {
     top: 32px;
 }
 
-.home.sd.admin-bar .site-header {
+.sd-homepage.admin-bar .site-header {
     top: 0;
 }
 
@@ -113,7 +113,7 @@ body.sd {
     text-align: center;
 }
 
-.home .featured-area, .sd-location .featured-area {
+.sd-homepage .featured-area, .sd-location .featured-area {
     height: 100vh;
 }
 
@@ -986,6 +986,7 @@ MOBILE MENU
 .sd .sd-detail-info {
     float: left;
     overflow: hidden;
+    max-width: 55%;
 }
 
 .sd .sd-address {
@@ -996,6 +997,9 @@ MOBILE MENU
 
 .sd .sd-ratings {
     float: left;
+}
+.sd .sd-ratings .geodir-pcomments {
+    margin-left: 5px;
 }
 
 .sd .sd-ratings .geodir-rating {
@@ -1644,6 +1648,9 @@ MOBILE TOGGLE MAP/LISTINGS START
 @media all and (max-width: 600px) {
     .home.sd.admin-bar .site-header {
         top: 46px;
+    }
+    .sd .sd-detail-info {
+        max-width: 100%;
     }
 }
 
