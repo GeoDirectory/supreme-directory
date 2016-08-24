@@ -12,7 +12,15 @@
 /*#############################################
 SUPREME DIRECTORY CODE STARTS
 #############################################*/
+add_filter("geodir_map_options_detail_page_map_canvas", 'my_default_detals_map_zoom',10,1);
+function my_default_detals_map_zoom($map_args){
+    // only change if its set to the default 12
+    if($map_args['zoom']==12){
+        $map_args['zoom'] = 1;
+    }
 
+    return $map_args;
+}
 /*
  * Define some constants for later use.
  */
@@ -554,22 +562,6 @@ function sd_safari_back_button_scroll_fix() {
 }
 add_filter('wp_footer', 'sd_safari_back_button_scroll_fix');
 
-/**
- * This function removes date section added by event manager in sidebar.
- *
- * @since 1.0.3
- */
-function sd_geodir_event_date_remove($template) {
-
-    if(geodir_get_current_posttype() == 'gd_event' && defined('GDEVENTS_VERSION')){
-
-        remove_filter('geodir_detail_page_sidebar_content', 'geodir_event_detail_page_sitebar_content', 2);
-
-    }
-
-    return $template;
-}
-add_filter( 'template_include', 'sd_geodir_event_date_remove',0);
 
 add_filter( 'body_class', 'sd_remove_bp_home_class', 10, 2 );
 function sd_remove_bp_home_class( $wp_classes, $extra_classes ) {

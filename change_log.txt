@@ -1,6 +1,7 @@
 V1.0.4
 Footer widget areas now responsive as 4-2-1 - CHANGED
 GD search box displayed when GD is not home page - FIXED
+Theme not working without GD as function in the wrong file - FIXED
 
 v1.0.3
 Fav link on details page scrolls to reviews - FIXED

@@ -1566,7 +1566,7 @@ MOBILE TOGGLE MAP/LISTINGS START
 
 @media all and (max-width: 668px) {
 
-    .sd.home .featured-area {
+    .sd.home .featured-area, .sd.sd-location .featured-area {
         display: block;
         height: auto;
         padding: 100px 0 30px;
@@ -1728,9 +1728,5 @@ fix iOS bug not displaying 100vh correctly
         height: 320px;
     }
 }
-@media only screen and (min-device-width : 320px) and (max-device-width : 480px) and (orientation : portrait) and (-webkit-min-device-pixel-ratio : 2) {
-    .home .featured-area, .sd-location .featured-area {
-        height: 480px;
-    }
-}
+
 
