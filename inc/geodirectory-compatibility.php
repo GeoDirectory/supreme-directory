@@ -769,9 +769,10 @@ function sup_add_feat_img_head($page)
         }
         $n_comments = ob_get_clean();
         if (!$preview) {
-            $author_name = get_the_author();
-            $entry_author = get_avatar(get_the_author_meta('email'), 100);
-            $author_link = get_author_posts_url(get_the_author_meta('ID'));
+            $author_id = $post->post_author;
+            $author_name = get_the_author_meta('display_name', $author_id);
+            $entry_author = get_avatar(get_the_author_meta('email', $author_id), 100);
+            $author_link = get_author_posts_url($author_id);
             $post_type = $post->post_type;
             $post_tax = $post_type . "category";
             $post_cats = $post->{$post_tax};

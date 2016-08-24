@@ -13,7 +13,15 @@
         </div>
         <div class="header-wrap">
 
-            <h1 class="entry-title"><?php echo get_the_title($page_for_posts); ?></h1>
+            <h1 class="entry-title">
+                <?php
+                if ( is_search() ) {
+                    echo __('Your Search Results for ', 'supreme-directory').get_search_query(false);
+                } else {
+                    echo get_the_title($page_for_posts);
+                }
+                ?>
+            </h1>
             <?php if (get_post_meta($page_for_posts, 'subtitle', true)) {
                 echo '<div class="entry-subtitle">' . get_post_meta($page_for_posts, 'subtitle', true) . '</div>';
             } ?>
