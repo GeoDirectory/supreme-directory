@@ -43,7 +43,7 @@ body.sd {
     margin: 0;
 }
 
-.sd.home .site-header, .sd.sd-location .site-header {
+.sd-homepage .site-header, .sd.sd-location .site-header {
     background-color: transparent;
     box-shadow: none;
     border: 0 none;
@@ -57,7 +57,7 @@ body.sd {
     top: 32px;
 }
 
-.home.sd.admin-bar .site-header {
+.sd-homepage.admin-bar .site-header {
     top: 0;
 }
 
@@ -113,7 +113,7 @@ body.sd {
     text-align: center;
 }
 
-.home .featured-area, .sd-location .featured-area {
+.sd-homepage .featured-area, .sd-location .featured-area {
     height: 100vh;
 }
 
@@ -986,6 +986,7 @@ MOBILE MENU
 .sd .sd-detail-info {
     float: left;
     overflow: hidden;
+    max-width: 55%;
 }
 
 .sd .sd-address {
@@ -996,6 +997,9 @@ MOBILE MENU
 
 .sd .sd-ratings {
     float: left;
+}
+.sd .sd-ratings .geodir-pcomments {
+    margin-left: 5px;
 }
 
 .sd .sd-ratings .geodir-rating {
@@ -1562,7 +1566,7 @@ MOBILE TOGGLE MAP/LISTINGS START
 
 @media all and (max-width: 668px) {
 
-    .sd.home .featured-area {
+    .sd.home .featured-area, .sd.sd-location .featured-area {
         display: block;
         height: auto;
         padding: 100px 0 30px;
@@ -1645,6 +1649,9 @@ MOBILE TOGGLE MAP/LISTINGS START
     .home.sd.admin-bar .site-header {
         top: 46px;
     }
+    .sd .sd-detail-info {
+        max-width: 100%;
+    }
 }
 
 @media all and (max-width: 375px) {
@@ -1721,9 +1728,5 @@ fix iOS bug not displaying 100vh correctly
         height: 320px;
     }
 }
-@media only screen and (min-device-width : 320px) and (max-device-width : 480px) and (orientation : portrait) and (-webkit-min-device-pixel-ratio : 2) {
-    .home .featured-area, .sd-location .featured-area {
-        height: 480px;
-    }
-}
+
 
