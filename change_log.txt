@@ -4,6 +4,7 @@ GD search box displayed when GD is not home page - FIXED
 Theme not working without GD as function in the wrong file - FIXED
 Detail page author thumbnail and link not working properly - FIXED
 Show keyword in search results page instead of "Blog" - CHANGED
+Supreme not complying with claim setting - FIXED
 
 v1.0.3
 Fav link on details page scrolls to reviews - FIXED
