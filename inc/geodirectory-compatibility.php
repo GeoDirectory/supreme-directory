@@ -805,19 +805,22 @@ function sup_add_feat_img_head($page)
             <div class="sd-detail-author">
                 <?php
                 if (!$preview && function_exists('geodir_load_translation_geodirclaim')) {
-                    $is_owned = geodir_get_post_meta($post->ID, 'claimed', true);
-                    if ($is_owned == '1') {
-                        ?>
-                        <span class="fa fa-stack sd-verified-badge"
-                              title="<?php _e('Verified Owner', 'supreme-directory'); ?>">
-						<i class="fa fa-circle fa-inverse"></i>
-						<i class="fa fa-check-circle"></i>
-					</span>
-                    <?php
-                    }else{
-                    $author_link = '#';
-                    $author_name = __('Claim Me', 'supreme-directory');
-                    $entry_author = '<img src="'.get_stylesheet_directory_uri() . "/images/gravatar2.png".'"  height="100" width="100">';
+                    $geodir_post_type = get_option('geodir_post_types_claim_listing', array());
+                    if (in_array($post_type, $geodir_post_type)) {
+                        $is_owned = geodir_get_post_meta($post->ID, 'claimed', true);
+                        if ($is_owned == '1') {
+                            ?>
+                            <span class="fa fa-stack sd-verified-badge"
+                                  title="<?php _e('Verified Owner', 'supreme-directory'); ?>">
+                            <i class="fa fa-circle fa-inverse"></i>
+                            <i class="fa fa-check-circle"></i>
+                        </span>
+                        <?php
+                        }else{
+                        $author_link = '#';
+                        $author_name = __('Claim Me', 'supreme-directory');
+                        $entry_author = '<img src="'.get_stylesheet_directory_uri() . "/images/gravatar2.png".'"  height="100" width="100">';
+                        }
                     }
                 }
 
