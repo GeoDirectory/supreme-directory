@@ -1078,3 +1078,50 @@ function sd_geodir_event_date_remove($template) {
     return $template;
 }
 add_filter( 'template_include', 'sd_geodir_event_date_remove',0);
+
+
+/**
+ * This function fixes scroll bar issue by resizing window.
+ *
+ * In safari scroll bar are not working properly when the user click back button.
+ * This function fixes that issue by resizing window.
+ * Refer this thread https://wpgeodirectory.com/support/topic/possible-bug/
+ *
+ * @since 1.0.3
+ */
+function sd_safari_back_button_scroll_fix() {
+    if (geodir_is_page('listing') || geodir_is_page('search')) {
+    ?>
+    <script type="text/javascript">
+        jQuery( document ).ready(function() {
+            var is_chrome = navigator.userAgent.indexOf('Chrome') > -1;
+            var is_safari = navigator.userAgent.indexOf("Safari") > -1 && !is_chrome;
+            if (is_safari) {
+                window.onpageshow = function(event) {
+                    if (event.persisted) {
+                        jQuery(window).trigger('resize');
+                    }
+                };
+            }
+        });
+
+    </script>
+    <?php
+    }
+}
+add_filter('wp_footer', 'sd_safari_back_button_scroll_fix');
+
+/**
+ * Add the search and category widgets to the GD home page feature area.
+ *
+ * @since 1.0.4
+ */
+function sd_feature_area_gd(){
+
+    if (geodir_is_page('home')) {
+        echo do_shortcode('[gd_advanced_search]');
+        echo do_shortcode('[gd_popular_post_category category_limit=5]');
+        echo '<div class="home-more"  id="sd-home-scroll" ><a href="#sd-home-scroll"><i class="fa fa-chevron-down"></i></a></div>';
+    }
+}
+add_action('sd_feature_area','sd_feature_area_gd',15);
