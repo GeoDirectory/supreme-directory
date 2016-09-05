@@ -555,3 +555,19 @@ function sd_feature_area_title_meta(){
     }
 }
 add_action('sd_feature_area','sd_feature_area_title_meta',10);
+
+function sd_add_sd_home_class($classes) {
+    if (is_front_page()) {
+        $classes[] = 'sd-homepage';
+    }
+    return $classes;
+}
+add_filter( 'body_class', 'sd_add_sd_home_class' );
+
+function sd_feature_area(){
+
+    if (is_front_page()) {
+        echo '<div class="home-more"  id="sd-home-scroll" ><a href="#sd-home-scroll"><i class="fa fa-chevron-down"></i></a></div>';
+    }
+}
+add_action('sd_feature_area','sd_feature_area',15);

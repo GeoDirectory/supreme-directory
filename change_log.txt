@@ -1,3 +1,7 @@
+V1.0.5
+Homepage not full height if GD not installed - FIXED
+Featured area now used hooks to add content - CHANGED
+
 V1.0.4
 Footer widget areas now responsive as 4-2-1 - CHANGED
 GD search box displayed when GD is not home page - FIXED
