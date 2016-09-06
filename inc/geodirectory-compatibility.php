@@ -1031,12 +1031,16 @@ function sd_homepage_featured_content(){
                     } else if ($location_type == 'region') {
                         $slug = $loc['gd_region'];
                         $country_slug = $loc['gd_country'];
-                    } else {
+                    } elseif($location_type == 'country') {
                         $slug = $loc['gd_country'];
+                        $country_slug = $loc['gd_country'];
+                    }
+                    else {
+                        $slug = '';
 
                     }
                     $seo = geodir_location_seo_by_slug($slug, $location_type, $country_slug, $region_slug);
-                    $tagline = $seo->seo_image_tagline;
+                    $tagline = (isset($seo->seo_image_tagline)) ? $seo->seo_image_tagline : '';
                     if ($tagline) {
                         $sub_title = stripslashes($tagline);
                     }
@@ -1053,13 +1057,13 @@ function sd_homepage_featured_content(){
 }
 add_action('sd_homepage_content','sd_homepage_featured_content');
 
-function add_sd_home_class($classes) {
-    if (geodir_is_page('home')) {
+function sd_add_gd_home_class($classes) {
+    if (geodir_is_page('home') || geodir_is_page('location')) {
         $classes[] = 'sd-homepage';
     }
     return $classes;
 }
-add_filter( 'body_class', 'add_sd_home_class' );
+add_filter( 'body_class', 'sd_add_gd_home_class' );
 
 
 /**
@@ -1118,10 +1122,11 @@ add_filter('wp_footer', 'sd_safari_back_button_scroll_fix');
  */
 function sd_feature_area_gd(){
 
-    if (geodir_is_page('home')) {
+    if (geodir_is_page('home') || is_front_page()) {
         echo do_shortcode('[gd_advanced_search]');
         echo do_shortcode('[gd_popular_post_category category_limit=5]');
         echo '<div class="home-more"  id="sd-home-scroll" ><a href="#sd-home-scroll"><i class="fa fa-chevron-down"></i></a></div>';
     }
 }
+remove_action('sd_feature_area','sd_feature_area',15);
 add_action('sd_feature_area','sd_feature_area_gd',15);
