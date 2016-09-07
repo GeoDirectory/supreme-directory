@@ -875,7 +875,7 @@ function sup_add_feat_img_head($page)
             <!-- sd-detail-suthor end -->
             <div class="sd-detail-info">
                 <?php
-                echo '<h1 class="sd-entry-title">' . get_the_title();
+                echo '<h1 class="sd-entry-title">' .  stripslashes(get_the_title());
                 ?>
                 <?php
                 echo '</h1>';
