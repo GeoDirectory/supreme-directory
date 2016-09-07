@@ -12,20 +12,12 @@
 /*#############################################
 SUPREME DIRECTORY CODE STARTS
 #############################################*/
-add_filter("geodir_map_options_detail_page_map_canvas", 'my_default_detals_map_zoom',10,1);
-function my_default_detals_map_zoom($map_args){
-    // only change if its set to the default 12
-    if($map_args['zoom']==12){
-        $map_args['zoom'] = 1;
-    }
 
-    return $map_args;
-}
 /*
  * Define some constants for later use.
  */
 if (!defined('SD_DEFAULT_FEATURED_IMAGE')) define('SD_DEFAULT_FEATURED_IMAGE', get_stylesheet_directory_uri() . "/images/featured.jpg");
-if (!defined('SD_VERSION')) define('SD_VERSION', "1.0.3");
+if (!defined('SD_VERSION')) define('SD_VERSION', "1.0.5");
 if (!defined('SD_CHILD')) define('SD_CHILD', 'supreme-directory');
 
 /**
@@ -531,36 +523,6 @@ function sd_dt_enable_header_top_return_zero() {
 add_filter('theme_mod_dt_enable_header_top', 'sd_dt_enable_header_top_return_zero');
 
 
-/**
- * This function fixes scroll bar issue by resizing window.
- *
- * In safari scroll bar are not working properly when the user click back button.
- * This function fixes that issue by resizing window.
- * Refer this thread https://wpgeodirectory.com/support/topic/possible-bug/
- *
- * @since 1.0.3
- */
-function sd_safari_back_button_scroll_fix() {
-    if (geodir_is_page('listing') || geodir_is_page('search')) {
-    ?>
-    <script type="text/javascript">
-        jQuery( document ).ready(function() {
-            var is_chrome = navigator.userAgent.indexOf('Chrome') > -1;
-            var is_safari = navigator.userAgent.indexOf("Safari") > -1 && !is_chrome;
-            if (is_safari) {
-                window.onpageshow = function(event) {
-                    if (event.persisted) {
-                        jQuery(window).trigger('resize');
-                    }
-                };
-            }
-        });
-
-    </script>
-    <?php
-    }
-}
-add_filter('wp_footer', 'sd_safari_back_button_scroll_fix');
 
 
 add_filter( 'body_class', 'sd_remove_bp_home_class', 10, 2 );
@@ -572,3 +534,40 @@ function sd_remove_bp_home_class( $wp_classes, $extra_classes ) {
 
     return $wp_classes;
 }
+
+/**
+ * Add the title and subtitle to the page feature area.
+ *
+ * @since 1.0.4
+ */
+function sd_feature_area_title_meta(){
+    if (is_singular()) {
+        ?>
+        <h1 class="entry-title"><?php the_title(); ?></h1>
+        <?php
+    } else {
+        ?>
+        <h2 class="entry-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+        <?php
+    }
+    if (get_post_meta(get_the_ID(), 'subtitle', true)) {
+        echo '<div class="entry-subtitle">' . get_post_meta(get_the_ID(), 'subtitle', true) . '</div>';
+    }
+}
+add_action('sd_feature_area','sd_feature_area_title_meta',10);
+
+function sd_add_sd_home_class($classes) {
+    if (is_front_page()) {
+        $classes[] = 'sd-homepage';
+    }
+    return $classes;
+}
+add_filter( 'body_class', 'sd_add_sd_home_class' );
+
+function sd_feature_area(){
+
+    if (is_front_page()) {
+        echo '<div class="home-more"  id="sd-home-scroll" ><a href="#sd-home-scroll"><i class="fa fa-chevron-down"></i></a></div>';
+    }
+}
+add_action('sd_feature_area','sd_feature_area',15);

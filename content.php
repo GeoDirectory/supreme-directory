@@ -18,26 +18,10 @@
 
                     </div>
                     <div class="header-wrap">
-                        <?php
-                        if (is_singular()) {
-                            ?>
-                            <h1 class="entry-title"><?php the_title(); ?></h1>
-                        <?php
-                        } else {
-                            ?>
-                            <h2 class="entry-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-                        <?php
-                        }
-                        if (get_post_meta(get_the_ID(), 'subtitle', true)) {
-                            echo '<div class="entry-subtitle">' . get_post_meta(get_the_ID(), 'subtitle', true) . '</div>';
-                        }
-                        ?>
+                       <?php
 
-                        <?php if (geodir_is_page('home')) {
-                            echo do_shortcode('[gd_advanced_search]');
-                            echo do_shortcode('[gd_popular_post_category category_limit=5]');
-                            echo '<div class="home-more"  id="sd-home-scroll" ><a href="#sd-home-scroll"><i class="fa fa-chevron-down"></i></a></div>';
-                        }
+                        do_action('sd_feature_area');
+
                         ?>
                     </div>
                 </div>

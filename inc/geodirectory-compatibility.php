@@ -875,7 +875,7 @@ function sup_add_feat_img_head($page)
             <!-- sd-detail-suthor end -->
             <div class="sd-detail-info">
                 <?php
-                echo '<h1 class="sd-entry-title">' . get_the_title();
+                echo '<h1 class="sd-entry-title">' .  stripslashes(get_the_title());
                 ?>
                 <?php
                 echo '</h1>';
@@ -1031,12 +1031,16 @@ function sd_homepage_featured_content(){
                     } else if ($location_type == 'region') {
                         $slug = $loc['gd_region'];
                         $country_slug = $loc['gd_country'];
-                    } else {
+                    } elseif($location_type == 'country') {
                         $slug = $loc['gd_country'];
+                        $country_slug = $loc['gd_country'];
+                    }
+                    else {
+                        $slug = '';
 
                     }
                     $seo = geodir_location_seo_by_slug($slug, $location_type, $country_slug, $region_slug);
-                    $tagline = $seo->seo_image_tagline;
+                    $tagline = (isset($seo->seo_image_tagline)) ? $seo->seo_image_tagline : '';
                     if ($tagline) {
                         $sub_title = stripslashes($tagline);
                     }
@@ -1053,13 +1057,13 @@ function sd_homepage_featured_content(){
 }
 add_action('sd_homepage_content','sd_homepage_featured_content');
 
-function add_sd_home_class($classes) {
-    if (geodir_is_page('home')) {
+function sd_add_gd_home_class($classes) {
+    if (geodir_is_page('home') || geodir_is_page('location')) {
         $classes[] = 'sd-homepage';
     }
     return $classes;
 }
-add_filter( 'body_class', 'add_sd_home_class' );
+add_filter( 'body_class', 'sd_add_gd_home_class' );
 
 
 /**
@@ -1078,3 +1082,51 @@ function sd_geodir_event_date_remove($template) {
     return $template;
 }
 add_filter( 'template_include', 'sd_geodir_event_date_remove',0);
+
+
+/**
+ * This function fixes scroll bar issue by resizing window.
+ *
+ * In safari scroll bar are not working properly when the user click back button.
+ * This function fixes that issue by resizing window.
+ * Refer this thread https://wpgeodirectory.com/support/topic/possible-bug/
+ *
+ * @since 1.0.3
+ */
+function sd_safari_back_button_scroll_fix() {
+    if (geodir_is_page('listing') || geodir_is_page('search')) {
+    ?>
+    <script type="text/javascript">
+        jQuery( document ).ready(function() {
+            var is_chrome = navigator.userAgent.indexOf('Chrome') > -1;
+            var is_safari = navigator.userAgent.indexOf("Safari") > -1 && !is_chrome;
+            if (is_safari) {
+                window.onpageshow = function(event) {
+                    if (event.persisted) {
+                        jQuery(window).trigger('resize');
+                    }
+                };
+            }
+        });
+
+    </script>
+    <?php
+    }
+}
+add_filter('wp_footer', 'sd_safari_back_button_scroll_fix');
+
+/**
+ * Add the search and category widgets to the GD home page feature area.
+ *
+ * @since 1.0.4
+ */
+function sd_feature_area_gd(){
+
+    if (geodir_is_page('home') || is_front_page()) {
+        echo do_shortcode('[gd_advanced_search]');
+        echo do_shortcode('[gd_popular_post_category category_limit=5]');
+        echo '<div class="home-more"  id="sd-home-scroll" ><a href="#sd-home-scroll"><i class="fa fa-chevron-down"></i></a></div>';
+    }
+}
+remove_action('sd_feature_area','sd_feature_area',15);
+add_action('sd_feature_area','sd_feature_area_gd',15);
