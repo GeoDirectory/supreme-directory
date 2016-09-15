@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Supreme Directory 1.0.3\n"
+"Project-Id-Version: Supreme Directory 1.0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-27 19:12+0100\n"
-"PO-Revision-Date: 2016-07-27 19:12+0100\n"
+"POT-Creation-Date: 2016-09-06 12:25+0100\n"
+"PO-Revision-Date: 2016-09-06 12:25+0100\n"
 "Last-Translator: \n"
 "Language-Team: GD Team <info@wpgeodirectory.com>\n"
 "Language: en_US\n"
@@ -18,16 +18,16 @@ msgstr ""
 "X-Generator: Poedit 1.8.7.1\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: archive.php:22 index.php:28 page.php:13 page_full-width.php:20 single.php:20
+#: archive.php:22 index.php:36 page.php:13 page_full-width.php:20 single.php:20
 #: woocommerce.php:21
 msgid "Sorry, no results were found."
 msgstr ""
 
-#: archive.php:37 content.php:90 index.php:43
+#: archive.php:37 content.php:74 index.php:51
 msgid "Previous"
 msgstr ""
 
-#: archive.php:38 content.php:87 index.php:44
+#: archive.php:38 content.php:71 index.php:52
 msgid "Next"
 msgstr ""
 
@@ -48,19 +48,19 @@ msgstr ""
 msgid "Reviews"
 msgstr ""
 
-#: content.php:70
+#: content.php:54
 msgid "Pages:"
 msgstr ""
 
-#: content.php:78 inc/geodirectory-compatibility.php:833
+#: content.php:62 inc/geodirectory-compatibility.php:838
 msgid "Edit"
 msgstr ""
 
-#: content.php:88
+#: content.php:72
 msgid "Next post:"
 msgstr ""
 
-#: content.php:91
+#: content.php:75
 msgid "Previous post:"
 msgstr ""
 
@@ -183,41 +183,45 @@ msgstr ""
 msgid "SHOW MAP"
 msgstr ""
 
-#: inc/geodirectory-compatibility.php:558
+#: inc/geodirectory-compatibility.php:559
 msgid "Near Me"
 msgstr ""
 
-#: inc/geodirectory-compatibility.php:664
-#: inc/geodirectory-compatibility.php:849
-#: inc/geodirectory-compatibility.php:862
+#: inc/geodirectory-compatibility.php:665
+#: inc/geodirectory-compatibility.php:854
+#: inc/geodirectory-compatibility.php:867
 msgid "Claim"
 msgstr ""
 
-#: inc/geodirectory-compatibility.php:810
+#: inc/geodirectory-compatibility.php:814
 msgid "Verified Owner"
 msgstr ""
 
-#: inc/geodirectory-compatibility.php:817
+#: inc/geodirectory-compatibility.php:821
 msgid "Claim Me"
 msgstr ""
 
-#: inc/geodirectory-compatibility.php:914
+#: inc/geodirectory-compatibility.php:919
 msgid "Write a Review"
 msgstr ""
 
-#: inc/geodirectory-compatibility.php:938
-#: inc/geodirectory-compatibility.php:948
+#: inc/geodirectory-compatibility.php:943
+#: inc/geodirectory-compatibility.php:953
 msgid "Share on Facebook"
 msgstr ""
 
-#: inc/geodirectory-compatibility.php:941
-#: inc/geodirectory-compatibility.php:950
+#: inc/geodirectory-compatibility.php:946
+#: inc/geodirectory-compatibility.php:955
 msgid "Share on Twitter"
 msgstr ""
 
-#: inc/geodirectory-compatibility.php:944
-#: inc/geodirectory-compatibility.php:952
+#: inc/geodirectory-compatibility.php:949
+#: inc/geodirectory-compatibility.php:957
 msgid "Share on Google Plus"
+msgstr ""
+
+#: index.php:19
+msgid "Your Search Results for "
 msgstr ""
 
 #, fuzzy
