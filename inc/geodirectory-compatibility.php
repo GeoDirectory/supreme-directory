@@ -520,15 +520,21 @@ remove_action('geodir_listing_after_pinpoint', 'geodir_output_pinpoint_html_list
 
 // remove core term description from listins pages
 remove_action('geodir_listings_page_description', 'geodir_action_listings_description', 10);
-add_action('geodir_listings_content', 'geodir_action_listings_description', 2);
-// CPT description
-if (defined('GEODIR_CP_TEXTDOMAIN')) {
-remove_action('geodir_listings_page_description', 'geodir_cpt_pt_desc', 10);
-add_action('geodir_listings_content', 'geodir_cpt_pt_desc', 2);
+if (!defined('GEODIRLOCATION_VERSION')) {
+    add_action('geodir_listings_content', 'geodir_action_listings_description', 2);
+
+    // CPT description
+    if (defined('GEODIR_CP_TEXTDOMAIN')) {
+    remove_action('geodir_listings_page_description', 'geodir_cpt_pt_desc', 10);
+    add_action('geodir_listings_content', 'geodir_cpt_pt_desc', 2);
+    }
 }
-// remove location manager term description from listings pages
-remove_action('wp_print_scripts', 'geodir_location_remove_action_listings_description', 100);
-remove_action('wp_print_scripts', 'geodir_location_remove_action_listings_description', 100);
+
+if (defined('GEODIRLOCATION_VERSION')) {
+    // remove location manager term description from listings pages
+    remove_action('wp_print_scripts', 'geodir_location_remove_action_listings_description', 100);
+    add_action('geodir_listings_content', 'geodir_location_action_listings_description', 2);
+}
 
 // remove claim link from sidebar as we have it in top bar
 remove_action('geodir_after_edit_post_link', 'geodir_display_post_claim_link', 2);

@@ -16,7 +16,7 @@ $full_image_url = SD_DEFAULT_FEATURED_IMAGE;
 
                             <?php echo get_avatar(get_the_author_meta('ID'), 120, '', get_the_author_meta('display_name')); ?>
                             <h1 class="entry-title"><?php $author_obj = $wp_query->get_queried_object();
-                                echo $author_obj->nickname; ?></h1>
+                                echo $author_obj->display_name; ?></h1>
 
                         </div>
                     </div>
@@ -26,7 +26,7 @@ $full_image_url = SD_DEFAULT_FEATURED_IMAGE;
 
                         <?php
                         // user profile text
-                        echo "<h1>".ucfirst(esc_attr(sprintf( __("%s's Profile", 'supreme-directory'), $author_obj->user_nicename )))."</h1>";
+                        echo "<h1>".ucfirst(esc_attr(sprintf( __("%s's Profile", 'supreme-directory'), $author_obj->display_name )))."</h1>";
 
                         // user listings
                             echo "<h3>".__("Listings", "supreme-directory")."</h3>";
@@ -41,7 +41,7 @@ $full_image_url = SD_DEFAULT_FEATURED_IMAGE;
                         ?>
 
 
-                        <h3><?php echo ucfirst($author_obj->nickname); ?>
+                        <h3><?php echo ucfirst($author_obj->display_name); ?>
                             's <?php _e("Reviews", "supreme-directory"); ?> (coming soon)</h3>
 
                     </div>
