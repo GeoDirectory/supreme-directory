@@ -1141,11 +1141,16 @@ add_filter('wp_footer', 'sd_safari_back_button_scroll_fix');
  */
 function sd_feature_area_gd(){
 
-    if (geodir_is_page('home') || is_front_page()) {
+    if (is_front_page() && !geodir_is_page('home')) {
         echo do_shortcode('[gd_advanced_search]');
         echo do_shortcode('[gd_popular_post_category category_limit=5]');
         echo '<div class="home-more"  id="sd-home-scroll" ><a href="#sd-home-scroll"><i class="fa fa-chevron-down"></i></a></div>';
     }
 }
-remove_action('sd_feature_area','sd_feature_area',15);
 add_action('sd_feature_area','sd_feature_area_gd',15);
+
+// remove original featured area
+function sd_remove_sd_feature_area(){
+remove_action('sd_feature_area','sd_feature_area',15);
+}
+add_action('get_template_part_content','sd_remove_sd_feature_area');
