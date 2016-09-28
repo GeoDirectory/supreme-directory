@@ -279,7 +279,7 @@ function sd_add_my_account_link($items, $args)
                         echo '<p class="sucess_msg">' . __('Invalid Username/Password.', 'supreme-directory') . '</p>';
 
                     ?>
-                    <form name="cus_loginform" method="post">
+                    <form name="cus_loginform" method="post" action="<?php echo sd_login_url('');?>" >
 
                         <div class="form_row clearfix">
                             <input placeholder='<?php _e('Email', 'supreme-directory'); ?>' type="text" name="log" id="user_login"
@@ -307,6 +307,7 @@ function sd_add_my_account_link($items, $args)
                                name="submit"/>
                         <input type="hidden" name="redirect_to" value="<?php echo esc_url($redirect_to); ?>"/>
                         <input type="hidden" name="testcookie" value="1"/>
+                        <input type="hidden" name="action" value="login"/>
 
                         <p class="sd-register">
                         <a href="<?php echo sd_login_url(array('signup' => true)); ?>"
@@ -337,10 +338,17 @@ function sd_login_url($params){
 if(function_exists('geodir_login_url')){
     return geodir_login_url($params);
 }else{
+
+    if(isset($params['signup']) && $params['signup']){
+        return wp_registration_url();
+    }elseif(isset($params['forgot']) && $params['forgot']){
+        return wp_lostpassword_url();
+    }
     return wp_login_url();
 }
 
 }
+
 
 /**
  * Runs on theme activation.
