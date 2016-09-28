@@ -2,6 +2,7 @@ v1.0.6
 Preview title shows slashes infront of quotation marks - FIXED
 Homepage chevron can show twice if GD installed - FIXED
 Login function without GD installed does not always work - FIXED
+Use category default thumbnail when there is no image in the listings - CHANGED
 
 v1.0.5
 Homepage not full height if GD not installed - FIXED
