@@ -187,18 +187,14 @@ body.sd {
     max-width: 590px;
 }
 
-.sd.home .geodir-search, .sd.sd-location .geodir-search {
-    margin-right: 0;
+.sd.home .featured-area .geodir-filter-container, .sd.sd-location .featured-area .geodir-filter-container {
+    position: absolute;
+    text-align: left;
+    z-index: 5001;
+    margin-right: 38px;
+    margin-left: 8px;
 }
 
-.sd .geodir-search input, .sd .geodir-advance-search input, .sd .geodir-search select {
-    height: 45px;
-    padding: 10px 12px;
-}
-
-.sd.home .geodir-search input.showFilters, .sd.sd-location .geodir-search input.showFilters {
-    display: none;
-}
 
 .sd .near-compass {
     color: #ccc;
@@ -600,134 +596,6 @@ SIDEBARS CSS END
 
 }
 
-/*
-#################################################
-SEARCH STANDARD
-#################################################
-*/
-
-#geodir_content .geodir-search .search_by_post,
-#geodir_content .geodir-search input[type="text"],
-#geodir_content .geodir-search input[type="button"] {
-    margin: 0.5%;
-}
-
-#geodir_content .geodir-search input[type="button"] {
-    width: 10%;
-}
-
-#geodir_content .geodir-search input.search_text {
-    margin-left: 0px;
-}
-
-#geodir_content .geodir-search input[type="text"] {
-    width: 43%;
-}
-
-.featured-area .geodir-search {
-    width: 100%;
-}
-
-.featured-area .geodir-search .search_by_post,
-.featured-area .geodir-search input[type="text"],
-.featured-area .geodir-search input[type="button"] {
-    margin: 0.5%;
-}
-
-.featured-area .geodir-search input[type="button"] {
-    width: 10%;
-}
-
-.featured-area .geodir-search input.search_text {
-    margin-left: 0.5%;
-}
-
-.featured-area .geodir-search input {
-    width: 43%;
-}
-
-.featured-area .geodir-search input.search_text {
-    margin-left: 0px;
-}
-
-/*
-#################################################
-CUSTOM POST TYPES
-#################################################
-*/
-
-.geodir_custom_posts #geodir_content .geodir-search input.search_text {
-    margin-left: 0.5%;
-}
-
-.geodir_custom_posts #geodir_content .geodir-search input[type="text"] {
-    width: 30%;
-}
-
-.geodir_custom_posts #geodir_content .geodir-search .search_by_post {
-    margin-left: 0px;
-    width: 26%;
-}
-
-.geodir_custom_posts .featured-area .geodir-search input.search_text {
-    margin-left: 0.5%;
-}
-
-.geodir_custom_posts .featured-area .geodir-search input[type="text"] {
-    width: 30%;
-}
-
-.geodir_custom_posts .featured-area .geodir-search .search_by_post {
-    margin-left: 0px;
-    width: 26%;
-}
-
-/*
-#################################################
-ADVANCED SEARCH FILTERS
-#################################################
-*/
-
-.geodir_advance_search #geodir_content .geodir-search .search_by_post {
-    width: 20%;
-}
-
-.geodir_advance_search #geodir_content .geodir-search .showFilters {
-    width: 6%;
-}
-
-.geodir_advance_search #geodir_content .geodir-search input[type="text"] {
-    width: 40%;
-}
-
-/*
-#################################################
-ADVANCED SEARCH FILTERS && CUSTOM POST TYPES
-#################################################
-*/
-
-.geodir_custom_posts.geodir_advance_search #geodir_content .geodir-search .search_by_post {
-    width: 20%;
-}
-
-.geodir_custom_posts.geodir_advance_search #geodir_content .geodir-search .showFilters {
-    width: 6%;
-}
-
-.geodir_custom_posts.geodir_advance_search #geodir_content .geodir-search input[type="text"] {
-    width: 29%;
-}
-
-.geodir_submit_search,
-.showFilters {
-    display: inline-block;
-    font: normal normal normal 14px/1 FontAwesome;
-    text-rendering: auto;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-size: 20px !important;
-    line-height: 0 !important;
-}
 
 .sd .Navi, .sd .nav-links {
     border-top: 0 none;
