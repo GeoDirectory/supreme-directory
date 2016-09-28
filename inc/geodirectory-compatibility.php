@@ -732,6 +732,7 @@ function sup_add_feat_img_head($page)
 
         global $preview, $post;
         $default_img_url = SD_DEFAULT_FEATURED_IMAGE;
+        $full_image_url = '';
         if ($preview) {
             geodir_action_geodir_set_preview_post();//Set the $post value if previewing a post.
             $post_images = array();
@@ -745,10 +746,22 @@ function sup_add_feat_img_head($page)
                 $full_image_urls = wp_get_attachment_image_src(get_post_thumbnail_id(), 'full');
                 $full_image_url = $full_image_urls[0];
             } else {
-                $full_image_url = $default_img_url;
+                if (isset($post->default_category) && $post->default_category) {
+                    $default_cat = $post->default_category;
+                } else {
+                    $default_cat = geodir_get_post_meta($post->ID, 'default_category', true);
+                }
+
+                if ($default_catimg = geodir_get_default_catimage($default_cat, $post->post_type)) {
+                    $full_image_url = $default_catimg['src'];
+                }
+
+                if (empty($full_image_url)) {
+                    $full_image_url = $default_img_url;
+                }
+
             }
         }
-
         ?>
         <div class="featured-area">
 
