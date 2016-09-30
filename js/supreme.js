@@ -16,9 +16,9 @@ jQuery(document).ready(function () {
         });
     }
 
-    jQuery(".search_by_post").change(function () {
+    jQuery("body").on("geodir_setup_search_form", function(){
         if (jQuery(".geodir-cat-list-tax").length) {
-            var postType = jQuery(this).val()
+            var postType = jQuery('.featured-area .search_by_post').val()
             jQuery(".geodir-cat-list-tax").val(postType + "category");
             jQuery(".geodir-cat-list-tax").change();
         }

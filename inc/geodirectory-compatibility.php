@@ -410,7 +410,7 @@ function sd_map_in_detail_page_sidebar()
             setup_postdata($post);
         }
 
-        if(!isset($post->post_latitude) || $post->post_latitude=''){
+        if(!isset($post->post_latitude) || $post->post_latitude==''){
             return '';// if not address, bail.
         }
         $geodir_post_detail_fields = geodir_show_listing_info('detail');
@@ -520,14 +520,17 @@ remove_action('geodir_listing_after_pinpoint', 'geodir_output_pinpoint_html_list
 
 // remove core term description from listins pages
 remove_action('geodir_listings_page_description', 'geodir_action_listings_description', 10);
+ add_action('geodir_listings_content', 'geodir_action_listings_description', 2);
 if (!defined('GEODIRLOCATION_VERSION')) {
-    add_action('geodir_listings_content', 'geodir_action_listings_description', 2);
 
-    // CPT description
-    if (defined('GEODIR_CP_TEXTDOMAIN')) {
-    remove_action('geodir_listings_page_description', 'geodir_cpt_pt_desc', 10);
-    add_action('geodir_listings_content', 'geodir_cpt_pt_desc', 2);
-    }
+
+
+}
+
+// CPT description
+if (defined('GEODIR_CP_TEXTDOMAIN')) {
+remove_action('geodir_listings_page_description', 'geodir_cpt_pt_desc', 10);
+add_action('geodir_listings_content', 'geodir_cpt_pt_desc', 2);
 }
 
 if (defined('GEODIRLOCATION_VERSION')) {
@@ -581,21 +584,6 @@ add_action('geodir_search_content', 'geodir_action_search_page_title', 1);
 remove_action('geodir_author_page_title', 'geodir_action_author_page_title', 10);
 add_action('geodir_author_content', 'geodir_action_author_page_title', 1);
 
-
-/**
- * Return the font awesome cog icon HTML.
- *
- * Replace advanced search button with fontawesome cog.
- *
- * @since 1.0.0
- * @return string The font awesome cog sign.
- */
-function sd_gd_adv_search_btn_value()
-{
-    return "&#xf013;";
-}
-
-add_filter('gd_adv_search_btn_value', 'sd_gd_adv_search_btn_value', 10);
 
 /**
  * Return the font awesome search icon HTML.
@@ -659,65 +647,6 @@ function sd_detail_display_notices() {
 }
 add_action('sd-detail-details-before', 'sd_detail_display_notices');
 
-//usage editor: [gd_claim_link class="" icon="false"]
-//usage php: echo do_shortcode('[gd_claim_link class="" icon="false"]');
-function geodir_claim_link_sc($atts) {
-    if (function_exists('geodir_load_translation_geodirclaim')) {
-        global $post, $preview;
-
-        $defaults = array(
-            'class' => 'supreme-btn supreme-btn-small supreme-edit-btn',
-            'icon' => "true",
-            'link_text' => __('Claim', 'supreme-directory')
-        );
-        $params = shortcode_atts($defaults, $atts);
-
-        ob_start();
-
-        $geodir_post_type = array();
-        if (get_option('geodir_post_types_claim_listing'))
-            $geodir_post_type = get_option('geodir_post_types_claim_listing');
-        $posttype = (isset($post->post_type)) ? $post->post_type : '';
-        if (in_array($posttype, $geodir_post_type) && !$preview) {
-            $is_owned = geodir_get_post_meta($post->ID, 'claimed', true);
-            if (get_option('geodir_claim_enable') == 'yes' && $is_owned == '0') {
-
-                if (is_user_logged_in()) {
-
-                    echo '<div class="geodir-company_info" style="border: none;margin: 0;padding: 0">';
-                    echo '<div class="geodir_display_claim_popup_forms"></div>';
-                    echo '<a href="javascript:void(0);" class="'.$params['class'].' geodir_claim_enable">';
-                    if ($params['icon'] == 'true') {
-                        echo '<i class="fa fa-question-circle"></i>';
-                    }
-                    echo $params['link_text'];
-                    echo '</a>';
-                    echo '</div>';
-                    echo '<input type="hidden" name="geodir_claim_popup_post_id" value="' . $post->ID . '" />';
-
-                } else {
-
-                    $site_login_url = geodir_login_url();
-                    echo '<a href="' . $site_login_url . '" class="'.$params['class'].'">';
-                    if ($params['icon'] == 'true') {
-                        echo '<i class="fa fa-question-circle"></i>';
-                    }
-                    echo $params['link_text'];
-                    echo '</a>';
-
-                }
-            }
-        }
-        $output = ob_get_contents();
-        ob_end_clean();
-        return $output;
-    }
-}
-add_shortcode('gd_claim_link', 'geodir_claim_link_sc');
-
-
-
-
 /**
  * Output the header featured area image HTML.
  *
@@ -732,6 +661,7 @@ function sup_add_feat_img_head($page)
 
         global $preview, $post;
         $default_img_url = SD_DEFAULT_FEATURED_IMAGE;
+        $full_image_url = '';
         if ($preview) {
             geodir_action_geodir_set_preview_post();//Set the $post value if previewing a post.
             $post_images = array();
@@ -745,10 +675,22 @@ function sup_add_feat_img_head($page)
                 $full_image_urls = wp_get_attachment_image_src(get_post_thumbnail_id(), 'full');
                 $full_image_url = $full_image_urls[0];
             } else {
-                $full_image_url = $default_img_url;
+                if (isset($post->default_category) && $post->default_category) {
+                    $default_cat = $post->default_category;
+                } else {
+                    $default_cat = geodir_get_post_meta($post->ID, 'default_category', true);
+                }
+
+                if ($default_catimg = geodir_get_default_catimage($default_cat, $post->post_type)) {
+                    $full_image_url = $default_catimg['src'];
+                }
+
+                if (empty($full_image_url)) {
+                    $full_image_url = $default_img_url;
+                }
+
             }
         }
-
         ?>
         <div class="featured-area">
 
