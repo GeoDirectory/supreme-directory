@@ -36,8 +36,10 @@ function sd_search_form_on_search_page()
  * Add body classes to the HTML where needed.
  *
  * @since 0.0.1
- * @param array $classes The array of body classes.
- * @return array The array of body classes.
+ *
+*@param array $classes The array of body classes.
+ *
+*@return array The array of body classes.
  */
 function sd_custom_body_class_gd($classes)
 {
@@ -64,7 +66,8 @@ add_filter('body_class', 'sd_custom_body_class_gd');
 /**
  * Remove and change some standard GeoDirectory widget areas.
  *
- * This function disables the listings pages sidebars and uses the GeoDirectory design setting to select map left/right on listings pages.
+ * This function disables the listings pages sidebars and uses the GeoDirectory design setting to select map left/right
+ * on listings pages.
  *
  * @since 1.0.0
  */
@@ -358,10 +361,10 @@ function sd_img_gallery_output()
         } elseif (geodir_is_page('preview')) {
 
             if (isset($post->post_images))
-                $post->post_images = trim($post->post_images, ",");
+                {$post->post_images = trim($post->post_images, ",");}
 
             if (isset($post->post_images) && !empty($post->post_images))
-                $post_images = explode(",", $post->post_images);
+                {$post_images = explode(",", $post->post_images);}
 
             if (!empty($post_images)) {
                 foreach ($post_images as $image) {
@@ -498,7 +501,8 @@ add_action('geodir_before_listing', 'geodir_pagination', 100);
  * Add fav html to listing page image.
  *
  * @since 1.0.0
- * @param object $post The post object.
+ *
+*@param object $post The post object.
  */
 function sd_listing_img_fav($post)
 {
@@ -519,12 +523,15 @@ remove_action('geodir_listing_after_pinpoint', 'geodir_output_pinpoint_html_list
 // add_filter('show_admin_bar', '__return_false'); // not allowed if submitting to wp.org
 
 // remove core term description from listins pages
-remove_action('geodir_listings_page_description', 'geodir_action_listings_description', 10);
- add_action('geodir_listings_content', 'geodir_action_listings_description', 2);
+
 if (!defined('GEODIRLOCATION_VERSION')) {
+	remove_action('geodir_listings_page_description', 'geodir_action_listings_description', 10);
+	add_action('geodir_listings_content', 'geodir_action_listings_description', 2);
 
-
-
+}else{
+remove_action('geodir_listings_page_description', 'geodir_action_listings_description', 10);
+	remove_action('wp_print_scripts', 'geodir_location_remove_action_listings_description', 100);
+	add_action('geodir_listings_content', 'geodir_location_action_listings_description', 100);
 }
 
 // CPT description
@@ -653,7 +660,8 @@ add_action('sd-detail-details-before', 'sd_detail_display_notices');
  * Add featured banner and listing details above wrapper.
  *
  * @since 1.0.0
- * @param string $page The GeoDirectory page being called.
+ *
+*@param string $page The GeoDirectory page being called.
  */
 function sup_add_feat_img_head($page)
 {
@@ -789,7 +797,7 @@ function sup_add_feat_img_head($page)
                 if (function_exists('geodir_load_translation_geodirclaim')) {
                     $geodir_post_type = array();
                     if (get_option('geodir_post_types_claim_listing'))
-                        $geodir_post_type = get_option('geodir_post_types_claim_listing');
+                        {$geodir_post_type = get_option('geodir_post_types_claim_listing');}
                     $posttype = (isset($post->post_type)) ? $post->post_type : '';
                     if (in_array($posttype, $geodir_post_type) && !$preview) {
                         $is_owned = geodir_get_post_meta($post->ID, 'claimed', true);
