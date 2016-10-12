@@ -5,7 +5,7 @@ Description: A Supreme Child Theme for Directory Starter
 Author: GeoDirectory
 Author URI: https://wpgeodirectory.com/
 Template: directory-starter
-Version: 1.0.5
+Version: 1.0.6
 License: GPLv2 or greater
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: supreme-directory
@@ -199,7 +199,6 @@ body.sd {
 .sd .near-compass {
     color: #ccc;
     cursor: pointer;
-    margin: 24px 0 0 27px;
 }
 
 .sd .near-compass .fa {
@@ -741,6 +740,7 @@ a#hideMap {
     text-transform: initial;
     line-height: normal;
     height: auto;
+    min-height: 0;
 }
 
 .sd-my-account-dd-menu-group {
@@ -772,6 +772,11 @@ a#hideMap {
 
 .sd-dd-avatar-wrap {
     overflow: hidden;
+}
+
+
+.sd-register {
+    padding-bottom: 10px;
 }
 
 
