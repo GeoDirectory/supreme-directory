@@ -1,3 +1,6 @@
+v1.0.7
+Undefined index notice - FIXED
+
 v1.0.6
 Preview title shows slashes infront of quotation marks - FIXED
 Homepage chevron can show twice if GD installed - FIXED
