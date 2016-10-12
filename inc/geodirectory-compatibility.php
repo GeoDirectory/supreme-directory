@@ -963,53 +963,48 @@ function sup_add_feat_img_head($page)
 
 }
 
+function sd_homepage_featured_content() {
+    if (is_singular() && $location = do_shortcode('[gd_current_location_name]')) { ?>
+        <h1 class="entry-title"><?php echo $location; ?></h1>
+    <?php } else { ?>
+        <h1 class="entry-title"><?php the_title(); ?></h1>
+    <?php }
 
-function sd_homepage_featured_content(){
+    $sub_title = get_post_meta(get_the_ID(), 'subtitle', true);
 
-                if (is_singular() && $location = do_shortcode('[gd_current_location_name]')) { ?>
-                    <h1 class="entry-title"><?php echo $location; ?></h1>
-                <?php } else { ?>
-                    <h1 class="entry-title"><?php the_title(); ?></h1>
-                <?php }
+    if (geodir_is_page('location') && defined('GEODIRLOCATION_VERSION')) {
+        $loc = geodir_get_current_location_terms();
+        $location_type = geodir_what_is_current_location();
+        $country_slug = '';
+        $region_slug = '';
+        if ($location_type == 'city') {
+            $slug = $loc['gd_city'];
+            $region_slug = isset($loc['gd_region']) ? $loc['gd_region'] : '';
+            $country_slug = isset($loc['gd_country']) ? $loc['gd_country'] : '';
+        } else if ($location_type == 'region') {
+            $slug = $loc['gd_region'];
+            $country_slug = isset($loc['gd_country']) ? $loc['gd_country'] : '';
+        } elseif($location_type == 'country') {
+            $slug = $loc['gd_country'];
+            $country_slug = isset($loc['gd_country']) ? $loc['gd_country'] : '';
+        }
+        else {
+            $slug = '';
+        }
+        $seo = geodir_location_seo_by_slug($slug, $location_type, $country_slug, $region_slug);
+        $tagline = (isset($seo->seo_image_tagline)) ? $seo->seo_image_tagline : '';
+        if ($tagline) {
+            $sub_title = stripslashes($tagline);
+        }
 
-                $sub_title = get_post_meta(get_the_ID(), 'subtitle', true);
+    }
+    if (isset($sub_title)) {
+        echo '<div class="entry-subtitle">' . $sub_title . '</div>';
+    }
 
-                if (geodir_is_page('location') && defined('GEODIRLOCATION_VERSION')) {
-                    $loc = geodir_get_current_location_terms();
-                    $location_type = geodir_what_is_current_location();
-                    $country_slug = '';
-                    $region_slug = '';
-                    if ($location_type == 'city') {
-                        $slug = $loc['gd_city'];
-                        $region_slug = $loc['gd_region'];
-                        $country_slug = $loc['gd_country'];
-
-                    } else if ($location_type == 'region') {
-                        $slug = $loc['gd_region'];
-                        $country_slug = $loc['gd_country'];
-                    } elseif($location_type == 'country') {
-                        $slug = $loc['gd_country'];
-                        $country_slug = $loc['gd_country'];
-                    }
-                    else {
-                        $slug = '';
-
-                    }
-                    $seo = geodir_location_seo_by_slug($slug, $location_type, $country_slug, $region_slug);
-                    $tagline = (isset($seo->seo_image_tagline)) ? $seo->seo_image_tagline : '';
-                    if ($tagline) {
-                        $sub_title = stripslashes($tagline);
-                    }
-
-                }
-                if (isset($sub_title)) {
-                    echo '<div class="entry-subtitle">' . $sub_title . '</div>';
-                }
-
-            echo do_shortcode('[gd_advanced_search]');
-            echo do_shortcode('[gd_popular_post_category category_limit=5]');
-            echo '<div class="home-more" id="sd-home-scroll"><a href="#sd-home-scroll" ><i class="fa fa-chevron-down"></i></a></div>';
-
+    echo do_shortcode('[gd_advanced_search]');
+    echo do_shortcode('[gd_popular_post_category category_limit=5]');
+    echo '<div class="home-more" id="sd-home-scroll"><a href="#sd-home-scroll" ><i class="fa fa-chevron-down"></i></a></div>';
 }
 add_action('sd_homepage_content','sd_homepage_featured_content');
 
