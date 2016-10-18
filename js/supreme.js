@@ -16,9 +16,9 @@ jQuery(document).ready(function () {
         });
     }
 
-    jQuery(".search_by_post").change(function () {
+    jQuery("body").on("geodir_setup_search_form", function(){
         if (jQuery(".geodir-cat-list-tax").length) {
-            var postType = jQuery(this).val()
+            var postType = jQuery('.featured-area .search_by_post').val()
             jQuery(".geodir-cat-list-tax").val(postType + "category");
             jQuery(".geodir-cat-list-tax").change();
         }
@@ -44,9 +44,7 @@ jQuery(document).ready(function () {
         }
 
     });
-
-    // fix the advanced search autocompleater results
-    sd_set_search_pos();
+    
 
     if ( jQuery( ".sd-detail-cta a.dt-btn" ).length ) {
         jQuery(".sd-detail-cta a.dt-btn").click(function () {
@@ -111,8 +109,7 @@ function sd_adjust_head(){
     });
 
 
-    // fix the advanced search near me dropdown
-    sd_set_search_pos();
+
 
 }
 
@@ -170,26 +167,3 @@ function sd_adjust_head(){
     });
 
 })();
-
-function sd_set_search_pos(){
-
-    var headHeight = jQuery('#site-header').height();
-    var ddHeadHeight = headHeight;
-    var hedPos = jQuery('#site-header').css('position');
-    if(hedPos=='absolute'){
-        ddHeadHeight = 0;
-    }
-
-    if ( jQuery( ".gd-near-me-dropdown" ).length ) {
-        jQuery(".gd-near-me-dropdown").css({
-            'margin-top': -ddHeadHeight+"px"
-        });
-    }
-
-    // fix the advanced search autocompleater results
-    if ( jQuery( ".ac_results" ).length ) {
-        jQuery(".ac_results").css({
-            'margin-top': -ddHeadHeight+"px"
-        });
-    }
-}

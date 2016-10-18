@@ -36,8 +36,10 @@ function sd_search_form_on_search_page()
  * Add body classes to the HTML where needed.
  *
  * @since 0.0.1
- * @param array $classes The array of body classes.
- * @return array The array of body classes.
+ *
+*@param array $classes The array of body classes.
+ *
+*@return array The array of body classes.
  */
 function sd_custom_body_class_gd($classes)
 {
@@ -64,7 +66,8 @@ add_filter('body_class', 'sd_custom_body_class_gd');
 /**
  * Remove and change some standard GeoDirectory widget areas.
  *
- * This function disables the listings pages sidebars and uses the GeoDirectory design setting to select map left/right on listings pages.
+ * This function disables the listings pages sidebars and uses the GeoDirectory design setting to select map left/right
+ * on listings pages.
  *
  * @since 1.0.0
  */
@@ -358,10 +361,10 @@ function sd_img_gallery_output()
         } elseif (geodir_is_page('preview')) {
 
             if (isset($post->post_images))
-                $post->post_images = trim($post->post_images, ",");
+                {$post->post_images = trim($post->post_images, ",");}
 
             if (isset($post->post_images) && !empty($post->post_images))
-                $post_images = explode(",", $post->post_images);
+                {$post_images = explode(",", $post->post_images);}
 
             if (!empty($post_images)) {
                 foreach ($post_images as $image) {
@@ -410,7 +413,7 @@ function sd_map_in_detail_page_sidebar()
             setup_postdata($post);
         }
 
-        if(!isset($post->post_latitude) || $post->post_latitude=''){
+        if(!isset($post->post_latitude) || $post->post_latitude==''){
             return '';// if not address, bail.
         }
         $geodir_post_detail_fields = geodir_show_listing_info('detail');
@@ -498,7 +501,8 @@ add_action('geodir_before_listing', 'geodir_pagination', 100);
  * Add fav html to listing page image.
  *
  * @since 1.0.0
- * @param object $post The post object.
+ *
+*@param object $post The post object.
  */
 function sd_listing_img_fav($post)
 {
@@ -519,15 +523,21 @@ remove_action('geodir_listing_after_pinpoint', 'geodir_output_pinpoint_html_list
 // add_filter('show_admin_bar', '__return_false'); // not allowed if submitting to wp.org
 
 // remove core term description from listins pages
-remove_action('geodir_listings_page_description', 'geodir_action_listings_description', 10);
-if (!defined('GEODIRLOCATION_VERSION')) {
-    add_action('geodir_listings_content', 'geodir_action_listings_description', 2);
 
-    // CPT description
-    if (defined('GEODIR_CP_TEXTDOMAIN')) {
-    remove_action('geodir_listings_page_description', 'geodir_cpt_pt_desc', 10);
-    add_action('geodir_listings_content', 'geodir_cpt_pt_desc', 2);
-    }
+if (!defined('GEODIRLOCATION_VERSION')) {
+	remove_action('geodir_listings_page_description', 'geodir_action_listings_description', 10);
+	add_action('geodir_listings_content', 'geodir_action_listings_description', 2);
+
+}else{
+remove_action('geodir_listings_page_description', 'geodir_action_listings_description', 10);
+	remove_action('wp_print_scripts', 'geodir_location_remove_action_listings_description', 100);
+	add_action('geodir_listings_content', 'geodir_location_action_listings_description', 100);
+}
+
+// CPT description
+if (defined('GEODIR_CP_TEXTDOMAIN')) {
+remove_action('geodir_listings_page_description', 'geodir_cpt_pt_desc', 10);
+add_action('geodir_listings_content', 'geodir_cpt_pt_desc', 2);
 }
 
 if (defined('GEODIRLOCATION_VERSION')) {
@@ -581,21 +591,6 @@ add_action('geodir_search_content', 'geodir_action_search_page_title', 1);
 remove_action('geodir_author_page_title', 'geodir_action_author_page_title', 10);
 add_action('geodir_author_content', 'geodir_action_author_page_title', 1);
 
-
-/**
- * Return the font awesome cog icon HTML.
- *
- * Replace advanced search button with fontawesome cog.
- *
- * @since 1.0.0
- * @return string The font awesome cog sign.
- */
-function sd_gd_adv_search_btn_value()
-{
-    return "&#xf013;";
-}
-
-add_filter('gd_adv_search_btn_value', 'sd_gd_adv_search_btn_value', 10);
 
 /**
  * Return the font awesome search icon HTML.
@@ -659,72 +654,14 @@ function sd_detail_display_notices() {
 }
 add_action('sd-detail-details-before', 'sd_detail_display_notices');
 
-//usage editor: [gd_claim_link class="" icon="false"]
-//usage php: echo do_shortcode('[gd_claim_link class="" icon="false"]');
-function geodir_claim_link_sc($atts) {
-    if (function_exists('geodir_load_translation_geodirclaim')) {
-        global $post, $preview;
-
-        $defaults = array(
-            'class' => 'supreme-btn supreme-btn-small supreme-edit-btn',
-            'icon' => "true",
-            'link_text' => __('Claim', 'supreme-directory')
-        );
-        $params = shortcode_atts($defaults, $atts);
-
-        ob_start();
-
-        $geodir_post_type = array();
-        if (get_option('geodir_post_types_claim_listing'))
-            $geodir_post_type = get_option('geodir_post_types_claim_listing');
-        $posttype = (isset($post->post_type)) ? $post->post_type : '';
-        if (in_array($posttype, $geodir_post_type) && !$preview) {
-            $is_owned = geodir_get_post_meta($post->ID, 'claimed', true);
-            if (get_option('geodir_claim_enable') == 'yes' && $is_owned == '0') {
-
-                if (is_user_logged_in()) {
-
-                    echo '<div class="geodir-company_info" style="border: none;margin: 0;padding: 0">';
-                    echo '<div class="geodir_display_claim_popup_forms"></div>';
-                    echo '<a href="javascript:void(0);" class="'.$params['class'].' geodir_claim_enable">';
-                    if ($params['icon'] == 'true') {
-                        echo '<i class="fa fa-question-circle"></i>';
-                    }
-                    echo $params['link_text'];
-                    echo '</a>';
-                    echo '</div>';
-                    echo '<input type="hidden" name="geodir_claim_popup_post_id" value="' . $post->ID . '" />';
-
-                } else {
-
-                    $site_login_url = geodir_login_url();
-                    echo '<a href="' . $site_login_url . '" class="'.$params['class'].'">';
-                    if ($params['icon'] == 'true') {
-                        echo '<i class="fa fa-question-circle"></i>';
-                    }
-                    echo $params['link_text'];
-                    echo '</a>';
-
-                }
-            }
-        }
-        $output = ob_get_contents();
-        ob_end_clean();
-        return $output;
-    }
-}
-add_shortcode('gd_claim_link', 'geodir_claim_link_sc');
-
-
-
-
 /**
  * Output the header featured area image HTML.
  *
  * Add featured banner and listing details above wrapper.
  *
  * @since 1.0.0
- * @param string $page The GeoDirectory page being called.
+ *
+*@param string $page The GeoDirectory page being called.
  */
 function sup_add_feat_img_head($page)
 {
@@ -860,7 +797,7 @@ function sup_add_feat_img_head($page)
                 if (function_exists('geodir_load_translation_geodirclaim')) {
                     $geodir_post_type = array();
                     if (get_option('geodir_post_types_claim_listing'))
-                        $geodir_post_type = get_option('geodir_post_types_claim_listing');
+                        {$geodir_post_type = get_option('geodir_post_types_claim_listing');}
                     $posttype = (isset($post->post_type)) ? $post->post_type : '';
                     if (in_array($posttype, $geodir_post_type) && !$preview) {
                         $is_owned = geodir_get_post_meta($post->ID, 'claimed', true);
@@ -1026,53 +963,48 @@ function sup_add_feat_img_head($page)
 
 }
 
+function sd_homepage_featured_content() {
+    if (is_singular() && $location = do_shortcode('[gd_current_location_name]')) { ?>
+        <h1 class="entry-title"><?php echo $location; ?></h1>
+    <?php } else { ?>
+        <h1 class="entry-title"><?php the_title(); ?></h1>
+    <?php }
 
-function sd_homepage_featured_content(){
+    $sub_title = get_post_meta(get_the_ID(), 'subtitle', true);
 
-                if (is_singular() && $location = do_shortcode('[gd_current_location_name]')) { ?>
-                    <h1 class="entry-title"><?php echo $location; ?></h1>
-                <?php } else { ?>
-                    <h1 class="entry-title"><?php the_title(); ?></h1>
-                <?php }
+    if (geodir_is_page('location') && defined('GEODIRLOCATION_VERSION')) {
+        $loc = geodir_get_current_location_terms();
+        $location_type = geodir_what_is_current_location();
+        $country_slug = '';
+        $region_slug = '';
+        if ($location_type == 'city') {
+            $slug = $loc['gd_city'];
+            $region_slug = isset($loc['gd_region']) ? $loc['gd_region'] : '';
+            $country_slug = isset($loc['gd_country']) ? $loc['gd_country'] : '';
+        } else if ($location_type == 'region') {
+            $slug = $loc['gd_region'];
+            $country_slug = isset($loc['gd_country']) ? $loc['gd_country'] : '';
+        } elseif($location_type == 'country') {
+            $slug = $loc['gd_country'];
+            $country_slug = isset($loc['gd_country']) ? $loc['gd_country'] : '';
+        }
+        else {
+            $slug = '';
+        }
+        $seo = geodir_location_seo_by_slug($slug, $location_type, $country_slug, $region_slug);
+        $tagline = (isset($seo->seo_image_tagline)) ? $seo->seo_image_tagline : '';
+        if ($tagline) {
+            $sub_title = stripslashes($tagline);
+        }
 
-                $sub_title = get_post_meta(get_the_ID(), 'subtitle', true);
+    }
+    if (isset($sub_title)) {
+        echo '<div class="entry-subtitle">' . $sub_title . '</div>';
+    }
 
-                if (geodir_is_page('location') && defined('GEODIRLOCATION_VERSION')) {
-                    $loc = geodir_get_current_location_terms();
-                    $location_type = geodir_what_is_current_location();
-                    $country_slug = '';
-                    $region_slug = '';
-                    if ($location_type == 'city') {
-                        $slug = $loc['gd_city'];
-                        $region_slug = $loc['gd_region'];
-                        $country_slug = $loc['gd_country'];
-
-                    } else if ($location_type == 'region') {
-                        $slug = $loc['gd_region'];
-                        $country_slug = $loc['gd_country'];
-                    } elseif($location_type == 'country') {
-                        $slug = $loc['gd_country'];
-                        $country_slug = $loc['gd_country'];
-                    }
-                    else {
-                        $slug = '';
-
-                    }
-                    $seo = geodir_location_seo_by_slug($slug, $location_type, $country_slug, $region_slug);
-                    $tagline = (isset($seo->seo_image_tagline)) ? $seo->seo_image_tagline : '';
-                    if ($tagline) {
-                        $sub_title = stripslashes($tagline);
-                    }
-
-                }
-                if (isset($sub_title)) {
-                    echo '<div class="entry-subtitle">' . $sub_title . '</div>';
-                }
-
-            echo do_shortcode('[gd_advanced_search]');
-            echo do_shortcode('[gd_popular_post_category category_limit=5]');
-            echo '<div class="home-more" id="sd-home-scroll"><a href="#sd-home-scroll" ><i class="fa fa-chevron-down"></i></a></div>';
-
+    echo do_shortcode('[gd_advanced_search]');
+    echo do_shortcode('[gd_popular_post_category category_limit=5]');
+    echo '<div class="home-more" id="sd-home-scroll"><a href="#sd-home-scroll" ><i class="fa fa-chevron-down"></i></a></div>';
 }
 add_action('sd_homepage_content','sd_homepage_featured_content');
 
