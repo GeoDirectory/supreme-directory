@@ -549,33 +549,6 @@ if (defined('GEODIRLOCATION_VERSION')) {
 remove_action('geodir_after_edit_post_link', 'geodir_display_post_claim_link', 2);
 
 
-/*
- * If location manager not installed then display the default location.
- */
-if (!function_exists('geodir_current_loc_shortcode')) {
-    add_shortcode('gd_current_location_name', 'sd_geodir_current_loc_shortcode');
-}
-
-
-/**
- * Return the default location name.
- *
- * @since 1.0.0
- * @return string The default location.
- */
-function sd_geodir_current_loc_shortcode()
-{
-    global $gd_session;
-    $output = geodir_get_default_location();
-
-    $output = $output->city;
-
-    if (($gd_session->get('my_location') || ($gd_session->get('user_lat') && $gd_session->get('user_lon')))) {
-        $output = __('Near Me', 'supreme-directory');
-    }
-
-    return $output;
-}
 
 /*
  * Move listings page title into the main wrapper content.
@@ -962,8 +935,30 @@ function sup_add_feat_img_head($page)
 
 }
 
+function sd_gd_current_location_name(){
+
+	/*
+	 * If location manager not installed then display the default location.
+	 */
+	if (!function_exists('geodir_current_loc_shortcode')) {
+	    global $gd_session;
+	    $output = geodir_get_default_location();
+
+	    $output = $output->city;
+
+	    if (($gd_session->get('my_location') || ($gd_session->get('user_lat') && $gd_session->get('user_lon')))) {
+	        $output = __('Near Me', 'supreme-directory');
+	    }
+
+	}else{
+		$output = do_shortcode('[gd_current_location_name]');
+	}
+
+	return $output;
+}
+
 function sd_homepage_featured_content() {
-    if (is_singular() && $location = do_shortcode('[gd_current_location_name]')) { ?>
+    if (is_singular() && $location = sd_gd_current_location_name()) { ?>
         <h1 class="entry-title"><?php echo $location; ?></h1>
     <?php } else { ?>
         <h1 class="entry-title"><?php the_title(); ?></h1>
