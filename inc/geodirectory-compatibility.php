@@ -529,9 +529,8 @@ if (!defined('GEODIRLOCATION_VERSION')) {
 	add_action('geodir_listings_content', 'geodir_action_listings_description', 2);
 
 }else{
-remove_action('geodir_listings_page_description', 'geodir_action_listings_description', 10);
+    remove_action('geodir_listings_page_description', 'geodir_action_listings_description', 10);
 	remove_action('wp_print_scripts', 'geodir_location_remove_action_listings_description', 100);
-	add_action('geodir_listings_content', 'geodir_location_action_listings_description', 100);
 }
 
 // CPT description
