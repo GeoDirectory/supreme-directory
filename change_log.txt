@@ -1,3 +1,6 @@
+v1.0.8
+Filters added to GeoDirectory details page top section  output - ADDED
+
 v1.0.7
 Undefined index notice - FIXED
 Duplicate description in listing category pages - FIXED

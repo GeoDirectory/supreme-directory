@@ -10,7 +10,7 @@ $full_image_url = SD_DEFAULT_FEATURED_IMAGE;
                 <header>
 
                     <div class="featured-area">
-                        <div class="featured-img" style="background-image: url(<?php echo $full_image_url; ?>);"></div>
+                        <div class="featured-img" style="background-image: url('<?php echo $full_image_url; ?>');"></div>
 
                         <div class="header-wrap">
 

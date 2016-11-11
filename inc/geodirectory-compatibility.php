@@ -674,7 +674,7 @@ function sup_add_feat_img_head($page)
         ?>
         <div class="featured-area">
 
-            <div class="featured-img" style="background-image: url(<?php echo $full_image_url; ?>);"></div>
+            <div class="featured-img" style="background-image: url('<?php echo $full_image_url; ?>');"></div>
 
             <?php if ($preview) {
                 echo geodir_action_geodir_preview_code();
@@ -818,53 +818,69 @@ function sup_add_feat_img_head($page)
                     $sd_address .= ', ' . apply_filters('sd_detail_country_name', $post->post_country, $post);
                 }
                 $sd_address .= '</div>';
-                echo $sd_address;
-                echo '<div class="sd-ratings">' . $post_ratings . ' <a href="' . get_comments_link() . '" class="geodir-pcomments">' . $n_comments . '</a></div>';
-                echo '<div class="sd-contacts">';
+
+
+                echo apply_filters('sd_details_output_address',$sd_address);
+
+                $sd_raitings = '<div class="sd-ratings">' . $post_ratings . ' <a href="' . get_comments_link() . '" class="geodir-pcomments">' . $n_comments . '</a></div>';
+                echo apply_filters('sd_details_output_ratings',$sd_raitings);
+                $sd_social = '<div class="sd-contacts">';
                 if (isset($post->geodir_website) && $post->geodir_website) {
-                    echo '<a target="_blank" href="' . $post->geodir_website . '"><i class="fa fa-external-link-square"></i></a>';
+                    $sd_social .= '<a target="_blank" href="' . $post->geodir_website . '"><i class="fa fa-external-link-square"></i></a>';
                 }
                 if (isset($post->geodir_facebook) && $post->geodir_facebook) {
-                    echo '<a target="_blank" href="' . $post->geodir_facebook . '"><i class="fa fa-facebook-official"></i></a>';
+                   $sd_social .='<a target="_blank" href="' . $post->geodir_facebook . '"><i class="fa fa-facebook-official"></i></a>';
                 }
                 if (isset($post->geodir_twitter) && $post->geodir_twitter) {
-                    echo '<a target="_blank" href="' . $post->geodir_twitter . '"><i class="fa fa-twitter-square"></i></a>';
+                    $sd_social .='<a target="_blank" href="' . $post->geodir_twitter . '"><i class="fa fa-twitter-square"></i></a>';
                 }
                 if (isset($post->geodir_contact) && $post->geodir_contact) {
-                    echo '<a href="tel:' . $post->geodir_contact . '"><i class="fa fa-phone-square"></i>&nbsp;:&nbsp;' . $post->geodir_contact . '</a>';
+                    $sd_social .='<a href="tel:' . $post->geodir_contact . '"><i class="fa fa-phone-square"></i>&nbsp;:&nbsp;' . $post->geodir_contact . '</a>';
                 }
-                echo '</div>';
-                echo '<div class="sd-detail-cat-links"><ul>';
+                $sd_social .= '</div>';
+
+                echo apply_filters('sd_details_output_social',$sd_social);
+
+                $cat_links = '<div class="sd-detail-cat-links"><ul>';
                 foreach ($cats_arr as $cat) {
                     $term_arr = get_term($cat, $post_tax);
                     $term_icon = isset($cat_icons[$cat]) ? $cat_icons[$cat] : '';
                     $term_url = get_term_link(intval($cat), $post_tax);
-                    echo '<li><a href="' . $term_url . '"><img src="' . $term_icon . '">';
-                    echo '<span class="cat-link">' . $term_arr->name . '</span>';
-                    echo '</a></li>';
+                    $cat_links .=  '<li><a href="' . $term_url . '"><img src="' . $term_icon . '">';
+                    $cat_links .= '<span class="cat-link">' . $term_arr->name . '</span>';
+                    $cat_links .= '</a></li>';
                 }
-                echo '</ul></div> <!-- sd-detail-cat-links end --> </div> <!-- sd-detail-info end -->';
-                echo '<div class="sd-detail-cta"><a class="dt-btn" href="' . get_the_permalink() . '#reviews">' . __('Write a Review', 'supreme-directory') . '</a>';
-                ?>
-                <div class="geodir_more_info geodir-company_info geodir_email" style="padding: 0;border: none">
-                <?php
+                $cat_links .= '</ul></div> <!-- sd-detail-cat-links end --> </div> <!-- sd-detail-info end -->';
+                echo apply_filters('sd_details_output_cat_links',$cat_links);
+
+                echo '<div class="sd-detail-cta">';
+                $review_button = '<a class="dt-btn" href="' . get_the_permalink() . '#reviews">' . __('Write a Review', 'supreme-directory') . '</a>';
+                echo apply_filters('sd_details_output_review_button',$review_button);
+
+                $send_buttons = '<div class="geodir_more_info geodir-company_info geodir_email" style="padding: 0;border: none">';
+
                 if (!$preview) {
                     $html = '<input type="hidden" name="geodir_popup_post_id" value="' . $post->ID . '" />
                     <div class="geodir_display_popup_forms"></div>';
-                    echo $html;
+	                $send_buttons .= $html;
                 }
-                ?>
-                    <span style="" class="geodir-i-email">
-                    <i class="fa fa-envelope"></i>
-                        <?php if (isset($post->geodir_email) && $post->geodir_email) {
-                        ?>
-                            <a href="javascript:void(0);" class="b_send_inquiry"><?php echo SEND_INQUIRY; ?></a> | <?php } ?>
-                        <a class="b_sendtofriend" href="javascript:void(0);"><?php echo SEND_TO_FRIEND; ?></a></span>
 
-                </div>
+                $send_buttons .= '<span style="" class="geodir-i-email">';
+                $send_buttons .= '<i class="fa fa-envelope"></i>';
+			    if (isset($post->geodir_email) && $post->geodir_email) {
+				    $send_buttons .= '<a href="javascript:void(0);" class="b_send_inquiry">'.SEND_INQUIRY.'</a> | ';
+			    }
+                $send_buttons .= '<a class="b_sendtofriend" href="javascript:void(0);">'.SEND_TO_FRIEND.'</a></span>';
+                $send_buttons .= '</div>';
 
-                <?php
+                echo apply_filters('sd_details_output_send_buttons',$send_buttons);
+
+				ob_start();
                 geodir_favourite_html($post->post_author, $post->ID);
+                $fav_html = ob_get_clean();
+                echo apply_filters('sd_details_output_fav',$fav_html);
+
+				ob_start();
                 ?>
                 <ul class="sd-cta-favsandshare">
                     <?php if (!$preview) { ?>
@@ -887,6 +903,9 @@ function sup_add_feat_img_head($page)
                     <?php } ?>
                 </ul>
                 <?php
+
+                $share_html = ob_get_clean();
+                echo apply_filters('sd_details_output_share_links',$share_html);
                 echo '</div><!-- sd-detail-cta end -->'; ?>
 
             </div>
@@ -922,7 +941,7 @@ function sup_add_feat_img_head($page)
 
         ?>
         <div class="featured-area">
-            <div class="featured-img" style="background-image: url(<?php echo $full_image_url[0]; ?>);">
+            <div class="featured-img" style="background-image: url('<?php echo $full_image_url[0]; ?>');">
 
             </div>
             <div class="header-wrap">
