@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Supreme Directory 1.0.81\n"
+"Project-Id-Version: Supreme Directory 1.0.82\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-16 14:30+0000\n"
-"PO-Revision-Date: 2016-11-16 14:31+0000\n"
+"POT-Creation-Date: 2016-11-16 18:29+0000\n"
+"PO-Revision-Date: 2016-11-16 18:29+0000\n"
 "Last-Translator: \n"
 "Language-Team: GD Team <info@wpgeodirectory.com>\n"
 "Language: en_US\n"
@@ -23,29 +23,17 @@ msgstr ""
 msgid "Sorry, no results were found."
 msgstr ""
 
-#: archive.php:37 content.php:74 index.php:51
+#: archive.php:37 content.php:74 functions.php:599 index.php:51
 msgid "Previous"
 msgstr ""
 
-#: archive.php:38 content.php:71 index.php:52
+#: archive.php:38 content.php:71 functions.php:600 index.php:52
 msgid "Next"
 msgstr ""
 
-#: author.php:29
+#: author.php:17
 #, php-format
 msgid "%s's Profile"
-msgstr ""
-
-#: author.php:32
-msgid "Listings"
-msgstr ""
-
-#: author.php:38
-msgid "Favorites"
-msgstr ""
-
-#: author.php:45
-msgid "Reviews"
 msgstr ""
 
 #: content.php:54
@@ -217,6 +205,14 @@ msgstr ""
 
 #: inc/geodirectory-compatibility.php:969
 msgid "Near Me"
+msgstr ""
+
+#: inc/geodirectory-compatibility.php:1112
+msgid "Listings"
+msgstr ""
+
+#: inc/geodirectory-compatibility.php:1118
+msgid "Favorites"
 msgstr ""
 
 #: index.php:19

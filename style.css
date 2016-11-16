@@ -1,11 +1,11 @@
 /*
 Theme Name: Supreme Directory
 Theme URI: https://wpgeodirectory.com/downloads/supreme-directory/
-Description: A Supreme Child Theme for Directory Starter
+Description: A Supreme Child Theme for Directory Starter, check out this video to see how easy it is to setup: https://www.youtube.com/watch?v=_MXfot6buMc
 Author: GeoDirectory
 Author URI: https://wpgeodirectory.com/
 Template: directory-starter
-Version: 1.0.81
+Version: 1.0.82
 License: GPLv2 or greater
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: supreme-directory
@@ -1079,7 +1079,9 @@ h2.comments-title {
 
 /* Blog Archive Page */
 
-.sd.blog .content-box.content-single article.hentry, .sd.category .content-box.content-archive article.hentry {
+.sd.author .content-box.content-archive article.hentry,
+.sd.blog .content-box.content-single article.hentry,
+.sd.category .content-box.content-archive article.hentry {
     border: 0 none;
     clear: none;
     margin: 0 5% 50px 0;
@@ -1087,16 +1089,25 @@ h2.comments-title {
     display: inline-table;
 }
 
-.sd.blog .content-box.content-single article.hentry:nth-child(3n+3), .sd.category .content-box.content-archive article.hentry:nth-child(3n+3) {
+.sd.blog .content-box.content-single article.hentry:nth-child(3n+3),
+.sd.category .content-box.content-archive article.hentry:nth-child(3n+3),
+.sd.author .content-box.content-archive article.hentry:nth-child(3n+3)
+{
     margin-right: 0;
 }
 
-.sd.blog .content-box.content-single, .sd.category .content-box.content-archive {
+.sd.blog .content-box.content-single,
+.sd.category .content-box.content-archive,
+.sd.author .content-box.content-archive
+{
     margin: 60px 0;
     overflow: hidden;
 }
 
-.sd.blog .content-box.content-single article.hentry .container, .sd.category .content-box.content-archive article.hentry .container {
+.sd.blog .content-box.content-single article.hentry .container,
+.sd.category .content-box.content-archive article.hentry .container,
+.sd.author .content-box.content-archive article.hentry .container
+{
     width: 100%;
 }
 

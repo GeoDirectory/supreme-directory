@@ -1,3 +1,6 @@
+v1.0.82
+Bug fixes for theme review - FIXED
+
 v1.0.81
 Theme review compliance changes - CHANGED
 

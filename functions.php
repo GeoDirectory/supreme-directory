@@ -17,7 +17,7 @@ SUPREME DIRECTORY CODE STARTS
  * Define some constants for later use.
  */
 if (!defined('SD_DEFAULT_FEATURED_IMAGE')) define('SD_DEFAULT_FEATURED_IMAGE', get_stylesheet_directory_uri() . "/images/featured.jpg");
-if (!defined('SD_VERSION')) define('SD_VERSION', "1.0.81");
+if (!defined('SD_VERSION')) define('SD_VERSION', "1.0.82");
 if (!defined('SD_CHILD')) define('SD_CHILD', 'supreme-directory');
 
 /**
@@ -43,7 +43,7 @@ function geodir_sd_force_update_remove_notice()
         $action.'_'.$slug
     );
 
-    $message = sprintf( __("This theme was designed to work with the GeoDirectory plugin! <a href='%s' >Click here to install it.</a>", 'supreme-directory'), $install_url ) ;
+    $message = sprintf( __("This theme was designed to work with the GeoDirectory plugin! <a href='%s' >Click here to install it.</a>", 'supreme-directory'), esc_url($install_url) ) ;
 
     printf('<div class="notice notice-error is-dismissible"><p>%1$s</p></div>', $message);
     }
@@ -211,25 +211,25 @@ function sd_add_my_account_link($items, $args)
                 <i class="fa fa-caret-down"></i>
             </a>
             <div id="sd-my-account" class="Panel">
-            <div class="mm-subtitle"><a class="mm-subclose" href="#mm-menu-<?php echo $menu_slug;?>"><?php _e('<  Back','supreme-directory');?></a></div>
+            <div class="mm-subtitle"><a class="mm-subclose" href="#mm-menu-<?php echo esc_attr($menu_slug);?>"><?php _e('<  Back','supreme-directory');?></a></div>
             <div class="sd-my-account-dd">
                 <div class="sd-my-account-dd-inner">
                     <div class="sd-dd-avatar-wrap">
-                        <a href="<?php echo $user_link; ?>" rel="nofollow"><?php echo $avatar; ?></a>
+                        <a href="<?php echo esc_url($user_link); ?>" rel="nofollow"><?php echo $avatar; ?></a>
                         <h4>
-                            <a href="<?php echo $user_link; ?>"
-                               rel="nofollow"><?php echo $current_user->display_name; ?></a>
+                            <a href="<?php echo esc_url($user_link); ?>"
+                               rel="nofollow"><?php echo esc_attr($current_user->display_name); ?></a>
                         </h4>
                     </div>
                     <?php if (class_exists('BuddyPress')) { ?>
                         <ul class="sd-my-account-dd-menu-group sd-my-account-dd-menu-bp-group">
                             <li class="sd-my-account-dd-menu-link">
-                                <a href="<?php echo $user_link; ?>">
+                                <a href="<?php echo esc_url($user_link); ?>">
                                     <i class="fa fa-user"></i> <?php echo __('About Me', 'supreme-directory'); ?>
                                 </a>
                             </li>
                             <li class="sd-my-account-dd-menu-link">
-                                <a href="<?php echo $user_link . 'settings/'; ?>">
+                                <a href="<?php echo esc_url($user_link . 'settings/'); ?>">
                                     <i class="fa fa-cog"></i> <?php echo __('Account Settings', 'supreme-directory'); ?>
                                 </a>
                             </li>
@@ -237,7 +237,7 @@ function sd_add_my_account_link($items, $args)
                     <?php } ?>
                     <ul class="sd-my-account-dd-menu-group">
                         <li class="sd-my-account-dd-menu-link">
-                            <a href="<?php echo wp_logout_url(home_url()); ?>">
+                            <a href="<?php echo esc_url(wp_logout_url(home_url())); ?>">
                                 <i class="fa fa-sign-out"></i> <?php echo __('Log Out', 'supreme-directory'); ?>
                             </a>
                         </li>
@@ -263,7 +263,7 @@ function sd_add_my_account_link($items, $args)
                 <i class="fa fa-caret-down"></i>
             </a>
             <div id="sd-my-account" class="Panel">
-            <div class="mm-subtitle"><a class="mm-subclose" href="#mm-menu-<?php echo $menu_slug;?>"><?php _e('<  Back','supreme-directory');?></a></div>
+            <div class="mm-subtitle"><a class="mm-subclose" href="#mm-menu-<?php echo esc_attr($menu_slug);?>"><?php _e('<  Back','supreme-directory');?></a></div>
             <div class="sd-my-account-dd">
                 <div class="sd-my-account-dd-inner">
                     <h4 class="sd-my-account-title"><?php echo __('Sign In', 'supreme-directory'); ?></h4>
@@ -309,9 +309,9 @@ function sd_add_my_account_link($items, $args)
                         <input type="hidden" name="action" value="login"/>
 
                         <p class="sd-register">
-                        <a href="<?php echo sd_login_url(array('signup' => true)); ?>"
+                        <a href="<?php echo esc_url(sd_login_url(array('signup' => true))); ?>"
                            class="goedir-newuser-link"><?php _e('Register', 'supreme-directory'); ?></a>
-                           <a href="<?php echo sd_login_url(array('forgot' => true)); ?>"
+                           <a href="<?php echo esc_url(sd_login_url(array('forgot' => true))); ?>"
                        class="goedir-forgot-link"><?php _e('Forgot Password?', 'supreme-directory'); ?></a>
                         </p>
                         <?php do_action('login_form'); ?>
@@ -558,7 +558,7 @@ function sd_feature_area_title_meta(){
         <?php
     }
     if (get_post_meta(get_the_ID(), 'subtitle', true)) {
-        echo '<div class="entry-subtitle">' . get_post_meta(get_the_ID(), 'subtitle', true) . '</div>';
+        echo '<div class="entry-subtitle">' . get_post_meta(get_the_ID(), 'subtitle', true) . '</div>'; // not escaped by design to allow users to add html here if required
     }
 }
 add_action('sd_feature_area','sd_feature_area_title_meta',10);
@@ -578,3 +578,27 @@ function sd_feature_area(){
     }
 }
 add_action('sd_feature_area','sd_feature_area',15);
+
+/**
+ * Output the author page content and allow it to be filtered.
+ *
+ * @since 1.0.82
+ * @param Object $author The author object.
+ */
+function sd_author_content_output($author){
+    while (have_posts()) : the_post();
+
+        // Include the page content template.
+        get_template_part('content-blog');
+
+        // End the loop.
+    endwhile;
+
+    // Previous/next page navigation.
+    the_posts_pagination(array(
+        'prev_text' => __('Previous', 'supreme-directory'),
+        'next_text' => __('Next', 'supreme-directory'),
+    ));
+}
+
+add_action('sd_author_content','sd_author_content_output',10,1);
