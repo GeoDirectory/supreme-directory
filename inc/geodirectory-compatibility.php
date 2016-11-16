@@ -674,7 +674,7 @@ function sup_add_feat_img_head($page)
         ?>
         <div class="featured-area">
 
-            <div class="featured-img" style="background-image: url('<?php echo $full_image_url; ?>');"></div>
+            <div class="featured-img" style="background-image: url('<?php echo esc_url($full_image_url); ?>');"></div>
 
             <?php if ($preview) {
                 echo geodir_action_geodir_preview_code();
@@ -941,7 +941,7 @@ function sup_add_feat_img_head($page)
 
         ?>
         <div class="featured-area">
-            <div class="featured-img" style="background-image: url('<?php echo $full_image_url[0]; ?>');">
+            <div class="featured-img" style="background-image: url('<?php echo esc_url($full_image_url[0]); ?>');">
 
             </div>
             <div class="header-wrap">

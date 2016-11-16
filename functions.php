@@ -17,7 +17,7 @@ SUPREME DIRECTORY CODE STARTS
  * Define some constants for later use.
  */
 if (!defined('SD_DEFAULT_FEATURED_IMAGE')) define('SD_DEFAULT_FEATURED_IMAGE', get_stylesheet_directory_uri() . "/images/featured.jpg");
-if (!defined('SD_VERSION')) define('SD_VERSION', "1.0.7");
+if (!defined('SD_VERSION')) define('SD_VERSION', "1.0.81");
 if (!defined('SD_CHILD')) define('SD_CHILD', 'supreme-directory');
 
 /**
@@ -42,11 +42,10 @@ function geodir_sd_force_update_remove_notice()
         ),
         $action.'_'.$slug
     );
-    $class = 'notice notice-error is-dismissible';
 
     $message = sprintf( __("This theme was designed to work with the GeoDirectory plugin! <a href='%s' >Click here to install it.</a>", 'supreme-directory'), $install_url ) ;
 
-    printf('<div class="%1$s"><p>%2$s</p></div>', $class, $message);
+    printf('<div class="notice notice-error is-dismissible"><p>%1$s</p></div>', $message);
     }
     
 }
@@ -360,7 +359,7 @@ function sd_theme_activation()
     //set the theme mod heights/settings
     sd_set_theme_mods();
     // add some page and set them if default settings set
-    sd_activation_install();
+    //sd_activation_install(); @todo we can't add info in install, add as an option
 }
 
 add_action('after_switch_theme', 'sd_theme_activation');
@@ -463,7 +462,7 @@ function sd_activation_install()
         update_option('sidebars_widgets', $sidebars_widgets);
 
 
-        // set the menu if it doew not exist
+        // set the menu if it does not exist
         // Check if the menu exists
         $menu_name = 'SD Menu';
         $menu_exists = wp_get_nav_menu_object( $menu_name );

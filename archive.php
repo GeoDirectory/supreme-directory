@@ -7,7 +7,7 @@
         }else{
             $full_image_url[0] = SD_DEFAULT_FEATURED_IMAGE;
         }
-            ?> style="background-image: url('<?php echo $full_image_url[0]; ?>');" <?php
+            ?> style="background-image: url('<?php echo esc_url($full_image_url[0]); ?>');" <?php
         ?>>
 
         </div>
