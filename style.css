@@ -5,7 +5,7 @@ Description: A Supreme Child Theme for Directory Starter, check out this video t
 Author: GeoDirectory
 Author URI: https://wpgeodirectory.com/
 Template: directory-starter
-Version: 1.0.82
+Version: 1.1.0
 License: GPLv2 or greater
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: supreme-directory
@@ -115,6 +115,10 @@ body.sd {
 
 .sd-homepage .featured-area, .sd-location .featured-area {
     height: 100vh;
+}
+
+.sd-homepage .container .featured-area, .sd-location .container .featured-area {
+    height: inherit;
 }
 
 .sd.single.geodir-page .featured-area, .sd.sd-preview .featured-area {
@@ -1081,7 +1085,9 @@ h2.comments-title {
 
 .sd.author .content-box.content-archive article.hentry,
 .sd.blog .content-box.content-single article.hentry,
-.sd.category .content-box.content-archive article.hentry {
+.sd.archive .content-box.content-archive article.hentry,
+.sd.category .content-box.content-archive article.hentry
+{
     border: 0 none;
     clear: none;
     margin: 0 5% 50px 0;
@@ -1090,6 +1096,7 @@ h2.comments-title {
 }
 
 .sd.blog .content-box.content-single article.hentry:nth-child(3n+3),
+.sd.archive .content-box.content-archive article.hentry:nth-child(3n+3),
 .sd.category .content-box.content-archive article.hentry:nth-child(3n+3),
 .sd.author .content-box.content-archive article.hentry:nth-child(3n+3)
 {
@@ -1097,6 +1104,7 @@ h2.comments-title {
 }
 
 .sd.blog .content-box.content-single,
+.sd.archive .content-box.content-archive,
 .sd.category .content-box.content-archive,
 .sd.author .content-box.content-archive
 {
@@ -1105,20 +1113,27 @@ h2.comments-title {
 }
 
 .sd.blog .content-box.content-single article.hentry .container,
+.sd.archive .content-box.content-archive article.hentry .container,
 .sd.category .content-box.content-archive article.hentry .container,
 .sd.author .content-box.content-archive article.hentry .container
 {
     width: 100%;
 }
 
-.sd.blog .entry-content, .sd.category .entry-content {
+.sd.blog .entry-content,
+.sd.category .entry-content,
+.sd.archive .entry-content
+{
     margin: 20px auto 0;
 }
 
-.sd.blog article h2.entry-title, .sd.category article h2.entry-title {
+.sd.blog article h2.entry-title,
+.sd.archive article h2.entry-title,
+.sd.category article h2.entry-title
+{
     font-size: 25px;
     padding: 0;
-    text-align: center;
+    /*text-align: center; @todo who added this, i don't like it...*/
 }
 
 .sd.blog .entry-footer, .sd.category .entry-footer, .sd.single-post .entry-footer {

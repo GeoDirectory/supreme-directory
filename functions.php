@@ -17,7 +17,7 @@ SUPREME DIRECTORY CODE STARTS
  * Define some constants for later use.
  */
 if (!defined('SD_DEFAULT_FEATURED_IMAGE')) define('SD_DEFAULT_FEATURED_IMAGE', get_stylesheet_directory_uri() . "/images/featured.jpg");
-if (!defined('SD_VERSION')) define('SD_VERSION', "1.0.82");
+if (!defined('SD_VERSION')) define('SD_VERSION', "1.1.0");
 if (!defined('SD_CHILD')) define('SD_CHILD', 'supreme-directory');
 
 /**
@@ -101,10 +101,34 @@ add_action('wp_enqueue_scripts', 'sd_enqueue_styles');
 function sd_theme_setup()
 {
     load_child_theme_textdomain( SD_CHILD, get_stylesheet_directory() . '/languages' );
+    add_filter('tiny_mce_before_init','sd_theme_editor_dynamic_styles',11,1);
 }
 
 add_action('after_setup_theme', 'sd_theme_setup');
 
+/**
+ * Add dynamic styles to the WYSIWYG editor.
+ *
+ * @param $mceInit
+ * @since 1.1.0
+ * @return mixed
+ */
+function sd_theme_editor_dynamic_styles( $mceInit ) {
+    ob_start();
+    ?>
+    body.mce-content-body {
+    font-size: 15px;
+    }
+    <?php
+    $styles = preg_replace( "/\r|\n/", " ", ob_get_clean()); // seems to need line breaks removed
+    if ( isset( $mceInit['content_style'] ) ) {
+        $mceInit['content_style'] .= ' ' . $styles . ' ';
+    } else {
+        $mceInit['content_style'] = $styles . ' ';
+    }
+
+    return $mceInit;
+}
 
 
 /*################################

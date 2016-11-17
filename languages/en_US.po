@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Supreme Directory 1.0.82\n"
+"Project-Id-Version: Supreme Directory 1.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-16 18:29+0000\n"
-"PO-Revision-Date: 2016-11-16 18:29+0000\n"
+"POT-Creation-Date: 2016-11-17 15:25+0000\n"
+"PO-Revision-Date: 2016-11-17 15:25+0000\n"
 "Last-Translator: \n"
 "Language-Team: GD Team <info@wpgeodirectory.com>\n"
 "Language: en_US\n"
@@ -23,11 +23,11 @@ msgstr ""
 msgid "Sorry, no results were found."
 msgstr ""
 
-#: archive.php:37 content.php:74 functions.php:599 index.php:51
+#: archive.php:37 content.php:74 functions.php:623 index.php:51
 msgid "Previous"
 msgstr ""
 
-#: archive.php:38 content.php:71 functions.php:600 index.php:52
+#: archive.php:38 content.php:71 functions.php:624 index.php:52
 msgid "Next"
 msgstr ""
 
@@ -59,103 +59,103 @@ msgid ""
 ">Click here to install it.</a>"
 msgstr ""
 
-#: functions.php:122
+#: functions.php:146
 msgid "Featured"
 msgstr ""
 
-#: functions.php:128
+#: functions.php:152
 msgid "Format"
 msgstr ""
 
-#: functions.php:145
+#: functions.php:169
 msgid "Posted on"
 msgstr ""
 
-#: functions.php:154
+#: functions.php:178
 msgid "Author"
 msgstr ""
 
-#: functions.php:160 functions.php:168
+#: functions.php:184 functions.php:192
 msgid ", "
 msgstr ""
 
-#: functions.php:163
+#: functions.php:187
 msgid "Categories"
 msgstr ""
 
-#: functions.php:171
+#: functions.php:195
 msgid "Tags"
 msgstr ""
 
-#: functions.php:210 functions.php:262
+#: functions.php:234 functions.php:286
 msgid "My Account"
 msgstr ""
 
-#: functions.php:214 functions.php:266
+#: functions.php:238 functions.php:290
 msgid "<  Back"
 msgstr ""
 
-#: functions.php:228
+#: functions.php:252
 msgid "About Me"
 msgstr ""
 
-#: functions.php:233
+#: functions.php:257
 msgid "Account Settings"
 msgstr ""
 
-#: functions.php:241
+#: functions.php:265
 msgid "Log Out"
 msgstr ""
 
-#: functions.php:269 functions.php:305
+#: functions.php:293 functions.php:329
 msgid "Sign In"
 msgstr ""
 
-#: functions.php:272
+#: functions.php:296
 msgid "Invalid Email, Please check"
 msgstr ""
 
-#: functions.php:278
+#: functions.php:302
 msgid "Invalid Username/Password."
 msgstr ""
 
-#: functions.php:284
+#: functions.php:308
 msgid "Email"
 msgstr ""
 
-#: functions.php:294
+#: functions.php:318
 msgid "Password"
 msgstr ""
 
-#: functions.php:302
+#: functions.php:326
 msgid "Remember me on this computer"
 msgstr ""
 
-#: functions.php:313
+#: functions.php:337
 msgid "Register"
 msgstr ""
 
-#: functions.php:315
+#: functions.php:339
 msgid "Forgot Password?"
 msgstr ""
 
-#: functions.php:406
+#: functions.php:430
 msgid "Hello world!"
 msgstr ""
 
-#: functions.php:421
+#: functions.php:445
 msgid "Find Local Treasures!"
 msgstr ""
 
-#: functions.php:428
+#: functions.php:452
 msgid "Discover the best places to stay, eat, shop and events near you."
 msgstr ""
 
-#: functions.php:439 functions.php:488
+#: functions.php:463 functions.php:512
 msgid "Blog"
 msgstr ""
 
-#: functions.php:479
+#: functions.php:503
 msgid "Home"
 msgstr ""
 
