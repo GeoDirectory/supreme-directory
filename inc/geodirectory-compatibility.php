@@ -266,11 +266,11 @@ function sd_add_event_dates_featured_area(){
                         $recurring_class_cont .= ' gde-recurr-cont-act';
                     }
 
-                    $output .= '<p class="' . $recurring_class_cont . '">';
-                    $output .= '<i class="fa fa-caret-right"></i> ' . $start_date;
+                    $output .= '<p class="' . esc_attr($recurring_class_cont) . '">';
+                    $output .= '<i class="fa fa-caret-right"></i> ' . esc_attr($start_date);
                     if ( !$same_datetime ) {
                         $output .= '<br />';
-                        $output .= '<i class="fa fa-caret-left"></i> ' . $end_date;
+                        $output .= '<i class="fa fa-caret-left"></i> ' . esc_attr($end_date);
                     }
                     $output .= '</p>';
                     if($geodir_num_dates>0){break;}
@@ -352,7 +352,7 @@ function sd_img_gallery_output()
             $post_images = geodir_get_images($post->ID, 'thumbnail');
             if (!empty($post_images)) {
                 foreach ($post_images as $image) {
-                    $thumb_image .= '<a href="' . $image->src . '">';
+                    $thumb_image .= '<a href="' . esc_url($image->src) . '">';
                     $thumb_image .= geodir_show_image($image, 'thumbnail', true, false);
                     $thumb_image .= '</a>';
                 }
@@ -369,7 +369,7 @@ function sd_img_gallery_output()
             if (!empty($post_images)) {
                 foreach ($post_images as $image) {
                     if ($image != '') {
-                        $thumb_image .= '<a href="' . $image . '">';
+                        $thumb_image .= '<a href="' . esc_url($image) . '">';
                         $thumb_image .= geodir_show_image(array('src' => $image), 'thumbnail', true, false);
                         $thumb_image .= '</a>';
                     }
@@ -674,7 +674,7 @@ function sup_add_feat_img_head($page)
         ?>
         <div class="featured-area">
 
-            <div class="featured-img" style="background-image: url(<?php echo $full_image_url; ?>);"></div>
+            <div class="featured-img" style="background-image: url('<?php echo esc_url($full_image_url); ?>');"></div>
 
             <?php if ($preview) {
                 echo geodir_action_geodir_preview_code();
@@ -752,8 +752,8 @@ function sup_add_feat_img_head($page)
                     }
                 }
 
-                printf('<div class="author-avatar"><a href="%s">%s</a></div>', $author_link, $entry_author);
-                printf('<div class="author-link"><a href="%s">%s</a></div>', $author_link, $author_name);
+                printf('<div class="author-avatar"><a href="%s">%s</a></div>', esc_url($author_link), $entry_author);
+                printf('<div class="author-link"><a href="%s">%s</a></div>', esc_url($author_link), esc_attr($author_name));
 
 
                 if (is_user_logged_in() && geodir_listing_belong_to_current_user()) {
@@ -762,7 +762,7 @@ function sup_add_feat_img_head($page)
                 $editlink = '#';
                 }
                     ?>
-                    <a href="<?php echo $editlink; ?>" class="supreme-btn supreme-btn-small supreme-edit-btn"><i
+                    <a href="<?php echo esc_url($editlink); ?>" class="supreme-btn supreme-btn-small supreme-edit-btn"><i
                             class="fa fa-edit"></i> <?php echo __('Edit', 'supreme-directory'); ?></a>
                 <?php }
 
@@ -792,7 +792,7 @@ function sup_add_feat_img_head($page)
 				            $login_to_claim_url = apply_filters('geodir_claim_login_to_claim_url', $login_to_claim_url, $post->ID);
 
                                 $site_login_url = $login_to_claim_url;
-                                echo '<a href="' . $site_login_url . '" class="supreme-btn supreme-btn-small supreme-edit-btn"><i class="fa fa-question-circle"></i> ' . __('Claim', 'supreme-directory') . '</a>';
+                                echo '<a href="' . esc_url($site_login_url) . '" class="supreme-btn supreme-btn-small supreme-edit-btn"><i class="fa fa-question-circle"></i> ' . __('Claim', 'supreme-directory') . '</a>';
 
                             }
                         }
@@ -818,53 +818,69 @@ function sup_add_feat_img_head($page)
                     $sd_address .= ', ' . apply_filters('sd_detail_country_name', $post->post_country, $post);
                 }
                 $sd_address .= '</div>';
-                echo $sd_address;
-                echo '<div class="sd-ratings">' . $post_ratings . ' <a href="' . get_comments_link() . '" class="geodir-pcomments">' . $n_comments . '</a></div>';
-                echo '<div class="sd-contacts">';
+
+
+                echo apply_filters('sd_details_output_address',$sd_address);
+
+                $sd_raitings = '<div class="sd-ratings">' . $post_ratings . ' <a href="' . get_comments_link() . '" class="geodir-pcomments">' . $n_comments . '</a></div>';
+                echo apply_filters('sd_details_output_ratings',$sd_raitings);
+                $sd_social = '<div class="sd-contacts">';
                 if (isset($post->geodir_website) && $post->geodir_website) {
-                    echo '<a target="_blank" href="' . $post->geodir_website . '"><i class="fa fa-external-link-square"></i></a>';
+                    $sd_social .= '<a target="_blank" href="' . esc_url($post->geodir_website) . '"><i class="fa fa-external-link-square"></i></a>';
                 }
                 if (isset($post->geodir_facebook) && $post->geodir_facebook) {
-                    echo '<a target="_blank" href="' . $post->geodir_facebook . '"><i class="fa fa-facebook-official"></i></a>';
+                   $sd_social .='<a target="_blank" href="' . esc_url($post->geodir_facebook) . '"><i class="fa fa-facebook-official"></i></a>';
                 }
                 if (isset($post->geodir_twitter) && $post->geodir_twitter) {
-                    echo '<a target="_blank" href="' . $post->geodir_twitter . '"><i class="fa fa-twitter-square"></i></a>';
+                    $sd_social .='<a target="_blank" href="' . esc_url($post->geodir_twitter) . '"><i class="fa fa-twitter-square"></i></a>';
                 }
                 if (isset($post->geodir_contact) && $post->geodir_contact) {
-                    echo '<a href="tel:' . $post->geodir_contact . '"><i class="fa fa-phone-square"></i>&nbsp;:&nbsp;' . $post->geodir_contact . '</a>';
+                    $sd_social .='<a href="tel:' . esc_attr($post->geodir_contact) . '"><i class="fa fa-phone-square"></i>&nbsp;:&nbsp;' . esc_attr($post->geodir_contact) . '</a>';
                 }
-                echo '</div>';
-                echo '<div class="sd-detail-cat-links"><ul>';
+                $sd_social .= '</div>';
+
+                echo apply_filters('sd_details_output_social',$sd_social);
+
+                $cat_links = '<div class="sd-detail-cat-links"><ul>';
                 foreach ($cats_arr as $cat) {
                     $term_arr = get_term($cat, $post_tax);
                     $term_icon = isset($cat_icons[$cat]) ? $cat_icons[$cat] : '';
                     $term_url = get_term_link(intval($cat), $post_tax);
-                    echo '<li><a href="' . $term_url . '"><img src="' . $term_icon . '">';
-                    echo '<span class="cat-link">' . $term_arr->name . '</span>';
-                    echo '</a></li>';
+                    $cat_links .=  '<li><a href="' . esc_url($term_url) . '"><img src="' . esc_url($term_icon) . '">';
+                    $cat_links .= '<span class="cat-link">' . esc_attr($term_arr->name) . '</span>';
+                    $cat_links .= '</a></li>';
                 }
-                echo '</ul></div> <!-- sd-detail-cat-links end --> </div> <!-- sd-detail-info end -->';
-                echo '<div class="sd-detail-cta"><a class="dt-btn" href="' . get_the_permalink() . '#reviews">' . __('Write a Review', 'supreme-directory') . '</a>';
-                ?>
-                <div class="geodir_more_info geodir-company_info geodir_email" style="padding: 0;border: none">
-                <?php
+                $cat_links .= '</ul></div> <!-- sd-detail-cat-links end --> </div> <!-- sd-detail-info end -->';
+                echo apply_filters('sd_details_output_cat_links',$cat_links);
+
+                echo '<div class="sd-detail-cta">';
+                $review_button = '<a class="dt-btn" href="' . get_the_permalink() . '#reviews">' . __('Write a Review', 'supreme-directory') . '</a>';
+                echo apply_filters('sd_details_output_review_button',$review_button);
+
+                $send_buttons = '<div class="geodir_more_info geodir-company_info geodir_email" style="padding: 0;border: none">';
+
                 if (!$preview) {
                     $html = '<input type="hidden" name="geodir_popup_post_id" value="' . $post->ID . '" />
                     <div class="geodir_display_popup_forms"></div>';
-                    echo $html;
+	                $send_buttons .= $html;
                 }
-                ?>
-                    <span style="" class="geodir-i-email">
-                    <i class="fa fa-envelope"></i>
-                        <?php if (isset($post->geodir_email) && $post->geodir_email) {
-                        ?>
-                            <a href="javascript:void(0);" class="b_send_inquiry"><?php echo SEND_INQUIRY; ?></a> | <?php } ?>
-                        <a class="b_sendtofriend" href="javascript:void(0);"><?php echo SEND_TO_FRIEND; ?></a></span>
 
-                </div>
+                $send_buttons .= '<span style="" class="geodir-i-email">';
+                $send_buttons .= '<i class="fa fa-envelope"></i>';
+			    if (isset($post->geodir_email) && $post->geodir_email) {
+				    $send_buttons .= '<a href="javascript:void(0);" class="b_send_inquiry">'.SEND_INQUIRY.'</a> | ';
+			    }
+                $send_buttons .= '<a class="b_sendtofriend" href="javascript:void(0);">'.SEND_TO_FRIEND.'</a></span>';
+                $send_buttons .= '</div>';
 
-                <?php
+                echo apply_filters('sd_details_output_send_buttons',$send_buttons);
+
+				ob_start();
                 geodir_favourite_html($post->post_author, $post->ID);
+                $fav_html = ob_get_clean();
+                echo apply_filters('sd_details_output_fav',$fav_html);
+
+				ob_start();
                 ?>
                 <ul class="sd-cta-favsandshare">
                     <?php if (!$preview) { ?>
@@ -887,6 +903,9 @@ function sup_add_feat_img_head($page)
                     <?php } ?>
                 </ul>
                 <?php
+
+                $share_html = ob_get_clean();
+                echo apply_filters('sd_details_output_share_links',$share_html);
                 echo '</div><!-- sd-detail-cta end -->'; ?>
 
             </div>
@@ -922,7 +941,7 @@ function sup_add_feat_img_head($page)
 
         ?>
         <div class="featured-area">
-            <div class="featured-img" style="background-image: url(<?php echo $full_image_url[0]; ?>);">
+            <div class="featured-img" style="background-image: url('<?php echo esc_url($full_image_url[0]); ?>');">
 
             </div>
             <div class="header-wrap">
@@ -959,7 +978,7 @@ function sd_gd_current_location_name(){
 
 function sd_homepage_featured_content() {
     if (is_singular() && $location = sd_gd_current_location_name()) { ?>
-        <h1 class="entry-title"><?php echo $location; ?></h1>
+        <h1 class="entry-title"><?php echo esc_attr($location); ?></h1>
     <?php } else { ?>
         <h1 class="entry-title"><?php the_title(); ?></h1>
     <?php }
@@ -1080,3 +1099,37 @@ function sd_remove_sd_feature_area(){
 remove_action('sd_feature_area','sd_feature_area',15);
 }
 add_action('get_template_part_content','sd_remove_sd_feature_area');
+
+/**
+ * Change the author page content if GeoDirectory Installed
+ *
+ * @since 1.0.82
+ * @param Object $author The author object.
+ */
+function sd_gd_author_content_output($author){
+
+	// user listings
+    echo "<h3>".__("Listings", "supreme-directory")."</h3>";
+    geodir_user_show_listings($author->ID,'link');
+
+	// user favs
+	$fav_count = geodir_user_favourite_listing_count($author->ID);
+	if(!empty($fav_count )){
+	    echo "<h3>".__("Favorites", "supreme-directory")."</h3>";
+	    geodir_user_show_favourites($author->ID,'link');
+	}
+
+}
+
+
+add_action('sd_author_content','sd_gd_author_content_output',10,1);
+
+/**
+ * Fires after theme setup to be able to remove actions set prior.
+ *
+ * @since 1.0.82
+ */
+function sd_gd_remove_theme_functions(){
+	remove_action('sd_author_content','sd_author_content_output',10);
+}
+add_action('after_setup_theme','sd_gd_remove_theme_functions');
