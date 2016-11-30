@@ -1,5 +1,6 @@
 v1.1.1
 nofollow added to social media links - ADDED
+Minor CSS changes - CHANGED
 
 v1.1.0
 Layout and design bug fixes with archive pages and images - FIXED
