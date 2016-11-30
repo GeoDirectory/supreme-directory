@@ -1,5 +1,5 @@
 v1.1.1
-target="_blank" option added to social media links - ADDED
+nofollow added to social media links - ADDED
 
 v1.1.0
 Layout and design bug fixes with archive pages and images - FIXED
