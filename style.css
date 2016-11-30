@@ -53,6 +53,11 @@ body.sd {
     z-index: 1111;
 }
 
+.registration.buddypress.sd-homepage .site-header {
+    position: relative;
+    background-color: #2f2f2f;
+}
+
 .sd.admin-bar .site-header {
     top: 32px;
 }

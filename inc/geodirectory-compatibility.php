@@ -895,21 +895,21 @@ function sup_add_feat_img_head($page)
                 ?>
                 <ul class="sd-cta-favsandshare">
                     <?php if (!$preview) { ?>
-                        <li><a target="_blank" title="<?php echo __('Share on Facebook', 'supreme-directory'); ?>"
+                        <li><a rel="nofollow" target="_blank" title="<?php echo __('Share on Facebook', 'supreme-directory'); ?>"
                                href="http://www.facebook.com/sharer.php?u=<?php the_permalink(); ?>&t=<?php the_title(); ?>"><i
                                     class="fa fa-facebook"></i></a></li>
-                        <li><a target="_blank" title="<?php echo __('Share on Twitter', 'supreme-directory'); ?>"
+                        <li><a rel="nofollow" target="_blank" title="<?php echo __('Share on Twitter', 'supreme-directory'); ?>"
                                href="http://twitter.com/share?text=<?php echo urlencode(get_the_title()); ?>&url=<?php echo urlencode(get_the_permalink()); ?>"><i
                                     class="fa fa-twitter"></i></a></li>
-                        <li><a target="_blank" title="<?php echo __('Share on Google Plus', 'supreme-directory'); ?>"
+                        <li><a rel="nofollow" target="_blank" title="<?php echo __('Share on Google Plus', 'supreme-directory'); ?>"
                                href="https://plus.google.com/share?url=<?php echo urlencode(get_the_permalink()); ?>"><i
                                     class="fa fa-google-plus"></i></a></li>
                     <?php } else { ?>
-                        <li><a target="_blank" title="<?php echo __('Share on Facebook', 'supreme-directory'); ?>"
+                        <li><a rel="nofollow" target="_blank" title="<?php echo __('Share on Facebook', 'supreme-directory'); ?>"
                                href=""><i class="fa fa-facebook"></i></a></li>
-                        <li><a target="_blank" title="<?php echo __('Share on Twitter', 'supreme-directory'); ?>"
+                        <li><a rel="nofollow" target="_blank" title="<?php echo __('Share on Twitter', 'supreme-directory'); ?>"
                                href=""><i class="fa fa-twitter"></i></a></li>
-                        <li><a target="_blank" title="<?php echo __('Share on Google Plus', 'supreme-directory'); ?>"
+                        <li><a rel="nofollow" target="_blank" title="<?php echo __('Share on Google Plus', 'supreme-directory'); ?>"
                                href=""><i class="fa fa-google-plus"></i></a></li>
                     <?php } ?>
                 </ul>
