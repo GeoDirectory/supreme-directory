@@ -140,8 +140,9 @@ function sd_adjust_head(){
 
 
         window.onscroll = function () {
+            var f =0;
             [].slice.call(parallax).forEach(function (el, i) {
-
+                if(f>1){return;}
                 var windowYOffset = window.pageYOffset;
 
                 originalBpos = parseInt(originalBpos);
@@ -154,6 +155,7 @@ function sd_adjust_head(){
                 if(parallaxPercent>100){parallaxPercent=100;}
 
                 jQuery(el).css("background-position","50% "+parallaxPercent+"%" );
+                f++;
 
             });
         };

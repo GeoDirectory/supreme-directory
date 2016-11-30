@@ -1,3 +1,21 @@
+v1.1.0
+Layout and design bug fixes with archive pages and images - FIXED
+WYSIWYG editor style changes to represent frontend design - CHANGED
+
+v1.0.82
+Bug fixes for theme review - FIXED
+
+v1.0.81
+Theme review compliance changes - CHANGED
+
+v1.0.8
+Filters added to GeoDirectory details page top section  output - ADDED
+functions.php:47 - untranslated string - FIXED
+content-blog.php:11 - escape url - FIXED
+author.php:13 - escape url - FIXED
+archive.php:10 - escape url - FIXED
+Multiple comment forms shown when using a static page as home page - FIXED
+
 v1.0.7
 Undefined index notice - FIXED
 Duplicate description in listing category pages - FIXED
