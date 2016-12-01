@@ -1,3 +1,6 @@
+v1.1.2
+If GD location manager not installed the GD default location can show as home page title - FIXED
+
 v1.1.1
 nofollow added to social media links - ADDED
 Minor CSS changes - CHANGED
