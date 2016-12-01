@@ -5,7 +5,7 @@ Description: A Supreme Child Theme for Directory Starter, check out this video t
 Author: GeoDirectory
 Author URI: https://wpgeodirectory.com/
 Template: directory-starter
-Version: 1.1.0
+Version: 1.1.1
 License: GPLv2 or greater
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: supreme-directory
@@ -51,6 +51,11 @@ body.sd {
     top: 0;
     width: 100%;
     z-index: 1111;
+}
+
+.registration.buddypress.sd-homepage .site-header {
+    position: relative;
+    background-color: #2f2f2f;
 }
 
 .sd.admin-bar .site-header {
