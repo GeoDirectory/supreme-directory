@@ -977,7 +977,7 @@ function sd_gd_current_location_name(){
 }
 
 function sd_homepage_featured_content() {
-    if (is_singular() && $location = sd_gd_current_location_name()) { ?>
+    if (is_singular() && geodir_is_page('location') && $location = sd_gd_current_location_name() ) { ?>
         <h1 class="entry-title"><?php echo esc_attr($location); ?></h1>
     <?php } else { ?>
         <h1 class="entry-title"><?php the_title(); ?></h1>

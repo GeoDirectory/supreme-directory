@@ -1,5 +1,9 @@
+v1.1.2
+If GD location manager not installed the GD default location can show as home page title - FIXED
+
 v1.1.1
-target="_blank" option added to social media links - ADDED
+nofollow added to social media links - ADDED
+Minor CSS changes - CHANGED
 
 v1.1.0
 Layout and design bug fixes with archive pages and images - FIXED
