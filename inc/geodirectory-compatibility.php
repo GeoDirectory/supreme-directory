@@ -267,10 +267,10 @@ function sd_add_event_dates_featured_area(){
                     }
 
                     $output .= '<p class="' . esc_attr($recurring_class_cont) . '">';
-                    $output .= '<i class="fa fa-caret-right"></i> ' . esc_attr($start_date);
+                    $output .= '<span class="geodir_schedule_start"><i class="fa fa-caret-right"></i> ' . esc_attr($start_date). '</span>';
                     if ( !$same_datetime ) {
                         $output .= '<br />';
-                        $output .= '<i class="fa fa-caret-left"></i> ' . esc_attr($end_date);
+                        $output .= '<span class="geodir_schedule_end"><i class="fa fa-caret-left"></i> ' . esc_attr($end_date). '</span>';
                     }
                     $output .= '</p>';
                     if($geodir_num_dates>0){break;}
