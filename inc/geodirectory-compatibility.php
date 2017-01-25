@@ -128,7 +128,21 @@ add_action('widgets_init', 'sd_theme_actions', 15);
  */
 function sd_map_show()
 {
-    echo do_shortcode('[gd_listing_map width=100% autozoom=true]');
+    $shortcode_args = array(
+        'width' => '100%',
+        'autozoom' => 'true'
+    );
+
+    $shortcode_args = apply_filters('sd_map_shortcode_args', $shortcode_args);
+
+    $arg_string = array();
+    foreach ($shortcode_args as $key => $value) {
+        $arg_string[] = $key.'='.$value;
+    }
+    $imploded_args = implode(' ', $arg_string);
+
+    $shortcode_string = '[gd_listing_map '.$imploded_args.']';
+    echo do_shortcode($shortcode_string);
 }
 
 
@@ -267,10 +281,10 @@ function sd_add_event_dates_featured_area(){
                     }
 
                     $output .= '<p class="' . esc_attr($recurring_class_cont) . '">';
-                    $output .= '<i class="fa fa-caret-right"></i> ' . esc_attr($start_date);
+                    $output .= '<span class="geodir_schedule_start"><i class="fa fa-caret-right"></i> ' . esc_attr($start_date). '</span>';
                     if ( !$same_datetime ) {
                         $output .= '<br />';
-                        $output .= '<i class="fa fa-caret-left"></i> ' . esc_attr($end_date);
+                        $output .= '<span class="geodir_schedule_end"><i class="fa fa-caret-left"></i> ' . esc_attr($end_date). '</span>';
                     }
                     $output .= '</p>';
                     if($geodir_num_dates>0){break;}
