@@ -1324,6 +1324,7 @@ RTL SUPPORT
 
     .sd.archive.geodir-page aside#gd-sidebar-wrapper, .sd.search.geodir-page aside#gd-sidebar-wrapper {
         visibility: hidden;
+        z-index: -1;
     }
 
     .sd.search.geodir-page .gd_rating_show, .sd.archive.geodir-page .gd_rating_show {
@@ -1426,6 +1427,7 @@ MOBILE TOGGLE MAP/LISTINGS START
 */
     .sd-map-only.sd.archive.geodir-page aside#gd-sidebar-wrapper,.sd-map-only.sd.search.geodir-page aside#gd-sidebar-wrapper{
         visibility: visible;
+        z-index: 1;
     }
 
     .sd-map-only #showMap, .sd-map-only #showSearch{
