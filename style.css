@@ -239,11 +239,11 @@ body.sd {
     margin: 0 auto;
 }
 
-.sd .featured-area  .geodir-cat-list ul li {
+.sd .featured-area .geodir-cat-list ul li {
     font-size: 12px;
 }
 
-.sd .featured-area  .geodir-cat-list ul li:nth-child(5n) {
+.sd .featured-area .geodir-cat-list ul li:nth-child(5n) {
     margin-right: 0;
 }
 
@@ -1166,7 +1166,7 @@ h2.comments-title {
 .sd.author .featured-area .avatar {
     border-radius: 60px;
     margin: 0 auto;
-    width: 120px; 
+    width: 120px;
 }
 
 ::-webkit-scrollbar {
