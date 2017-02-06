@@ -1034,7 +1034,8 @@ function sd_homepage_featured_content() {
     }
 
     echo do_shortcode('[gd_advanced_search]');
-    echo do_shortcode('[gd_popular_post_category category_limit=5]');
+    echo do_shortcode('[gd_popular_post_category category_limit=5 category_restrict=1]');
+    
     echo '<div class="home-more" id="sd-home-scroll"><a href="#sd-home-scroll" ><i class="fa fa-chevron-down"></i></a></div>';
 }
 add_action('sd_homepage_content','sd_homepage_featured_content');
