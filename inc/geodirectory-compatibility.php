@@ -746,6 +746,7 @@ function sup_add_feat_img_head($page)
         <div class="container">
             <div class="sd-detail-author">
                 <?php
+                $is_owned = false;
                 if (!$preview && function_exists('geodir_load_translation_geodirclaim')) {
                     $geodir_post_type = get_option('geodir_post_types_claim_listing', array());
                     if (in_array($post_type, $geodir_post_type)) {
@@ -760,15 +761,17 @@ function sup_add_feat_img_head($page)
                         <?php
                         }else{
                         $author_link = '#';
-                        $author_name = __('Claim Me', 'supreme-directory');
+                        //$author_name = __('Claim Me', 'supreme-directory');
                         $entry_author = '<img src="'.get_stylesheet_directory_uri() . "/images/gravatar2.png".'"  height="100" width="100">';
                         }
                     }
                 }
 
                 printf('<div class="author-avatar"><a href="%s">%s</a></div>', esc_url($author_link), $entry_author);
-                printf('<div class="author-link"><a href="%s">%s</a></div>', esc_url($author_link), esc_attr($author_name));
 
+                if ($is_owned == '1') {
+                    printf('<div class="author-link"><a href="%s">%s</a></div>', esc_url($author_link), esc_attr($author_name));
+                }
 
                 if (is_user_logged_in() && geodir_listing_belong_to_current_user()) {
                 global $preview;
@@ -953,10 +956,11 @@ function sup_add_feat_img_head($page)
         }
 
 
+        $full_image_url = apply_filters('sd_featured_image_url', esc_url($full_image_url[0]));
+
         ?>
         <div class="featured-area">
-            <div class="featured-img" style="background-image: url('<?php echo esc_url($full_image_url[0]); ?>');">
-
+            <div class="featured-img" style="background-image: url('<?php echo $full_image_url; ?>');">
             </div>
             <div class="header-wrap">
             <?php do_action('sd_homepage_content');?>
