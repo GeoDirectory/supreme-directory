@@ -740,40 +740,43 @@ function sup_add_feat_img_head($page)
 
         $cats_arr = array_filter(explode(",", $post_cats));
         $cat_icons = geodir_get_term_icon();
-        $extra_class = apply_filters('sd_detail_details_extra_class', "");
+        
+        $post_id = $post->ID;
+        
+        // WPML
+        $duplicate_of = geodir_is_wpml() ? get_post_meta((int)$post_id, '_icl_lang_duplicate_of', true) : NULL;
+        // WPML
         ?>
         <?php do_action('sd-detail-details-before'); ?>
-        <div class="sd-detail-details <?php echo $extra_class; ?>">
+        <div class="sd-detail-details">
         <div class="container">
             <div class="sd-detail-author">
                 <?php
                 $is_owned = false;
                 if (!$preview && function_exists('geodir_load_translation_geodirclaim')) {
                     $geodir_post_type = get_option('geodir_post_types_claim_listing', array());
+                    
                     if (in_array($post_type, $geodir_post_type)) {
-                        $is_owned = geodir_get_post_meta($post->ID, 'claimed', true);
-                        if ($is_owned == '1') {
+                        $is_owned = !$duplicate_of ? (int)geodir_get_post_meta($post_id, 'claimed', true) : (int)geodir_get_post_meta($duplicate_of, 'claimed', true);
+                        
+                        if ($is_owned) {
                             ?>
-                            <span class="fa fa-stack sd-verified-badge"
-                                  title="<?php _e('Verified Owner', 'supreme-directory'); ?>">
-                            <i class="fa fa-circle fa-inverse"></i>
-                            <i class="fa fa-check-circle"></i>
-                        </span>
-                        <?php
+                            <span class="fa fa-stack sd-verified-badge" title="<?php _e('Verified Owner', 'supreme-directory'); ?>">
+                                <i class="fa fa-circle fa-inverse"></i>
+                                <i class="fa fa-check-circle"></i>
+                            </span>
+                            <?php
                         } else {
-                        $author_link = '#';
-                        $entry_author = '<img src="'.get_stylesheet_directory_uri() . "/images/gravatar.jpg".'"  height="100" width="100">';
+                            $author_link = '#';
+                            $entry_author = '<img src="'.get_stylesheet_directory_uri() . "/images/gravatar2.png".'"  height="100" width="100">';
                         }
                     }
                 }
 
                 printf('<div class="author-avatar"><a href="%s">%s</a></div>', esc_url($author_link), $entry_author);
 
-                if (!defined('GEODIRCLAIM_VERSION') || $is_owned == '1') {
-                    printf('<div class="author-link"><span class="vcard author author_name"><span class="fn"><a href="%s">%s</a></span></span></div>', esc_url($author_link), esc_attr($author_name));
-                    do_action('sd_detail_author_extra', $post, $author_link, $author_name);
-                } else {
-                    do_action('sd_detail_default_author', $post, $author_link, $author_name);
+                if ($is_owned) {
+                    printf('<div class="author-link"><a href="%s">%s</a></div>', esc_url($author_link), esc_attr($author_name));
                 }
 
                 if (is_user_logged_in() && geodir_listing_belong_to_current_user()) {
@@ -788,32 +791,45 @@ function sup_add_feat_img_head($page)
 
                 if (function_exists('geodir_load_translation_geodirclaim')) {
                     $geodir_post_type = array();
-                    if (get_option('geodir_post_types_claim_listing'))
-                        {$geodir_post_type = get_option('geodir_post_types_claim_listing');}
+                    if (get_option('geodir_post_types_claim_listing')) {
+                        $geodir_post_type = get_option('geodir_post_types_claim_listing');
+                    }
+    
                     $posttype = (isset($post->post_type)) ? $post->post_type : '';
+                    
                     if (in_array($posttype, $geodir_post_type) && !$preview) {
-                        $is_owned = geodir_get_post_meta($post->ID, 'claimed', true);
-                        if (get_option('geodir_claim_enable') == 'yes' && $is_owned != '1') {
-
-                            if (is_user_logged_in()) {
-
-                                echo '<div class="geodir-company_info">';
-                                echo '<div class="geodir_display_claim_popup_forms"></div>';
-                                echo '<a href="javascript:void(0);" class="supreme-btn supreme-btn-small supreme-edit-btn geodir_claim_enable"><i class="fa fa-question-circle"></i> ' . __('Claim', 'supreme-directory') . '</a>';
-                                echo '</div>';
-                                echo '<input type="hidden" name="geodir_claim_popup_post_id" value="' . $post->ID . '" />';
-                                if (!empty($_REQUEST['gd_go']) && $_REQUEST['gd_go'] == 'claim' && !isset($_REQUEST['geodir_claim_request'])) {
-					                echo '<script type="text/javascript">jQuery(function(){jQuery(".supreme-btn.geodir_claim_enable").trigger("click");});</script>';
-				                }
+                        $is_owned = !$duplicate_of ? (int)geodir_get_post_meta($post_id, 'claimed', true) : (int)geodir_get_post_meta($duplicate_of, 'claimed', true);
+        
+                        if (get_option('geodir_claim_enable') == 'yes' && !$is_owned ) {
+                            if ($duplicate_of) {
+                                $current_url = get_permalink($duplicate_of);
+                                $current_url = add_query_arg(array('gd_go' => 'claim'), $current_url);
+                                
+                                if (!is_user_logged_in()) {
+                                    $current_url = geodir_login_url(array('redirect_to' => urlencode_deep($current_url)));
+                                    $current_url = apply_filters('geodir_claim_login_to_claim_url', $current_url, $duplicate_of);
+                                }
+                                    
+                                echo '<a href="' . esc_url($current_url) . '" class="supreme-btn supreme-btn-small supreme-edit-btn"><i class="fa fa-question-circle"></i> ' . __('Claim', 'supreme-directory') . '</a>';
                             } else {
-                            $current_url = remove_query_arg(array('gd_go'), geodir_curPageURL());
-				            $current_url = add_query_arg(array('gd_go' => 'claim'), $current_url);
-				            $login_to_claim_url = geodir_login_url(array('redirect_to' => urlencode_deep($current_url)));
-				            $login_to_claim_url = apply_filters('geodir_claim_login_to_claim_url', $login_to_claim_url, $post->ID);
+                                if (is_user_logged_in()) {
+                                    echo '<div class="geodir-company_info">';
+                                    echo '<div class="geodir_display_claim_popup_forms"></div>';
+                                    echo '<a href="javascript:void(0);" class="supreme-btn supreme-btn-small supreme-edit-btn geodir_claim_enable"><i class="fa fa-question-circle"></i> ' . __('Claim', 'supreme-directory') . '</a>';
+                                    echo '</div>';
+                                    echo '<input type="hidden" name="geodir_claim_popup_post_id" value="' . $post->ID . '" />';
+                                    if (!empty($_REQUEST['gd_go']) && $_REQUEST['gd_go'] == 'claim' && !isset($_REQUEST['geodir_claim_request'])) {
+                                        echo '<script type="text/javascript">jQuery(function(){jQuery(".supreme-btn.geodir_claim_enable").trigger("click");});</script>';
+                                    }
+                                } else {
+                                    $current_url = remove_query_arg(array('gd_go'), geodir_curPageURL());
+                                    $current_url = add_query_arg(array('gd_go' => 'claim'), $current_url);
+                                    $login_to_claim_url = geodir_login_url(array('redirect_to' => urlencode_deep($current_url)));
+                                    $login_to_claim_url = apply_filters('geodir_claim_login_to_claim_url', $login_to_claim_url, $post->ID);
+                                    
+                                    echo '<a href="' . esc_url($login_to_claim_url) . '" class="supreme-btn supreme-btn-small supreme-edit-btn"><i class="fa fa-question-circle"></i> ' . __('Claim', 'supreme-directory') . '</a>';
 
-                                $site_login_url = $login_to_claim_url;
-                                echo '<a href="' . esc_url($site_login_url) . '" class="supreme-btn supreme-btn-small supreme-edit-btn"><i class="fa fa-question-circle"></i> ' . __('Claim', 'supreme-directory') . '</a>';
-
+                                }
                             }
                         }
                     }
@@ -823,8 +839,7 @@ function sup_add_feat_img_head($page)
             <!-- sd-detail-suthor end -->
             <div class="sd-detail-info">
                 <?php
-                $title_extra_class = apply_filters('sd_detail_title_extra_class', "");
-                echo '<h1 class="sd-entry-title '.$title_extra_class.'">' .  stripslashes(get_the_title());
+                echo '<h1 class="sd-entry-title">' .  stripslashes(get_the_title());
                 ?>
                 <?php
                 echo '</h1>';

@@ -2,6 +2,7 @@ v1.1.3
 CSS fix for iOS devices for links not working on listing pages - FIXED
 Double space in CSS causing problems with GD Booster - FIXED
 Claim link not working when not logged in - FIXED
+Claim listing WPML compatibility fix - FIXED
 
 v1.1.2
 If GD location manager not installed the GD default location can show as home page title - FIXED
