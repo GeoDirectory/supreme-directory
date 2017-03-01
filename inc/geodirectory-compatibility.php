@@ -22,13 +22,36 @@ add_action('geodir_listings_content', 'sd_search_form_on_search_page', 4);
 
 
 /**
+ * Outputs the search form.
+ *
+ * @since 1.0.0
+ */
+function sd_search_form_shortcode()
+{
+    $shortcode_args = array(
+        
+    );
+
+    $shortcode_args = apply_filters('sd_search_shortcode_args', $shortcode_args);
+
+    $arg_string = array();
+    foreach ($shortcode_args as $key => $value) {
+        $arg_string[] = $key.'='.$value;
+    }
+    $imploded_args = implode(' ', $arg_string);
+
+    $shortcode_string = '[gd_advanced_search '.$imploded_args.']';
+    echo do_shortcode($shortcode_string);
+}
+
+/**
  * Outputs the search widget.
  *
  * @since 1.0.0
  */
 function sd_search_form_on_search_page()
 {
-    echo do_shortcode('[gd_advanced_search]');
+    sd_search_form_shortcode();
 }
 
 
@@ -1058,7 +1081,7 @@ function sd_homepage_featured_content() {
         echo '<div class="entry-subtitle">' . $sub_title . '</div>';
     }
 
-    echo do_shortcode('[gd_advanced_search]');
+    sd_search_form_shortcode();
     echo do_shortcode('[gd_popular_post_category category_limit=5 category_restrict=1]');
     
     echo '<div class="home-more" id="sd-home-scroll"><a href="#sd-home-scroll" ><i class="fa fa-chevron-down"></i></a></div>';
@@ -1131,7 +1154,7 @@ add_filter('wp_footer', 'sd_safari_back_button_scroll_fix');
 function sd_feature_area_gd(){
 
     if (is_front_page() && !geodir_is_page('home')) {
-        echo do_shortcode('[gd_advanced_search]');
+        sd_search_form_shortcode();
         echo do_shortcode('[gd_popular_post_category category_limit=5]');
         echo '<div class="home-more"  id="sd-home-scroll" ><a href="#sd-home-scroll"><i class="fa fa-chevron-down"></i></a></div>';
     }
