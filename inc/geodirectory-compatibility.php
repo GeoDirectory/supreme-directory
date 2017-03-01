@@ -734,6 +734,8 @@ function sup_add_feat_img_head($page)
         $postlink = get_permalink(geodir_add_listing_page_id());
         $editlink = geodir_getlink($postlink, array('pid' => $post->ID), false);
 
+        $extra_class = apply_filters('sd_detail_details_extra_class', "");
+
         if (is_array($post_cats)) {
             $post_cats = implode(',', $post_cats);
         }
@@ -748,7 +750,7 @@ function sup_add_feat_img_head($page)
         // WPML
         ?>
         <?php do_action('sd-detail-details-before'); ?>
-        <div class="sd-detail-details">
+        <div class="sd-detail-details  <?php echo $extra_class; ?>">
         <div class="container">
             <div class="sd-detail-author">
                 <?php
@@ -768,15 +770,18 @@ function sup_add_feat_img_head($page)
                             <?php
                         } else {
                             $author_link = '#';
-                            $entry_author = '<img src="'.get_stylesheet_directory_uri() . "/images/gravatar2.png".'"  height="100" width="100">';
+                            $entry_author = '<img src="'.get_stylesheet_directory_uri() . "/images/gravatar.jpg".'"  height="100" width="100">';
                         }
                     }
                 }
 
                 printf('<div class="author-avatar"><a href="%s">%s</a></div>', esc_url($author_link), $entry_author);
 
-                if ($is_owned) {
-                    printf('<div class="author-link"><a href="%s">%s</a></div>', esc_url($author_link), esc_attr($author_name));
+                if (!defined('GEODIRCLAIM_VERSION') || $is_owned == '1') {
+                    printf('<div class="author-link"><span class="vcard author author_name"><span class="fn"><a href="%s">%s</a></span></span></div>', esc_url($author_link), esc_attr($author_name));
+                    do_action('sd_detail_author_extra', $post, $author_link, $author_name);
+                } else {
+                    do_action('sd_detail_default_author', $post, $author_link, $author_name);
                 }
 
                 if (is_user_logged_in() && geodir_listing_belong_to_current_user()) {
@@ -839,7 +844,8 @@ function sup_add_feat_img_head($page)
             <!-- sd-detail-suthor end -->
             <div class="sd-detail-info">
                 <?php
-                echo '<h1 class="sd-entry-title">' .  stripslashes(get_the_title());
+                $title_extra_class = apply_filters('sd_detail_title_extra_class', "");
+                echo '<h1 class="sd-entry-title '.$title_extra_class.'">' .  stripslashes(get_the_title());
                 ?>
                 <?php
                 echo '</h1>';
