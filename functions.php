@@ -260,6 +260,7 @@ function sd_add_my_account_link($items, $args)
                             </li>
                         </ul>
                     <?php } ?>
+                    <?php do_action('sd_my_account_logged_in_extras'); ?>
                     <ul class="sd-my-account-dd-menu-group">
                         <li class="sd-my-account-dd-menu-link">
                             <a href="<?php echo esc_url(wp_logout_url(home_url())); ?>">
