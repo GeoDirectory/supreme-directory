@@ -891,13 +891,13 @@ function sup_add_feat_img_head($page)
                 echo apply_filters('sd_details_output_ratings',$sd_raitings);
                 $sd_social = '<div class="sd-contacts">';
                 if (isset($post->geodir_website) && $post->geodir_website) {
-                    $sd_social .= '<a target="_blank" href="' . esc_url($post->geodir_website) . '"><i class="fa fa-external-link-square"></i></a>';
+                    $sd_social .= '<a rel="nofollow" target="_blank" href="' . esc_url($post->geodir_website) . '"><i class="fa fa-external-link-square"></i></a>';
                 }
                 if (isset($post->geodir_facebook) && $post->geodir_facebook) {
-                   $sd_social .='<a target="_blank" href="' . esc_url($post->geodir_facebook) . '"><i class="fa fa-facebook-official"></i></a>';
+                   $sd_social .='<a rel="nofollow" target="_blank" href="' . esc_url($post->geodir_facebook) . '"><i class="fa fa-facebook-official"></i></a>';
                 }
                 if (isset($post->geodir_twitter) && $post->geodir_twitter) {
-                    $sd_social .='<a target="_blank" href="' . esc_url($post->geodir_twitter) . '"><i class="fa fa-twitter-square"></i></a>';
+                    $sd_social .='<a rel="nofollow" target="_blank" href="' . esc_url($post->geodir_twitter) . '"><i class="fa fa-twitter-square"></i></a>';
                 }
                 if (isset($post->geodir_contact) && $post->geodir_contact) {
                     $sd_social .='<a href="tel:' . esc_attr($post->geodir_contact) . '"><i class="fa fa-phone-square"></i>&nbsp;:&nbsp;' . esc_attr($post->geodir_contact) . '</a>';
