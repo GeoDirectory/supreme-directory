@@ -22,13 +22,36 @@ add_action('geodir_listings_content', 'sd_search_form_on_search_page', 4);
 
 
 /**
+ * Outputs the search form.
+ *
+ * @since 1.0.0
+ */
+function sd_search_form_shortcode()
+{
+    $shortcode_args = array(
+        
+    );
+
+    $shortcode_args = apply_filters('sd_search_shortcode_args', $shortcode_args);
+
+    $arg_string = array();
+    foreach ($shortcode_args as $key => $value) {
+        $arg_string[] = $key.'='.$value;
+    }
+    $imploded_args = implode(' ', $arg_string);
+
+    $shortcode_string = '[gd_advanced_search '.$imploded_args.']';
+    echo do_shortcode($shortcode_string);
+}
+
+/**
  * Outputs the search widget.
  *
  * @since 1.0.0
  */
 function sd_search_form_on_search_page()
 {
-    echo do_shortcode('[gd_advanced_search]');
+    sd_search_form_shortcode();
 }
 
 
@@ -734,6 +757,8 @@ function sup_add_feat_img_head($page)
         $postlink = get_permalink(geodir_add_listing_page_id());
         $editlink = geodir_getlink($postlink, array('pid' => $post->ID), false);
 
+        $extra_class = apply_filters('sd_detail_details_extra_class', "");
+
         if (is_array($post_cats)) {
             $post_cats = implode(',', $post_cats);
         }
@@ -748,7 +773,7 @@ function sup_add_feat_img_head($page)
         // WPML
         ?>
         <?php do_action('sd-detail-details-before'); ?>
-        <div class="sd-detail-details">
+        <div class="sd-detail-details  <?php echo $extra_class; ?>">
         <div class="container">
             <div class="sd-detail-author">
                 <?php
@@ -768,15 +793,18 @@ function sup_add_feat_img_head($page)
                             <?php
                         } else {
                             $author_link = '#';
-                            $entry_author = '<img src="'.get_stylesheet_directory_uri() . "/images/gravatar2.png".'"  height="100" width="100">';
+                            $entry_author = '<img src="'.get_stylesheet_directory_uri() . "/images/gravatar.jpg".'"  height="100" width="100">';
                         }
                     }
                 }
 
                 printf('<div class="author-avatar"><a href="%s">%s</a></div>', esc_url($author_link), $entry_author);
 
-                if ($is_owned) {
-                    printf('<div class="author-link"><a href="%s">%s</a></div>', esc_url($author_link), esc_attr($author_name));
+                if (!defined('GEODIRCLAIM_VERSION') || $is_owned == '1') {
+                    printf('<div class="author-link"><span class="vcard author author_name"><span class="fn"><a href="%s">%s</a></span></span></div>', esc_url($author_link), esc_attr($author_name));
+                    do_action('sd_detail_author_extra', $post, $author_link, $author_name);
+                } else {
+                    do_action('sd_detail_default_author', $post, $author_link, $author_name);
                 }
 
                 if (is_user_logged_in() && geodir_listing_belong_to_current_user()) {
@@ -839,7 +867,8 @@ function sup_add_feat_img_head($page)
             <!-- sd-detail-suthor end -->
             <div class="sd-detail-info">
                 <?php
-                echo '<h1 class="sd-entry-title">' .  stripslashes(get_the_title());
+                $title_extra_class = apply_filters('sd_detail_title_extra_class', "");
+                echo '<h1 class="sd-entry-title '.$title_extra_class.'">' .  stripslashes(get_the_title());
                 ?>
                 <?php
                 echo '</h1>';
@@ -862,13 +891,13 @@ function sup_add_feat_img_head($page)
                 echo apply_filters('sd_details_output_ratings',$sd_raitings);
                 $sd_social = '<div class="sd-contacts">';
                 if (isset($post->geodir_website) && $post->geodir_website) {
-                    $sd_social .= '<a target="_blank" href="' . esc_url($post->geodir_website) . '"><i class="fa fa-external-link-square"></i></a>';
+                    $sd_social .= '<a rel="nofollow" target="_blank" href="' . esc_url($post->geodir_website) . '"><i class="fa fa-external-link-square"></i></a>';
                 }
                 if (isset($post->geodir_facebook) && $post->geodir_facebook) {
-                   $sd_social .='<a target="_blank" href="' . esc_url($post->geodir_facebook) . '"><i class="fa fa-facebook-official"></i></a>';
+                   $sd_social .='<a rel="nofollow" target="_blank" href="' . esc_url($post->geodir_facebook) . '"><i class="fa fa-facebook-official"></i></a>';
                 }
                 if (isset($post->geodir_twitter) && $post->geodir_twitter) {
-                    $sd_social .='<a target="_blank" href="' . esc_url($post->geodir_twitter) . '"><i class="fa fa-twitter-square"></i></a>';
+                    $sd_social .='<a rel="nofollow" target="_blank" href="' . esc_url($post->geodir_twitter) . '"><i class="fa fa-twitter-square"></i></a>';
                 }
                 if (isset($post->geodir_contact) && $post->geodir_contact) {
                     $sd_social .='<a href="tel:' . esc_attr($post->geodir_contact) . '"><i class="fa fa-phone-square"></i>&nbsp;:&nbsp;' . esc_attr($post->geodir_contact) . '</a>';
@@ -1052,7 +1081,7 @@ function sd_homepage_featured_content() {
         echo '<div class="entry-subtitle">' . $sub_title . '</div>';
     }
 
-    echo do_shortcode('[gd_advanced_search]');
+    sd_search_form_shortcode();
     echo do_shortcode('[gd_popular_post_category category_limit=5 category_restrict=1]');
     
     echo '<div class="home-more" id="sd-home-scroll"><a href="#sd-home-scroll" ><i class="fa fa-chevron-down"></i></a></div>';
@@ -1125,7 +1154,7 @@ add_filter('wp_footer', 'sd_safari_back_button_scroll_fix');
 function sd_feature_area_gd(){
 
     if (is_front_page() && !geodir_is_page('home')) {
-        echo do_shortcode('[gd_advanced_search]');
+        sd_search_form_shortcode();
         echo do_shortcode('[gd_popular_post_category category_limit=5]');
         echo '<div class="home-more"  id="sd-home-scroll" ><a href="#sd-home-scroll"><i class="fa fa-chevron-down"></i></a></div>';
     }
