@@ -1204,7 +1204,7 @@ function sd_gd_remove_theme_functions(){
 }
 add_action('after_setup_theme','sd_gd_remove_theme_functions');
 
-add_action('sd_detail_before_cat_links','sd_tags_content');
+add_action('geodir_before_detail_page_more_info','sd_tags_content');
 function sd_tags_content()
 {
     global $preview, $post;?>
