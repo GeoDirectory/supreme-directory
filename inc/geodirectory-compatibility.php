@@ -96,6 +96,15 @@ add_filter('body_class', 'sd_custom_body_class_gd');
  */
 function sd_theme_actions()
 {
+
+    if (geodir_is_page('listing') || geodir_is_page('search')) {
+        $post_types = get_option( 'geodir_cpt_disable_location' );
+        $cur_post_type = geodir_get_current_posttype();
+        if (is_array($post_types) && in_array($cur_post_type, $post_types)) {
+            return;
+        }    
+    }
+
     unregister_sidebar('geodir_listing_left_sidebar');
     unregister_sidebar('geodir_listing_right_sidebar');
 
@@ -106,7 +115,6 @@ function sd_theme_actions()
 	    unregister_sidebar('geodir_author_left_sidebar');
 	    unregister_sidebar('geodir_author_right_sidebar');
     }
-
 
     // listings page
     if (get_option('geodir_show_listing_right_section', true)) {
@@ -141,7 +149,7 @@ function sd_theme_actions()
 
 }
 
-add_action('widgets_init', 'sd_theme_actions', 15);
+add_action('wp', 'sd_theme_actions', 15);
 
 
 /**
