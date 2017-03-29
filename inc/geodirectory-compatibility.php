@@ -207,6 +207,7 @@ function sd_add_event_dates_featured_area(){
         <?php do_action('sd_detail_header_wrap_inner'); ?>
         <?php
 
+        $output = '';
         if(isset($post->recurring_dates)){
             $recuring_data = maybe_unserialize( $post->recurring_dates );
 //print_r($recuring_data);
@@ -217,7 +218,7 @@ function sd_add_event_dates_featured_area(){
                 $endtimes = '';
                 $astarttimes = array();
                 $aendtimes = array();
-                $output = '';
+
                 // Check recurring enabled
                 $recurring_pkg = geodir_event_recurring_pkg( $post );
 
@@ -906,6 +907,8 @@ function sup_add_feat_img_head($page)
 
                 echo apply_filters('sd_details_output_social',$sd_social);
 
+                do_action('sd_detail_before_cat_links');
+
                 $cat_links = '<div class="sd-detail-cat-links"><ul>';
                 foreach ($cats_arr as $cat) {
                     $term_arr = get_term($cat, $post_tax);
@@ -1200,3 +1203,102 @@ function sd_gd_remove_theme_functions(){
 	remove_action('sd_author_content','sd_author_content_output',10);
 }
 add_action('after_setup_theme','sd_gd_remove_theme_functions');
+
+add_action('geodir_before_detail_page_more_info','sd_tags_content');
+function sd_tags_content()
+{
+    global $preview, $post;?>
+    <?php
+    $taxonomies = array();
+
+    $is_backend_preview = (is_single() && !empty($_REQUEST['post_type']) && !empty($_REQUEST['preview']) && !empty($_REQUEST['p'])) && is_super_admin() ? true : false; // skip if preview from backend
+
+    if ($preview && !$is_backend_preview) {
+        $post_type = $post->listing_type;
+        $post_taxonomy = $post_type . 'category';
+        $post->{$post_taxonomy} = $post->post_category[$post_taxonomy];
+    } else {
+        $post_type = $post->post_type;
+    }
+
+    $post_type_info = get_post_type_object($post_type);
+    $listing_label = __($post_type_info->labels->singular_name, 'geodirectory');
+
+    if (!empty($post->post_tags)) {
+
+        if (taxonomy_exists($post_type . '_tags')):
+            $links = array();
+            $terms = array();
+            // to limit post tags
+            $post_tags = trim($post->post_tags, ",");
+            $post_id = isset($post->ID) ? $post->ID : '';
+
+
+            $post_tags = apply_filters('geodir_action_details_post_tags', $post_tags, $post_id);
+
+            $post->post_tags = $post_tags;
+            $post_tags = explode(",", trim($post->post_tags, ","));
+
+
+            foreach ($post_tags as $post_term) {
+
+                // fix slug creation order for tags & location
+                $post_term = trim($post_term);
+
+                $priority_location = false;
+                if ($insert_term = term_exists($post_term, $post_type . '_tags')) {
+                    $term = get_term_by('id', $insert_term['term_id'], $post_type . '_tags');
+                } else {
+                    $post_country = isset($_REQUEST['post_country']) && $_REQUEST['post_country'] != '' ? sanitize_text_field($_REQUEST['post_country']) : NULL;
+                    $post_region = isset($_REQUEST['post_region']) && $_REQUEST['post_region'] != '' ? sanitize_text_field($_REQUEST['post_region']) : NULL;
+                    $post_city = isset($_REQUEST['post_city']) && $_REQUEST['post_city'] != '' ? sanitize_text_field($_REQUEST['post_city']) : NULL;
+                    $match_country = $post_country && sanitize_title($post_term) == sanitize_title($post_country) ? true : false;
+                    $match_region = $post_region && sanitize_title($post_term) == sanitize_title($post_region) ? true : false;
+                    $match_city = $post_city && sanitize_title($post_term) == sanitize_title($post_city) ? true : false;
+                    if ($match_country || $match_region || $match_city) {
+                        $priority_location = true;
+                        $term = get_term_by('name', $post_term, $post_type . '_tags');
+                    } else {
+                        $insert_term = wp_insert_term($post_term, $post_type . '_tags');
+                        $term = get_term_by('name', $post_term, $post_type . '_tags');
+                    }
+                }
+
+                if (!is_wp_error($term) && is_object($term)) {
+
+                    // fix tag link on detail page
+                    if ($priority_location) {
+
+                        $tag_link = "<a href=''>$post_term</a>";
+
+                        $tag_link = apply_filters('geodir_details_taxonomies_tag_link',$tag_link,$term);
+                        $links[] = $tag_link;
+                    } else {
+                        $tag_link = "<a href='" . esc_attr(get_term_link($term->term_id, $term->taxonomy)) . "'>$term->name</a>";
+                        /** This action is documented in geodirectory-template_actions.php */
+                        $tag_link = apply_filters('geodir_details_taxonomies_tag_link',$tag_link,$term);
+                        $links[] = $tag_link;
+                    }
+                    $terms[] = $term;
+                }
+                //
+            }
+            if (!isset($listing_label)) {
+                $listing_label = '';
+            }
+            $taxonomies[$post_type . '_tags'] = wp_sprintf(__('%s Tags: %l', 'geodirectory'), geodir_ucwords($listing_label), $links, (object)$terms);
+        endif;
+
+    }
+
+    $taxonomies = apply_filters('geodir_details_taxonomies_output',$taxonomies,$post_type,$listing_label,geodir_ucwords($listing_label));
+
+
+    if (isset($taxonomies[$post_type . '_tags'])) {
+        echo '<div class="geodir_more_info">';
+        echo '<span class="">' . $taxonomies[$post_type . '_tags'] . '</span>';
+        echo '</div>';
+    }
+    ?>
+    <?php
+}
