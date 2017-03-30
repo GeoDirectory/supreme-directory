@@ -48,13 +48,22 @@ jQuery(document).ready(function () {
 
     if ( jQuery( ".sd-detail-cta a.dt-btn" ).length ) {
         jQuery(".sd-detail-cta a.dt-btn").click(function () {
-            jQuery('.geodir-tab-head [data-tab="#reviews"]').closest('dd').trigger('click');
-            setTimeout(function(){jQuery('html,body').animate({scrollTop:jQuery('#respond').offset().top}, 'slow');console.log('scroll')}, 200);
+            sd_scroll_to_reviews();
+        });
+    }
 
+    if ( jQuery( ".sd-ratings a.geodir-pcomments" ).length ) {
+        jQuery(".sd-ratings a.geodir-pcomments").click(function () {
+            sd_scroll_to_reviews();
         });
     }
 
 });
+
+function sd_scroll_to_reviews(){
+    jQuery('.geodir-tab-head [data-tab="#reviews"]').closest('dd').trigger('click');
+    setTimeout(function(){jQuery('html,body').animate({scrollTop:jQuery('#respond').offset().top}, 'slow');console.log('scroll')}, 200);
+}
 
 
 function sd_adjust_head(){
