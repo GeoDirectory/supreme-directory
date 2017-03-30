@@ -31,7 +31,7 @@ body.sd {
     font-size: 15px;
 }
 
-.sd .site-header {
+.sd-common .site-header {
     border: 0 none;
     box-shadow: none;
     /*height: 61px;*/
@@ -75,7 +75,7 @@ body.sd {
     overflow: hidden;
 }
 
-.sd #primary-nav ul li a {
+.sd-common #primary-nav ul li a {
     min-height: 61px;
     line-height: 61px;
 }
@@ -420,7 +420,7 @@ SIDEBARS CSS END
     z-index: 99999;
 }
 
-.sd.search.geodir-page.admin-bar #site-header, .sd.archive.geodir-page.admin-bar #site-header {
+.sd-common.search.geodir-page.admin-bar #site-header, .sd-common.archive.geodir-page.admin-bar #site-header {
     top: 32px;
 }
 
@@ -476,7 +476,7 @@ SIDEBARS CSS END
     /*display: none;*/
 }
 
-.gd-pagination-details {
+.sd .gd-pagination-details {
     float: right;
 }
 
@@ -696,7 +696,7 @@ a#hideMap {
     margin-top: 5px;
 }
 
-.sd .sd-my-account-link .avatar {
+.sd-common .sd-my-account-link .avatar {
     width: 20px;
     height: 20px;
     border-radius: 15px;
@@ -741,11 +741,11 @@ a#hideMap {
     margin-top: 0;
 }
 
-.sd #primary-nav ul li .sd-my-account-dd h4 a {
+.sd-common #primary-nav ul li .sd-my-account-dd h4 a {
     font-size: 16px;
 }
 
-.sd #primary-nav ul li .sd-my-account-dd a {
+.sd-common #primary-nav ul li .sd-my-account-dd a {
     text-transform: initial;
     line-height: normal;
     height: auto;
@@ -756,14 +756,14 @@ a#hideMap {
     clear: both;
 }
 
-.sd #primary-nav .sd-my-account-dd-menu-bp-group {
+.sd-common #primary-nav .sd-my-account-dd-menu-bp-group {
     margin: 12px 0 0;
     border-top: 1px solid #151515;
     padding-top: 11px;
     padding-bottom: 11px;
 }
 
-.sd #primary-nav .sd-my-account-dd-menu-group .fa {
+.sd-common #primary-nav .sd-my-account-dd-menu-group .fa {
     margin-right: 7px;
 }
 
