@@ -1,6 +1,7 @@
 v1.1.4
-Tags now show in sidebarof details page - FIXED
+Tags now show in sidebar of details page - FIXED
 reviews link in details page head will now open reviews tab - FIXED
+Country name does not showing as a translated - FIXED
 
 v1.1.3
 CSS fix for iOS devices for links not working on listing pages - FIXED
