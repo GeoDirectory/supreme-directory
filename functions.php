@@ -209,9 +209,7 @@ function supreme_entry_meta()
  * @return string The menu items HTML.
  * @since 1.0.0
  */
-function sd_add_my_account_link($items, $args)
-{
-
+function sd_add_my_account_link($items, $args) {
     if ($args->theme_location == 'primary-menu') {
         ob_start();
         $menu_slug = $args->menu->slug;
@@ -219,9 +217,9 @@ function sd_add_my_account_link($items, $args)
         <li  class="sd-my-account menu-item">
             <?php
         if (is_user_logged_in()) {
-
             $current_user = wp_get_current_user();
             $avatar = get_avatar($current_user->ID, 60);
+            $redirect_to = apply_filters('sd_logout_redirect_to_link', sd_current_page_url());
             ?>
             <a class="sd-my-account-link" href="">
                 <?php
@@ -263,7 +261,7 @@ function sd_add_my_account_link($items, $args)
                     <?php do_action('sd_my_account_logged_in_extras'); ?>
                     <ul class="sd-my-account-dd-menu-group">
                         <li class="sd-my-account-dd-menu-link">
-                            <a href="<?php echo esc_url(wp_logout_url(home_url())); ?>">
+                            <a href="<?php echo esc_url(wp_logout_url($redirect_to)); ?>">
                                 <i class="fa fa-sign-out"></i> <?php echo __('Log Out', 'supreme-directory'); ?>
                             </a>
                         </li>
@@ -271,18 +269,16 @@ function sd_add_my_account_link($items, $args)
                 </div>
             </div>
             </div>
-
-        <?php } else {
+        <?php 
+        } else {
             if (isset($_GET['redirect_to']) && $_GET['redirect_to'] != '') {
                 $redirect_to = $_GET['redirect_to'];
+            } else if (isset($_GET['redirect_add_listing']) && $_GET['redirect_add_listing'] != '') {
+                $redirect_to = $_GET['redirect_add_listing'];
             } else {
-                //echo $_SERVER['HTTP_HOST'] ;
-                $redirect_to = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '';
-                if (strpos($redirect_to, $_SERVER['HTTP_HOST']) === false) {
-                    $redirect_to = home_url();
-                }
-
+                $redirect_to = sd_current_page_url();
             }
+            $redirect_to = apply_filters('sd_login_redirect_to_link', $redirect_to);
             ?>
             <a class="sd-my-account-link" href="">
                 <?php echo __('My Account', 'supreme-directory'); ?>
@@ -628,3 +624,46 @@ function sd_author_content_output($author){
 }
 
 add_action('sd_author_content','sd_author_content_output',10,1);
+
+
+/**
+ * Get the current page URL.
+ *
+ * @since 1.1.4
+ *
+ * @return string The current URL.
+ */
+function sd_current_page_url() {
+    $current_url = 'http';
+    if ( isset( $_SERVER['HTTPS'] ) && strtolower( $_SERVER['HTTPS'] ) == 'on' ) {
+        $current_url .= 's';
+    }
+    $current_url .= "://";
+
+    /*
+     * Since we are assigning the URI from the server variables, we first need
+     * to determine if we are running on apache or IIS.  If PHP_SELF and REQUEST_URI
+     * are present, we will assume we are running on apache.
+     */
+    if ( !empty( $_SERVER['PHP_SELF'] ) && !empty( $_SERVER['REQUEST_URI'] ) ) {
+        // To build the entire URI we need to prepend the protocol, and the http host
+        // to the URI string.
+        $current_url .= $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+    } else {
+        /*
+         * Since we do not have REQUEST_URI to work with, we will assume we are
+         * running on IIS and will therefore need to work some magic with the SCRIPT_NAME and
+         * QUERY_STRING environment variables.
+         *
+         * IIS uses the SCRIPT_NAME variable instead of a REQUEST_URI variable... thanks, MS
+         */
+        $current_url .= $_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME'];
+        
+        // If the query string exists append it to the URI string
+        if ( isset( $_SERVER['QUERY_STRING']) && !empty( $_SERVER['QUERY_STRING'] ) ) {
+            $current_url .= '?' . $_SERVER['QUERY_STRING'];
+        }
+    }
+
+    return apply_filters( 'sd_current_page_url', $current_url );
+}
