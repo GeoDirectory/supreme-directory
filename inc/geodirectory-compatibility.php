@@ -17,8 +17,16 @@ remove_action('geodir_author_before_main_content', 'geodir_breadcrumb', 20);
 /*
  * add search widget on top of search results and in listings page.
  */
-add_action('geodir_search_content', 'sd_search_form_on_search_page', 4);
-add_action('geodir_listings_content', 'sd_search_form_on_search_page', 4);
+function sd_before_listing_content_search()
+{
+    if (sd_is_non_location_cpt()) {
+        return;
+    }
+    add_action('geodir_search_content', 'sd_search_form_on_search_page', 4);
+    add_action('geodir_listings_content', 'sd_search_form_on_search_page', 4);
+}
+
+add_action('wp', 'sd_before_listing_content_search');
 
 
 /**
@@ -96,6 +104,11 @@ add_filter('body_class', 'sd_custom_body_class_gd');
  */
 function sd_theme_actions()
 {
+
+    if (sd_is_non_location_cpt()) {
+        return;
+    }
+
     unregister_sidebar('geodir_listing_left_sidebar');
     unregister_sidebar('geodir_listing_right_sidebar');
 
@@ -106,7 +119,6 @@ function sd_theme_actions()
 	    unregister_sidebar('geodir_author_left_sidebar');
 	    unregister_sidebar('geodir_author_right_sidebar');
     }
-
 
     // listings page
     if (get_option('geodir_show_listing_right_section', true)) {
@@ -141,7 +153,7 @@ function sd_theme_actions()
 
 }
 
-add_action('widgets_init', 'sd_theme_actions', 15);
+add_action('wp', 'sd_theme_actions', 15);
 
 
 /**
@@ -533,7 +545,15 @@ function sd_header_login_handler()
 add_action('init', 'sd_header_login_handler');
 
 // add paging html to top of listings
-add_action('geodir_before_listing', 'geodir_pagination', 100);
+function sd_before_listing_pagination()
+{
+    if (sd_is_non_location_cpt()) {
+        return;
+    }
+    add_action('geodir_before_listing', 'geodir_pagination', 100);
+}
+
+add_action('wp', 'sd_before_listing_pagination');
 
 /**
  * Add fav html to listing page image.
@@ -1304,4 +1324,15 @@ function sd_tags_content()
     }
     ?>
     <?php
+}
+
+function sd_is_non_location_cpt() {
+    if (geodir_is_page('listing') || geodir_is_page('search')) {
+        $post_types = get_option( 'geodir_cpt_disable_location' );
+        $cur_post_type = geodir_get_current_posttype();
+        if (is_array($post_types) && in_array($cur_post_type, $post_types)) {
+            return true;
+        }
+    }
+    return false;
 }
