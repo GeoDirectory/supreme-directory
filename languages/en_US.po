@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Supreme Directory 1.1.3\n"
+"Project-Id-Version: Supreme Directory 1.1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-09 17:59+0000\n"
-"PO-Revision-Date: 2017-02-09 17:59+0000\n"
+"POT-Creation-Date: 2017-04-19 15:34+0100\n"
+"PO-Revision-Date: 2017-04-19 15:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: GD Team <info@wpgeodirectory.com>\n"
 "Language: en_US\n"
@@ -19,15 +19,15 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 
 #: archive.php:22 index.php:36 page.php:13 page_full-width.php:20 single.php:20
-#: woocommerce.php:21
+#: woocommerce.php:51
 msgid "Sorry, no results were found."
 msgstr ""
 
-#: archive.php:37 content.php:74 functions.php:623 index.php:51
+#: archive.php:37 content.php:74 functions.php:625 index.php:51
 msgid "Previous"
 msgstr ""
 
-#: archive.php:38 content.php:71 functions.php:624 index.php:52
+#: archive.php:38 content.php:71 functions.php:626 index.php:52
 msgid "Next"
 msgstr ""
 
@@ -40,7 +40,7 @@ msgstr ""
 msgid "Pages:"
 msgstr ""
 
-#: content.php:62 inc/geodirectory-compatibility.php:789
+#: content.php:62 inc/geodirectory-compatibility.php:838
 msgid "Edit"
 msgstr ""
 
@@ -59,157 +59,161 @@ msgid ""
 ">Click here to install it.</a>"
 msgstr ""
 
-#: functions.php:146
+#: functions.php:150
 msgid "Featured"
 msgstr ""
 
-#: functions.php:152
+#: functions.php:156
 msgid "Format"
 msgstr ""
 
-#: functions.php:169
+#: functions.php:173
 msgid "Posted on"
 msgstr ""
 
-#: functions.php:178
+#: functions.php:183
 msgid "Author"
 msgstr ""
 
-#: functions.php:184 functions.php:192
+#: functions.php:189 functions.php:197
 msgid ", "
 msgstr ""
 
-#: functions.php:187
+#: functions.php:192
 msgid "Categories"
 msgstr ""
 
-#: functions.php:195
+#: functions.php:200
 msgid "Tags"
 msgstr ""
 
-#: functions.php:234 functions.php:286
+#: functions.php:237 functions.php:288
 msgid "My Account"
 msgstr ""
 
-#: functions.php:238 functions.php:290
+#: functions.php:241 functions.php:292
 msgid "<  Back"
 msgstr ""
 
-#: functions.php:252
+#: functions.php:255
 msgid "About Me"
 msgstr ""
 
-#: functions.php:257
+#: functions.php:260
 msgid "Account Settings"
 msgstr ""
 
-#: functions.php:265
+#: functions.php:269
 msgid "Log Out"
 msgstr ""
 
-#: functions.php:293 functions.php:329
+#: functions.php:295 functions.php:331
 msgid "Sign In"
 msgstr ""
 
-#: functions.php:296
+#: functions.php:298
 msgid "Invalid Email, Please check"
 msgstr ""
 
-#: functions.php:302
+#: functions.php:304
 msgid "Invalid Username/Password."
 msgstr ""
 
-#: functions.php:308
+#: functions.php:310
 msgid "Email"
 msgstr ""
 
-#: functions.php:318
+#: functions.php:320
 msgid "Password"
 msgstr ""
 
-#: functions.php:326
+#: functions.php:328
 msgid "Remember me on this computer"
 msgstr ""
 
-#: functions.php:337
+#: functions.php:339
 msgid "Register"
 msgstr ""
 
-#: functions.php:339
+#: functions.php:341
 msgid "Forgot Password?"
 msgstr ""
 
-#: functions.php:430
+#: functions.php:432
 msgid "Hello world!"
 msgstr ""
 
-#: functions.php:445
+#: functions.php:447
 msgid "Find Local Treasures!"
 msgstr ""
 
-#: functions.php:452
+#: functions.php:454
 msgid "Discover the best places to stay, eat, shop and events near you."
 msgstr ""
 
-#: functions.php:463 functions.php:512
+#: functions.php:465 functions.php:514
 msgid "Blog"
 msgstr ""
 
-#: functions.php:503
+#: functions.php:505
 msgid "Home"
 msgstr ""
 
-#: inc/geodirectory-compatibility.php:158
+#: inc/geodirectory-compatibility.php:193
 msgid "SEARCH LISTINGS"
 msgstr ""
 
-#: inc/geodirectory-compatibility.php:160
+#: inc/geodirectory-compatibility.php:195
 msgid "SHOW LISTINGS"
 msgstr ""
 
-#: inc/geodirectory-compatibility.php:162
+#: inc/geodirectory-compatibility.php:197
 msgid "SHOW MAP"
 msgstr ""
 
-#: inc/geodirectory-compatibility.php:764
+#: inc/geodirectory-compatibility.php:810
 msgid "Verified Owner"
 msgstr ""
 
-#: inc/geodirectory-compatibility.php:813
-#: inc/geodirectory-compatibility.php:818
-#: inc/geodirectory-compatibility.php:830
+#: inc/geodirectory-compatibility.php:862
+#: inc/geodirectory-compatibility.php:867
+#: inc/geodirectory-compatibility.php:879
 msgid "Claim"
 msgstr ""
 
-#: inc/geodirectory-compatibility.php:893
+#: inc/geodirectory-compatibility.php:945
 msgid "Write a Review"
 msgstr ""
 
-#: inc/geodirectory-compatibility.php:923
-#: inc/geodirectory-compatibility.php:933
+#: inc/geodirectory-compatibility.php:975
+#: inc/geodirectory-compatibility.php:985
 msgid "Share on Facebook"
 msgstr ""
 
-#: inc/geodirectory-compatibility.php:926
-#: inc/geodirectory-compatibility.php:935
+#: inc/geodirectory-compatibility.php:978
+#: inc/geodirectory-compatibility.php:987
 msgid "Share on Twitter"
 msgstr ""
 
-#: inc/geodirectory-compatibility.php:929
-#: inc/geodirectory-compatibility.php:937
+#: inc/geodirectory-compatibility.php:981
+#: inc/geodirectory-compatibility.php:989
 msgid "Share on Google Plus"
 msgstr ""
 
-#: inc/geodirectory-compatibility.php:1006
+#: inc/geodirectory-compatibility.php:1058
 msgid "Near Me"
 msgstr ""
 
-#: inc/geodirectory-compatibility.php:1150
+#: inc/geodirectory-compatibility.php:1202
 msgid "Listings"
 msgstr ""
 
-#: inc/geodirectory-compatibility.php:1156
+#: inc/geodirectory-compatibility.php:1208
 msgid "Favorites"
+msgstr ""
+
+#: inc/geodirectory-compatibility.php:1312
+msgid "%s Tags: %l"
 msgstr ""
 
 #: index.php:19
