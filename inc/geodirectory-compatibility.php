@@ -87,11 +87,18 @@ function sd_custom_body_class_gd($classes)
     } elseif (geodir_is_page('add-listing')) {
         $classes[] = 'sd-add';
     }
-    // return the modified $classes array
+
+    // remove 'sd' class if location-less CPT
+    if (sd_is_non_location_cpt()) {
+        if(($key = array_search('sd', $classes)) !== false) {
+            unset($classes[$key]);
+        }
+    }
+
     return $classes;
 }
 
-add_filter('body_class', 'sd_custom_body_class_gd');
+add_filter('body_class', 'sd_custom_body_class_gd',11,1);
 
 
 /**

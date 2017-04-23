@@ -1,3 +1,6 @@
+v1.1.5
+GD function not put in GD compat file causing frontend error for non GD sites - FIXED
+
 v1.1.4
 Tags now show in sidebar of details page - FIXED
 reviews link in details page head will now open reviews tab - FIXED
