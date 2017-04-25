@@ -87,11 +87,18 @@ function sd_custom_body_class_gd($classes)
     } elseif (geodir_is_page('add-listing')) {
         $classes[] = 'sd-add';
     }
-    // return the modified $classes array
+
+    // remove 'sd' class if location-less CPT
+    if (sd_is_non_location_cpt()) {
+        if(($key = array_search('sd', $classes)) !== false) {
+            unset($classes[$key]);
+        }
+    }
+
     return $classes;
 }
 
-add_filter('body_class', 'sd_custom_body_class_gd');
+add_filter('body_class', 'sd_custom_body_class_gd',11,1);
 
 
 /**
@@ -901,7 +908,7 @@ function sup_add_feat_img_head($page)
                     $sd_address .= ', ' . apply_filters('sd_detail_region_name', $post->post_region, $post);
                 }
                 if (isset($post->post_country) && $post->post_country) {
-                    $sd_address .= ', ' . apply_filters('sd_detail_country_name', $post->post_country, $post);
+                    $sd_address .= ', ' . apply_filters('sd_detail_country_name', __($post->post_country, 'geodirectory'), $post);
                 }
                 $sd_address .= '</div>';
 
@@ -1273,6 +1280,9 @@ function sd_tags_content()
                     $post_region = isset($_REQUEST['post_region']) && $_REQUEST['post_region'] != '' ? sanitize_text_field($_REQUEST['post_region']) : NULL;
                     $post_city = isset($_REQUEST['post_city']) && $_REQUEST['post_city'] != '' ? sanitize_text_field($_REQUEST['post_city']) : NULL;
                     $match_country = $post_country && sanitize_title($post_term) == sanitize_title($post_country) ? true : false;
+                    if ($post_country && !$match_country) {
+                        $match_country = sanitize_title($post_term) == sanitize_title(__($post_country, 'geodirectory')) ? true : false;
+                    }
                     $match_region = $post_region && sanitize_title($post_term) == sanitize_title($post_region) ? true : false;
                     $match_city = $post_city && sanitize_title($post_term) == sanitize_title($post_city) ? true : false;
                     if ($match_country || $match_region || $match_city) {
