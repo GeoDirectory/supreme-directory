@@ -821,7 +821,7 @@ function sup_add_feat_img_head($page)
                             <?php
                         } else {
                             $author_link = '#';
-                            $entry_author = '<img src="'.get_stylesheet_directory_uri() . "/images/gravatar.jpg".'"  height="100" width="100">';
+                            //$entry_author = '<img src="'.get_stylesheet_directory_uri() . "/images/gravatar.jpg".'"  height="100" width="100">';
                         }
                     }
                 }
