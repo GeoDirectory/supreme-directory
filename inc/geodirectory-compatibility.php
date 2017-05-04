@@ -1014,7 +1014,7 @@ function sup_add_feat_img_head($page)
         if (function_exists('geodir_get_location_seo')) {
             $seo = geodir_get_location_seo();
             if (isset($seo->seo_image_tagline) && $seo->seo_image_tagline) {
-                $sub_title = $seo->seo_image_tagline;
+                $sub_title = __($seo->seo_image_tagline, 'geodirlocation');
             }
             if (isset($seo->seo_image) && $seo->seo_image) {
                 $full_image_url = wp_get_attachment_image_src($seo->seo_image, 'full');
@@ -1074,7 +1074,7 @@ function sd_gd_current_location_name(){
 
 function sd_homepage_featured_content() {
     if (is_singular() && geodir_is_page('location') && $location = sd_gd_current_location_name() ) { ?>
-        <h1 class="entry-title"><?php echo esc_attr($location); ?></h1>
+        <h1 class="entry-title"><?php echo esc_attr(__($location, 'geodirectory')); ?></h1>
     <?php } else { ?>
         <h1 class="entry-title"><?php the_title(); ?></h1>
     <?php }
@@ -1101,7 +1101,7 @@ function sd_homepage_featured_content() {
             $slug = '';
         }
         $seo = geodir_location_seo_by_slug($slug, $location_type, $country_slug, $region_slug);
-        $tagline = (isset($seo->seo_image_tagline)) ? $seo->seo_image_tagline : '';
+        $tagline = (isset($seo->seo_image_tagline)) ? __($seo->seo_image_tagline, 'geodirlocation') : '';
         if ($tagline) {
             $sub_title = stripslashes($tagline);
         }
