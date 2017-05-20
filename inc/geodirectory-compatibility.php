@@ -778,10 +778,6 @@ function sup_add_feat_img_head($page)
             $post_cats = isset($post->post_category) ? $post->post_category[$post_tax] : $post->{$post_tax};
         }
 
-        $author_name = apply_filters('sd_detail_author_name', $author_name);
-        $entry_author = apply_filters('sd_detail_entry_author', $entry_author);
-        $author_link = apply_filters('sd_detail_author_link', $author_link);
-
         $postlink = get_permalink(geodir_add_listing_page_id());
         $editlink = geodir_getlink($postlink, array('pid' => $post->ID), false);
 
@@ -826,6 +822,10 @@ function sup_add_feat_img_head($page)
                         }
                     }
                 }
+                
+                $author_name = apply_filters('sd_detail_author_name', $author_name);
+                $entry_author = apply_filters('sd_detail_entry_author', $entry_author);
+                $author_link = apply_filters('sd_detail_author_link', $author_link);
 
                 printf('<div class="author-avatar"><a href="%s">%s</a></div>', esc_url($author_link), $entry_author);
 

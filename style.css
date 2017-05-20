@@ -402,7 +402,7 @@ SIDEBARS CSS END
     margin-bottom: 40px;
 }
 
-.sd .geodir_location_description .widget-title {
+.sd .geodir_location_description > .widget-title {
     display: none;
 }
 
