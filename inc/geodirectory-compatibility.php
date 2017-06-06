@@ -778,10 +778,6 @@ function sup_add_feat_img_head($page)
             $post_cats = isset($post->post_category) ? $post->post_category[$post_tax] : $post->{$post_tax};
         }
 
-        $author_name = apply_filters('sd_detail_author_name', $author_name);
-        $entry_author = apply_filters('sd_detail_entry_author', $entry_author);
-        $author_link = apply_filters('sd_detail_author_link', $author_link);
-
         $postlink = get_permalink(geodir_add_listing_page_id());
         $editlink = geodir_getlink($postlink, array('pid' => $post->ID), false);
 
@@ -821,10 +817,15 @@ function sup_add_feat_img_head($page)
                             <?php
                         } else {
                             $author_link = '#';
-                            $entry_author = '<img src="'.get_stylesheet_directory_uri() . "/images/gravatar.jpg".'"  height="100" width="100">';
+                            $author_name = __('Claim Me', 'supreme-directory');
+                            $entry_author = '<img src="'.get_stylesheet_directory_uri() . "/images/gravatar2.png".'"  height="100" width="100">';
                         }
                     }
                 }
+                
+                $author_name = apply_filters('sd_detail_author_name', $author_name);
+                $entry_author = apply_filters('sd_detail_entry_author', $entry_author);
+                $author_link = apply_filters('sd_detail_author_link', $author_link);
 
                 printf('<div class="author-avatar"><a href="%s">%s</a></div>', esc_url($author_link), $entry_author);
 
@@ -1014,7 +1015,7 @@ function sup_add_feat_img_head($page)
         if (function_exists('geodir_get_location_seo')) {
             $seo = geodir_get_location_seo();
             if (isset($seo->seo_image_tagline) && $seo->seo_image_tagline) {
-                $sub_title = $seo->seo_image_tagline;
+                $sub_title = __($seo->seo_image_tagline, 'geodirlocation');
             }
             if (isset($seo->seo_image) && $seo->seo_image) {
                 $full_image_url = wp_get_attachment_image_src($seo->seo_image, 'full');
@@ -1074,7 +1075,7 @@ function sd_gd_current_location_name(){
 
 function sd_homepage_featured_content() {
     if (is_singular() && geodir_is_page('location') && $location = sd_gd_current_location_name() ) { ?>
-        <h1 class="entry-title"><?php echo esc_attr($location); ?></h1>
+        <h1 class="entry-title"><?php echo esc_attr(__($location, 'geodirectory')); ?></h1>
     <?php } else { ?>
         <h1 class="entry-title"><?php the_title(); ?></h1>
     <?php }
@@ -1101,7 +1102,7 @@ function sd_homepage_featured_content() {
             $slug = '';
         }
         $seo = geodir_location_seo_by_slug($slug, $location_type, $country_slug, $region_slug);
-        $tagline = (isset($seo->seo_image_tagline)) ? $seo->seo_image_tagline : '';
+        $tagline = (isset($seo->seo_image_tagline)) ? __($seo->seo_image_tagline, 'geodirlocation') : '';
         if ($tagline) {
             $sub_title = stripslashes($tagline);
         }

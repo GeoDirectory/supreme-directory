@@ -1,3 +1,8 @@
+v1.1.6
+Detail page avatar should work as per discussion default avatar settings - FIXED
+Featured area location title & subtitle should be translated via WPML string translation - CHANGED
+Reordering listing details page hooks to filter author avatar - CHANGED
+
 v1.1.5
 GD function not put in GD compat file causing frontend error for non GD sites - FIXED
 
@@ -75,7 +80,7 @@ Edit listing link on preview page should not be an proper link - FIXED
 Google pagespeed insight problems - FIXED
 Detail page Category not working for category types other than Ajax chained - FIXED
 CSS and author sidebar bug fixes - FIXED
-My account mobile manu back button sometimes not working - FIXED
+My account mobile menu back button sometimes not working - FIXED
 Preview page on mobile buttons can be hidden - FIXED
 Prev/Next buttons not click-able - FIXED
 Header issue on buddypress groups home - FIXED
@@ -98,7 +103,7 @@ Default page now has sidebar - CHANGED
 Added full width page template - ADDED
 Pages now have their own sidebar - ADDED
 Header Top Bar not necessary - REMOVED
-Now works without GeoDirectory installed - CHNAGED
+Now works without GeoDirectory installed - CHANGED
 RTL CSS added - ADDED
 Page/post meta setting "sd_remove_head" will remove the featured image area for that post/page - ADDED
 Claim listing button will now redirect back and open claim form - FIXED
@@ -110,7 +115,7 @@ There is no confirmation message on the page displayed for send enquiry & send t
 gd_claim_link shortcode added - ADDED
 Blog page not responsive on mobile - FIXED
 Account Nav and Primary Menu not displayed correctly in mobile - FIXED
-Set geodir_pagination_advance_info ption on install - CHANGED
+Set geodir_pagination_advance_info option on install - CHANGED
 Advanced search dropdowns not aligned correctly - FIXED
 Event dates added to featured area of details page - ADDED
 Google analytics not showing - FIXED
