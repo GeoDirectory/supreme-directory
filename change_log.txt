@@ -1,3 +1,6 @@
+v1.1.7
+Mobile details page tabs now close and scroll to show tab title - CHANGED
+
 v1.1.6
 Detail page avatar should work as per discussion default avatar settings - FIXED
 Featured area location title & subtitle should be translated via WPML string translation - CHANGED
