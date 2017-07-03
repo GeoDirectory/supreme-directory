@@ -793,7 +793,7 @@ function sup_add_feat_img_head($page)
         $post_id = $post->ID;
         
         // WPML
-        $duplicate_of = geodir_is_wpml() ? get_post_meta((int)$post_id, '_icl_lang_duplicate_of', true) : NULL;
+        $duplicate_of = geodir_wpml_is_post_type_translated($post_type) ? get_post_meta((int)$post_id, '_icl_lang_duplicate_of', true) : NULL;
         // WPML
         ?>
         <?php do_action('sd-detail-details-before'); ?>

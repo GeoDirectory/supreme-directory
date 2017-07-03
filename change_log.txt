@@ -1,5 +1,7 @@
 v1.1.7
 Mobile details page tabs now close and scroll to show tab title - CHANGED
+Don't translate GD post types/taxonomies if disabled in WPML settings - CHANGED
+
 
 v1.1.6
 Detail page avatar should work as per discussion default avatar settings - FIXED
