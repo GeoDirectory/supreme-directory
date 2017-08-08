@@ -669,3 +669,27 @@ function sd_current_page_url() {
 
     return apply_filters( 'sd_current_page_url', $current_url );
 }
+
+// UsersWP compatibility
+add_filter('get_post_metadata', 'sd_hide_banner_on_uwp_pages', 10, 4);
+/**
+ * Hides banners on UsersWP pages.
+ *
+ * @since 1.1.7
+ *
+ * @param null|array|string $metadata     The value get_metadata() should return - a single metadata value,
+ *                                     or an array of values.
+ * @param int               $object_id Object ID.
+ * @param string            $meta_key  Meta key.
+ * @param bool              $single    Whether to return only the first value of the specified $meta_key.
+ *
+ * @return string Meta value.
+ */
+function sd_hide_banner_on_uwp_pages($metadata, $object_id, $meta_key, $single) {
+    if (defined('USERSWP_VERSION') && is_uwp_page()) {
+        if ($meta_key == 'sd_remove_head' && $single) {
+            $metadata = "1";
+        }
+    }
+    return $metadata;
+}
