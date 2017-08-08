@@ -12,7 +12,8 @@ $full_image_url = SD_DEFAULT_FEATURED_IMAGE;
 
                         <div class="header-wrap">
 
-                            <?php echo get_avatar(get_the_author_meta('ID'), 120, '', get_the_author_meta('display_name')); ?>
+                            <?php $author_obj = get_user_by( 'slug', get_query_var( 'author_name' ) );
+                            echo get_avatar($author_obj->ID, 120, '', get_the_author_meta('display_name')); ?>
                             <h1 class="entry-title"><?php $author_obj = $wp_query->get_queried_object();
                                 echo ucfirst(esc_attr(sprintf( __("%s's Profile", 'supreme-directory'), esc_attr($author_obj->display_name) )))?></h1>
 
