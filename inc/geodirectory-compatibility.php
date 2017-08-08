@@ -1003,11 +1003,12 @@ function sup_add_feat_img_head($page)
                 $share_html = ob_get_clean();
                 echo apply_filters('sd_details_output_share_links',$share_html);
                 echo '</div><!-- sd-detail-cta end -->'; ?>
-
+                <?php do_action('sd-detail-details-container-inner-after'); ?>
             </div>
             <!-- container end -->
+            <?php do_action('sd-detail-details-container-after'); ?>
         </div><!-- sd-detail-details end -->
-
+        <?php do_action('sd-detail-details-after'); ?>
 
 
     <?php } elseif ($page == 'home-page') {
