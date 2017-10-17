@@ -778,6 +778,8 @@ function sup_add_feat_img_head($page)
             $post_cats = isset($post->post_category) ? $post->post_category[$post_tax] : $post->{$post_tax};
         }
 
+        $package_info = (array)geodir_post_package_info( array(), $post, $post_type );
+
         $postlink = get_permalink(geodir_add_listing_page_id());
         $editlink = geodir_getlink($postlink, array('pid' => $post->ID), false);
 
@@ -961,12 +963,19 @@ function sup_add_feat_img_head($page)
 	                $send_buttons .= $html;
                 }
 
-                $send_buttons .= '<span style="" class="geodir-i-email">';
-                $send_buttons .= '<i class="fa fa-envelope"></i>';
-			    if (isset($post->geodir_email) && $post->geodir_email) {
-				    $send_buttons .= '<a href="javascript:void(0);" class="b_send_inquiry">'.SEND_INQUIRY.'</a> | ';
-			    }
-                $send_buttons .= '<a class="b_sendtofriend" href="javascript:void(0);">'.SEND_TO_FRIEND.'</a></span>';
+                $share_actions = array();
+                if ( ! empty( $post->geodir_email ) ) {
+                    $share_actions[] = '<a href="javascript:void(0);" class="b_send_inquiry">' . SEND_INQUIRY . '</a>';
+                }
+                if ( ! empty( $package_info['sendtofriend'] ) ) {
+                    $share_actions[] = '<a class="b_sendtofriend" href="javascript:void(0);">' . SEND_TO_FRIEND . '</a></span>';
+                }
+                if ( ! empty( $share_actions ) ) {
+                    $send_buttons .= '<span style="" class="geodir-i-email">';
+                    $send_buttons .= '<i class="fa fa-envelope"></i> ';
+                    $send_buttons .= implode( ' | ', $share_actions );
+                    $send_buttons .= '</span>';
+                }
                 $send_buttons .= '</div>';
 
                 echo apply_filters('sd_details_output_send_buttons',$send_buttons);

@@ -1064,6 +1064,11 @@ h2.comments-title {
     margin-top: 35px;
 }
 
+.sd-detail-cta .geodir_email .geodir-i-email {
+    display: block;
+    text-align: center;
+}
+
 /* Preview Page */
 
 .geodir_preview_section {
