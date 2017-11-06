@@ -905,10 +905,10 @@ function sup_add_feat_img_head($page)
                 echo '</h1>';
                 $sd_address = '<div class="sd-address">';
                 if (isset($post->post_city) && $post->post_city) {
-                    $sd_address .= apply_filters('sd_detail_city_name', $post->post_city, $post);
+                    $sd_address .= apply_filters('sd_detail_city_name', stripslashes($post->post_city), $post);
                 }
                 if (isset($post->post_region) && $post->post_region) {
-                    $sd_address .= ', ' . apply_filters('sd_detail_region_name', $post->post_region, $post);
+                    $sd_address .= ', ' . apply_filters('sd_detail_region_name', stripslashes($post->post_region), $post);
                 }
                 if (isset($post->post_country) && $post->post_country) {
                     $sd_address .= ', ' . apply_filters('sd_detail_country_name', __($post->post_country, 'geodirectory'), $post);

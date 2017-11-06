@@ -826,7 +826,8 @@ MOBILE MENU
 
 .sd .sd-detail-author {
     float: left;
-    margin: 10px 50px 0 0;
+    padding: 10px 50px 0 0;
+    max-width: 17%;
 }
 
 .sd .author-avatar {
@@ -1557,7 +1558,7 @@ MOBILE TOGGLE MAP/LISTINGS START
 
 
 @media all and (max-width: 600px) {
-    .home.sd.admin-bar .site-header {
+    .home.sd.admin-bar .site-header, .sd-homepage.admin-bar .site-header {
         top: 46px;
     }
     .sd .sd-detail-info {
