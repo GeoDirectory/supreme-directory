@@ -89,11 +89,18 @@ function sd_enqueue_styles()
 {
     wp_enqueue_script('supreme', get_stylesheet_directory_uri() . '/js/supreme.js', array(), SD_VERSION, true);
     wp_enqueue_style('directory-theme-child-style', get_stylesheet_uri(), array('directory-theme-style', 'directory-theme-style-responsive'));
+    
+    ob_start();
+    sd_theme_customize_css();
+    $customizer_css = ob_get_clean();
 
+    wp_add_inline_style( 'directory-theme-child-style', $customizer_css );
 }
-
 add_action('wp_enqueue_scripts', 'sd_enqueue_styles');
 
+function sd_theme_customize_css() {
+    do_action( 'sd_theme_customize_css' );
+}
 
 /**
  * Loads the translation files for wordpress.

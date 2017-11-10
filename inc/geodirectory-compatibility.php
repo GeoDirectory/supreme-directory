@@ -88,11 +88,8 @@ function sd_custom_body_class_gd($classes)
         $classes[] = 'sd-add';
     }
 
-    // remove 'sd' class if location-less CPT
     if (sd_is_non_location_cpt()) {
-        if(($key = array_search('sd', $classes)) !== false) {
-            unset($classes[$key]);
-        }
+        $classes[] = 'sd-loc-less';
     }
 
     return $classes;
@@ -1354,3 +1351,51 @@ function sd_is_non_location_cpt() {
     }
     return false;
 }
+
+function sd_add_location_less_style() {
+    if ( sd_is_non_location_cpt() && ( geodir_is_page( 'listing' ) || geodir_is_page( 'search' ) ) ) {
+    ?>
+    .sd.search.geodir-page.sd-loc-less .geodir-common,
+    .sd.archive.geodir-page.sd-loc-less .geodir-common {
+        padding-right: <?php echo esc_attr(get_theme_mod('dt_container_padding_right', DT_CONTAINER_PADDING_RIGHT)); ?>;
+        padding-left: <?php echo esc_attr(get_theme_mod('dt_container_padding_left', DT_CONTAINER_PADDING_LEFT)); ?>;
+        margin-right: <?php echo esc_attr(get_theme_mod('dt_container_margin_right', DT_CONTAINER_MARGIN_RIGHT)); ?>;
+        margin-left: <?php echo esc_attr(get_theme_mod('dt_container_margin_left', DT_CONTAINER_MARGIN_LEFT)); ?>;
+    }
+    .sd.search.geodir-page.sd-loc-less #geodir_content,
+    .sd.archive.geodir-page.sd-loc-less #geodir_content {
+        flex-basis: inherit;
+        width: 67% !important;
+        padding: 0;
+    }
+    
+    .sd.geodir-page.sd-loc-less #gd-sidebar-wrapper {
+        width: 28% !important;
+        flex-basis: inherit !important;
+    }
+    .sd.geodir-page.sd-loc-less #gd-sidebar-wrapper.geodir-sidebar-left {
+        margin-right: 9%!important
+    }
+    .sd.geodir-page.sd-loc-less #gd-sidebar-wrapper.geodir-sidebar-right {
+        margin-left: 9%!important
+    }
+    @media (min-width: 1200px) {
+        .sd.search.geodir-page.sd-loc-less .geodir-common,
+        .sd.archive.geodir-page.sd-loc-less .geodir-common {
+            width: <?php echo esc_attr(get_theme_mod('dt_container_width', DT_CONTAINER_WIDTH)); ?>;
+        }
+    }
+    @media (max-width: 992px) {
+        .sd.search.geodir-page.sd-loc-less #geodir_content,
+        .sd.archive.geodir-page.sd-loc-less #geodir_content {
+            flex-basis: 100%;
+            width: 100% !important;
+        }
+        #wpadminbar {
+            position: fixed
+        }
+    }
+    <?php
+    }
+}
+add_action( 'sd_theme_customize_css', 'sd_add_location_less_style' );
