@@ -776,6 +776,15 @@ function sup_add_feat_img_head($page)
         }
 
         $package_info = (array)geodir_post_package_info( array(), $post, $post_type );
+        $package_fields = geodir_post_custom_fields( (!empty($package_info['pid']) ? $package_info['pid'] : ''), 'all', $post_type );
+        $available_fields = array();
+        if ( ! empty( $package_fields ) ) {
+            foreach ( $package_fields as $package_field ) {
+                if ( ! empty( $package_field['name'] ) ) {
+                    $available_fields[] = $package_field['name'];
+                }
+            }
+        }
 
         $postlink = get_permalink(geodir_add_listing_page_id());
         $editlink = geodir_getlink($postlink, array('pid' => $post->ID), false);
@@ -912,22 +921,21 @@ function sup_add_feat_img_head($page)
                 }
                 $sd_address .= '</div>';
 
-
                 echo apply_filters('sd_details_output_address',$sd_address);
 
                 $sd_raitings = '<div class="sd-ratings">' . $post_ratings . ' <a href="' . get_comments_link() . '" class="geodir-pcomments">' . $n_comments . '</a></div>';
                 echo apply_filters('sd_details_output_ratings',$sd_raitings);
                 $sd_social = '<div class="sd-contacts">';
-                if (isset($post->geodir_website) && $post->geodir_website) {
+                if (isset($post->geodir_website) && $post->geodir_website && !empty($available_fields) && in_array('geodir_website', $available_fields)) {
                     $sd_social .= '<a rel="nofollow" target="_blank" href="' . esc_url($post->geodir_website) . '"><i class="fa fa-external-link-square"></i></a>';
                 }
-                if (isset($post->geodir_facebook) && $post->geodir_facebook) {
+                if (isset($post->geodir_facebook) && $post->geodir_facebook && !empty($available_fields) && in_array('geodir_facebook', $available_fields)) {
                    $sd_social .='<a rel="nofollow" target="_blank" href="' . esc_url($post->geodir_facebook) . '"><i class="fa fa-facebook-official"></i></a>';
                 }
-                if (isset($post->geodir_twitter) && $post->geodir_twitter) {
+                if (isset($post->geodir_twitter) && $post->geodir_twitter && !empty($available_fields) && in_array('geodir_twitter', $available_fields)) {
                     $sd_social .='<a rel="nofollow" target="_blank" href="' . esc_url($post->geodir_twitter) . '"><i class="fa fa-twitter-square"></i></a>';
                 }
-                if (isset($post->geodir_contact) && $post->geodir_contact) {
+                if (isset($post->geodir_contact) && $post->geodir_contact && !empty($available_fields) && in_array('geodir_contact', $available_fields)) {
                     $sd_social .='<a href="tel:' . esc_attr($post->geodir_contact) . '"><i class="fa fa-phone-square"></i>&nbsp;:&nbsp;' . esc_attr($post->geodir_contact) . '</a>';
                 }
                 $sd_social .= '</div>';
@@ -961,7 +969,7 @@ function sup_add_feat_img_head($page)
                 }
 
                 $share_actions = array();
-                if ( ! empty( $post->geodir_email ) ) {
+                if ( ! empty( $post->geodir_email ) && ! empty( $available_fields ) && in_array( 'geodir_email', $available_fields ) ) {
                     $share_actions[] = '<a href="javascript:void(0);" class="b_send_inquiry">' . SEND_INQUIRY . '</a>';
                 }
                 if ( ! empty( $package_info['sendtofriend'] ) ) {

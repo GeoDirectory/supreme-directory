@@ -6,6 +6,7 @@ Author avatar not showing on author page if user has no posts - FIXED
 Send to friend and contact form don't respect GD settings to show hide - FIXED
 CSS changes for location page - CHANGED
 Locationless CPT & search page does not looks good - FIXED
+Detail page shows fields even disabled via price package - FIXED
 
 v1.1.6
 Detail page avatar should work as per discussion default avatar settings - FIXED
