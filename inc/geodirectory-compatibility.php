@@ -893,10 +893,10 @@ function sup_add_feat_img_head($page)
                 <ul class="sd-cta-favsandshare">
                     <?php if (!$preview) { ?>
                         <li><a rel="nofollow" target="_blank" title="<?php echo __('Share on Facebook', 'supreme-directory'); ?>"
-                               href="http://www.facebook.com/sharer.php?u=<?php the_permalink(); ?>&t=<?php the_title(); ?>"><i
+                               href="http://www.facebook.com/sharer.php?u=<?php the_permalink(); ?>&t=<?php urlencode(the_title()); ?>"><i
                                     class="fa fa-facebook"></i></a></li>
                         <li><a rel="nofollow" target="_blank" title="<?php echo __('Share on Twitter', 'supreme-directory'); ?>"
-                               href="http://twitter.com/share?text=<?php echo urlencode(get_the_title()); ?>&url=<?php echo urlencode(get_the_permalink()); ?>"><i
+                               href="http://twitter.com/share?text=<?php echo urlencode(html_entity_decode(get_the_title(), ENT_COMPAT, 'UTF-8')); ?>&url=<?php echo urlencode(get_the_permalink()); ?>"><i
                                     class="fa fa-twitter"></i></a></li>
                         <li><a rel="nofollow" target="_blank" title="<?php echo __('Share on Google Plus', 'supreme-directory'); ?>"
                                href="https://plus.google.com/share?url=<?php echo urlencode(get_the_permalink()); ?>"><i

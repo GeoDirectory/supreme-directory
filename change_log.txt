@@ -9,6 +9,7 @@ Locationless CPT & search page does not looks good - FIXED
 Detail page shows fields even disabled via price package - FIXED
 Author page does not show any widgets for Locationless CPT - FIXED
 Event end date not showing in event detail featured area - FIXED
+Problem in sharing on twitter when title has apostrophe - FIXED
 
 v1.1.6
 Detail page avatar should work as per discussion default avatar settings - FIXED
