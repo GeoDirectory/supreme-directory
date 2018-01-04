@@ -711,9 +711,9 @@ function sd_footer_copyright_default() {
         $theme_name = "Supreme Directory";
         $theme_url = "https://wordpress.org/themes/supreme-directory/";
 
-        $wp_link = '<a href="https://wordpress.org/" target="_blank" title="' . esc_attr__('WordPress', 'directory-starter') . '"><span>' . __('WordPress', 'directory-starter') . '</span></a>';
-        $default_footer_value = sprintf(__('Copyright &copy; %1$s %2$s %3$s Theme %4$s', 'directory-starter'),date('Y'),"<a href='$theme_url' target='_blank' title='$theme_name'>", $theme_name, "</a>");
-        $default_footer_value .= sprintf(__(' - Powered by %s.', 'directory-starter'), $wp_link);
+        $wp_link = '<a href="https://wordpress.org/" target="_blank" title="' . esc_attr__('WordPress', 'supreme-directory') . '"><span>' . __('WordPress', 'supreme-directory') . '</span></a>';
+        $default_footer_value = sprintf(__('Copyright &copy; %1$s %2$s %3$s Theme %4$s', 'supreme-directory'),date('Y'),"<a href='$theme_url' target='_blank' title='$theme_name'>", $theme_name, "</a>");
+        $default_footer_value .= sprintf(__(' - Powered by %s.', 'supreme-directory'), $wp_link);
 
         echo $default_footer_value;
 
