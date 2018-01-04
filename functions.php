@@ -111,6 +111,7 @@ function sd_theme_setup()
 {
     load_child_theme_textdomain( SD_CHILD, get_stylesheet_directory() . '/languages' );
     add_filter('tiny_mce_before_init','sd_theme_editor_dynamic_styles',11,1);
+    remove_action( 'dt_footer_copyright', 'dt_footer_copyright_default', 10 );
 }
 
 add_action('after_setup_theme', 'sd_theme_setup');
@@ -700,3 +701,24 @@ function sd_hide_banner_on_uwp_pages($metadata, $object_id, $meta_key, $single) 
     }
     return $metadata;
 }
+
+/**
+ * Change copyright texts
+ */
+function sd_footer_copyright_default() {
+    $dt_disable_footer_credits = esc_attr(get_theme_mod('dt_disable_footer_credits', DT_DISABLE_FOOTER_CREDITS));
+    if ($dt_disable_footer_credits != '1') {
+        $theme_name = "Supreme Directory";
+        $theme_url = "https://wordpress.org/themes/supreme-directory/";
+
+        $wp_link = '<a href="https://wordpress.org/" target="_blank" title="' . esc_attr__('WordPress', 'directory-starter') . '"><span>' . __('WordPress', 'directory-starter') . '</span></a>';
+        $default_footer_value = sprintf(__('Copyright &copy; %1$s %2$s %3$s Theme %4$s', 'directory-starter'),date('Y'),"<a href='$theme_url' target='_blank' title='$theme_name'>", $theme_name, "</a>");
+        $default_footer_value .= sprintf(__(' - Powered by %s.', 'directory-starter'), $wp_link);
+
+        echo $default_footer_value;
+
+    }else{
+        echo esc_attr( get_theme_mod( 'dt_copyright_text', DT_COPYRIGHT_TEXT ) );
+    }
+}
+add_action( 'dt_footer_copyright', 'sd_footer_copyright_default', 10 );
