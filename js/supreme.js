@@ -91,6 +91,10 @@ function sd_adjust_head(){
     jQuery("#geodir_wrapper").css({
         'margin-top': headHeight+"px"
     });
+    
+    if (jQuery("body").hasClass('sd-loc-less')) {
+        return;
+    }
 
     jQuery("#geodir_content").css({
         height: "calc(100vh - "+headHeight+"px)",

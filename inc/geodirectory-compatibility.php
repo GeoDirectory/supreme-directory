@@ -88,11 +88,8 @@ function sd_custom_body_class_gd($classes)
         $classes[] = 'sd-add';
     }
 
-    // remove 'sd' class if location-less CPT
     if (sd_is_non_location_cpt()) {
-        if(($key = array_search('sd', $classes)) !== false) {
-            unset($classes[$key]);
-        }
+        $classes[] = 'sd-loc-less';
     }
 
     return $classes;
@@ -220,132 +217,30 @@ remove_action('geodir_detail_before_main_content', 'geodir_action_geodir_preview
 add_action('sd_details_featured_area_text','sd_add_event_dates_featured_area');
 function sd_add_event_dates_featured_area(){
     global $post,$geodir_date_format,$geodir_date_time_format;
-    ?>
 
+    $schedules = sd_event_get_schedules( $post );
+
+    ?>
     <div class="header-wrap sd-event-dates-head">
         <?php do_action('sd_detail_header_wrap_inner'); ?>
         <?php
-
         $output = '';
-        if(isset($post->recurring_dates)){
-            $recuring_data = maybe_unserialize( $post->recurring_dates );
-//print_r($recuring_data);
-            if ( !empty( $recuring_data ) && ( isset( $recuring_data['event_recurring_dates'] ) && $recuring_data['event_recurring_dates'] != '' ) || ( isset( $post->is_recurring ) && !empty( $post->is_recurring ) ) ) {
-                $event_recurring_dates = explode( ',', $recuring_data['event_recurring_dates'] );
-                $geodir_num_dates = 0;
-                $starttimes = '';
-                $endtimes = '';
-                $astarttimes = array();
-                $aendtimes = array();
-
-                // Check recurring enabled
-                $recurring_pkg = geodir_event_recurring_pkg( $post );
-
-                $hide_past_dates = true;
-
-                if ( !isset( $recuring_data['repeat_type'] ) ) {
-                    $recuring_data['repeat_type'] = 'custom';
+        if ( !empty( $schedules ) ) {
+            foreach ( $schedules as $schedule ) {
+                $output .= '<p class="gde-recurring-cont">';
+                $output .= '<span class="geodir_schedule_start"><i class="fa fa-caret-right"></i> ' . $schedule['start'] . '</span>';
+                if ( ! empty( $schedule['end'] ) && $schedule['start'] != $schedule['end'] ) {
+                    $output .= '<br />';
+                    $output .= '<span class="geodir_schedule_end"><i class="fa fa-caret-left"></i> ' . $schedule['end'] . '</span>';
                 }
-
-                $repeat_type = isset( $recuring_data['repeat_type'] ) && in_array( $recuring_data['repeat_type'], array( 'day', 'week', 'month', 'year', 'custom' ) ) ? $recuring_data['repeat_type'] : 'year'; // day, week, month, year, custom
-
-                $different_times = isset( $recuring_data['different_times'] ) && !empty( $recuring_data['different_times'] ) ? true : false;
-
-                if ( $repeat_type == 'custom' && $different_times ) {
-                    $astarttimes = isset( $recuring_data['starttimes'] ) ? $recuring_data['starttimes'] : array();
-                    $aendtimes = isset( $recuring_data['endtimes'] ) ? $recuring_data['endtimes'] : array();
-                } else {
-                    $starttimes = isset( $recuring_data['starttime'] ) ? $recuring_data['starttime'] : '';
-                    $endtimes = isset( $recuring_data['endtime'] ) ? $recuring_data['endtime'] : '';
-                }
-
-                if(isset($_REQUEST['gde']) && $_REQUEST['gde']){
-                    //print_r($event_recurring_dates);
-                    if(in_array($_REQUEST['gde'],$event_recurring_dates)){
-                        $event_recurring_dates = array(esc_html($_REQUEST['gde']));
-                    }
-                }
-
-                foreach( $event_recurring_dates as $key => $date ) {
-                    $geodir_num_dates++;
-
-                    if ( $repeat_type == 'custom' && $different_times ) {
-                        if ( !empty( $astarttimes ) && isset( $astarttimes[$key] ) ) {
-                            $starttimes = $astarttimes[$key];
-                            $endtimes = $aendtimes[$key];
-                        } else {
-                            $starttimes = '';
-                            $endtimes = '';
-                        }
-                    }
-
-                    $duration = isset( $recuring_data['duration_x'] ) && (int)$recuring_data['duration_x'] > 0 ? (int)$recuring_data['duration_x'] : 1;
-                    $duration--;
-                    $enddate = date_i18n( 'Y-m-d', strtotime( $date . ' + ' . $duration . ' day' ) );
-
-                    // Hide past dates
-                    if ( $hide_past_dates && strtotime( $enddate ) < strtotime( date_i18n( 'Y-m-d', current_time( 'timestamp' ) ) ) ) {
-                        $geodir_num_dates--;
-                        continue;
-                    }
-
-                    $sdate = strtotime( $date . ' ' . $starttimes );
-                    $edate = strtotime( $enddate . ' ' . $endtimes );
-
-                    $start_date = date_i18n( $geodir_date_time_format, $sdate );
-                    $end_date = date_i18n( $geodir_date_time_format, $edate );
-
-                    $full_day = false;
-                    $same_datetime = false;
-
-                    if ( $starttimes == $endtimes && ( $starttimes == '' || $starttimes == '00:00:00' || $starttimes == '00:00' ) ) {
-                        $full_day = true;
-                    }
-
-                    if ( $start_date == $end_date && $full_day ) {
-                        $same_datetime = true;
-                    }
-
-                    $link_date = date_i18n( 'Y-m-d', $sdate );
-                    $title_date = date_i18n( $geodir_date_format, $sdate );
-                    if ( $full_day ) {
-                        $start_date = $title_date;
-                        $end_date = date_i18n( $geodir_date_format, $edate );
-                    }
-
-
-
-                    $recurring_class = 'gde-recurr-link';
-                    $recurring_class_cont = 'gde-recurring-cont';
-                    if ( isset( $_REQUEST['gde'] ) && $_REQUEST['gde'] == $link_date ) {
-                        $recurring_event_link = 'javascript:void(0);';
-                        $recurring_class .= ' gde-recurr-act';
-                        $recurring_class_cont .= ' gde-recurr-cont-act';
-                    }
-
-                    $output .= '<p class="' . esc_attr($recurring_class_cont) . '">';
-                    $output .= '<span class="geodir_schedule_start"><i class="fa fa-caret-right"></i> ' . esc_attr($start_date). '</span>';
-                    if ( !$same_datetime ) {
-                        $output .= '<br />';
-                        $output .= '<span class="geodir_schedule_end"><i class="fa fa-caret-left"></i> ' . esc_attr($end_date). '</span>';
-                    }
-                    $output .= '</p>';
-                    if($geodir_num_dates>0){break;}
-                }
+                $output .= '</p>';
             }
-
-            echo $output;
-
         }
-
+        echo $output;
         ?>
     </div>
     <?php
-
-
 }
-
-
 
 add_action('geodir_wrapper_open', 'sup_add_feat_img_head', 4, 1);
 
@@ -779,6 +674,15 @@ function sup_add_feat_img_head($page)
         }
 
         $package_info = (array)geodir_post_package_info( array(), $post, $post_type );
+        $package_fields = geodir_post_custom_fields( (!empty($package_info['pid']) ? $package_info['pid'] : ''), 'all', $post_type );
+        $available_fields = array();
+        if ( ! empty( $package_fields ) ) {
+            foreach ( $package_fields as $package_field ) {
+                if ( ! empty( $package_field['name'] ) ) {
+                    $available_fields[] = $package_field['name'];
+                }
+            }
+        }
 
         $postlink = get_permalink(geodir_add_listing_page_id());
         $editlink = geodir_getlink($postlink, array('pid' => $post->ID), false);
@@ -915,22 +819,21 @@ function sup_add_feat_img_head($page)
                 }
                 $sd_address .= '</div>';
 
-
                 echo apply_filters('sd_details_output_address',$sd_address);
 
                 $sd_raitings = '<div class="sd-ratings">' . $post_ratings . ' <a href="' . get_comments_link() . '" class="geodir-pcomments">' . $n_comments . '</a></div>';
                 echo apply_filters('sd_details_output_ratings',$sd_raitings);
                 $sd_social = '<div class="sd-contacts">';
-                if (isset($post->geodir_website) && $post->geodir_website) {
+                if (isset($post->geodir_website) && $post->geodir_website && !empty($available_fields) && in_array('geodir_website', $available_fields)) {
                     $sd_social .= '<a rel="nofollow" target="_blank" href="' . esc_url($post->geodir_website) . '"><i class="fa fa-external-link-square"></i></a>';
                 }
-                if (isset($post->geodir_facebook) && $post->geodir_facebook) {
+                if (isset($post->geodir_facebook) && $post->geodir_facebook && !empty($available_fields) && in_array('geodir_facebook', $available_fields)) {
                    $sd_social .='<a rel="nofollow" target="_blank" href="' . esc_url($post->geodir_facebook) . '"><i class="fa fa-facebook-official"></i></a>';
                 }
-                if (isset($post->geodir_twitter) && $post->geodir_twitter) {
+                if (isset($post->geodir_twitter) && $post->geodir_twitter && !empty($available_fields) && in_array('geodir_twitter', $available_fields)) {
                     $sd_social .='<a rel="nofollow" target="_blank" href="' . esc_url($post->geodir_twitter) . '"><i class="fa fa-twitter-square"></i></a>';
                 }
-                if (isset($post->geodir_contact) && $post->geodir_contact) {
+                if (isset($post->geodir_contact) && $post->geodir_contact && !empty($available_fields) && in_array('geodir_contact', $available_fields)) {
                     $sd_social .='<a href="tel:' . esc_attr($post->geodir_contact) . '"><i class="fa fa-phone-square"></i>&nbsp;:&nbsp;' . esc_attr($post->geodir_contact) . '</a>';
                 }
                 $sd_social .= '</div>';
@@ -964,7 +867,7 @@ function sup_add_feat_img_head($page)
                 }
 
                 $share_actions = array();
-                if ( ! empty( $post->geodir_email ) ) {
+                if ( ! empty( $post->geodir_email ) && ! empty( $available_fields ) && in_array( 'geodir_email', $available_fields ) ) {
                     $share_actions[] = '<a href="javascript:void(0);" class="b_send_inquiry">' . SEND_INQUIRY . '</a>';
                 }
                 if ( ! empty( $package_info['sendtofriend'] ) ) {
@@ -990,10 +893,10 @@ function sup_add_feat_img_head($page)
                 <ul class="sd-cta-favsandshare">
                     <?php if (!$preview) { ?>
                         <li><a rel="nofollow" target="_blank" title="<?php echo __('Share on Facebook', 'supreme-directory'); ?>"
-                               href="http://www.facebook.com/sharer.php?u=<?php the_permalink(); ?>&t=<?php the_title(); ?>"><i
+                               href="http://www.facebook.com/sharer.php?u=<?php the_permalink(); ?>&t=<?php urlencode(the_title()); ?>"><i
                                     class="fa fa-facebook"></i></a></li>
                         <li><a rel="nofollow" target="_blank" title="<?php echo __('Share on Twitter', 'supreme-directory'); ?>"
-                               href="http://twitter.com/share?text=<?php echo urlencode(get_the_title()); ?>&url=<?php echo urlencode(get_the_permalink()); ?>"><i
+                               href="http://twitter.com/share?text=<?php echo urlencode(html_entity_decode(get_the_title(), ENT_COMPAT, 'UTF-8')); ?>&url=<?php echo urlencode(get_the_permalink()); ?>"><i
                                     class="fa fa-twitter"></i></a></li>
                         <li><a rel="nofollow" target="_blank" title="<?php echo __('Share on Google Plus', 'supreme-directory'); ?>"
                                href="https://plus.google.com/share?url=<?php echo urlencode(get_the_permalink()); ?>"><i
@@ -1166,7 +1069,7 @@ add_filter( 'template_include', 'sd_geodir_event_date_remove',0);
  * @since 1.0.3
  */
 function sd_safari_back_button_scroll_fix() {
-    if (geodir_is_page('listing') || geodir_is_page('search')) {
+    if (geodir_is_page('listing') || geodir_is_page('search') || geodir_is_page('author')) {
     ?>
     <script type="text/javascript">
         jQuery( document ).ready(function() {
@@ -1345,7 +1248,7 @@ function sd_tags_content()
 }
 
 function sd_is_non_location_cpt() {
-    if (geodir_is_page('listing') || geodir_is_page('search')) {
+    if (geodir_is_page('listing') || geodir_is_page('search') || geodir_is_page('author')) {
         $post_types = get_option( 'geodir_cpt_disable_location' );
         $cur_post_type = geodir_get_current_posttype();
         if (is_array($post_types) && in_array($cur_post_type, $post_types)) {
@@ -1353,4 +1256,332 @@ function sd_is_non_location_cpt() {
         }
     }
     return false;
+}
+
+function sd_add_location_less_style() {
+    if ( sd_is_non_location_cpt() && ( geodir_is_page( 'listing' ) || geodir_is_page( 'search' ) || geodir_is_page( 'author' ) ) ) {
+    ?>
+    .sd.search.geodir-page.sd-loc-less .geodir-common,
+    .sd.archive.geodir-page.sd-loc-less .geodir-common {
+        padding-right: <?php echo esc_attr(get_theme_mod('dt_container_padding_right', DT_CONTAINER_PADDING_RIGHT)); ?>;
+        padding-left: <?php echo esc_attr(get_theme_mod('dt_container_padding_left', DT_CONTAINER_PADDING_LEFT)); ?>;
+        margin-right: <?php echo esc_attr(get_theme_mod('dt_container_margin_right', DT_CONTAINER_MARGIN_RIGHT)); ?>;
+        margin-left: <?php echo esc_attr(get_theme_mod('dt_container_margin_left', DT_CONTAINER_MARGIN_LEFT)); ?>;
+    }
+    .sd.search.geodir-page.sd-loc-less #geodir_content,
+    .sd.archive.geodir-page.sd-loc-less #geodir_content {
+        flex-basis: inherit;
+        width: 67% !important;
+        padding: 0;
+    }
+    
+    .sd.geodir-page.sd-loc-less #gd-sidebar-wrapper {
+        width: 28% !important;
+        flex-basis: inherit !important;
+    }
+    .sd.geodir-page.sd-loc-less #gd-sidebar-wrapper.geodir-sidebar-left {
+        margin-right: 9%!important
+    }
+    .sd.geodir-page.sd-loc-less #gd-sidebar-wrapper.geodir-sidebar-right {
+        margin-left: 9%!important
+    }
+    .sd.search.geodir-page.sd-loc-less .site-footer,
+    .sd.archive.geodir-page.sd-loc-less .site-footer {
+        display: block;
+    }
+    @media (min-width: 1200px) {
+        .sd.search.geodir-page.sd-loc-less .geodir-common,
+        .sd.archive.geodir-page.sd-loc-less .geodir-common {
+            width: <?php echo esc_attr(get_theme_mod('dt_container_width', DT_CONTAINER_WIDTH)); ?>;
+            margin-top: 20px;
+        }
+    }
+    @media (max-width: 992px) {
+        .sd.search.geodir-page.sd-loc-less #geodir_content,
+        .sd.archive.geodir-page.sd-loc-less #geodir_content {
+            flex-basis: 100%;
+            width: 100% !important;
+        }
+        #wpadminbar {
+            position: fixed
+        }
+    }
+    <?php
+    }
+}
+add_action( 'sd_theme_customize_css', 'sd_add_location_less_style' );
+
+function sd_event_get_schedules( $post, $hide_past_dates = true, $limit = 1 ) {
+    global $geodir_date_time_format, $geodir_date_format, $geodir_time_format;
+
+    if ( geodir_is_page( 'preview' ) ) {
+        $recuring_data = (array)$post;
+        $input_format = geodir_event_field_date_format();
+
+        if (isset($recuring_data['event_start']) && $recuring_data['event_start']) {
+            $recuring_data['event_start'] = geodir_date($recuring_data['event_start'], 'Y-m-d', $input_format);
+        }
+
+        if (isset($recuring_data['event_end']) && $recuring_data['event_end']) {
+            $recuring_data['event_end'] = geodir_date($recuring_data['event_end'], 'Y-m-d', $input_format);
+        }
+
+        if (isset($recuring_data['repeat_end']) && $recuring_data['repeat_end']) {
+            $recuring_data['repeat_end'] = geodir_date($recuring_data['repeat_end'], 'Y-m-d', $input_format);
+        }
+    } else {
+        $recuring_data = !empty( $post->recurring_dates ) ? maybe_unserialize( $post->recurring_dates ) : NULL;
+    }
+
+    $schedules = array();
+
+    if ( !empty( $recuring_data ) && ( isset( $recuring_data['event_recurring_dates'] ) && $recuring_data['event_recurring_dates'] != '' ) || ( isset( $post->is_recurring ) && !empty( $post->is_recurring ) ) ) {
+        $starttimes = '';
+        $endtimes = '';
+        $astarttimes = array();
+        $aendtimes = array();
+
+        // Check recurring enabled
+        $recurring_pkg = geodir_event_recurring_pkg( $post );
+
+        if ( $post->is_recurring && $recurring_pkg ) {
+            if ( !isset( $recuring_data['repeat_type'] ) ) {
+                $recuring_data['repeat_type'] = 'custom';
+            }
+
+            $repeat_type = isset( $recuring_data['repeat_type'] ) && in_array( $recuring_data['repeat_type'], array( 'day', 'week', 'month', 'year', 'custom' ) ) ? $recuring_data['repeat_type'] : 'year'; // day, week, month, year, custom
+
+            $different_times = isset( $recuring_data['different_times'] ) && !empty( $recuring_data['different_times'] ) ? true : false;
+
+            if ( geodir_is_page( 'preview' ) ) {
+                $start_date = geodir_event_is_date( $recuring_data['event_start'] ) ? $recuring_data['event_start'] : date_i18n( 'Y-m-d', current_time( 'timestamp' ) );
+                $end_date = isset( $recuring_data['event_end'] ) ? trim( $recuring_data['event_end'] ) : '';
+                $all_day = isset( $recuring_data['all_day'] ) && !empty( $recuring_data['all_day'] ) ? true : false;
+                $starttime = isset( $recuring_data['starttime'] ) && !$all_day ? trim( $recuring_data['starttime'] ) : '';
+                $endtime = isset( $recuring_data['endtime'] ) && !$all_day ? trim( $recuring_data['endtime'] ) : '';
+
+                $starttimes = isset( $recuring_data['starttimes'] ) && !$all_day ? $recuring_data['starttimes'] : '';
+                $endtimes = isset( $recuring_data['endtimes'] ) && !$all_day ? $recuring_data['endtimes'] : '';
+
+                $repeat_x = isset( $recuring_data['repeat_x'] ) ? trim( $recuring_data['repeat_x'] ) : '';
+                $duration_x = isset( $recuring_data['duration_x'] ) ? trim( $recuring_data['duration_x'] ) : 1;
+                $repeat_end_type = isset( $recuring_data['repeat_end_type'] ) ? trim( $recuring_data['repeat_end_type'] ) : 0;
+
+                $max_repeat = $repeat_end_type != 1 && isset( $recuring_data['max_repeat'] ) ? (int)$recuring_data['max_repeat'] : 0;
+                $repeat_end = $repeat_end_type == 1 && isset( $recuring_data['repeat_end'] ) ? $recuring_data['repeat_end'] : '';
+
+                if ( geodir_event_is_date( $end_date ) && strtotime( $end_date ) < strtotime( $start_date ) ) {
+                    $end_date = $start_date;
+                }
+
+                $repeat_x = $repeat_x > 0 ? (int)$repeat_x : 1;
+                $duration_x = $duration_x > 0 ? (int)$duration_x : 1;
+                $max_repeat = $max_repeat > 0 ? (int)$max_repeat : 1;
+
+                if ( $repeat_end_type == 1 && !geodir_event_is_date( $repeat_end ) ) {
+                    $repeat_end = '';
+                }
+
+                if ( $repeat_type == 'custom' ) {
+                    $event_recurring_dates = explode( ',', $recuring_data['event_recurring_dates'] );
+                } else {
+                    // week days
+                    $repeat_days = array();
+                    if ( $repeat_type == 'week' || $repeat_type == 'month' ) {
+                        $repeat_days = isset( $recuring_data['repeat_days'] ) ? $recuring_data['repeat_days'] : $repeat_days;
+                    }
+
+                    // by week
+                    $repeat_weeks = array();
+                    if ( $repeat_type == 'month' ) {
+                        $repeat_weeks = isset( $recuring_data['repeat_weeks'] ) ? $recuring_data['repeat_weeks'] : $repeat_weeks;
+                    }
+
+                    $event_recurring_dates = geodir_event_date_occurrences( $repeat_type, $start_date, $end_date, $repeat_x, $max_repeat, $repeat_end, $repeat_days, $repeat_weeks );
+                }
+            } else {
+                $event_recurring_dates = explode( ',', $recuring_data['event_recurring_dates'] );
+            }
+
+            if ( empty( $recuring_data['all_day'] ) ) {
+                if ( $repeat_type == 'custom' && $different_times ) {
+                    $astarttimes = isset( $recuring_data['starttimes'] ) ? $recuring_data['starttimes'] : array();
+                    $aendtimes = isset( $recuring_data['endtimes'] ) ? $recuring_data['endtimes'] : array();
+                } else {
+                    $starttimes = isset( $recuring_data['starttime'] ) ? $recuring_data['starttime'] : '';
+                    $endtimes = isset( $recuring_data['endtime'] ) ? $recuring_data['endtime'] : '';
+                }
+            }
+
+            if ( ! empty( $_REQUEST['gde'] )) {
+                if ( in_array( $_REQUEST['gde'], $event_recurring_dates ) ){
+                    $event_recurring_dates = array( esc_html( $_REQUEST['gde'] ) );
+                }
+            }
+
+            foreach( $event_recurring_dates as $key => $date ) {
+                $schedule = array();
+
+                if ( $repeat_type == 'custom' && $different_times ) {
+                    if ( !empty( $astarttimes ) && isset( $astarttimes[$key] ) ) {
+                        $starttimes = $astarttimes[$key];
+                        $endtimes = $aendtimes[$key];
+                    } else {
+                        $starttimes = '';
+                        $endtimes = '';
+                    }
+                }
+
+                $duration = isset( $recuring_data['duration_x'] ) && (int)$recuring_data['duration_x'] > 0 ? (int)$recuring_data['duration_x'] : 1;
+                $duration--;
+                $enddate = date_i18n( 'Y-m-d', strtotime( $date . ' + ' . $duration . ' day' ) );
+
+                // Hide past dates
+                if ( $hide_past_dates && strtotime( $enddate ) < strtotime( date_i18n( 'Y-m-d', current_time( 'timestamp' ) ) ) ) {
+                    continue;
+                }
+
+                $sdate = strtotime( $date . ' ' . $starttimes );
+                $edate = strtotime( $enddate . ' ' . $endtimes );
+
+                $start_date = date_i18n( $geodir_date_time_format, $sdate );
+                $end_date = date_i18n( $geodir_date_time_format, $edate );
+
+                $full_day = false;
+                $same_datetime = false;
+
+                if ( $starttimes == $endtimes && ( $starttimes == '' || $starttimes == '00:00:00' || $starttimes == '00:00' ) ) {
+                    $full_day = true;
+                }
+
+                if ( $start_date == $end_date && $full_day ) {
+                    $same_datetime = true;
+                }
+
+                $title_date = date_i18n( $geodir_date_format, $sdate );
+                if ( $full_day ) {
+                    $start_date = $title_date;
+                    $end_date = date_i18n( $geodir_date_format, $edate );
+                }
+
+                $schedule['start'] = $start_date;
+                if ( !$same_datetime ) {
+                    $schedule['end'] = $end_date;
+                }
+
+                $schedules[] = $schedule;
+                if ( !empty( $limit ) && count( $schedules ) >= $limit ) {
+                    break;
+                }
+            }
+        } else {
+            if ( isset( $recuring_data['is_recurring'] ) ) {
+                $start_date = isset( $recuring_data['event_start'] ) ? $recuring_data['event_start'] : '';
+                $end_date = isset( $recuring_data['event_end'] ) ? $recuring_data['event_end'] : $start_date;
+                $all_day = isset( $recuring_data['all_day'] ) && !empty( $recuring_data['all_day'] ) ? true : false;
+                $starttime = isset( $recuring_data['starttime'] ) ? $recuring_data['starttime'] : '';
+                $endtime = isset( $recuring_data['endtime'] ) ? $recuring_data['endtime'] : '';
+
+                $event_recurring_dates = explode( ',', $recuring_data['event_recurring_dates'] );
+                $starttimes = isset( $recuring_data['starttimes'] ) && !empty( $recuring_data['starttimes'] ) ? $recuring_data['starttimes'] : array();
+                $endtimes = isset( $recuring_data['endtimes'] ) && !empty( $recuring_data['endtimes'] ) ? $recuring_data['endtimes'] : array();
+
+                if ( ! empty( $_REQUEST['gde'] )) {
+                    if ( in_array( $_REQUEST['gde'], $event_recurring_dates ) ){
+                        $event_recurring_dates = array( esc_html( $_REQUEST['gde'] ) );
+                    }
+                }
+
+                if ( !geodir_event_is_date( $start_date ) && !empty( $event_recurring_dates ) ) {
+                    $start_date = $event_recurring_dates[0];
+                }
+
+                if ( strtotime( $end_date ) < strtotime( $start_date ) ) {
+                    $end_date = $start_date;
+                }
+
+                if ( $starttime == '' && !empty( $starttimes ) ) {
+                    $starttime = $starttimes[0];
+                    $endtime = $endtimes[0];
+                }
+
+                $one_day = false;
+                if ( $start_date == $end_date && $all_day ) {
+                    $one_day = true;
+                }
+
+                if ( $all_day ) {
+                    $start_datetime = strtotime( $start_date );
+                    $end_datetime = strtotime( $end_date );
+
+                    $start_date = date_i18n( $geodir_date_format, $start_datetime );
+                    $end_date = date_i18n( $geodir_date_format, $end_datetime );
+                    if ( $start_date == $end_date ) {
+                        $one_day = true;
+                    }
+                } else {
+                    if ( $start_date == $end_date && $starttime == $endtime ) {
+                        $end_date = date_i18n( 'Y-m-d', strtotime( $start_date . ' ' . $starttime . ' +1 day' ) );
+                        $one_day = false;
+                    }
+                    $start_datetime = strtotime( $start_date . ' ' . $starttime );
+                    $end_datetime = strtotime( $end_date . ' ' . $endtime );
+
+                    $start_date = date_i18n( $geodir_date_time_format, $start_datetime );
+                    $end_date = date_i18n( $geodir_date_time_format, $end_datetime );
+                }
+
+                $schedule['start'] = $start_date;
+                if ( !$one_day ) {
+                    $schedule['end'] = $end_date;
+                }
+
+                $schedules[] = $schedule;
+            } else { // older event dates
+                $event_recurring_dates = explode( ',', $recuring_data['event_recurring_dates'] );
+                $starttimes = isset( $recuring_data['starttime'] ) ? $recuring_data['starttime'] : '';
+                $endtimes = isset( $recuring_data['endtime'] ) ? $recuring_data['endtime'] : '';
+                
+                if ( ! empty( $_REQUEST['gde'] )) {
+                    if ( in_array( $_REQUEST['gde'], $event_recurring_dates ) ){
+                        $event_recurring_dates = array( esc_html( $_REQUEST['gde'] ) );
+                    }
+                }
+
+                foreach( $event_recurring_dates as $key => $date ) {
+                    $schedule = array();
+
+                    if ( isset( $recuring_data['different_times'] ) && $recuring_data['different_times'] == '1' ) {
+                        $starttimes = isset( $recuring_data['starttimes'][$key] ) ? $recuring_data['starttimes'][$key] : '';
+                        $endtimes = isset( $recuring_data['endtimes'][$key] ) ? $recuring_data['endtimes'][$key] : '';
+                    }
+
+                    $sdate = strtotime( $date . ' ' . $starttimes );
+                    $edate = strtotime( $date . ' ' . $endtimes );
+
+                    if ( $starttimes > $endtimes ) {
+                        $edate = strtotime( $date . ' ' . $endtimes . " +1 day" );
+                    }
+
+                    // Hide past dates
+                    if ( $hide_past_dates && strtotime( date_i18n( 'Y-m-d', $edate ) ) < strtotime( date_i18n( 'Y-m-d', current_time( 'timestamp' ) ) ) ) {
+                        continue;
+                    }
+
+                    $schedule['start'] = date_i18n( $geodir_date_time_format, $sdate );
+                    if ( $sdate != $edate ) {
+                        $schedule['end'] = date_i18n( $geodir_date_time_format, $edate );
+                    }
+
+                    $schedules[] = $schedule;
+
+                    if ( !empty( $limit ) && count( $schedules ) >= $limit ) {
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    return $schedules;
 }
