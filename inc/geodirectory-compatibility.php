@@ -694,6 +694,9 @@ function sup_add_feat_img_head($page)
         }
 
         $cats_arr = array_filter(explode(",", $post_cats));
+		if (!empty($cats_arr)) {
+			$cats_arr = array_unique($cats_arr);
+		}
         $cat_icons = geodir_get_term_icon();
         
         $post_id = $post->ID;
