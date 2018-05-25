@@ -1,4 +1,6 @@
 v1.1.8
+Responsive CSS improvements - CHANGED
+is_bbpress called without checking if bbpress is active - FIXED
 Remove send to friend functionality as it against the GDPR policy - CHANGED
 
 v1.1.7

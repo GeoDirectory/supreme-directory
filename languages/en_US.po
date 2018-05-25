@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Supreme Directory 1.1.7\n"
+"Project-Id-Version: Supreme Directory 1.1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-04 11:54+0000\n"
-"PO-Revision-Date: 2018-01-04 11:54+0000\n"
+"POT-Creation-Date: 2018-05-25 18:36+0100\n"
+"PO-Revision-Date: 2018-05-25 18:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: GD Team <info@wpgeodirectory.com>\n"
 "Language: en_US\n"
@@ -40,7 +40,7 @@ msgstr ""
 msgid "Pages:"
 msgstr ""
 
-#: content.php:62 inc/geodirectory-compatibility.php:752
+#: content.php:62 inc/geodirectory-compatibility.php:747
 msgid "Edit"
 msgstr ""
 
@@ -173,64 +173,64 @@ msgstr ""
 msgid " - Powered by %s."
 msgstr ""
 
-#: inc/geodirectory-compatibility.php:197
+#: inc/geodirectory-compatibility.php:198
 msgid "SEARCH LISTINGS"
 msgstr ""
 
-#: inc/geodirectory-compatibility.php:199
+#: inc/geodirectory-compatibility.php:200
 msgid "SHOW LISTINGS"
 msgstr ""
 
-#: inc/geodirectory-compatibility.php:201
+#: inc/geodirectory-compatibility.php:202
 msgid "SHOW MAP"
 msgstr ""
 
-#: inc/geodirectory-compatibility.php:719
+#: inc/geodirectory-compatibility.php:714
 msgid "Verified Owner"
 msgstr ""
 
-#: inc/geodirectory-compatibility.php:726
+#: inc/geodirectory-compatibility.php:721
 msgid "Claim Me"
 msgstr ""
 
+#: inc/geodirectory-compatibility.php:771
 #: inc/geodirectory-compatibility.php:776
-#: inc/geodirectory-compatibility.php:781
-#: inc/geodirectory-compatibility.php:793
+#: inc/geodirectory-compatibility.php:788
 msgid "Claim"
 msgstr ""
 
-#: inc/geodirectory-compatibility.php:858
+#: inc/geodirectory-compatibility.php:853
 msgid "Write a Review"
 msgstr ""
 
-#: inc/geodirectory-compatibility.php:895
-#: inc/geodirectory-compatibility.php:905
+#: inc/geodirectory-compatibility.php:887
+#: inc/geodirectory-compatibility.php:897
 msgid "Share on Facebook"
 msgstr ""
 
-#: inc/geodirectory-compatibility.php:898
-#: inc/geodirectory-compatibility.php:907
+#: inc/geodirectory-compatibility.php:890
+#: inc/geodirectory-compatibility.php:899
 msgid "Share on Twitter"
 msgstr ""
 
+#: inc/geodirectory-compatibility.php:893
 #: inc/geodirectory-compatibility.php:901
-#: inc/geodirectory-compatibility.php:909
 msgid "Share on Google Plus"
 msgstr ""
 
-#: inc/geodirectory-compatibility.php:979
+#: inc/geodirectory-compatibility.php:971
 msgid "Near Me"
 msgstr ""
 
-#: inc/geodirectory-compatibility.php:1123
+#: inc/geodirectory-compatibility.php:1115
 msgid "Listings"
 msgstr ""
 
-#: inc/geodirectory-compatibility.php:1129
+#: inc/geodirectory-compatibility.php:1121
 msgid "Favorites"
 msgstr ""
 
-#: inc/geodirectory-compatibility.php:1233
+#: inc/geodirectory-compatibility.php:1225
 msgid "%s Tags: %l"
 msgstr ""
 
