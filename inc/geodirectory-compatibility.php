@@ -276,7 +276,7 @@ remove_action('geodir_details_main_content', 'geodir_action_details_taxonomies',
 /**
  * Output the listings images as a gallery.
  *
- * Used to add the listins images to the sidebar.
+ * Used to add the listing images to the sidebar.
  *
  * @since 1.0.0
  */
@@ -553,9 +553,8 @@ add_action("switch_theme", "sd_theme_deactivation", 10 , 2);
 
 
 
-//remove send to friend/enquiry from details page
+//remove send to enquiry from details page
 add_filter("geodir_show_geodir_email", '__return_false');
-remove_action('geodir_after_detail_page_more_info', 'geodir_payment_sidebar_show_send_to_friend', 11);
 
 function sd_detail_display_notices() {
     if (geodir_is_page('detail')) {
@@ -571,14 +570,6 @@ function sd_detail_display_notices() {
             ?>
             <div class="alert alert-success" style="text-align: center">
                 <?php echo SEND_INQUIRY_SUCCESS; ?>
-            </div>
-            <?php
-        }
-
-        if (isset($_GET['sendtofrnd']) && $_GET['sendtofrnd'] == 'success') {
-            ?>
-            <div class="alert alert-success" style="text-align: center">
-                <?php echo SEND_FRIEND_SUCCESS; ?>
             </div>
             <?php
         }
@@ -802,7 +793,7 @@ function sup_add_feat_img_head($page)
                 }
                 ?>
             </div>
-            <!-- sd-detail-suthor end -->
+            <!-- sd-detail-author end -->
             <div class="sd-detail-info">
                 <?php
                 $title_extra_class = apply_filters('sd_detail_title_extra_class', "");
@@ -872,9 +863,6 @@ function sup_add_feat_img_head($page)
                 $share_actions = array();
                 if ( ! empty( $post->geodir_email ) && ! empty( $available_fields ) && in_array( 'geodir_email', $available_fields ) ) {
                     $share_actions[] = '<a href="javascript:void(0);" class="b_send_inquiry">' . SEND_INQUIRY . '</a>';
-                }
-                if ( ! empty( $package_info['sendtofriend'] ) ) {
-                    $share_actions[] = '<a class="b_sendtofriend" href="javascript:void(0);">' . SEND_TO_FRIEND . '</a></span>';
                 }
                 if ( ! empty( $share_actions ) ) {
                     $send_buttons .= '<span style="" class="geodir-i-email">';
