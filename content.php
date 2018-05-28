@@ -42,7 +42,7 @@
             <?php
             global $more;
             $more = 0;
-            if (is_singular() || is_bbpress()) {
+            if (is_singular() || ( function_exists('is_bbpress') && is_bbpress() )) {
                 the_content();
             } else {
                 directory_theme_post_thumbnail();

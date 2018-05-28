@@ -20,10 +20,11 @@ remove_action('geodir_author_before_main_content', 'geodir_breadcrumb', 20);
 function sd_before_listing_content_search()
 {
     if (sd_is_non_location_cpt()) {
-        return;
+        add_action('geodir_search_content', 'sd_search_form_on_search_page', 4);
+    }else{
+        add_action('geodir_search_content', 'sd_search_form_on_search_page', 4);
+        add_action('geodir_listings_content', 'sd_search_form_on_search_page', 4);
     }
-    add_action('geodir_search_content', 'sd_search_form_on_search_page', 4);
-    add_action('geodir_listings_content', 'sd_search_form_on_search_page', 4);
 }
 
 add_action('wp', 'sd_before_listing_content_search');
