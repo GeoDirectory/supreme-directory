@@ -1,3 +1,6 @@
+v1.1.9
+WooCommerce category page shows incorrect title - FIXED
+
 v1.1.8
 Responsive CSS improvements - CHANGED
 is_bbpress called without checking if bbpress is active - FIXED

@@ -31,7 +31,7 @@ if($dt_enable_woo_sidebar){
                     ?>
                     <h1 class="entry-title"><?php the_title(); ?></h1>
                     <?php
-                } elseif (is_shop()) {
+                } elseif (is_woocommerce()) {
                     ?>
                     <h1 class="entry-title"><?php woocommerce_page_title(); ?></h1>
                     <?php
