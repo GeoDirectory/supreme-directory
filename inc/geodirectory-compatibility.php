@@ -341,8 +341,8 @@ function sd_img_gallery_output()
 add_action('geodir_detail_sidebar_inside', 'sd_img_gallery_output', 1);
 
 // add recurring dates to sidebar if events installed
-if(function_exists('geodir_event_show_shedule_date')){
-    add_action('geodir_detail_sidebar_inside', 'geodir_event_show_shedule_date', '1.5');
+if(function_exists('geodir_event_show_schedule_date')){
+    add_action('geodir_detail_sidebar_inside', 'geodir_event_show_schedule_date', '1.5');
 }
 
 /**
