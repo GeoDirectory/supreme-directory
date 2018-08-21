@@ -1,6 +1,7 @@
 v1.1.9
 WooCommerce category page shows incorrect title - FIXED
 Event dates missing from detail page sidebar - FIXED
+Includes security patch related to search title - SECURITY
 
 v1.1.8
 Responsive CSS improvements - CHANGED
