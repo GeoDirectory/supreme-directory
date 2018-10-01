@@ -17,9 +17,9 @@ jQuery(document).ready(function () {
     }
 
     jQuery("body").on("geodir_setup_search_form", function(){
-        if (jQuery(".geodir-cat-list-tax").length) {
-            var postType = jQuery('.featured-area .search_by_post').val()
-            jQuery(".geodir-cat-list-tax").val(postType + "category");
+        if (jQuery(".featured-area .geodir-cat-list-tax").length) {
+            var postType = jQuery('.featured-area .search_by_post').val();
+            jQuery(".geodir-cat-list-tax").val(postType);
             jQuery(".geodir-cat-list-tax").change();
         }
     });
@@ -58,85 +58,43 @@ jQuery(document).ready(function () {
         });
     }
 
+    // fire any resize functions
+    jQuery(window).on('resize', function(){
+        // var win = $(this); //this = window
+        // if (win.height() >= 820) { /* ... */ }
+        // if (win.width() >= 1280) { /* ... */ }
+        console.log('resized');
+        sd_archive_container_max_height();
+    });
+
 });
+
+function sd_archive_container_max_height(){
+    if ( jQuery( "body.post-type-archive" ).length  || jQuery( "body.geodir-page-search" ).length) {
+        $offsetHeight = jQuery('.sd-container .container .entry-content').offset().top;
+        $maxHeight = window.innerHeight - $offsetHeight;
+        //alert($maxHeight);
+        jQuery('body.post-type-archive .sd-container .container .entry-content, body.geodir-page-search .sd-container .container .entry-content').css('max-height',$maxHeight);
+        jQuery('.main_map_wrapper, #gd_map_canvas_archive, #gd_map_canvas_archive_loading_div').css('height',$maxHeight);
+
+    }
+}
 
 function sd_scroll_to_reviews(){
     jQuery('.geodir-tab-head [data-tab="#reviews"]').closest('dd').trigger('click');
     setTimeout(function(){jQuery('html,body').animate({scrollTop:jQuery('#respond').offset().top}, 'slow');console.log('scroll')}, 200);
 }
 
-
-function sd_adjust_head(){
-    var headHeight = jQuery('#site-header').height();
-
-    if ( jQuery( "body").hasClass('admin-bar') ) {
-
-        // if admin bar present then set margin top to 0 so we can adjust things later
-        if(jQuery('html').css("margin-top")!='0px'){
-            jQuery('html').attr('style', jQuery('html').attr('style') + '; ' + 'margin-top: 0 !important');
-        }
-
-
-        var winWidth = jQuery( window ).width();
-
-        if(winWidth>782){
-            headHeight = headHeight + 32;
-        }else{
-            headHeight = headHeight + 46;
-        }
-
-    }
-
-    if(headHeight>0){headHeight = headHeight-1;}
-    jQuery("#geodir_wrapper").css({
-        'margin-top': headHeight+"px"
-    });
-    
-    if (jQuery("body").hasClass('sd-loc-less')) {
-        return;
-    }
-
-    jQuery("#geodir_content").css({
-        height: "calc(100vh - "+headHeight+"px)",
-       // 'margin-top': headHeight+"px",
-        'overflow-y': "scroll",
-        '-webkit-overflow-scrolling': "touch"
-    });
-
-    jQuery("#gd-sidebar-wrapper").css({
-        height: "calc(100vh - "+headHeight+"px)",
-       // 'margin-top': headHeight+"px",
-        'overflow': "hidden"
-    });
-
-    jQuery(".sd.search.geodir-page #sticky_map_gd_listing_map, .sd.archive.geodir-page #sticky_map_gd_listing_map").css({
-        height: "calc(100vh - "+headHeight+"px)",
-       // 'margin-top': headHeight+"px",
-        'overflow': "hidden"
-    });
-
-    jQuery(".sd.search.geodir-page #gd_listing_map_wrapper, .sd.search.geodir-page #gd_listing_map, .sd.search.geodir-page #gd_listing_map_loading_div, .sd.archive.geodir-page #gd_listing_map_wrapper, .sd.archive.geodir-page #gd_listing_map, .sd.archive.geodir-page #gd_listing_map_loading_div").css({
-        height: "calc(100vh - "+headHeight+"px)",
-        // 'margin-top': headHeight+"px",
-        'overflow': "hidden"
-    });
-
-
-
-
-}
+var $sd_sidebar_position = '';
 
 (function(){
 
-    // if header is fixed adjest the content to push it down and make it 100vh
-    if(jQuery('#site-header').css("position") == "fixed") {
-        sd_adjust_head();
-
-        jQuery( window ).resize(function() {
-            sd_adjust_head();
-        });
+    // set the sidebar position var
+    if(jQuery('body.sd-right-sidebar').length){
+        $sd_sidebar_position = 'right';
+    }else{
+        $sd_sidebar_position = 'left';
     }
-
 
     if ( jQuery( ".featured-img" ).length ) {
 
@@ -181,4 +139,66 @@ function sd_adjust_head(){
         }, 1000);
     });
 
+
+    sd_insert_archive_resizer();
+
+
 })();
+
+
+
+// insert archive page size adjuster
+function sd_insert_archive_resizer(){
+    $screen_width = screen.width;
+    if(jQuery('body.post-type-archive .sd-container .container').length &&  $screen_width > 992){
+        jQuery('body.post-type-archive .sd-container .container').append('<button class="sd-archive-resizer"><i class="fas fa-arrows-alt-h"></i></button>');
+        sd_position_archive_resizer();
+    }
+}
+
+function sd_position_archive_resizer(){
+
+    var $container = '.entry-content';
+    var $offset = 21;
+    if($sd_sidebar_position=='left') {
+        $container = '.sd-sidebar';
+        $offset = 13;
+    }
+
+        $width = jQuery('body.post-type-archive .sd-container .container '+$container).outerWidth() - $offset;
+    jQuery('.sd-archive-resizer').css('left',$width);
+}
+var $sd_set_archive_width = false;
+// function to adjust width of archive elements
+jQuery('body.post-type-archive .sd-archive-resizer').mousedown(function(e){
+    e.preventDefault();
+
+    var $container = '.entry-content';
+    if($sd_sidebar_position=='left') {
+        $container = '.sd-sidebar';
+    }
+
+    jQuery(document).mousemove(function(e){
+
+        jQuery('.container '+$container).css("width",e.pageX+2);
+        sd_position_archive_resizer();
+        $sd_set_archive_width = true;
+    });
+});
+jQuery(document).mouseup(function(e){
+    jQuery(document).unbind('mousemove');
+    // set the value if we have localstorage
+    if($sd_set_archive_width && geodir_is_localstorage()){
+
+        var $container = '.entry-content';
+        var $offset = 21;
+        if($sd_sidebar_position=='left') {
+            $container = '.sd-sidebar';
+            $offset = 13;
+        }
+
+        $width = jQuery('body.post-type-archive .sd-container .container '+$container).outerWidth() - $offset;
+        localStorage.setItem('sd_archive_width', $width);
+        window.dispatchEvent(new Event('resize'));// so map tiles fill in
+    }
+});

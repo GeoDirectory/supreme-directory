@@ -1,20 +1,29 @@
 <?php global $dt_blog_sidebar_position,$sd_sidebar_class,$post;?>
 <article <?php post_class(); ?>>
-    <?php get_template_part('content-featured-area');?>
     <div class="container" id="home-scroll">
 
         <?php
         if($dt_blog_sidebar_position=='left'){?>
         <div class="sd-sidebar sd-sidebar-left">
             <div class="sidebar blog-sidebar page-sidebar">
-                <?php if(is_page()){get_sidebar('pages');}else{get_sidebar();}?>
+                <?php dynamic_sidebar('sidebar-gd');?>
             </div>
         </div>
         <?php }?>
 
         <div class="entry-content entry-summary <?php echo $sd_sidebar_class;?>">
             <?php
-            if(get_post_meta($post->ID, '_sd_featured_area', true) == 'remove'){
+
+            // add the title if its not added in the featured area
+            $post_id = $post->ID;
+            if(function_exists('geodir_is_page') && geodir_is_page('single') && isset($post->post_type)){
+                $page_id = geodir_cpt_template_page('page_details',$post->post_type);
+                if($page_id){
+                    $post_id = $page_id;
+                }
+            }
+            $featured_type  = get_post_meta($post_id, '_sd_featured_area', true);
+            if($featured_type == 'remove'){
                 ?>
                 <h1 class="entry-title"><?php the_title(); ?></h1>
                 <?php
@@ -45,19 +54,6 @@
 
                 <?php
                 global $post;
-                if(is_single() && isset($post->post_type) && $post->post_type='post'){
-                    // Previous/next post navigation.
-                    the_post_navigation(array(
-                        'next_text' => '<span class="meta-nav" aria-hidden="true">' . __('Next', 'supreme-directory') . '</span> ' .
-                            '<span class="screen-reader-text">' . __('Next post:', 'supreme-directory') . '</span> ' .
-                            '<span class="post-title">%title</span>',
-                        'prev_text' => '<span class="meta-nav" aria-hidden="true">' . __('Previous', 'supreme-directory') . '</span> ' .
-                            '<span class="screen-reader-text">' . __('Previous post:', 'supreme-directory') . '</span> ' .
-                            '<span class="post-title">%title</span>',
-                    )); 
-                }
-
-
 
                 // If comments are open or we have at least one comment, load up the comment template.
                 if (comments_open() || get_comments_number()) : ?>
@@ -77,7 +73,7 @@
         if($dt_blog_sidebar_position=='right'){?>
             <div class="sd-sidebar sd-sidebar-right">
                 <div class="sidebar blog-sidebar page-sidebar">
-                    <?php if(is_page()){get_sidebar('pages');}else{get_sidebar();} ?>
+                    <?php dynamic_sidebar('sidebar-gd'); ?>
                 </div>
             </div>
         <?php }?>

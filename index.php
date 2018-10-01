@@ -16,7 +16,7 @@
             <h1 class="entry-title">
                 <?php
                 if ( is_search() ) {
-                    echo __('Your Search Results for ', 'supreme-directory').get_search_query(false);
+                    echo __('Your Search Results for ', 'supreme-directory').get_search_query(true);
                 } else {
                     echo get_the_title($page_for_posts);
                 }
