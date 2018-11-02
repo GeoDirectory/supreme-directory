@@ -70,11 +70,11 @@ jQuery(document).ready(function () {
 });
 
 function sd_archive_container_max_height(){
-    if ( jQuery( "body.post-type-archive" ).length  || jQuery( "body.geodir-page-search" ).length) {
+    if ( jQuery( "body.geodir-fixed-archive" ).length) {
         $offsetHeight = jQuery('.sd-container .container .entry-content').offset().top;
         $maxHeight = window.innerHeight - $offsetHeight;
         //alert($maxHeight);
-        jQuery('body.post-type-archive .sd-container .container .entry-content, body.geodir-page-search .sd-container .container .entry-content').css('max-height',$maxHeight);
+        jQuery('body.geodir-fixed-archive .sd-container .container .entry-content').css('max-height',$maxHeight);
         jQuery('.main_map_wrapper, #gd_map_canvas_archive, #gd_map_canvas_archive_loading_div').css('height',$maxHeight);
 
     }
@@ -150,8 +150,8 @@ var $sd_sidebar_position = '';
 // insert archive page size adjuster
 function sd_insert_archive_resizer(){
     $screen_width = screen.width;
-    if(jQuery('body.post-type-archive .sd-container .container').length &&  $screen_width > 992){
-        jQuery('body.post-type-archive .sd-container .container').append('<button class="sd-archive-resizer"><i class="fas fa-arrows-alt-h"></i></button>');
+    if(jQuery('body.geodir-fixed-archive .sd-container .container').length &&  $screen_width > 992){
+        jQuery('body.geodir-fixed-archive .sd-container .container').append('<button class="sd-archive-resizer"><i class="fas fa-arrows-alt-h"></i></button>');
         sd_position_archive_resizer();
     }
 }
@@ -165,12 +165,12 @@ function sd_position_archive_resizer(){
         $offset = 13;
     }
 
-        $width = jQuery('body.post-type-archive .sd-container .container '+$container).outerWidth() - $offset;
+        $width = jQuery('body.geodir-fixed-archive .sd-container .container '+$container).outerWidth() - $offset;
     jQuery('.sd-archive-resizer').css('left',$width);
 }
 var $sd_set_archive_width = false;
 // function to adjust width of archive elements
-jQuery('body.post-type-archive .sd-archive-resizer').mousedown(function(e){
+jQuery('body.geodir-fixed-archive .sd-archive-resizer').mousedown(function(e){
     e.preventDefault();
 
     var $container = '.entry-content';
@@ -197,8 +197,10 @@ jQuery(document).mouseup(function(e){
             $offset = 13;
         }
 
-        $width = jQuery('body.post-type-archive .sd-container .container '+$container).outerWidth() - $offset;
+        $width = jQuery('body.geodir-fixed-archive .sd-container .container '+$container).outerWidth() - $offset;
         localStorage.setItem('sd_archive_width', $width);
         window.dispatchEvent(new Event('resize'));// so map tiles fill in
     }
 });
+
+

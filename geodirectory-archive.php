@@ -5,7 +5,12 @@
  * @package Supreme_Directory
  * @since 2.0.0
  */
+add_filter('body_class', 'sd_add_gd_archive_class');
 
+function sd_add_gd_archive_class($classes) {
+    $classes[] = 'geodir-fixed-archive';
+    return $classes;
+}
 get_header();
 
 do_action('dt_page_before_main_content');

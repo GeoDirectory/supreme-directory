@@ -17,7 +17,7 @@ SUPREME DIRECTORY CODE STARTS
  * Define some constants for later use.
  */
 if (!defined('SD_DEFAULT_FEATURED_IMAGE')) define('SD_DEFAULT_FEATURED_IMAGE', get_stylesheet_directory_uri() . "/images/featured.jpg");
-if (!defined('SD_VERSION')) define('SD_VERSION', "2.0.0.0-beta");
+if (!defined('SD_VERSION')) define('SD_VERSION', "2.0.0.1-rc");
 if (!defined('SD_CHILD')) define('SD_CHILD', 'supreme-directory');
 
 if(is_admin()){
@@ -99,7 +99,7 @@ if (!defined('GEODIRECTORY_VERSION')) {
 function sd_enqueue_styles()
 {
     wp_enqueue_script('supreme', get_stylesheet_directory_uri() . '/assets/js/supreme.min.js', array(), SD_VERSION, true);
-    wp_enqueue_style('directory-theme-child-style', get_stylesheet_directory_uri().'//assets/css/style.css', array('directory-theme-style', 'directory-theme-style-responsive'));
+    wp_enqueue_style('directory-theme-child-style', get_stylesheet_directory_uri().'/assets/css/style.css', array('directory-theme-style', 'directory-theme-style-responsive'),SD_VERSION);
     
     ob_start();
     sd_theme_customize_css();
@@ -222,174 +222,6 @@ function supreme_entry_meta()
 
 }
 
-/**
- * Add My Account link to the main menu.
- *
- * @param string $items The HTML list content for the menu items.
- * @param object $args An object containing wp_nav_menu() arguments.
- * @return string The menu items HTML.
- * @since 1.0.0
- */
-function sd_add_my_account_link($items, $args) {
-    if ($args->theme_location == 'primary-menu') {
-        ob_start();
-        $menu_slug = $args->menu->slug;
-        ?>
-        <li  class="sd-my-account menu-item">
-            <?php
-        if (is_user_logged_in()) {
-            $current_user = wp_get_current_user();
-            $avatar = get_avatar($current_user->ID, 60);
-            $redirect_to = apply_filters('sd_logout_redirect_to_link', sd_current_page_url());
-            ?>
-            <a class="sd-my-account-link" href="">
-                <?php
-                echo $avatar;
-                if (class_exists('BuddyPress')) {
-                    $user_link = bp_get_loggedin_user_link();
-                } else {
-                    $user_link = get_author_posts_url($current_user->ID);
-                }
-                ?>
-                <?php echo __('My Account', 'supreme-directory'); ?>
-                <i class="fa fa-caret-down"></i>
-            </a>
-            <div id="sd-my-account" class="Panel">
-            <div class="mm-subtitle"><a class="mm-subclose" href="#mm-menu-<?php echo esc_attr($menu_slug);?>"><?php _e('<  Back','supreme-directory');?></a></div>
-            <div class="sd-my-account-dd">
-                <div class="sd-my-account-dd-inner">
-                    <div class="sd-dd-avatar-wrap">
-                        <a href="<?php echo esc_url($user_link); ?>" rel="nofollow"><?php echo $avatar; ?></a>
-                        <h4>
-                            <a href="<?php echo esc_url($user_link); ?>"
-                               rel="nofollow"><?php echo esc_attr($current_user->display_name); ?></a>
-                        </h4>
-                    </div>
-                    <?php if (class_exists('BuddyPress')) { ?>
-                        <ul class="sd-my-account-dd-menu-group sd-my-account-dd-menu-bp-group">
-                            <li class="sd-my-account-dd-menu-link">
-                                <a href="<?php echo esc_url($user_link); ?>">
-                                    <i class="fa fa-user"></i> <?php echo __('About Me', 'supreme-directory'); ?>
-                                </a>
-                            </li>
-                            <li class="sd-my-account-dd-menu-link">
-                                <a href="<?php echo esc_url($user_link . 'settings/'); ?>">
-                                    <i class="fa fa-cog"></i> <?php echo __('Account Settings', 'supreme-directory'); ?>
-                                </a>
-                            </li>
-                        </ul>
-                    <?php } ?>
-                    <?php do_action('sd_my_account_logged_in_extras'); ?>
-                    <ul class="sd-my-account-dd-menu-group">
-                        <li class="sd-my-account-dd-menu-link">
-                            <a href="<?php echo esc_url(wp_logout_url($redirect_to)); ?>">
-                                <i class="fa fa-sign-out"></i> <?php echo __('Log Out', 'supreme-directory'); ?>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            </div>
-        <?php 
-        } else {
-            if (isset($_GET['redirect_to']) && $_GET['redirect_to'] != '') {
-                $redirect_to = $_GET['redirect_to'];
-            } else if (isset($_GET['redirect_add_listing']) && $_GET['redirect_add_listing'] != '') {
-                $redirect_to = $_GET['redirect_add_listing'];
-            } else {
-                $redirect_to = sd_current_page_url();
-            }
-            $redirect_to = apply_filters('sd_login_redirect_to_link', $redirect_to);
-            ?>
-            <a class="sd-my-account-link" href="">
-                <?php echo __('My Account', 'supreme-directory'); ?>
-                <i class="fa fa-caret-down"></i>
-            </a>
-            <div id="sd-my-account" class="Panel">
-            <div class="mm-subtitle"><a class="mm-subclose" href="#mm-menu-<?php echo esc_attr($menu_slug);?>"><?php _e('<  Back','supreme-directory');?></a></div>
-            <div class="sd-my-account-dd">
-                <div class="sd-my-account-dd-inner">
-                    <h4 class="sd-my-account-title"><?php echo __('Sign In', 'supreme-directory'); ?></h4>
-                    <?php
-                    if (isset($_REQUEST['emsg']) && $_REQUEST['emsg'] == 'fw') {
-                        echo "<p class=\"error_msg\"> " . __('Invalid Email, Please check', 'supreme-directory') . " </p>";
-                    } elseif (isset($_REQUEST['logemsg']) && $_REQUEST['logemsg'] == 1) {
-                        echo "<p class=\"error_msg\"> " . INVALID_USER_PW_MSG . " </p>";
-                    }
-
-                    if (isset($_REQUEST['checkemail']) && $_REQUEST['checkemail'] == 'confirm')
-                        echo '<p class="sucess_msg">' . __('Invalid Username/Password.', 'supreme-directory') . '</p>';
-
-                    ?>
-                    <form name="cus_loginform" method="post" action="<?php echo sd_login_url('');?>" >
-
-                        <div class="form_row clearfix">
-                            <input placeholder='<?php _e('Email', 'supreme-directory'); ?>' type="text" name="log" id="user_login"
-                                   value="<?php global $user_login;
-                                   if (!isset($user_login)) {
-                                       $user_login = '';
-                                   }
-                                   echo esc_attr($user_login); ?>" size="20" class="textfield"/>
-                            <span class="user_loginInfo"></span>
-                        </div>
-
-                        <div class="form_row clearfix">
-                            <input placeholder='<?php _e('Password', 'supreme-directory'); ?>' type="password" name="pwd"
-                                   id="user_pass"
-                                   class="textfield input-text" value="" size="20"/>
-                            <span class="user_passInfo"></span>
-                        </div>
-
-                        <p class="rember">
-                            <input name="rememberme" type="checkbox" id="rememberme" value="forever" class="fl"/>
-                            <?php _e('Remember me on this computer', 'supreme-directory'); ?>
-                        </p>
-
-                        <input class="geodir_button" type="submit" value="<?php _e('Sign In', 'supreme-directory'); ?>"
-                               name="submit"/>
-                        <input type="hidden" name="redirect_to" value="<?php echo esc_url($redirect_to); ?>"/>
-                        <input type="hidden" name="testcookie" value="1"/>
-                        <input type="hidden" name="action" value="login"/>
-
-                        <p class="sd-register">
-                        <a href="<?php echo esc_url(sd_login_url(array('signup' => true))); ?>"
-                           class="goedir-newuser-link"><?php _e('Register', 'supreme-directory'); ?></a>
-                           <a href="<?php echo esc_url(sd_login_url(array('forgot' => true))); ?>"
-                       class="goedir-forgot-link"><?php _e('Forgot Password?', 'supreme-directory'); ?></a>
-                        </p>
-                        <?php do_action('login_form'); ?>
-                    </form>
-                </div>
-            </div>
-            </div>
-        <?php
-        }
-        ?>
-        </li>
-        <?php
-        $html = ob_get_clean();
-        $items .= $html;
-    }
-    return $items;
-}
-
-add_filter('wp_nav_menu_items', 'sd_add_my_account_link', 1001, 2);
-
-
-function sd_login_url($params){
-if(function_exists('geodir_login_url')){
-    return geodir_login_url($params);
-}else{
-
-    if(isset($params['signup']) && $params['signup']){
-        return wp_registration_url();
-    }elseif(isset($params['forgot']) && $params['forgot']){
-        return wp_lostpassword_url();
-    }
-    return wp_login_url();
-}
-
-}
 
 
 /**
@@ -596,8 +428,9 @@ function sd_feature_area_title_meta(){
         <h1 class="entry-title"><?php the_title(); ?></h1>
         <?php
     } else {
+        /*<!-- <h2 class="entry-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>-->*/
         ?>
-        <h2 class="entry-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+        <h1 class="entry-title"><?php the_title(); ?></h1>
         <?php
     }
 
@@ -612,9 +445,12 @@ add_action('sd_feature_area','sd_feature_area_title_meta',10);
 
 function sd_add_sd_home_class($classes) {
     global $post;
+    //echo '###'.get_option('show_on_front');
     if (is_front_page()) {
         $classes[] = 'sd-homepage';
-        $classes[] = 'sd-float-menu';
+        if(get_option('show_on_front')!='posts'){
+            $classes[] = 'sd-float-menu';
+        }
     }
 
     // check for location page
@@ -632,7 +468,7 @@ add_filter( 'body_class', 'sd_add_sd_home_class' );
 function sd_feature_area(){
 
     if (is_front_page()) {
-        echo '<div class="home-more"  id="sd-home-scroll" ><a href="#sd-home-scroll"><i class="fa fa-chevron-down"></i></a></div>';
+        echo '<div class="home-more"  id="sd-home-scroll" ><a href="#sd-home-scroll"><i class="fas fa-chevron-down"></i></a></div>';
     }
 }
 add_action('sd_feature_area','sd_feature_area',15);

@@ -87,10 +87,10 @@
                 var html = `
             <div class="sd-mobile-search-controls">
                 <a class="dt-btn" id="showSearch" href="#">
-                    <i class="fa fa-search"></i> <?php _e('SEARCH LISTINGS', 'supreme-directory');?></a>
-                <a class="dt-btn" id="hideMap" href="#"><i class="fa fa-th-large">
+                    <i class="fas fa-search"></i> <?php _e('SEARCH LISTINGS', 'supreme-directory');?></a>
+                <a class="dt-btn" id="hideMap" href="#"><i class="fas fa-th-large">
                     </i> <?php _e('SHOW LISTINGS', 'supreme-directory'); ?></a>
-                <a class="dt-btn" id="showMap" href="#"><i class="fa fa-map-o">
+                <a class="dt-btn" id="showMap" href="#"><i class="far fa-map">
                     </i> <?php _e('SHOW MAP', 'supreme-directory') ?></a>
 			</div>
 `;

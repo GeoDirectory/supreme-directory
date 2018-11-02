@@ -65,26 +65,6 @@ function sd_map_show()
 }
 
 
-/**
- * Output the mobile map buttons HTML.
- *
- * @since 1.0.0
- */
-function sd_mobile_map_buttons()
-{
-    echo '<div class="sd-mobile-search-controls">
-			<a class="dt-btn" id="showSearch" href="#">
-				<i class="fa fa-search"></i> ' . __('SEARCH LISTINGS', 'supreme-directory') . '</a>
-			<a class="dt-btn" id="hideMap" href="#"><i class="fa fa-th-large">
-				</i> ' . __('SHOW LISTINGS', 'supreme-directory') . '</a>
-			<a class="dt-btn" id="showMap" href="#"><i class="fa fa-map-o">
-				</i> ' . __('SHOW MAP', 'supreme-directory') . '</a>
-			</div>';
-}
-
-add_action('geodir_listings_content', 'sd_mobile_map_buttons', 5);
-add_action('geodir_search_content', 'sd_mobile_map_buttons', 5);
-
 
 /*################################
       DETAIL PAGE FUNCTIONS
@@ -105,10 +85,10 @@ function sd_add_event_dates_featured_area(){
         if ( !empty( $schedules ) ) {
             foreach ( $schedules as $schedule ) {
                 $output .= '<p class="gde-recurring-cont">';
-                $output .= '<span class="geodir_schedule_start"><i class="fa fa-caret-right"></i> ' . $schedule['start'] . '</span>';
+                $output .= '<span class="geodir_schedule_start"><i class="fas fa-caret-right"></i> ' . $schedule['start'] . '</span>';
                 if ( ! empty( $schedule['end'] ) && $schedule['start'] != $schedule['end'] ) {
                     $output .= '<br />';
-                    $output .= '<span class="geodir_schedule_end"><i class="fa fa-caret-left"></i> ' . $schedule['end'] . '</span>';
+                    $output .= '<span class="geodir_schedule_end"><i class="fas fa-caret-left"></i> ' . $schedule['end'] . '</span>';
                 }
                 $output .= '</p>';
             }

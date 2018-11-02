@@ -1,33 +1,9 @@
-<?php get_header(); ?>
-    <div class="featured-area">
-        <div class="featured-img" <?php
-        $page_for_posts = get_option('page_for_posts');
-        if (has_post_thumbnail($page_for_posts)) { // check if the post has a Post Thumbnail assigned to it.
-            $full_image_url = wp_get_attachment_image_src(get_post_thumbnail_id($page_for_posts), 'full');
-        }else{
-            $full_image_url[0] = SD_DEFAULT_FEATURED_IMAGE;
-        }
-            ?> style="background-image: url('<?php echo esc_url($full_image_url[0]); ?>');" <?php
-        ?>>
+<?php get_header();
 
-        </div>
-        <div class="header-wrap">
+do_action('dt_page_before_main_content');
 
-            <h1 class="entry-title">
-                <?php
-                if ( is_search() ) {
-                    echo __('Your Search Results for ', 'supreme-directory').get_search_query(true);
-                } else {
-                    echo get_the_title($page_for_posts);
-                }
-                ?>
-            </h1>
-            <?php if (get_post_meta($page_for_posts, 'subtitle', true)) {
-                echo '<div class="entry-subtitle">' . get_post_meta($page_for_posts, 'subtitle', true) . '</div>';
-            } ?>
+?>
 
-        </div>
-    </div>
 
     <div class="container">
         <div class="content-box content-single">

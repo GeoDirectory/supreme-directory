@@ -3,6 +3,7 @@ if (((function_exists('is_buddypress') && !is_buddypress()) || !function_exists(
 
 	
 	$post_id = $post->ID;
+	$featured_image = '';
 	if(function_exists('geodir_is_page') && geodir_is_page('single') && isset($post->post_type)){
 		$page_id = geodir_cpt_template_page('page_details',$post->post_type);
 		if($page_id){
@@ -33,7 +34,7 @@ if (((function_exists('is_buddypress') && !is_buddypress()) || !function_exists(
 
 			<?php if($featured_type=='parallax' || $featured_type=='location'){
 				?>
-					<div class="featured-img" <?php
+					<div  id="sd-featured-img" class="featured-img" <?php
 					$featured_image = apply_filters('sd_featured_image','');
 					
 					if($featured_image){
@@ -47,12 +48,25 @@ if (((function_exists('is_buddypress') && !is_buddypress()) || !function_exists(
 					}
 
 					
-					?> style="background-image: url('<?php echo esc_url($featured_image); ?>');" <?php
+					?> style="background-image: url('<?php //echo esc_url($featured_image); ?>');" <?php
 					?>>
 					</div>
 				<?php
 			}?>
 
+			<script>
+				(function(){
+					var img = new Image(),
+						x = document.getElementById('sd-featured-img');
+
+					img.onload = function() {
+						x.style.backgroundImage = "url('"+img.src+"')";
+						x.classList.add("sd-fade-in");
+					};
+
+					img.src = "<?php echo esc_url($featured_image); ?>";
+				})();
+			</script>
 
 
 			<div class="header-wrap">
