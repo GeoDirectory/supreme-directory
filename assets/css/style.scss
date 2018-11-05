@@ -1363,6 +1363,11 @@ RTL SUPPORT
     margin: 0;
   }
 
+  .sd-map-only .geodir_flexslider .geodir-direction-nav .geodir-next,
+  .sd-map-only .geodir_flexslider .geodir-direction-nav .geodir-prev {
+    display: none;
+  }
+
   .sd-map-only #showMap, .sd-map-only #showSearch{
     display: none;
   }
