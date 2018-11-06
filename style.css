@@ -5,7 +5,7 @@ Description: A Supreme Child Theme for Directory Starter, check out this video t
 Author: GeoDirectory
 Author URI: https://wpgeodirectory.com/
 Template: directory-starter
-Version: 1.1.9
+Version: 1.2.0
 License: GPLv2 or greater
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: supreme-directory
@@ -210,7 +210,7 @@ body.sd {
     cursor: pointer;
 }
 
-.sd .near-compass .fa {
+.sd .near-compass svg {
     font-size: 18px;
 }
 
@@ -537,7 +537,7 @@ SIDEBARS CSS END
     margin: 2px 5px 0 0;
 }
 
-.sd .geodir-gridview .fa.fa-comments {
+.sd .geodir-gridview .fa-comments {
     display: none;
 }
 
@@ -685,7 +685,7 @@ a#hideMap {
     color: #82888a;
 }
 
-.sd-cta-favsandshare li .fa {
+.sd-cta-favsandshare li svg {
     font-size: 30px !important;
 }
 
@@ -763,7 +763,7 @@ a#hideMap {
     padding-bottom: 11px;
 }
 
-.sd-common #primary-nav .sd-my-account-dd-menu-group .fa {
+.sd-common #primary-nav .sd-my-account-dd-menu-group svg {
     margin-right: 7px;
 }
 
@@ -958,7 +958,7 @@ a.dt-btn:visited {
     width: 100%;
 }
 
-.sd .sd-detail-cta .geodir-addtofav a .fa {
+.sd .sd-detail-cta .geodir-addtofav a svg {
     display: block;
     font-size: 50px;
     margin: 0 auto;
@@ -1019,7 +1019,7 @@ h2.comments-title {
     width: 35px;
 }
 
-.sd-verified-badge i {
+.sd-verified-badge svg {
     font-size: 35px;
     position: absolute;
     left: 0;
@@ -1055,7 +1055,7 @@ h2.comments-title {
     height: 30px;
 }
 
-.sd .sd-detail-cta .geodir-addtofav a .fa {
+.sd .sd-detail-cta .geodir-addtofav a svg {
     font-size: 30px;
     width: 34px;
 }
@@ -1242,7 +1242,7 @@ body.body_fullscreen #gd_listing_map_wrapper{
 #gd-account-nav.mm-opened .geodir-chosen-container-single .chosen-drop {
     margin-top: -11px;
 }
-#gd-account-nav.mm-opened .mm-list i.fa {
+#gd-account-nav.mm-opened .mm-list svg {
     display: none;
 }
 #gd-account-nav.mm-opened .mm-list>li>a,
@@ -1386,7 +1386,7 @@ RTL SUPPORT
         height: 40px;
     }
 
-    .sd .sd-detail-cta .geodir-addtofav a .fa {
+    .sd .sd-detail-cta .geodir-addtofav a svg {
         font-size: 40px;
         width: 44px;
     }

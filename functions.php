@@ -17,7 +17,7 @@ SUPREME DIRECTORY CODE STARTS
  * Define some constants for later use.
  */
 if (!defined('SD_DEFAULT_FEATURED_IMAGE')) define('SD_DEFAULT_FEATURED_IMAGE', get_stylesheet_directory_uri() . "/images/featured.jpg");
-if (!defined('SD_VERSION')) define('SD_VERSION', "1.1.9");
+if (!defined('SD_VERSION')) define('SD_VERSION', "1.2.0");
 if (!defined('SD_CHILD')) define('SD_CHILD', 'supreme-directory');
 
 /**
@@ -241,7 +241,7 @@ function sd_add_my_account_link($items, $args) {
                 }
                 ?>
                 <?php echo __('My Account', 'supreme-directory'); ?>
-                <i class="fa fa-caret-down"></i>
+                <i class="fas fa-caret-down"></i>
             </a>
             <div id="sd-my-account" class="Panel">
             <div class="mm-subtitle"><a class="mm-subclose" href="#mm-menu-<?php echo esc_attr($menu_slug);?>"><?php _e('<  Back','supreme-directory');?></a></div>
@@ -258,12 +258,12 @@ function sd_add_my_account_link($items, $args) {
                         <ul class="sd-my-account-dd-menu-group sd-my-account-dd-menu-bp-group">
                             <li class="sd-my-account-dd-menu-link">
                                 <a href="<?php echo esc_url($user_link); ?>">
-                                    <i class="fa fa-user"></i> <?php echo __('About Me', 'supreme-directory'); ?>
+                                    <i class="fas fa-user"></i> <?php echo __('About Me', 'supreme-directory'); ?>
                                 </a>
                             </li>
                             <li class="sd-my-account-dd-menu-link">
                                 <a href="<?php echo esc_url($user_link . 'settings/'); ?>">
-                                    <i class="fa fa-cog"></i> <?php echo __('Account Settings', 'supreme-directory'); ?>
+                                    <i class="fas fa-cog"></i> <?php echo __('Account Settings', 'supreme-directory'); ?>
                                 </a>
                             </li>
                         </ul>
@@ -272,7 +272,7 @@ function sd_add_my_account_link($items, $args) {
                     <ul class="sd-my-account-dd-menu-group">
                         <li class="sd-my-account-dd-menu-link">
                             <a href="<?php echo esc_url(wp_logout_url($redirect_to)); ?>">
-                                <i class="fa fa-sign-out"></i> <?php echo __('Log Out', 'supreme-directory'); ?>
+                                <i class="fas fa-sign-out-alt"></i> <?php echo __('Log Out', 'supreme-directory'); ?>
                             </a>
                         </li>
                     </ul>
@@ -292,7 +292,7 @@ function sd_add_my_account_link($items, $args) {
             ?>
             <a class="sd-my-account-link" href="">
                 <?php echo __('My Account', 'supreme-directory'); ?>
-                <i class="fa fa-caret-down"></i>
+                <i class="fas fa-caret-down"></i>
             </a>
             <div id="sd-my-account" class="Panel">
             <div class="mm-subtitle"><a class="mm-subclose" href="#mm-menu-<?php echo esc_attr($menu_slug);?>"><?php _e('<  Back','supreme-directory');?></a></div>
@@ -606,7 +606,7 @@ add_filter( 'body_class', 'sd_add_sd_home_class' );
 function sd_feature_area(){
 
     if (is_front_page()) {
-        echo '<div class="home-more"  id="sd-home-scroll" ><a href="#sd-home-scroll"><i class="fa fa-chevron-down"></i></a></div>';
+        echo '<div class="home-more"  id="sd-home-scroll" ><a href="#sd-home-scroll"><i class="fas fa-chevron-down"></i></a></div>';
     }
 }
 add_action('sd_feature_area','sd_feature_area',15);

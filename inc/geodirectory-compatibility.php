@@ -195,10 +195,10 @@ function sd_mobile_map_buttons()
 {
     echo '<div class="sd-mobile-search-controls">
 			<a class="dt-btn" id="showSearch" href="#">
-				<i class="fa fa-search"></i> ' . __('SEARCH LISTINGS', 'supreme-directory') . '</a>
-			<a class="dt-btn" id="hideMap" href="#"><i class="fa fa-th-large">
+				<i class="fas fa-search"></i> ' . __('SEARCH LISTINGS', 'supreme-directory') . '</a>
+			<a class="dt-btn" id="hideMap" href="#"><i class="fas fa-th-large">
 				</i> ' . __('SHOW LISTINGS', 'supreme-directory') . '</a>
-			<a class="dt-btn" id="showMap" href="#"><i class="fa fa-map-o">
+			<a class="dt-btn" id="showMap" href="#"><i class="far fa-map">
 				</i> ' . __('SHOW MAP', 'supreme-directory') . '</a>
 			</div>';
 }
@@ -229,10 +229,10 @@ function sd_add_event_dates_featured_area(){
         if ( !empty( $schedules ) ) {
             foreach ( $schedules as $schedule ) {
                 $output .= '<p class="gde-recurring-cont">';
-                $output .= '<span class="geodir_schedule_start"><i class="fa fa-caret-right"></i> ' . $schedule['start'] . '</span>';
+                $output .= '<span class="geodir_schedule_start"><i class="fas fa-caret-right"></i> ' . $schedule['start'] . '</span>';
                 if ( ! empty( $schedule['end'] ) && $schedule['start'] != $schedule['end'] ) {
                     $output .= '<br />';
-                    $output .= '<span class="geodir_schedule_end"><i class="fa fa-caret-left"></i> ' . $schedule['end'] . '</span>';
+                    $output .= '<span class="geodir_schedule_end"><i class="fas fa-caret-left"></i> ' . $schedule['end'] . '</span>';
                 }
                 $output .= '</p>';
             }
@@ -525,22 +525,6 @@ remove_action('geodir_author_page_title', 'geodir_action_author_page_title', 10)
 add_action('geodir_author_content', 'geodir_action_author_page_title', 1);
 
 
-/**
- * Return the font awesome search icon HTML.
- *
- * Replace advanced search button with fontawesome cog.
- *
- * @since 1.0.0
- * @return string The font awesome cog sign.
- */
-function sd_gd_adv_search_s_btn_value()
-{
-    return "&#xf002;";
-}
-
-add_filter('geodir_search_default_search_button_text', 'sd_gd_adv_search_s_btn_value', 10);
-
-
 function sd_theme_deactivation($newname, $newtheme) {
     // undo set the details page to use list and not tabs
     update_option('geodir_disable_tabs', '0');
@@ -711,9 +695,9 @@ function sup_add_feat_img_head($page)
                         
                         if ($is_owned) {
                             ?>
-                            <span class="fa fa-stack sd-verified-badge" title="<?php _e('Verified Owner', 'supreme-directory'); ?>">
-                                <i class="fa fa-circle fa-inverse"></i>
-                                <i class="fa fa-check-circle"></i>
+                            <span class="fa-stack sd-verified-badge" title="<?php _e('Verified Owner', 'supreme-directory'); ?>">
+                                <i class="fas fa-circle fa-inverse"></i>
+                                <i class="fas fa-check-circle"></i>
                             </span>
                             <?php
                         } else {
@@ -744,7 +728,7 @@ function sup_add_feat_img_head($page)
                 }
                     ?>
                     <a href="<?php echo esc_url($editlink); ?>" class="supreme-btn supreme-btn-small supreme-edit-btn"><i
-                            class="fa fa-edit"></i> <?php echo __('Edit', 'supreme-directory'); ?></a>
+                            class="fas fa-edit"></i> <?php echo __('Edit', 'supreme-directory'); ?></a>
                 <?php }
 
                 if (function_exists('geodir_load_translation_geodirclaim')) {
@@ -768,12 +752,12 @@ function sup_add_feat_img_head($page)
                                     $current_url = apply_filters('geodir_claim_login_to_claim_url', $current_url, $duplicate_of);
                                 }
                                     
-                                echo '<a href="' . esc_url($current_url) . '" class="supreme-btn supreme-btn-small supreme-edit-btn"><i class="fa fa-question-circle"></i> ' . __('Claim', 'supreme-directory') . '</a>';
+                                echo '<a href="' . esc_url($current_url) . '" class="supreme-btn supreme-btn-small supreme-edit-btn"><i class="fas fa-question-circle"></i> ' . __('Claim', 'supreme-directory') . '</a>';
                             } else {
                                 if (is_user_logged_in()) {
                                     echo '<div class="geodir-company_info">';
                                     echo '<div class="geodir_display_claim_popup_forms"></div>';
-                                    echo '<a href="javascript:void(0);" class="supreme-btn supreme-btn-small supreme-edit-btn geodir_claim_enable"><i class="fa fa-question-circle"></i> ' . __('Claim', 'supreme-directory') . '</a>';
+                                    echo '<a href="javascript:void(0);" class="supreme-btn supreme-btn-small supreme-edit-btn geodir_claim_enable"><i class="fas fa-question-circle"></i> ' . __('Claim', 'supreme-directory') . '</a>';
                                     echo '</div>';
                                     echo '<input type="hidden" name="geodir_claim_popup_post_id" value="' . $post->ID . '" />';
                                     if (!empty($_REQUEST['gd_go']) && $_REQUEST['gd_go'] == 'claim' && !isset($_REQUEST['geodir_claim_request'])) {
@@ -785,7 +769,7 @@ function sup_add_feat_img_head($page)
                                     $login_to_claim_url = geodir_login_url(array('redirect_to' => urlencode_deep($current_url)));
                                     $login_to_claim_url = apply_filters('geodir_claim_login_to_claim_url', $login_to_claim_url, $post->ID);
                                     
-                                    echo '<a href="' . esc_url($login_to_claim_url) . '" class="supreme-btn supreme-btn-small supreme-edit-btn"><i class="fa fa-question-circle"></i> ' . __('Claim', 'supreme-directory') . '</a>';
+                                    echo '<a href="' . esc_url($login_to_claim_url) . '" class="supreme-btn supreme-btn-small supreme-edit-btn"><i class="fas fa-question-circle"></i> ' . __('Claim', 'supreme-directory') . '</a>';
 
                                 }
                             }
@@ -820,16 +804,16 @@ function sup_add_feat_img_head($page)
                 echo apply_filters('sd_details_output_ratings',$sd_raitings);
                 $sd_social = '<div class="sd-contacts">';
                 if (isset($post->geodir_website) && $post->geodir_website && !empty($available_fields) && in_array('geodir_website', $available_fields)) {
-                    $sd_social .= '<a rel="nofollow" target="_blank" href="' . esc_url($post->geodir_website) . '"><i class="fa fa-external-link-square"></i></a>';
+                    $sd_social .= '<a rel="nofollow" target="_blank" href="' . esc_url($post->geodir_website) . '"><i class="fas fa-external-link-square-alt"></i></a>';
                 }
                 if (isset($post->geodir_facebook) && $post->geodir_facebook && !empty($available_fields) && in_array('geodir_facebook', $available_fields)) {
-                   $sd_social .='<a rel="nofollow" target="_blank" href="' . esc_url($post->geodir_facebook) . '"><i class="fa fa-facebook-official"></i></a>';
+                   $sd_social .='<a rel="nofollow" target="_blank" href="' . esc_url($post->geodir_facebook) . '"><i class="fab fa-facebook"></i></a>';
                 }
                 if (isset($post->geodir_twitter) && $post->geodir_twitter && !empty($available_fields) && in_array('geodir_twitter', $available_fields)) {
-                    $sd_social .='<a rel="nofollow" target="_blank" href="' . esc_url($post->geodir_twitter) . '"><i class="fa fa-twitter-square"></i></a>';
+                    $sd_social .='<a rel="nofollow" target="_blank" href="' . esc_url($post->geodir_twitter) . '"><i class="fab fa-twitter-square"></i></a>';
                 }
                 if (isset($post->geodir_contact) && $post->geodir_contact && !empty($available_fields) && in_array('geodir_contact', $available_fields)) {
-                    $sd_social .='<a href="tel:' . esc_attr($post->geodir_contact) . '"><i class="fa fa-phone-square"></i>&nbsp;:&nbsp;' . esc_attr($post->geodir_contact) . '</a>';
+                    $sd_social .='<a href="tel:' . esc_attr($post->geodir_contact) . '"><i class="fas fa-phone-square"></i>&nbsp;:&nbsp;' . esc_attr($post->geodir_contact) . '</a>';
                 }
                 $sd_social .= '</div>';
 
@@ -867,7 +851,7 @@ function sup_add_feat_img_head($page)
                 }
                 if ( ! empty( $share_actions ) ) {
                     $send_buttons .= '<span style="" class="geodir-i-email">';
-                    $send_buttons .= '<i class="fa fa-envelope"></i> ';
+                    $send_buttons .= '<i class="fas fa-envelope"></i> ';
                     $send_buttons .= implode( ' | ', $share_actions );
                     $send_buttons .= '</span>';
                 }
@@ -886,20 +870,20 @@ function sup_add_feat_img_head($page)
                     <?php if (!$preview) { ?>
                         <li><a rel="nofollow" target="_blank" title="<?php echo __('Share on Facebook', 'supreme-directory'); ?>"
                                href="http://www.facebook.com/sharer.php?u=<?php the_permalink(); ?>&t=<?php urlencode(the_title()); ?>"><i
-                                    class="fa fa-facebook"></i></a></li>
+                                    class="fab fa-facebook"></i></a></li>
                         <li><a rel="nofollow" target="_blank" title="<?php echo __('Share on Twitter', 'supreme-directory'); ?>"
                                href="http://twitter.com/share?text=<?php echo urlencode(html_entity_decode(get_the_title(), ENT_COMPAT, 'UTF-8')); ?>&url=<?php echo urlencode(get_the_permalink()); ?>"><i
-                                    class="fa fa-twitter"></i></a></li>
+                                    class="fab fa-twitter"></i></a></li>
                         <li><a rel="nofollow" target="_blank" title="<?php echo __('Share on Google Plus', 'supreme-directory'); ?>"
                                href="https://plus.google.com/share?url=<?php echo urlencode(get_the_permalink()); ?>"><i
-                                    class="fa fa-google-plus"></i></a></li>
+                                    class="fab fa-google-plus-g"></i></a></li>
                     <?php } else { ?>
                         <li><a rel="nofollow" target="_blank" title="<?php echo __('Share on Facebook', 'supreme-directory'); ?>"
-                               href=""><i class="fa fa-facebook"></i></a></li>
+                               href=""><i class="fab fa-facebook"></i></a></li>
                         <li><a rel="nofollow" target="_blank" title="<?php echo __('Share on Twitter', 'supreme-directory'); ?>"
-                               href=""><i class="fa fa-twitter"></i></a></li>
+                               href=""><i class="fab fa-twitter"></i></a></li>
                         <li><a rel="nofollow" target="_blank" title="<?php echo __('Share on Google Plus', 'supreme-directory'); ?>"
-                               href=""><i class="fa fa-google-plus"></i></a></li>
+                               href=""><i class="fab fa-google-plus-g"></i></a></li>
                     <?php } ?>
                 </ul>
                 <?php
@@ -1020,7 +1004,7 @@ function sd_homepage_featured_content() {
     sd_search_form_shortcode();
     echo do_shortcode('[gd_popular_post_category category_limit=5 category_restrict=1]');
     
-    echo '<div class="home-more" id="sd-home-scroll"><a href="#sd-home-scroll" ><i class="fa fa-chevron-down"></i></a></div>';
+    echo '<div class="home-more" id="sd-home-scroll"><a href="#sd-home-scroll" ><i class="fas fa-chevron-down"></i></a></div>';
 }
 add_action('sd_homepage_content','sd_homepage_featured_content');
 
@@ -1092,7 +1076,7 @@ function sd_feature_area_gd(){
     if (is_front_page() && !geodir_is_page('home')) {
         sd_search_form_shortcode();
         echo do_shortcode('[gd_popular_post_category category_limit=5]');
-        echo '<div class="home-more"  id="sd-home-scroll" ><a href="#sd-home-scroll"><i class="fa fa-chevron-down"></i></a></div>';
+        echo '<div class="home-more"  id="sd-home-scroll" ><a href="#sd-home-scroll"><i class="fas fa-chevron-down"></i></a></div>';
     }
 }
 add_action('sd_feature_area','sd_feature_area_gd',15);
