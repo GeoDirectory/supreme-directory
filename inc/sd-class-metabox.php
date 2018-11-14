@@ -9,7 +9,7 @@ abstract class SD_Metabox
 			add_meta_box(
 				'sd_featured_area_settings',          // Unique ID
 				__('Featured Area Settings','supreme-directory'), // Box title
-				[self::class, 'html'],   // Content callback, must be of type callable
+				array(__CLASS__, 'html'),   // Content callback, must be of type callable
 				$screen,                 // Post type
 				'side'
 			);
