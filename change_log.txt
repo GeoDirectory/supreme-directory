@@ -1,3 +1,6 @@
+v2.0.0.2-rc
+Slider navigation displays over map on mobile device - FIXED
+
 v2.0.0.1-rc
 Fade-in background image once loaded - CHANGED
 My Account menu link removed (functionality can be added via many plugins such as UsersWP) - CHANGED
