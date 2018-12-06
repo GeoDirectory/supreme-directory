@@ -131,3 +131,30 @@ header{
 //  height: 65vh;
 //  width: 100%;
 //}
+
+/* Archive page posts featured area */
+header {
+	.blog-featured-area {
+		display: flex;
+		min-height: 350px;
+		padding: 32px 0;
+		position: relative;
+		text-align: center;
+		flex-direction: column;
+		align-items: center;
+
+		.blog-featured-img {
+			background-color: #f9f9f9;
+			background-position: 100% 100%;
+			background-repeat: no-repeat;
+			background-size: cover;
+			border-bottom: 1px solid rgba(0, 0, 0, 0.075);
+			height: 100%;
+			left: 0;
+			position: absolute;
+			top: 0;
+			width: 100%;
+			overflow: hidden;
+		}
+	}
+}
