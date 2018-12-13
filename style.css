@@ -210,6 +210,7 @@ body.sd {
     cursor: pointer;
 }
 
+.sd .near-compass i,
 .sd .near-compass svg {
     font-size: 18px;
 }
@@ -685,6 +686,7 @@ a#hideMap {
     color: #82888a;
 }
 
+.sd-cta-favsandshare li i,
 .sd-cta-favsandshare li svg {
     font-size: 30px !important;
 }
@@ -763,6 +765,7 @@ a#hideMap {
     padding-bottom: 11px;
 }
 
+.sd-common #primary-nav .sd-my-account-dd-menu-group i,
 .sd-common #primary-nav .sd-my-account-dd-menu-group svg {
     margin-right: 7px;
 }
@@ -958,6 +961,7 @@ a.dt-btn:visited {
     width: 100%;
 }
 
+.sd .sd-detail-cta .geodir-addtofav a i,
 .sd .sd-detail-cta .geodir-addtofav a svg {
     display: block;
     font-size: 50px;
@@ -1019,6 +1023,7 @@ h2.comments-title {
     width: 35px;
 }
 
+.sd-verified-badge i,
 .sd-verified-badge svg {
     font-size: 35px;
     position: absolute;
@@ -1055,6 +1060,7 @@ h2.comments-title {
     height: 30px;
 }
 
+.sd .sd-detail-cta .geodir-addtofav a i,
 .sd .sd-detail-cta .geodir-addtofav a svg {
     font-size: 30px;
     width: 34px;
@@ -1242,6 +1248,7 @@ body.body_fullscreen #gd_listing_map_wrapper{
 #gd-account-nav.mm-opened .geodir-chosen-container-single .chosen-drop {
     margin-top: -11px;
 }
+#gd-account-nav.mm-opened .mm-list i,
 #gd-account-nav.mm-opened .mm-list svg {
     display: none;
 }
@@ -1386,7 +1393,9 @@ RTL SUPPORT
         height: 40px;
     }
 
-    .sd .sd-detail-cta .geodir-addtofav a svg {
+
+    .sd .sd-detail-cta .geodir-addtofav a i,
+    .sd .sd-detail-cta .geodir-addtofav a svg{
         font-size: 40px;
         width: 44px;
     }
