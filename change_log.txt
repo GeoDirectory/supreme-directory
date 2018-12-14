@@ -1,3 +1,6 @@
+v1.2.1
+Changes to support Font Awesome CSS and JS versions - CHANGED
+
 v1.2.0
 Update Font Awesome to v5 JS version - CHANGED
 
