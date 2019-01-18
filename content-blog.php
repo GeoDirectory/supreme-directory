@@ -1,8 +1,8 @@
 <article <?php post_class(); ?>>
     <header>
 
-        <a class="featured-area" href="<?php the_permalink(); ?>">
-	<span class="featured-img" <?php
+        <a class="blog-featured-area" href="<?php the_permalink(); ?>">
+	<span class="blog-featured-img" <?php
     if (has_post_thumbnail()) { // check if the post has a Post Thumbnail assigned to it.
         $full_image_url = wp_get_attachment_image_src(get_post_thumbnail_id(), 'full');
     } else {
