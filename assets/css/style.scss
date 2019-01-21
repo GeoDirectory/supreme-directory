@@ -1031,6 +1031,7 @@ h2.comments-title {
 
 .sd.author .content-box.content-archive article.hentry,
 .sd.blog .content-box.content-single article.hentry,
+.sd.search .content-box.content-search article.hentry,
 .sd.archive .content-box.content-archive article.hentry,
 .sd.category .content-box.content-archive article.hentry
 {
@@ -1042,6 +1043,7 @@ h2.comments-title {
 }
 
 .sd.blog .content-box.content-single article.hentry:nth-child(3n+3),
+.sd.search .content-box.content-search article.hentry:nth-child(3n+3),
 .sd.archive .content-box.content-archive article.hentry:nth-child(3n+3),
 .sd.category .content-box.content-archive article.hentry:nth-child(3n+3),
 .sd.author .content-box.content-archive article.hentry:nth-child(3n+3)
@@ -1050,6 +1052,7 @@ h2.comments-title {
 }
 
 .sd.blog .content-box.content-single,
+.sd.search .content-box.content-search,
 .sd.archive .content-box.content-archive,
 .sd.category .content-box.content-archive,
 .sd.author .content-box.content-archive
@@ -1059,6 +1062,7 @@ h2.comments-title {
 }
 
 .sd.blog .content-box.content-single article.hentry .container,
+.sd.search .content-box.content-search article.hentry .container,
 .sd.archive .content-box.content-archive article.hentry .container,
 .sd.category .content-box.content-archive article.hentry .container,
 .sd.author .content-box.content-archive article.hentry .container
@@ -1067,6 +1071,7 @@ h2.comments-title {
 }
 
 .sd.blog .entry-content,
+.sd.search .entry-content,
 .sd.category .entry-content,
 .sd.archive .entry-content
 {
@@ -1074,6 +1079,7 @@ h2.comments-title {
 }
 
 .sd.blog article h2.entry-title,
+.sd.search article h2.entry-title,
 .sd.archive article h2.entry-title,
 .sd.category article h2.entry-title
 {
@@ -1082,7 +1088,7 @@ h2.comments-title {
   /*text-align: center; @todo who added this, i don't like it...*/
 }
 
-.sd.blog .entry-footer, .sd.category .entry-footer, .sd.single-post .entry-footer {
+.sd.blog .entry-footer, .sd.search .content-box.content-search .entry-footer, .sd.category .entry-footer, .sd.single-post .entry-footer {
   /*text-align: center;*/
 }
 
@@ -1470,7 +1476,7 @@ RTL SUPPORT
     clear: both;
   }
 
-  .sd.blog .content-box.content-single article.hentry, .sd.category .content-box.content-archive article.hentry {
+  .sd.blog .content-box.content-single article.hentry, .sd.search .content-box.content-search article.hentry, .sd.category .content-box.content-archive article.hentry {
     float: none;
     margin: 0 5% 50px 5%;
     width: 90%;

@@ -1,12 +1,26 @@
 <?php get_header();
 
 do_action('dt_page_before_main_content');
+	if( is_home() && get_option('page_for_posts') ) { 
+		global $post; 
+		$backup_post = $post; 
+		$post = get_post( get_option( 'page_for_posts' ) );
+	
+		get_template_part( 'content-featured-area' );
 
-?>
-
-
+		$post = $backup_post; 
+	} else if ( is_search() ) { ?>
+		<header>
+			<div class="featured-area type-title">
+				<div class="header-wrap">
+				<?php do_action( 'sd_feature_area' ); ?>
+				</div>
+			</div>
+		</header>
+	<?php } ?>
+	
     <div class="container">
-        <div class="content-box content-single">
+        <div class="content-box content-single <?php echo ( is_search() ? 'content-search' : '' ); ?>">
             <?php if (!have_posts()) : ?>
                 <div class="alert-error">
                     <p><?php _e('Sorry, no results were found.', 'supreme-directory'); ?></p>
