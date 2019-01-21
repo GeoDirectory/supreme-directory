@@ -23,11 +23,11 @@
                 }
             }
             $featured_type  = get_post_meta($post_id, '_sd_featured_area', true);
-            if($featured_type == 'remove'){
+           // if($featured_type == 'remove' || 1==1){
                 ?>
                 <h1 class="entry-title"><?php the_title(); ?></h1>
                 <?php
-            }
+            //}
 
 
             global $more;

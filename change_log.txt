@@ -1,4 +1,6 @@
-v2.0.0.3-rc
+v2.0.0.3
+Titles missing from GD archive pages - FIXED
+Compatibility with Font Awesome CSS or JS version - CHANGED
 Blog archive & category page not showing featured image - FIXED
 
 v2.0.0.2-rc
