@@ -525,6 +525,11 @@ SIDEBARS CSS END
   padding: 0;
 }
 
+.sd .sidebar .widget{
+  display: block;
+  clear: both;
+}
+
 .sd.search.geodir-page .geodir-search, .sd.archive.geodir-page .geodir-search {
   margin-right: 0;
   width: 100%;

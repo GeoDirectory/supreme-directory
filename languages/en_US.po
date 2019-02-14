@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Supreme Directory 2.0.0.3\n"
+"Project-Id-Version: Supreme Directory 2.0.0.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-18 18:54+0000\n"
-"PO-Revision-Date: 2019-01-18 18:54+0000\n"
+"POT-Creation-Date: 2019-02-14 18:09+0000\n"
+"PO-Revision-Date: 2019-02-14 18:09+0000\n"
 "Last-Translator: \n"
 "Language-Team: AyeCode Ltd <contact@ayecode.io>\n"
 "Language: en_US\n"
@@ -18,16 +18,16 @@ msgstr ""
 "X-Generator: Poedit 1.8.7.1\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: archive.php:22 geodirectory.php:29 index.php:12 page.php:13
+#: archive.php:22 geodirectory.php:29 index.php:26 page.php:13
 #: page_full-width.php:20 single.php:20 woocommerce.php:51
 msgid "Sorry, no results were found."
 msgstr ""
 
-#: archive.php:37 content.php:54 functions.php:493 index.php:27
+#: archive.php:37 content.php:54 functions.php:501 index.php:41
 msgid "Previous"
 msgstr ""
 
-#: archive.php:38 content.php:51 functions.php:494 index.php:28
+#: archive.php:38 content.php:51 functions.php:502 index.php:42
 msgid "Next"
 msgstr ""
 
@@ -121,16 +121,21 @@ msgstr ""
 msgid "Home"
 msgstr ""
 
-#: functions.php:576
+#: functions.php:432
+#, php-format
+msgid "Search Results for: %s"
+msgstr ""
+
+#: functions.php:584
 msgid "WordPress"
 msgstr ""
 
-#: functions.php:577
+#: functions.php:585
 #, php-format
 msgid "Copyright &copy; %1$s %2$s %3$s Theme %4$s"
 msgstr ""
 
-#: functions.php:578
+#: functions.php:586
 #, php-format
 msgid " - Powered by %s."
 msgstr ""
