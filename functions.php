@@ -427,6 +427,10 @@ function sd_feature_area_title_meta(){
         ?>
         <h1 class="entry-title"><?php the_title(); ?></h1>
         <?php
+    } else if ( is_search() ) {
+		?>
+        <h1 class="entry-title"><?php echo apply_filters( 'sd_featured_area_search_page_title', sprintf( __( 'Search Results for: %s', 'supreme-directory' ), '<span>' . get_search_query() . '</span>' ) ); ?></h1>
+        <?php
     } else {
         /*<!-- <h2 class="entry-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>-->*/
         ?>
@@ -434,7 +438,11 @@ function sd_feature_area_title_meta(){
         <?php
     }
 
-    $subtitle = get_post_meta(get_the_ID(), 'subtitle', true);
+	if ( is_search() ) {
+		$subtitle = '';
+	} else {
+		$subtitle = get_post_meta(get_the_ID(), 'subtitle', true);
+	}
 
     $subtitle = apply_filters('sd_featured_area_subtitle',$subtitle);
     if ($subtitle) {
