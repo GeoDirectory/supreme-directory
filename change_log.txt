@@ -1,3 +1,6 @@
+v2.0.0.4
+Black space covering admin bar menu on mobile devices - FIXED
+
 v2.0.0.3
 Titles missing from GD archive pages - FIXED
 Compatibility with Font Awesome CSS or JS version - CHANGED
