@@ -1,5 +1,6 @@
 v2.0.0.4
 Black space covering admin bar menu on mobile devices - FIXED
+Blog archive & category page sometimes not showing featured image - FIXED
 
 v2.0.0.3
 Titles missing from GD archive pages - FIXED
