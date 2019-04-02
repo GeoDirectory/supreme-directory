@@ -11,7 +11,8 @@ do_action( 'sd-detail-details-before' ); ?>
 			global $gd_post;
 			$is_owned     = false;
 			$author_link  = do_shortcode( '[gd_post_meta key="post_author" show="value"]' );
-			$author_image = get_avatar( get_the_author_meta( 'email' ), 100, 'mm', '', array( 'class' => "author_avatar" ) );
+			$author_id   = isset( $gd_post->post_author ) ? absint( $gd_post->post_author ) : '0';
+			$author_image = get_avatar( get_the_author_meta( 'email',$author_id ), 100, 'mm', '', array( 'class' => "author_avatar" ) );
 
 
 			if ( ! $author_link && function_exists( 'geodir_claim_show_claim_link' ) && geodir_claim_show_claim_link( $gd_post->ID ) ) {
@@ -20,7 +21,7 @@ do_action( 'sd-detail-details-before' ); ?>
 				$author_image = '<img src="' . get_stylesheet_directory_uri() . "/images/none.png" . '"  height="100" width="100">';
 			} else {
 				$is_owned    = true;
-				$author_id   = isset( $gd_post->post_author ) ? absint( $gd_post->post_author ) : '0';
+
 				$author_name = get_the_author_meta( 'user_nicename', $author_id );
 			}
 
