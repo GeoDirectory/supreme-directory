@@ -690,3 +690,9 @@ function sd_location_manager_image($image){
 
     return $image;
 }
+
+add_action('wp','sd_compatibility_action',15);
+function sd_compatibility_action(){
+    // remove the actions disabling the featured image
+    remove_filter( "get_post_metadata", array('GeoDir_Template_Loader','filter_thumbnail_id'), 10 );
+}

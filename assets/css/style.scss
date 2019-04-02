@@ -810,6 +810,11 @@ MOBILE MENU
   float: left;
   overflow: hidden;
   max-width: 55%;
+
+  .gd-rating-output{
+    margin: 0;
+    vertical-align: text-top;
+  }
 }
 
 .sd .sd-address {
@@ -854,8 +859,8 @@ MOBILE MENU
 }
 
 .sd-detail-cat-links li {
-  float: left;
-  margin: 0 30px 0 0;
+  //float: left;
+  //margin: 0 30px 0 0;
 }
 
 .sd-detail-cat-links img {
@@ -871,6 +876,21 @@ MOBILE MENU
 .sd-detail-cta {
   float: right;
   width: 28%;
+  text-align: center;
+  .geodir-post-badge{
+    display: block;
+    .gd-badge{
+      display: block;
+    }
+  }
+  .sd-cta-favsandshare{
+    font-size: 40px;
+  }
+  .geodir-addtofav{
+    i,svg{
+      font-size: 30px !important;
+    }
+  }
 }
 
 a.dt-btn {
@@ -1002,7 +1022,11 @@ h2.comments-title {
 
 .sd-detail-cat-links {
   overflow: hidden;
-  margin-top: 35px;
+  ul{
+    li{
+      margin-left: 0;
+    }
+  }
 }
 
 .sd-detail-cta .geodir_email .geodir-i-email {
