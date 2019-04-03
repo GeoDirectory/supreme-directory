@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Supreme Directory 2.0.0.4\n"
+"Project-Id-Version: Supreme Directory 2.0.0.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-14 18:09+0000\n"
-"PO-Revision-Date: 2019-02-14 18:09+0000\n"
+"POT-Creation-Date: 2019-04-02 20:43+0100\n"
+"PO-Revision-Date: 2019-04-02 20:43+0100\n"
 "Last-Translator: \n"
 "Language-Team: AyeCode Ltd <contact@ayecode.io>\n"
 "Language: en_US\n"
@@ -18,8 +18,8 @@ msgstr ""
 "X-Generator: Poedit 1.8.7.1\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: archive.php:22 geodirectory.php:29 index.php:26 page.php:13
-#: page_full-width.php:20 single.php:20 woocommerce.php:51
+#: archive.php:22 geodirectory-single.php:35 geodirectory.php:29 index.php:26
+#: page.php:13 page_full-width.php:20 single.php:20 woocommerce.php:51
 msgid "Sorry, no results were found."
 msgstr ""
 
@@ -141,10 +141,12 @@ msgid " - Powered by %s."
 msgstr ""
 
 #: inc/geodirectory-compatibility.php:242
+#: template-parts/header/header-single-top.php:36
 msgid "Verified Owner"
 msgstr ""
 
 #: inc/geodirectory-compatibility.php:249
+#: template-parts/header/header-single-top.php:19
 msgid "Claim Me"
 msgstr ""
 
@@ -155,16 +157,21 @@ msgid "Claim"
 msgstr ""
 
 #: inc/geodirectory-compatibility.php:381
+#: template-parts/header/header-single-top.php:115
 msgid "Write a Review"
 msgstr ""
 
 #: inc/geodirectory-compatibility.php:415
 #: inc/geodirectory-compatibility.php:425
+#: template-parts/header/header-single-top.php:137
+#: template-parts/header/header-single-top.php:147
 msgid "Share on Facebook"
 msgstr ""
 
 #: inc/geodirectory-compatibility.php:418
 #: inc/geodirectory-compatibility.php:427
+#: template-parts/header/header-single-top.php:141
+#: template-parts/header/header-single-top.php:150
 msgid "Share on Twitter"
 msgstr ""
 

@@ -1,3 +1,10 @@
+v2.0.0.6
+GD details page author gravatar not showing from user email - FIXED
+
+v2.0.0.5
+GD Details page now has template file similar to v1 - ADDED
+First release on wp.org - INFO
+
 v2.0.0.4
 Black space covering admin bar menu on mobile devices - FIXED
 Blog archive & category page sometimes not showing featured image - FIXED
