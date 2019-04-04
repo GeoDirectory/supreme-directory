@@ -49,7 +49,7 @@ $sd_sidebar_class = 'sidebar-active sidebar-'.$dt_blog_sidebar_position;
     </div>
 
     <div class="fullwidth-sidebar-container">
-        <div class="sidebar bottom-sidebar">xxxxxxxxx
+        <div class="sidebar bottom-sidebar">
             <?php dynamic_sidebar('sidebar-gd-bottom'); ?>
         </div>
     </div>
