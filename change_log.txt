@@ -1,5 +1,8 @@
+v2.0.0.8
+Claim me button covers the claim popup form in mobile view - FIXED
+
 v2.0.0.7
-Details page template has deubug info in footer widget area - FIXED
+Details page template has debug info in footer widget area - FIXED
 
 v2.0.0.6
 GD details page author gravatar not showing from user email - FIXED
