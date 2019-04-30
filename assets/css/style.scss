@@ -851,6 +851,7 @@ MOBILE MENU
 
 .sd-detail-cat-links {
   margin: 10px 0 0;
+  clear: both;
 }
 
 .sd-detail-cat-links > ul {
@@ -886,11 +887,17 @@ MOBILE MENU
   .sd-cta-favsandshare{
     font-size: 40px;
   }
-  .geodir-addtofav{
-    i,svg{
-      font-size: 30px !important;
+
+
+  .geodir-post-fav{
+    padding-top: 15px;
+    .geodir-addtofav{
+      i,svg{
+        font-size: 30px !important;
+      }
     }
   }
+
 }
 
 a.dt-btn {
