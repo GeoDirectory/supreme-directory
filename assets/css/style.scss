@@ -1486,6 +1486,10 @@ RTL SUPPORT
     max-width: inherit;
     padding: 5px 50px 0 0;
   }
+ 
+  .lity-active .sd .sd-detail-author {
+    z-index: inherit;
+  }
 
   .sd .author-link a {
     color: #fff;
