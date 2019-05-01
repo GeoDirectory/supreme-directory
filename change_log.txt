@@ -1,5 +1,7 @@
-v2.0.0.8
-Claim me button covers the claim popup form in mobile view - FIXED
+= 2.0.0.8 =
+* Claim me button covers the claim popup form in mobile view - FIXED
+* Details page top category links can sometimes not take their own line - FIXED
+* Details page top add to fav button sometimes has no top padding - FIXED
 
 v2.0.0.7
 Details page template has debug info in footer widget area - FIXED
