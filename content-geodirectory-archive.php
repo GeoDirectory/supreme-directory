@@ -1,4 +1,7 @@
-<?php global $dt_blog_sidebar_position,$sd_sidebar_class,$post;?>
+<?php 
+global $dt_blog_sidebar_position, $sd_sidebar_class, $post; 
+$map_shortcode = apply_filters( 'sd_archive_gd_map_shortcode', '[gd_map width="100%" height="100vh" maptype="ROADMAP" zoom="0" map_type="auto"]' );
+?>
 <article <?php post_class(); ?>>
     <div class="container" id="home-scroll">
 
@@ -6,7 +9,7 @@
         if($dt_blog_sidebar_position=='left'){?>
         <div class="sd-sidebar sd-sidebar-left" id="sd-sidebar-left">
             <div class="sidebar blog-sidebar page-sidebar">
-                <?php echo do_shortcode('[gd_map width="100%" height="100vh" maptype="ROADMAP" zoom="0" map_type="auto"]');?>
+                <?php echo do_shortcode( $map_shortcode );?>
             </div>
         </div>
         <?php }?>
@@ -105,7 +108,7 @@
         if($dt_blog_sidebar_position=='right'){?>
             <div class="sd-sidebar sd-sidebar-right" id="sd-sidebar-right">
                 <div class="sidebar blog-sidebar page-sidebar">
-                    <?php echo do_shortcode('[gd_map width="100%" height="100vh" maptype="ROADMAP" zoom="0" map_type="auto"]');?>
+                    <?php echo do_shortcode( $map_shortcode );?>
                 </div>
             </div>
         <?php }?>

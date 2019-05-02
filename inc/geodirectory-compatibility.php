@@ -696,3 +696,28 @@ function sd_compatibility_action(){
     // remove the actions disabling the featured image
     remove_filter( "get_post_metadata", array('GeoDir_Template_Loader','filter_thumbnail_id'), 10 );
 }
+
+/**
+ * Filter archive page map shortcode.
+ *
+ * @since 2.0.0.9
+ *
+ * @param string $shortcode Archive page map shortcode.
+ *
+ * @return string Filtered shortcode.
+ */
+function sd_archive_gd_map_shortcode( $shortcode ) {
+	$extra_args = '';
+
+	// Marker cluster
+	if ( defined( 'GEODIR_MARKERCLUSTER_VERSION' ) ) {
+		$extra_args .= ' marker_cluster=1';
+	}
+
+	if ( $extra_args != '' ) {
+		$shortcode = str_replace( "]", $extra_args . "]", $shortcode );
+	}
+
+	return $shortcode;
+}
+add_filter( 'sd_archive_gd_map_shortcode', 'sd_archive_gd_map_shortcode', 10, 1 );
