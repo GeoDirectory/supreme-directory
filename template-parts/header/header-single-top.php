@@ -60,10 +60,22 @@ do_action( 'sd-detail-details-before' ); ?>
 		<!-- sd-detail-author end -->
 		<div class="sd-detail-info">
 			<?php
+			$post_id = $post->ID;
+			if(function_exists('geodir_is_page') && geodir_is_page('single') && isset($post->post_type)){
+				$page_id = geodir_cpt_template_page('page_details',$post->post_type);
+				if($page_id){
+					$post_id = $page_id;
+				}
+			}
+			$featured_type  = get_post_meta($post_id, '_sd_featured_area', true);
 
 			// Title
 			$title_extra_class = apply_filters( 'sd_detail_title_extra_class', "" );
-			echo '<h1 class="sd-entry-title ' . $title_extra_class . '">' . stripslashes( get_the_title() ).'</h1>';
+			if($featured_type=='remove'){
+				echo '<h1 class="sd-entry-title' . $title_extra_class . '">' . stripslashes( get_the_title() ).'</h1>';
+			} else{
+				echo '<h2 class="sd-entry-title' . $title_extra_class . '">' . stripslashes( get_the_title() ).'</h2>';
+			}
 
 			// Address
 			$address_shortcode = '[gd_post_address show="icon-value" address_template="%%city%%, %%region%%, %%country%%" alignment="left"]';
