@@ -1,6 +1,7 @@
 = 2.0.0.9 =
 * Hook added to modify archive map shortcode - CHANGED
 * Marker cluster not working on archive map - FIXED
+* Two h1 tab SEO issue on single page - FIXED
 
 = 2.0.0.8 =
 * Claim me button covers the claim popup form in mobile view - FIXED
