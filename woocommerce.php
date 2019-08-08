@@ -12,38 +12,7 @@ if($dt_enable_woo_sidebar){
 }
 
 ?>
-
-    <header>
-        <div class="featured-area <?php if (is_singular()) { echo "woosingle-featured-area"; } ?>">
-            <div class="featured-img" <?php
-            if (has_post_thumbnail()) { // check if the post has a Post Thumbnail assigned to it.
-                $full_image_url = wp_get_attachment_image_src(get_post_thumbnail_id(), 'full');
-            }else{
-                $full_image_url[0] = SD_DEFAULT_FEATURED_IMAGE;
-            }
-            ?> style="background-image: url('<?php echo esc_url($full_image_url[0]); ?>');" <?php
-            ?>>
-
-            </div>
-            <div class="header-wrap">
-                <?php
-                if (is_singular()) {
-                    ?>
-                    <h1 class="entry-title"><?php the_title(); ?></h1>
-                    <?php
-                } elseif (is_woocommerce()) {
-                    ?>
-                    <h1 class="entry-title"><?php woocommerce_page_title(); ?></h1>
-                    <?php
-                } else {
-                    ?>
-                    <h2 class="entry-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-                    <?php
-                }
-                ?>
-            </div>
-        </div>
-    </header>
+<?php get_template_part('content-featured-area');?>
         <div class="container sd-container" style="overflow: hidden;">
             <div class="content-box content-single">
                 <?php if (!have_posts()) : ?>

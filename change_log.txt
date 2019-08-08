@@ -3,6 +3,7 @@
 * Marker cluster not working on archive map - FIXED
 * Two h1 tab SEO issue on single page - FIXED
 * Archive page on mobile shows multiple map controls - FIXED
+* Make WooCommerce pages use featured image if set - FIXED
 
 = 2.0.0.8 =
 * Claim me button covers the claim popup form in mobile view - FIXED

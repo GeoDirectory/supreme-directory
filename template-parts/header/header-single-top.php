@@ -95,6 +95,7 @@ do_action( 'sd-detail-details-before' ); ?>
 			// Social links
 			$social_shortcodes = '[gd_post_badge key="facebook" condition="is_not_empty" icon_class="fab fa-facebook-f fa-fw" link="%%input%%" new_window="1" bg_color="#2b4be8" txt_color="#ffffff" alignment="left"]';
 			$social_shortcodes .= '[gd_post_badge key="twitter" condition="is_not_empty" icon_class="fab fa-twitter fa-fw" link="%%input%%" new_window="1" bg_color="#2bb8e8" txt_color="#ffffff" alignment="left"]';
+			$social_shortcodes .= '[gd_post_badge key="instagram" condition="is_not_empty" icon_class="fab fa-instagram fa-fw" link="%%input%%" new_window="1" bg_color="#a94999" txt_color="#ffffff" alignment="left"]';
 			$social_shortcodes .= '[gd_post_badge key="website" condition="is_not_empty" icon_class="fas fa-link fa-fw" link="%%input%%" new_window="1" bg_color="#85a9b5" txt_color="#ffffff" alignment="left"]';
 			$social_shortcodes .= '[gd_post_badge key="phone" condition="is_not_empty" icon_class="fas fa-phone fa-fw" link="%%input%%" badge="%%input%%" new_window="1" bg_color="#ed6d61" txt_color="#ffffff" alignment="left"]';
 			$social_shortcode = apply_filters( 'sd_details_output_social_shortcode',$social_shortcodes);

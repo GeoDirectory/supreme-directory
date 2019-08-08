@@ -19,9 +19,7 @@
                 <h1 class="entry-title"><?php the_title(); ?></h1>
                 <?php
             }
-
-            global $more;
-            $more = 0;
+            
             if (is_singular() || ( function_exists('is_bbpress') && is_bbpress() )) {
                 the_content();
             } else {

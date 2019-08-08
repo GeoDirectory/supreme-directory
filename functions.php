@@ -114,7 +114,7 @@ function sd_theme_customize_css() {
 }
 
 /**
- * Loads the translation files for wordpress.
+ * Loads the translation files for WordPress.
  *
  * @since 1.0.0
  */
@@ -426,6 +426,10 @@ function sd_feature_area_title_meta(){
     if (is_singular()) {
         ?>
         <h1 class="entry-title"><?php the_title(); ?></h1>
+        <?php
+    } elseif (function_exists('is_woocommerce') && is_woocommerce()) {
+        ?>
+        <h1 class="entry-title"><?php woocommerce_page_title(); ?></h1>
         <?php
     } else if ( is_search() ) {
 		?>
