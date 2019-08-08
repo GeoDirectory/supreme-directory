@@ -25,9 +25,9 @@ do_action( 'sd-detail-details-before' ); ?>
 				$author_name = get_the_author_meta( 'user_nicename', $author_id );
 			}
 
-			$author_name  = apply_filters( 'sd_detail_author_name', $author_name );
-			$author_image = apply_filters( 'sd_detail_entry_author', $author_image );
-			$author_link  = apply_filters( 'sd_detail_author_link', $author_link );
+			$author_name  = apply_filters( 'sd_detail_author_name', $author_name, $author_id );
+			$author_image = apply_filters( 'sd_detail_entry_author', $author_image, $author_id );
+			$author_link  = apply_filters( 'sd_detail_author_link', $author_link, $author_id );
 
 			// verified owner
 			if ( function_exists( 'geodir_claim_show_claim_link' ) && GeoDir_Claim_Post::is_claimed( $gd_post->ID ) ) {
