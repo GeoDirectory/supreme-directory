@@ -69,7 +69,8 @@ $map_shortcode = apply_filters( 'sd_archive_gd_map_shortcode', '[gd_map width="1
 
             </footer>
         </div>
-        <script>
+        <script type="text/javascript">
+            /* <![CDATA[ */
             function sd_maybe_set_archive_content_width(){
                 if(typeof(Storage) !== "undefined"){
                     $width = localStorage.getItem('sd_archive_width');
@@ -87,23 +88,15 @@ $map_shortcode = apply_filters( 'sd_archive_gd_map_shortcode', '[gd_map width="1
 
             // insert the mobile switch buttons if needed
             function sd_insert_mobile_archive_buttons(){
-                var html = `
-            <div class="sd-mobile-search-controls">
-                <a class="dt-btn" id="showSearch" href="#">
-                    <i class="fas fa-search"></i> <?php _e('SEARCH LISTINGS', 'supreme-directory');?></a>
-                <a class="dt-btn" id="hideMap" href="#"><i class="fas fa-th-large">
-                    </i> <?php _e('SHOW LISTINGS', 'supreme-directory'); ?></a>
-                <a class="dt-btn" id="showMap" href="#"><i class="far fa-map">
-                    </i> <?php _e('SHOW MAP', 'supreme-directory') ?></a>
-			</div>
-`;
-                jQuery('#sd-archive-map').prepend(html);
+                var html = '<div class="sd-mobile-search-controls"><a class="dt-btn" id="showSearch" href="#"><i class="fas fa-search"></i> <?php _e('SEARCH LISTINGS', 'supreme-directory');?></a> <a class="dt-btn" id="hideMap" href="#"><i class="fas fa-th-large"></i> <?php _e('SHOW LISTINGS', 'supreme-directory'); ?></a> <a class="dt-btn" id="showMap" href="#"><i class="far fa-map"></i> <?php _e('SHOW MAP', 'supreme-directory') ?></a></div>';
+                if (!jQuery('#sd-archive-map .sd-mobile-search-controls').length) {
+					jQuery('#sd-archive-map').prepend(html);
+				}
             }
 
-
             sd_insert_mobile_archive_buttons();
+        /* ]]> */
         </script>
-
         <?php
         if($dt_blog_sidebar_position=='right'){?>
             <div class="sd-sidebar sd-sidebar-right" id="sd-sidebar-right">
