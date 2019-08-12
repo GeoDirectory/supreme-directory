@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Supreme Directory 2.0.0.8\n"
+"Project-Id-Version: Supreme Directory 2.0.0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-30 17:18+0100\n"
-"PO-Revision-Date: 2019-04-30 17:19+0100\n"
+"POT-Creation-Date: 2019-08-08 15:06+0100\n"
+"PO-Revision-Date: 2019-08-08 15:06+0100\n"
 "Last-Translator: \n"
 "Language-Team: AyeCode Ltd <contact@ayecode.io>\n"
 "Language: en_US\n"
@@ -18,16 +18,16 @@ msgstr ""
 "X-Generator: Poedit 1.8.7.1\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: archive.php:22 geodirectory-single.php:35 geodirectory.php:29 index.php:26
-#: page.php:13 page_full-width.php:20 single.php:20 woocommerce.php:51
+#: archive.php:22 geodirectory-single.php:35 geodirectory.php:29 index.php:23
+#: page.php:13 page_full-width.php:20 single.php:20 woocommerce.php:20
 msgid "Sorry, no results were found."
 msgstr ""
 
-#: archive.php:37 content.php:54 functions.php:501 index.php:41
+#: archive.php:37 content.php:52 functions.php:505 index.php:38
 msgid "Previous"
 msgstr ""
 
-#: archive.php:38 content.php:51 functions.php:502 index.php:42
+#: archive.php:38 content.php:49 functions.php:506 index.php:39
 msgid "Next"
 msgstr ""
 
@@ -36,33 +36,33 @@ msgstr ""
 msgid "%s's Profile"
 msgstr ""
 
-#: content-geodirectory-archive.php:44 content-geodirectory.php:43
-#: content.php:34
+#: content-geodirectory-archive.php:47 content-geodirectory.php:41
+#: content.php:32
 msgid "Pages:"
 msgstr ""
 
-#: content-geodirectory-archive.php:52 content-geodirectory.php:51
-#: content.php:42 inc/geodirectory-compatibility.php:275
+#: content-geodirectory-archive.php:55 content-geodirectory.php:49
+#: content.php:40
 msgid "Edit"
 msgstr ""
 
-#: content-geodirectory-archive.php:90
+#: content-geodirectory-archive.php:91
 msgid "SEARCH LISTINGS"
 msgstr ""
 
-#: content-geodirectory-archive.php:92
+#: content-geodirectory-archive.php:91
 msgid "SHOW LISTINGS"
 msgstr ""
 
-#: content-geodirectory-archive.php:94
+#: content-geodirectory-archive.php:91
 msgid "SHOW MAP"
 msgstr ""
 
-#: content.php:52
+#: content.php:50
 msgid "Next post:"
 msgstr ""
 
-#: content.php:55
+#: content.php:53
 msgid "Previous post:"
 msgstr ""
 
@@ -121,63 +121,23 @@ msgstr ""
 msgid "Home"
 msgstr ""
 
-#: functions.php:432
+#: functions.php:436
 #, php-format
 msgid "Search Results for: %s"
 msgstr ""
 
-#: functions.php:584
+#: functions.php:588
 msgid "WordPress"
 msgstr ""
 
-#: functions.php:585
+#: functions.php:589
 #, php-format
 msgid "Copyright &copy; %1$s %2$s %3$s Theme %4$s"
 msgstr ""
 
-#: functions.php:586
+#: functions.php:590
 #, php-format
 msgid " - Powered by %s."
-msgstr ""
-
-#: inc/geodirectory-compatibility.php:242
-#: template-parts/header/header-single-top.php:36
-msgid "Verified Owner"
-msgstr ""
-
-#: inc/geodirectory-compatibility.php:249
-#: template-parts/header/header-single-top.php:19
-msgid "Claim Me"
-msgstr ""
-
-#: inc/geodirectory-compatibility.php:299
-#: inc/geodirectory-compatibility.php:304
-#: inc/geodirectory-compatibility.php:316
-msgid "Claim"
-msgstr ""
-
-#: inc/geodirectory-compatibility.php:381
-#: template-parts/header/header-single-top.php:115
-msgid "Write a Review"
-msgstr ""
-
-#: inc/geodirectory-compatibility.php:415
-#: inc/geodirectory-compatibility.php:425
-#: template-parts/header/header-single-top.php:137
-#: template-parts/header/header-single-top.php:147
-msgid "Share on Facebook"
-msgstr ""
-
-#: inc/geodirectory-compatibility.php:418
-#: inc/geodirectory-compatibility.php:427
-#: template-parts/header/header-single-top.php:141
-#: template-parts/header/header-single-top.php:150
-msgid "Share on Twitter"
-msgstr ""
-
-#: inc/geodirectory-compatibility.php:421
-#: inc/geodirectory-compatibility.php:429
-msgid "Share on Google Plus"
 msgstr ""
 
 #: inc/sd-class-metabox.php:11
@@ -202,6 +162,28 @@ msgstr ""
 
 #: inc/sd-class-metabox.php:40
 msgid "Show:"
+msgstr ""
+
+#: template-parts/header/header-single-top.php:19
+msgid "Claim Me"
+msgstr ""
+
+#: template-parts/header/header-single-top.php:36
+msgid "Verified Owner"
+msgstr ""
+
+#: template-parts/header/header-single-top.php:128
+msgid "Write a Review"
+msgstr ""
+
+#: template-parts/header/header-single-top.php:150
+#: template-parts/header/header-single-top.php:160
+msgid "Share on Facebook"
+msgstr ""
+
+#: template-parts/header/header-single-top.php:154
+#: template-parts/header/header-single-top.php:163
+msgid "Share on Twitter"
 msgstr ""
 
 #, fuzzy

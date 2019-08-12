@@ -15,22 +15,20 @@
             <?php
 
             // add the title if its not added in the featured area
-            $post_id = $post->ID;
+            $pid = $post->ID;
             if(function_exists('geodir_is_page') && geodir_is_page('single') && isset($post->post_type)){
                 $page_id = geodir_cpt_template_page('page_details',$post->post_type);
                 if($page_id){
-                    $post_id = $page_id;
+                    $pid = $page_id;
                 }
             }
-            $featured_type  = get_post_meta($post_id, '_sd_featured_area', true);
+            $featured_type  = get_post_meta($pid, '_sd_featured_area', true);
             if($featured_type == 'remove'){
                 ?>
                 <h1 class="entry-title"><?php the_title(); ?></h1>
                 <?php
             }
 
-            global $more;
-            $more = 0;
             if (is_singular() || ( function_exists('is_bbpress') && is_bbpress() )) {
                 the_content();
             } else {

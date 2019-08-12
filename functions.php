@@ -17,7 +17,7 @@ SUPREME DIRECTORY CODE STARTS
  * Define some constants for later use.
  */
 if (!defined('SD_DEFAULT_FEATURED_IMAGE')) define('SD_DEFAULT_FEATURED_IMAGE', get_stylesheet_directory_uri() . "/images/featured.jpg");
-if (!defined('SD_VERSION')) define('SD_VERSION', "2.0.0.8");
+if (!defined('SD_VERSION')) define('SD_VERSION', "2.0.0.9");
 if (!defined('SD_CHILD')) define('SD_CHILD', 'supreme-directory');
 
 if(is_admin()){
@@ -114,7 +114,7 @@ function sd_theme_customize_css() {
 }
 
 /**
- * Loads the translation files for wordpress.
+ * Loads the translation files for WordPress.
  *
  * @since 1.0.0
  */
@@ -426,6 +426,10 @@ function sd_feature_area_title_meta(){
     if (is_singular()) {
         ?>
         <h1 class="entry-title"><?php the_title(); ?></h1>
+        <?php
+    } elseif (function_exists('is_woocommerce') && is_woocommerce()) {
+        ?>
+        <h1 class="entry-title"><?php woocommerce_page_title(); ?></h1>
         <?php
     } else if ( is_search() ) {
 		?>
