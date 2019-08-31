@@ -120,18 +120,14 @@ do_action( 'sd-detail-details-before' ); ?>
 
 		<div class="sd-detail-cta">
 			<?php
-
-
 			// write a review
-			if(comments_open( )){
-				//$review_button = '<a class="dt-btn" href="' . get_the_permalink() . '#reviews">' . __( 'Write a Review', 'supreme-directory' ) . '</a>';
-				$review_button_text = __("Write a Review","supreme-directory");
-				$review_button_shortcode = '[gd_post_badge size="large" key="post_title" condition="is_not_empty"  link="#reviews" badge="'.$review_button_text .'" new_window="0" bg_color="#ed6d61" txt_color="#ffffff" alignment="center"]';
-				$review_button = apply_filters( 'sd_details_output_review_button_shortcode',$review_button_shortcode);
-				$review_button = do_shortcode($review_button);
+			if ( comments_open() ) {
+				$review_button_text = __( "Write a Review", "supreme-directory" );
+				$review_button_shortcode = '[gd_post_badge size="large" key="post_title" condition="is_not_empty"  link="#reviews" badge="' . $review_button_text . '" new_window="0" bg_color="#ed6d61" txt_color="#ffffff" alignment="center" css_class="gd-write-a-review-badge"]';
+				$review_button = apply_filters( 'sd_details_output_review_button_shortcode', $review_button_shortcode );
+				$review_button = do_shortcode( $review_button );
 				echo apply_filters( 'sd_details_output_review_button', $review_button );
 			}
-
 
 			// send buttons
 			$send_buttons = '';
