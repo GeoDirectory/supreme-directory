@@ -21,6 +21,7 @@ No, this is optional but recommended.
 
 = 2.0.0.10 =
 * Click on Write a review link don't scroll to review form - FIXED
+* Featured area image not working when image is added via import post with image name only - FIXED
 
 = 2.0.0.9 =
 * Hook added to modify archive map shortcode - CHANGED

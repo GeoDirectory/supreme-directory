@@ -250,20 +250,23 @@ function sd_location_subtitle($subtitle){
     return $subtitle;
 }
 
-add_filter('sd_featured_image','sd_location_manager_image');
-function sd_location_manager_image($image){
+function sd_location_manager_image( $image ) {
+	global $gd_post;
 
-    if(class_exists('GeoDir_Location_SEO') && geodir_is_page('location')){
+    if ( class_exists( 'GeoDir_Location_SEO' ) && geodir_is_page( 'location' ) ) {
         $location_seo = GeoDir_Location_SEO::get_location_seo();
-        //print_r($location_seo);
-        if(!empty($location_seo->image)){
-            $full_image_url = wp_get_attachment_image_src($location_seo->image, 'full');
+
+        if ( ! empty( $location_seo->image ) ) {
+            $full_image_url = wp_get_attachment_image_src( $location_seo->image, 'full' );
             $image = $full_image_url[0];
         }
-    }
+    } elseif ( ! empty( $gd_post ) && ! empty( $gd_post->featured_image ) && ! has_post_thumbnail() && ( geodir_is_page( 'detail' ) || geodir_is_page( 'preview' ) ) ) {
+		$image = geodir_file_relative_url( $gd_post->featured_image, true ); // Use featured image when post thumbnail is not set.
+	}
 
     return $image;
 }
+add_filter( 'sd_featured_image', 'sd_location_manager_image' );
 
 add_action('wp','sd_compatibility_action',15);
 function sd_compatibility_action(){
