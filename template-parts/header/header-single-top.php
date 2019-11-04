@@ -117,7 +117,6 @@ do_action( 'sd-detail-details-before' ); ?>
 			?>
 		</div> <!-- sd-detail-info end -->
 
-
 		<div class="sd-detail-cta">
 			<?php
 			// write a review
@@ -133,7 +132,6 @@ do_action( 'sd-detail-details-before' ); ?>
 			$send_buttons = '';
 			echo apply_filters( 'sd_details_output_send_buttons', $send_buttons );
 
-
 			// fav
 			$fav_html = do_shortcode('[gd_post_fav show="icon"]');
 			echo apply_filters( 'sd_details_output_fav', $fav_html );
@@ -141,23 +139,15 @@ do_action( 'sd-detail-details-before' ); ?>
 			ob_start();
 			?>
 			<ul class="sd-cta-favsandshare">
-				<?php if ( ! $preview ) { ?>
-					<li><a rel="nofollow" target="_blank"
-					       title="<?php echo __( 'Share on Facebook', 'supreme-directory' ); ?>"
-					       href="http://www.facebook.com/sharer.php?u=<?php the_permalink(); ?>&t=<?php urlencode( the_title() ); ?>"><i
-								class="fab fa-facebook"></i></a></li>
-					<li><a rel="nofollow" target="_blank"
-					       title="<?php echo __( 'Share on Twitter', 'supreme-directory' ); ?>"
-					       href="http://twitter.com/share?text=<?php echo urlencode( html_entity_decode( get_the_title(), ENT_COMPAT, 'UTF-8' ) ); ?>&url=<?php echo urlencode( get_the_permalink() ); ?>"><i
-								class="fab fa-twitter"></i></a></li>
-
+				<?php if ( ! $preview ) {
+					$share_url = urlencode( get_the_permalink() );
+					$share_title = urlencode( html_entity_decode( get_the_title(), ENT_COMPAT, 'UTF-8' ) );
+				?>
+					<li><a rel="nofollow" target="_blank" title="<?php echo esc_attr__( 'Share on Facebook', 'supreme-directory' ); ?>" href="http://www.facebook.com/sharer.php?u=<?php echo $share_url; ?>&t=<?php echo $share_title; ?>"><i class="fab fa-facebook"></i></a></li>
+					<li><a rel="nofollow" target="_blank" title="<?php echo esc_attr__( 'Share on Twitter', 'supreme-directory' ); ?>" href="http://twitter.com/share?text=<?php echo $share_title; ?>&url=<?php echo $share_url; ?>"><i class="fab fa-twitter"></i></a></li>
 				<?php } else { ?>
-					<li><a rel="nofollow" target="_blank"
-					       title="<?php echo __( 'Share on Facebook', 'supreme-directory' ); ?>"
-					       href=""><i class="fab fa-facebook"></i></a></li>
-					<li><a rel="nofollow" target="_blank"
-					       title="<?php echo __( 'Share on Twitter', 'supreme-directory' ); ?>"
-					       href=""><i class="fab fa-twitter"></i></a></li>
+					<li><a rel="nofollow" target="_blank" title="<?php echo esc_attr__( 'Share on Facebook', 'supreme-directory' ); ?>" href=""><i class="fab fa-facebook"></i></a></li>
+					<li><a rel="nofollow" target="_blank" title="<?php echo esc_attr__( 'Share on Twitter', 'supreme-directory' ); ?>" href=""><i class="fab fa-twitter"></i></a></li>
 				<?php } ?>
 			</ul>
 			<?php
