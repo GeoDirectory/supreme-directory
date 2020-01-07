@@ -17,7 +17,7 @@ do_action( 'sd-detail-details-before' ); ?>
 
 			if ( ! $author_link && function_exists( 'geodir_claim_show_claim_link' ) && geodir_claim_show_claim_link( $gd_post->ID ) ) {
 				$author_name  = __( 'Claim Me', 'supreme-directory' );
-				$author_link  = do_shortcode( '[gd_claim_post text="Claim Me" output="button"]' );
+				$author_link  = do_shortcode( '[gd_claim_post text="' . esc_attr( $author_name ) . '" output="button"]' );
 				$author_image = '<img src="' . get_stylesheet_directory_uri() . "/images/none.png" . '"  height="100" width="100">';
 			} else {
 				$is_owned    = true;
