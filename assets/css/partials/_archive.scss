@@ -16,6 +16,7 @@ body{
           padding-top: 10px !important;
           overflow-y: scroll;
           max-height: 90vh;
+          -webkit-overflow-scrolling: touch;
         }
 
         .sd-sidebar {

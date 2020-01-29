@@ -19,6 +19,13 @@ No, this is optional but recommended.
 
 == Changelog ==
 
+= 2.0.0.10 =
+* Click on Write a review link don't scroll to review form - FIXED
+* Featured area image not working when image is added via import post with image name only - FIXED
+* Add smooth scrolling to archive pages on iOS devices - FIXED
+* Hide featured area is not working on WooCommerce shop page - FIXED
+* Fixed some W3 validation issues - FIXED
+
 = 2.0.0.9 =
 * Hook added to modify archive map shortcode - CHANGED
 * Marker cluster not working on archive map - FIXED
