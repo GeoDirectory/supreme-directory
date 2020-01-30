@@ -38,7 +38,7 @@ $map_shortcode = apply_filters( 'sd_archive_gd_map_shortcode', '[gd_map width="1
             if (is_singular() || ( function_exists('is_bbpress') && is_bbpress() )) {
                 the_content();
             } else {
-                directory_theme_post_thumbnail();
+                //directory_theme_post_thumbnail();
                 the_excerpt();
             }
             ?>
@@ -53,8 +53,6 @@ $map_shortcode = apply_filters( 'sd_archive_gd_map_shortcode', '[gd_map width="1
             <footer class="entry-footer">
                 <?php directory_theme_entry_meta(); ?>
                 <?php edit_post_link(__('Edit', 'supreme-directory'), '<span class="edit-link">', '</span>'); ?>
-
-
 
                 <?php
                 global $post;

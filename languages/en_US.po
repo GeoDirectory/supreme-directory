@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Supreme Directory 2.0.0.9\n"
+"Project-Id-Version: Supreme Directory 2.0.0.10\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-08 15:06+0100\n"
-"PO-Revision-Date: 2019-08-08 15:06+0100\n"
+"POT-Creation-Date: 2020-01-30 16:14+0530\n"
+"PO-Revision-Date: 2020-01-30 16:14+0530\n"
 "Last-Translator: \n"
 "Language-Team: AyeCode Ltd <contact@ayecode.io>\n"
 "Language: en_US\n"
@@ -15,7 +15,7 @@ msgstr ""
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 2.2.4\n"
 "X-Poedit-SearchPath-0: .\n"
 
 #: archive.php:22 geodirectory-single.php:35 geodirectory.php:29 index.php:23
@@ -46,15 +46,15 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: content-geodirectory-archive.php:91
+#: content-geodirectory-archive.php:89
 msgid "SEARCH LISTINGS"
 msgstr ""
 
-#: content-geodirectory-archive.php:91
+#: content-geodirectory-archive.php:89
 msgid "SHOW LISTINGS"
 msgstr ""
 
-#: content-geodirectory-archive.php:91
+#: content-geodirectory-archive.php:89
 msgid "SHOW MAP"
 msgstr ""
 
@@ -172,17 +172,17 @@ msgstr ""
 msgid "Verified Owner"
 msgstr ""
 
-#: template-parts/header/header-single-top.php:128
+#: template-parts/header/header-single-top.php:124
 msgid "Write a Review"
 msgstr ""
 
-#: template-parts/header/header-single-top.php:150
-#: template-parts/header/header-single-top.php:160
+#: template-parts/header/header-single-top.php:146
+#: template-parts/header/header-single-top.php:149
 msgid "Share on Facebook"
 msgstr ""
 
-#: template-parts/header/header-single-top.php:154
-#: template-parts/header/header-single-top.php:163
+#: template-parts/header/header-single-top.php:147
+#: template-parts/header/header-single-top.php:150
 msgid "Share on Twitter"
 msgstr ""
 

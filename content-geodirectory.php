@@ -32,7 +32,7 @@
             if (is_singular() || ( function_exists('is_bbpress') && is_bbpress() )) {
                 the_content();
             } else {
-                directory_theme_post_thumbnail();
+                //directory_theme_post_thumbnail();
                 the_excerpt();
             }
             ?>

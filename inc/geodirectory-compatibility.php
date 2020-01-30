@@ -253,18 +253,18 @@ function sd_location_subtitle($subtitle){
 function sd_location_manager_image( $image ) {
 	global $gd_post;
 
-    if ( class_exists( 'GeoDir_Location_SEO' ) && geodir_is_page( 'location' ) ) {
-        $location_seo = GeoDir_Location_SEO::get_location_seo();
+	if ( class_exists( 'GeoDir_Location_SEO' ) && ( geodir_is_page( 'location' ) || geodir_is_page( 'archive' ) ) ) {
+		$location_seo = GeoDir_Location_SEO::get_location_seo();
 
-        if ( ! empty( $location_seo->image ) ) {
-            $full_image_url = wp_get_attachment_image_src( $location_seo->image, 'full' );
-            $image = $full_image_url[0];
-        }
-    } elseif ( ! empty( $gd_post ) && ! empty( $gd_post->featured_image ) && ! has_post_thumbnail() && ( geodir_is_page( 'detail' ) || geodir_is_page( 'preview' ) ) ) {
+		if ( ! empty( $location_seo->image ) ) {
+			$full_image_url = wp_get_attachment_image_src( $location_seo->image, 'full' );
+			$image = $full_image_url[0];
+		}
+	} elseif ( ! empty( $gd_post ) && ! empty( $gd_post->featured_image ) && ! has_post_thumbnail() && ( geodir_is_page( 'detail' ) || geodir_is_page( 'preview' ) ) ) {
 		$image = geodir_file_relative_url( $gd_post->featured_image, true ); // Use featured image when post thumbnail is not set.
 	}
 
-    return $image;
+	return $image;
 }
 add_filter( 'sd_featured_image', 'sd_location_manager_image' );
 

@@ -43,7 +43,7 @@ if ( ( ( function_exists( 'is_buddypress' ) && ! is_buddypress() ) || ! function
 				if ( ! $featured_image && has_post_thumbnail() ) { // check if the post has a Post Thumbnail assigned to it.
 					$full_image_url = wp_get_attachment_image_src( get_post_thumbnail_id(), 'full' );
 					$featured_image = $full_image_url[0];
-				} else {
+				} elseif( ! $featured_image ) {
 					$featured_image = SD_DEFAULT_FEATURED_IMAGE;
 				}
 				?>>
