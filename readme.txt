@@ -19,6 +19,9 @@ No, this is optional but recommended.
 
 == Changelog ==
 
+= 2.0.0.11 =
+* GD search full width page title not using title from title/meta setting - FIXED
+
 = 2.0.0.10 =
 * Click on Write a review link don't scroll to review form - FIXED
 * Featured area image not working when image is added via import post with image name only - FIXED

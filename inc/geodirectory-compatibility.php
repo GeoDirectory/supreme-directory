@@ -298,3 +298,20 @@ function sd_archive_gd_map_shortcode( $shortcode ) {
 	return $shortcode;
 }
 add_filter( 'sd_archive_gd_map_shortcode', 'sd_archive_gd_map_shortcode', 10, 1 );
+
+/**
+ * Filter search page title on GD search page.
+ *
+ * @since 2.0.0.11
+ *
+ * @param string $title Search page title.
+ * @return string Filtered title.
+ */
+function sd_geodir_search_page_featured_area_title( $title ) {
+	if ( geodir_is_page( 'search' ) ) {
+		$title = the_title( '', '', false );
+	}
+
+	return $title;
+}
+add_filter( 'sd_featured_area_search_page_title', 'sd_geodir_search_page_featured_area_title', 10, 1 );
