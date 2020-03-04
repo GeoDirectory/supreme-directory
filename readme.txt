@@ -2,8 +2,8 @@
 Contributors: paoltaia, stiofansisland, ayecode
 Tags: food-and-drink, blog, one-column, two-columns, three-columns, left-sidebar, right-sidebar, custom-header, custom-menu, editor-style, featured-images, microformats, post-formats, rtl-language-support, translation-ready
 Requires at least: 4.0
-Tested up to: 5.3.2
-Stable tag: 2.0.0.10
+Tested up to: 5.3
+Stable tag: 2.0.0.11
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -21,6 +21,7 @@ No, this is optional but recommended.
 
 = 2.0.0.11 =
 * GD search full width page title not using title from title/meta setting - FIXED
+* Categories on front-page CSS broken with latest GD - FIXED
 
 = 2.0.0.10 =
 * Click on Write a review link don't scroll to review form - FIXED
