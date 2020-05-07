@@ -315,3 +315,46 @@ function sd_geodir_search_page_featured_area_title( $title ) {
 	return $title;
 }
 add_filter( 'sd_featured_area_search_page_title', 'sd_geodir_search_page_featured_area_title', 10, 1 );
+
+/**
+ * Set the featured image on archive and post type pages if set.
+ * 
+ * @param $image
+ *
+ * @return mixed
+ */
+function sd_archive_feature_image( $image ) {
+
+    $attachment_id = 0;
+    if ( !$image && geodir_is_page( 'post_type' ) ) {
+        $post_type = geodir_get_current_posttype();
+        if( $post_type ){
+
+            $cpts = geodir_get_posttypes('array');
+            if ( ! empty( $cpts[$post_type]['default_image'] ) ) {
+                $attachment_id = absint( $cpts[$post_type]['default_image'] );
+            }
+        }
+
+    } elseif ( !$image && geodir_is_page( 'archive' ) ) {
+        $term_id = get_queried_object_id();
+
+        if( $term_id ){
+            $term_image = get_term_meta( $term_id, 'ct_cat_default_img', true );
+            if(!empty($term_image['id'])){
+                $attachment_id = absint($term_image['id']);
+            }
+        }
+
+    }
+
+
+    if( !$image && !empty($attachment_id )){
+        $full_image_url = wp_get_attachment_image_src( $attachment_id , 'full' );
+        $image = $full_image_url[0];
+    }
+
+
+    return $image;
+}
+add_filter( 'sd_featured_image', 'sd_archive_feature_image', 9, 1 );
