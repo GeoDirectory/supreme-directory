@@ -435,6 +435,10 @@ function sd_feature_area_title_meta(){
 		?>
         <h1 class="entry-title"><?php echo apply_filters( 'sd_featured_area_search_page_title', sprintf( __( 'Search Results for: %s', 'supreme-directory' ), '<span>' . get_search_query() . '</span>' ) ); ?></h1>
         <?php
+    } else if ( !is_front_page() && is_home() ) {
+        ?>
+        <h1 class="entry-title"><?php echo get_the_title( get_option('page_for_posts', true) ); ?></h1>
+        <?php
     } else {
         /*<!-- <h2 class="entry-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>-->*/
         ?>

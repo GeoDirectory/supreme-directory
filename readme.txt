@@ -20,6 +20,10 @@ No, this is optional but recommended.
 == Changelog ==
 
 = 2.0.0.11 =
+* GD archive pages will now show default post type or default category image on archive pages that set the featured section to show - ADDED
+* GD Archive pages width can be contained to a smaller size when using a plugin that uses bootstrap - FIXED
+
+= 2.0.0.11 =
 * GD search full width page title not using title from title/meta setting - FIXED
 * Categories on front-page CSS broken with latest GD - FIXED
 
