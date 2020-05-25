@@ -43,7 +43,7 @@ jQuery(document).ready(function() {
         });
     }
 
-	jQuery(".sd-detail-cta .gd-write-a-review-badge > a, .geodir-post-rating .gd-list-rating-link").on('click', function(e) {
+	jQuery(".sd-detail-cta .gd-write-a-review-badge > a, .sd-ratings .geodir-post-rating .gd-list-rating-link").on('click', function(e) {
 		e.preventDefault();
 		sd_scroll_to_reviews();
 	});
