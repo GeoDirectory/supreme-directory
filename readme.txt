@@ -2,14 +2,26 @@
 Contributors: paoltaia, stiofansisland, ayecode
 Tags: food-and-drink, blog, one-column, two-columns, three-columns, left-sidebar, right-sidebar, custom-header, custom-menu, editor-style, featured-images, microformats, post-formats, rtl-language-support, translation-ready
 Requires at least: 4.0
-Tested up to: 5.3
-Stable tag: 2.0.0.11
+Tested up to: 5.4
+Stable tag: 2.0.0.12
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Supreme Directory is a starter theme for our GeoDirectory plugin (https://wordpress.org/plugins/geodirectory/)
 
-A Supreme Child Theme for Directory Starter, check out this video to see how easy it is to setup: https://www.youtube.com/watch?v=_MXfot6buMc
+== Description ==
+
+A Supreme Child for Directory Starter, check out this video to see how easy it is to setup: https://www.youtube.com/watch?v=_MXfot6buMc
+
+Supreme Directory is the sleekest and faster loading theme for GeoDirectory. It is a Child Theme of our free theme Directory Starter and it is free as well.
+
+Supreme requires minimal setup, it features an eye catching home page design with a full screen featured area boosting parallax effect.
+
+Each page can be built using popular Page Builders, the one we tested the most and we recommend is Beaver Builder.
+
+= Compatible with all Add-ons and more =
+
+All add-ons play well with Supreme and we made sure that BuddyPress would be compatible too. Supreme is 100% responsive and work perfectly with all devices.
 
 == Frequently Asked Questions ==
 
