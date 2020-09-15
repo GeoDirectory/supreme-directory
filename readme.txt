@@ -2,8 +2,8 @@
 Contributors: paoltaia, stiofansisland, ayecode
 Tags: food-and-drink, blog, one-column, two-columns, three-columns, left-sidebar, right-sidebar, custom-header, custom-menu, editor-style, featured-images, microformats, post-formats, rtl-language-support, translation-ready
 Requires at least: 4.0
-Tested up to: 5.4
-Stable tag: 2.0.0.12
+Tested up to: 5.5
+Stable tag: 2.0.0.14
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -30,6 +30,9 @@ All add-ons play well with Supreme and we made sure that BuddyPress would be com
 No, this is optional but recommended.
 
 == Changelog ==
+
+= 2.0.0.14 =
+* Content template bug can cause some page builders to fail to save page - FIXED
 
 = 2.0.0.12 =
 * GD archive pages will now show default post type or default category image on archive pages that set the featured section to show - ADDED

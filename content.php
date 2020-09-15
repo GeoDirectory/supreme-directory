@@ -19,7 +19,7 @@
                 <h1 class="entry-title"><?php the_title(); ?></h1>
                 <?php
             }
-            
+
             if (is_singular() || ( function_exists('is_bbpress') && is_bbpress() )) {
                 the_content();
             } else {
@@ -43,7 +43,7 @@
 
                 <?php
                 global $post;
-                if(is_single() && isset($post->post_type) && $post->post_type='post'){
+                if(is_single() && isset($post->post_type) && $post->post_type == 'post'){
                     // Previous/next post navigation.
                     the_post_navigation(array(
                         'next_text' => '<span class="meta-nav" aria-hidden="true">' . __('Next', 'supreme-directory') . '</span> ' .
@@ -52,7 +52,7 @@
                         'prev_text' => '<span class="meta-nav" aria-hidden="true">' . __('Previous', 'supreme-directory') . '</span> ' .
                             '<span class="screen-reader-text">' . __('Previous post:', 'supreme-directory') . '</span> ' .
                             '<span class="post-title">%title</span>',
-                    )); 
+                    ));
                 }
 
 
