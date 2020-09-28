@@ -20,8 +20,7 @@ $dt_blog_sidebar_position = esc_attr(get_theme_mod('dt_blog_sidebar_position', D
 $sd_sidebar_class = 'sidebar-active sidebar-'.$dt_blog_sidebar_position;
 ?>
 
-    <div class="sd-container">
-        <div class="content-box content-single">
+    <div class="container-fluid">
             <?php if (!have_posts()) :
                 // Include the page content template.
                 get_template_part('content-geodirectory-archive');
@@ -35,7 +34,6 @@ $sd_sidebar_class = 'sidebar-active sidebar-'.$dt_blog_sidebar_position;
                 // End the loop.
             endwhile;
             ?>
-        </div>
     </div>
 
 <?php get_footer(); ?>

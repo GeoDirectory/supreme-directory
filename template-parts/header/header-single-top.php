@@ -1,24 +1,22 @@
 <?php
 global $preview, $gd_post;
 do_action( 'sd-detail-details-before' ); ?>
-<div class="sd-detail-details  <?php if ( isset( $extra_class ) ) {
-	echo $extra_class;
-} ?>">
-	<div class="container">
-		<div class="sd-detail-author">
+<div class="sd-detail-details  <?php if(get_theme_mod('dt_container_full', DT_CONTAINER_FULL)){echo 'container-fluid';}else{ echo "container";}?> ">
+	<div class="row">
+		<div class="sd-detail-author col col-md-2 text-center">
 			<?php
 
 			global $gd_post;
 			$is_owned     = false;
 			$author_link  = do_shortcode( '[gd_post_meta key="post_author" show="value"]' );
 			$author_id   = isset( $gd_post->post_author ) ? absint( $gd_post->post_author ) : '0';
-			$author_image = get_avatar( get_the_author_meta( 'email',$author_id ), 100, 'mm', '', array( 'class' => "author_avatar" ) );
+			$author_image = get_avatar( get_the_author_meta( 'email',$author_id ), 100, 'mm', '', array( 'class' => "author_avatar rounded-circle shadow" ) );
 
 
 			if ( ! $author_link && function_exists( 'geodir_claim_show_claim_link' ) && geodir_claim_show_claim_link( $gd_post->ID ) ) {
 				$author_name  = __( 'Claim Me', 'supreme-directory' );
 				$author_link  = do_shortcode( '[gd_claim_post text="' . esc_attr( $author_name ) . '" output="button"]' );
-				$author_image = '<img src="' . get_stylesheet_directory_uri() . "/images/none.png" . '"  height="100" width="100">';
+				$author_image = '<img class="avatar avatar-default rounded-circle shadow" src="' . get_stylesheet_directory_uri() . "/images/none.png" . '"  height="100" width="100">';
 			} else {
 				$is_owned    = true;
 
@@ -41,7 +39,7 @@ do_action( 'sd-detail-details-before' ); ?>
 			}
 
 			?>
-			<div class="author-avatar">
+			<div class="author-avatar mt-n5x mt-3">
 				<?php echo $author_image; ?>
 			</div>
 
@@ -58,7 +56,7 @@ do_action( 'sd-detail-details-before' ); ?>
 			?>
 		</div>
 		<!-- sd-detail-author end -->
-		<div class="sd-detail-info">
+		<div class="sd-detail-info col mt-3">
 			<?php
 			$post_id = $post->ID;
 			if(function_exists('geodir_is_page') && geodir_is_page('single') && isset($post->post_type)){
@@ -78,7 +76,7 @@ do_action( 'sd-detail-details-before' ); ?>
 			}
 
 			// Address
-			$address_shortcode = '[gd_post_address show="icon-value" address_template="%%city%%, %%region%%, %%country%%" alignment="left"]';
+			$address_shortcode = '[gd_post_address show="icon-value" address_template="%%city%%, %%region%%, %%country%%" ]';
 			$address_shortcode = apply_filters( 'sd_details_output_address_shortcode', $address_shortcode );
 			$address = do_shortcode($address_shortcode);
 			$sd_address = '<div class="sd-address">';
@@ -87,19 +85,19 @@ do_action( 'sd-detail-details-before' ); ?>
 			echo apply_filters( 'sd_details_output_address', $sd_address );
 
 			// Ratings
-			$ratings_shortcode = apply_filters( 'sd_details_output_ratings_shortcode','[gd_post_rating alignment="left"]');
+			$ratings_shortcode = apply_filters( 'sd_details_output_ratings_shortcode','[gd_post_rating ]');
 			$ratings = do_shortcode($ratings_shortcode);
-			$sd_ratings = '<div class="sd-ratings">' . $ratings . '</div>';
+			$sd_ratings = '';//'<div class="sd-ratings">' . $ratings . '</div>';
 			echo apply_filters( 'sd_details_output_ratings', $sd_ratings );
 
 			// Social links
-			$social_shortcodes = '[gd_post_badge key="facebook" condition="is_not_empty" icon_class="fab fa-facebook-f fa-fw" link="%%input%%" new_window="1" bg_color="#2b4be8" txt_color="#ffffff" alignment="left"]';
+			$social_shortcodes = '[gd_post_badge key="facebook" condition="is_not_empty" icon_class="fab fa-facebook-f fa-fw" link="%%input%%" new_window="1" color=\'facebook\' alignment="left"]';
 			$social_shortcodes .= '[gd_post_badge key="twitter" condition="is_not_empty" icon_class="fab fa-twitter fa-fw" link="%%input%%" new_window="1" bg_color="#2bb8e8" txt_color="#ffffff" alignment="left"]';
 			$social_shortcodes .= '[gd_post_badge key="instagram" condition="is_not_empty" icon_class="fab fa-instagram fa-fw" link="%%input%%" new_window="1" bg_color="#a94999" txt_color="#ffffff" alignment="left"]';
 			$social_shortcodes .= '[gd_post_badge key="website" condition="is_not_empty" icon_class="fas fa-link fa-fw" link="%%input%%" new_window="1" bg_color="#85a9b5" txt_color="#ffffff" alignment="left"]';
-			$social_shortcodes .= '[gd_post_badge key="phone" condition="is_not_empty" icon_class="fas fa-phone fa-fw" link="%%input%%" badge="%%input%%" bg_color="#ed6d61" txt_color="#ffffff" alignment="left"]';
+			$social_shortcodes .= '[gd_post_badge key="phone" condition="is_not_empty" icon_class="fas fa-phone fa-fw" link="%%input%%" badge="%%input%%" color=\'secondary\' alignment="left"]';
 			$social_shortcode = apply_filters( 'sd_details_output_social_shortcode',$social_shortcodes);
-			$sd_social = '<div class="sd-contacts">';
+			$sd_social = '<div class="sd-contacts clearfix mt-2">';
 			$sd_social .= do_shortcode($social_shortcode);
 			$sd_social .= '</div>';
 			echo apply_filters( 'sd_details_output_social', $sd_social );
@@ -108,8 +106,9 @@ do_action( 'sd-detail-details-before' ); ?>
 
 			// Categories
 			$cat_shortcode = '[gd_categories title_tag="h4" post_type="0" hide_count="1" sort_by="count" max_level="1" max_count="all" max_count_child="all"]';
+			$cat_shortcode = "[gd_categories title=''  post_type='0'  cpt_title='false'  title_tag='h6'  cpt_ajax='false'  filter_ids=''  hide_empty='true'  hide_count='false'  hide_icon='false'  use_image='false'  cpt_left='false'  sort_by='count'  max_level='1'  max_count='all'  max_count_child='all'  no_cpt_filter='false'  no_cat_filter='false'  design_type=''  card_padding_inside='1'  card_color=''  icon_color=''  icon_size=''  bg=''  mt=''  mr=''  mb='0'  ml=''  pt=''  pr=''  pb=''  pl=''  border=''  rounded=''  rounded_size=''  shadow='' ]";
 			$cat_shortcode = apply_filters( 'sd_details_output_cat_links_shortcode',$cat_shortcode);
-			$cat_links = '<div class="sd-detail-cat-links">';
+			$cat_links = '<div class="sd-detail-cat-links mt-3">';
 			$cat_links .= do_shortcode($cat_shortcode);;
 			$cat_links .= '</div><!-- sd-detail-cat-links end -->';
 			echo apply_filters( 'sd_details_output_cat_links', $cat_links );
@@ -117,12 +116,12 @@ do_action( 'sd-detail-details-before' ); ?>
 			?>
 		</div> <!-- sd-detail-info end -->
 
-		<div class="sd-detail-cta">
+		<div class="sd-detail-cta col col-md-3 mt-3">
 			<?php
 			// write a review
 			if ( comments_open() ) {
 				$review_button_text = __( "Write a Review", "supreme-directory" );
-				$review_button_shortcode = '[gd_post_badge size="large" key="post_title" condition="is_not_empty"  link="#reviews" badge="' . $review_button_text . '" new_window="0" bg_color="#ed6d61" txt_color="#ffffff" alignment="center" css_class="gd-write-a-review-badge"]';
+				$review_button_shortcode = '[gd_post_badge size="large" key="post_title" condition="is_not_empty"  link="#reviews" badge="' . $review_button_text . '" new_window="0" color="primary" alignment="center" css_class="gd-write-a-review-badge" size="h3" mb="2"]';
 				$review_button = apply_filters( 'sd_details_output_review_button_shortcode', $review_button_shortcode );
 				$review_button = do_shortcode( $review_button );
 				echo apply_filters( 'sd_details_output_review_button', $review_button );
@@ -133,26 +132,22 @@ do_action( 'sd-detail-details-before' ); ?>
 			echo apply_filters( 'sd_details_output_send_buttons', $send_buttons );
 
 			// fav
-			$fav_html = do_shortcode('[gd_post_fav show="icon"]');
+			$fav_html = do_shortcode('[gd_post_fav show=\'\'  icon=\'\'  icon_color_off=\'\'  icon_color_on=\'\'  type=\'badge\'  shadow=\'\'  color=\'gray\'  bg_color=\'\'  txt_color=\'\'  size=\'h3\'  alignment=\'block\'  position=\'\'  mt=\'\'  mr=\'\'  mb=\'2\'  ml=\'\'  list_hide=\'\'  list_hide_secondary=\'\' ]');
 			echo apply_filters( 'sd_details_output_fav', $fav_html );
 
-			ob_start();
-			?>
-			<ul class="sd-cta-favsandshare">
-				<?php if ( ! $preview ) {
-					$share_url = urlencode( get_the_permalink() );
-					$share_title = urlencode( html_entity_decode( get_the_title(), ENT_COMPAT, 'UTF-8' ) );
-				?>
-					<li><a rel="nofollow" target="_blank" title="<?php echo esc_attr__( 'Share on Facebook', 'supreme-directory' ); ?>" href="http://www.facebook.com/sharer.php?u=<?php echo $share_url; ?>&t=<?php echo $share_title; ?>"><i class="fab fa-facebook"></i></a></li>
-					<li><a rel="nofollow" target="_blank" title="<?php echo esc_attr__( 'Share on Twitter', 'supreme-directory' ); ?>" href="http://twitter.com/share?text=<?php echo $share_title; ?>&url=<?php echo $share_url; ?>"><i class="fab fa-twitter"></i></a></li>
-				<?php } else { ?>
-					<li><a rel="nofollow" target="_blank" title="<?php echo esc_attr__( 'Share on Facebook', 'supreme-directory' ); ?>" href=""><i class="fab fa-facebook"></i></a></li>
-					<li><a rel="nofollow" target="_blank" title="<?php echo esc_attr__( 'Share on Twitter', 'supreme-directory' ); ?>" href=""><i class="fab fa-twitter"></i></a></li>
-				<?php } ?>
-			</ul>
-			<?php
 
-			$share_html = ob_get_clean();
+			// share args
+			$share_html = '';
+			$share_url = $preview ? '' : urlencode( get_the_permalink() );
+			$share_title =  $preview ? '' :  urlencode( html_entity_decode( get_the_title(), ENT_COMPAT, 'UTF-8' ) );
+
+			// share on facebook
+			$share_html .= apply_filters( 'sd_details_output_share_facebook', do_shortcode( '[gd_post_badge size="large" key="post_title" condition="is_not_empty"  link="https://www.facebook.com/sharer.php?u='.esc_attr($share_url).'&t='.esc_attr($share_title).'" badge="' . esc_attr__( 'Share on Facebook', 'supreme-directory' ). '" new_window="1" color="facebook" alignment="center" css_class="gd-write-a-review-badge" size="h3" mb="2"]' ) );
+
+			// share on twitter
+			$share_html .= apply_filters( 'sd_details_output_share_twitter', do_shortcode( '[gd_post_badge size="large" key="post_title" condition="is_not_empty"  link="https://twitter.com/share?text='.esc_attr($share_title).'url='.esc_attr($share_url).'" badge="' . esc_attr__( 'Share on Twitter', 'supreme-directory' ). '" new_window="1" color="twitter" alignment="center" css_class="gd-write-a-review-badge" size="h3" mb="2"]' ) );
+
+			$share_html = '';
 			echo apply_filters( 'sd_details_output_share_links', $share_html );
 			echo '</div><!-- sd-detail-cta end -->'; ?>
 			<?php do_action( 'sd-detail-details-container-inner-after' ); ?>

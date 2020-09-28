@@ -161,10 +161,13 @@ function sd_feature_area_gd(){
         }
 
         if(!$shortcode_content){
-            $shortcode_content = apply_filters('sd_featured_area_content','[gd_search][gd_categories title_tag="hide" post_type="0" cpt_ajax="1" hide_count="1" sort_by="count" max_level="0" max_count="6" hide_empty="1"]');
+//            $shortcode_content = apply_filters('sd_featured_area_content','[gd_search][gd_categories title_tag="hide" post_type="0" cpt_ajax="1" hide_count="1" sort_by="count" max_level="0" max_count="6" hide_empty="1"]');
+            $shortcode_content = apply_filters('sd_featured_area_content','[gd_search][gd_categories post_type="0" max_level="0" max_count="6" max_count_child="all" title_tag="h4" design_type="icon-top" icon_size="box-small" sort_by="count" mb="3" row_items="6" hide_empty="true" card_padding_inside="1"  hide_count="true" card_color=\'outline-light\']');
         }
         echo do_shortcode($shortcode_content);
-        echo '<div class="home-more"  id="sd-home-scroll" ><a href="#sd-home-scroll"><i class="fa fa-chevron-down"></i></a></div>';
+        if(!is_front_page()){
+            echo '<div class="home-more  h2"  id="sd-home-scroll" ><a href="#sd-home-scroll" class="text-white"><i class="fa fa-chevron-down"></i></a></div>';
+        }
     }
 }
 add_action('sd_feature_area','sd_feature_area_gd',15);
@@ -358,3 +361,218 @@ function sd_archive_feature_image( $image ) {
     return $image;
 }
 add_filter( 'sd_featured_image', 'sd_archive_feature_image', 9, 1 );
+
+/**
+ * Add rating to single page featured area.
+ *
+ * @param $subtitle
+ *
+ * @return string
+ */
+function gd_sd_featured_area_subtitle($subtitle){
+    
+    if(empty($subtitle) && geodir_is_page('single')){
+        $subtitle = do_shortcode("[gd_post_rating show='stars'  size='h2'  alignment='center'  list_hide=''  list_hide_secondary='' ]");
+    }
+    
+    return $subtitle;
+}
+add_filter('sd_featured_area_subtitle','gd_sd_featured_area_subtitle');
+
+/**
+ * Make header transparent on certain pages.
+ *
+ * @param $class
+ *
+ * @return string
+ */
+function gd_sd_header_extra_class( $class ){
+
+    if(geodir_is_page('location')){
+        $class .= ' z-index-1 position-absolute w-100 bg-transparent ';
+    }
+
+    return $class;
+}
+add_filter('dt_header_extra_class','gd_sd_header_extra_class');
+
+
+// JS
+function gd_sd_enqueue_script(){
+    
+    wp_add_inline_script( 'geodir', gd_sd_script() ); 
+}
+add_action('wp_enqueue_scripts', 'gd_sd_enqueue_script');
+
+function gd_sd_script(){
+ob_start();
+if(0){ ?><script><?php }?>
+        jQuery(document).ready(function() {
+            jQuery("body").on("geodir_setup_search_form", function() {
+                if (jQuery(".featured-area .geodir-cat-list-tax").length) {
+                    var postType = jQuery('.featured-area .search_by_post').val();
+                    jQuery(".geodir-cat-list-tax").val(postType);
+                    jQuery(".geodir-cat-list-tax").change();
+                }
+            });
+
+            jQuery("#showMap").click(function() {
+                jQuery('#sd-sidebar-left,#sd-sidebar-right,#hideMap').removeClass('d-none');
+                jQuery('#sd-archive-map,#showMap').addClass('d-none');
+            });
+
+            jQuery("#hideMap").click(function() {
+                jQuery('#sd-sidebar-left,#sd-sidebar-right,#hideMap').addClass('d-none');
+                jQuery('#sd-archive-map,#showMap').removeClass('d-none');
+            });
+
+            jQuery("#showSearch").click(function() {
+                jQuery("body").toggleClass('sd-show-search');
+                if (typeof geodir_reposition_compass == 'function') {
+                    geodir_reposition_compass();
+                }
+            });
+
+            if (jQuery(".sd-detail-cta a.dt-btn").length) {
+                jQuery(".sd-detail-cta a.dt-btn").click(function() {
+                    sd_scroll_to_reviews();
+                });
+            }
+
+            jQuery(".sd-detail-cta .gd-write-a-review-badge, .sd-ratings .geodir-post-rating .gd-list-rating-link").on('click', function(e) {
+                e.preventDefault();
+                sd_scroll_to_reviews();
+            });
+
+
+        });
+
+        function sd_scroll_to_reviews() {
+            jQuery(".geodir-tab-head [href='#reviews']")[0].click();
+
+            setTimeout(function() {
+                jQuery('html,body').animate({
+                    scrollTop: jQuery('#comments #respond').offset().top
+                }, 'slow');
+                jQuery('#comments #respond #comment').focus();
+            }, 200);
+        }
+
+        var $sd_sidebar_position = '';
+        (function() {
+            // set the sidebar position var
+            if (jQuery('body.sd-right-sidebar').length) {
+                $sd_sidebar_position = 'right';
+            } else {
+                $sd_sidebar_position = 'left';
+            }
+
+            if (jQuery(".featured-img").length) {
+                var windowHeight = screen.height;
+                var parallax = document.querySelectorAll(".featured-img"),
+                    speed = 0.6;
+                var bPos = jQuery(".featured-img").css("background-position");
+                var arrBpos = bPos.split(' ');
+                var originalBpos = arrBpos[1];
+                var fetHeight = parseInt(jQuery(".featured-area").css("height"));
+                var fetAreHeight = jQuery(".featured-area").offset().top + fetHeight;
+
+                window.onscroll = function() {
+                    var f = 0;
+                    [].slice.call(parallax).forEach(function(el, i) {
+                        if (f > 1) {
+                            return;
+                        }
+                        var windowYOffset = window.pageYOffset;
+                        originalBpos = parseInt(originalBpos);
+                        var perc = windowYOffset / fetAreHeight + (originalBpos / 100);
+                        //"50% calc("+originalBpos+" - " + (windowYOffset * speed) + "px)"
+                        parallaxPercent = 100 * perc;
+                        if (parallaxPercent > 100) {
+                            parallaxPercent = 100;
+                        }
+                        jQuery(el).css("background-position", "50% " + parallaxPercent + "%");
+                        f++;
+                    });
+                };
+            }
+
+            jQuery("#sd-home-scroll").click(function(event) {
+                event.preventDefault();
+                jQuery('html, body').animate({
+                    scrollTop: jQuery(".featured-area").outerHeight()
+                }, 1000);
+            });
+
+            sd_insert_archive_resizer('.sd-archive-listings','.sd-archive-map');
+        })();
+
+        // insert archive page size adjuster
+        function sd_insert_archive_resizer($listings_container,$map_container) {
+            $screen_width = screen.width;
+            if (jQuery($map_container).length && $screen_width > 992) {
+                $offset = 'mr-n5';
+                if ($sd_sidebar_position == 'left') {
+                    $offset = 'ml-n5';
+                }
+                jQuery($listings_container).prepend('<span class="sd-archive-resizer '+$offset+' iconbox iconsmall fill rounded-circle bg-primary text-white shadow border-0 c-pointer" title="Drag to resize" data-toggle="tooltip"  style="position: sticky;top: 50vh;z-index: 1;width: 30px;height: 30px;line-height: 30px;"><i class="fas fa-arrows-alt-h"></i></span>');
+                sd_position_archive_resizer($listings_container);
+            }
+
+            sd_reposition_archive($listings_container,$map_container);
+        }
+
+        function sd_position_archive_resizer($container) {
+            var $offset = 21;
+            if ($sd_sidebar_position == 'left') {
+                $container = '.sd-sidebar';
+                $offset = 13;
+            }
+            $width = jQuery($container).outerWidth() - $offset;
+            jQuery('.sd-archive-resizer').css('left', $width);
+        }
+
+        function sd_reposition_archive($container,$map_container) {
+
+            var $sd_set_archive_width = false;
+// function to adjust width of archive elements
+            jQuery('body.geodir-fixed-archive .sd-archive-resizer').mousedown(function(e) {console.log('down');
+                e.preventDefault();
+                $left_container = $container;
+                $rigth_container = $map_container;
+                // var $container = '.entry-content';
+                if ($sd_sidebar_position == 'left') {
+                    $left_container = $map_container;
+                    $rigth_container = $container;
+                }
+                jQuery(document).mousemove(function(e) {
+                    jQuery($left_container).removeClass('col-md-7 col-12').addClass('col').css("width", e.pageX + 2).css("max-width", e.pageX + 2).css("flex-basis", 'auto');
+                    jQuery($rigth_container).removeClass('col-md-5 col-12').addClass('col');
+                    sd_position_archive_resizer($container);
+                    $sd_set_archive_width = true;
+                });
+            });
+
+            jQuery(document).mouseup(function(e) {
+                jQuery(document).unbind('mousemove');
+
+                // set the value if we have localstorage
+                if ($sd_set_archive_width && geodir_is_localstorage()) {console.log('up');
+                    // var $container = '.entry-content';
+                    var $offset = 21;
+                    if ($sd_sidebar_position == 'left') {
+                        $container = '.sd-sidebar';
+                        $offset = 13;
+                    }
+                    $width = jQuery('body.geodir-fixed-archive ' + $container).outerWidth() - $offset;
+                    localStorage.setItem('sd_archive_width', $width);
+                    window.dispatchEvent(new Event('resize')); // so map tiles fill in
+                }
+            });
+        }
+
+        <?php if(0){ ?></script><?php }
+
+    return ob_get_clean();
+    
+}

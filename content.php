@@ -1,7 +1,7 @@
 <?php global $dt_blog_sidebar_position,$sd_sidebar_class,$post;?>
 <article <?php post_class(); ?>>
     <?php get_template_part('content-featured-area');?>
-    <div class="container" id="home-scroll">
+    <div class="<?php if(get_theme_mod('dt_container_full', DT_CONTAINER_FULL)){echo 'container-fluid';}else{ echo "container";}?>" id="home-scroll">
 
         <?php
         if($dt_blog_sidebar_position=='left'){?>

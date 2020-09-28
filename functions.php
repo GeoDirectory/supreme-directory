@@ -24,6 +24,9 @@ if(is_admin()){
     require_once('inc/sd-class-metabox.php');             // Add settings for the featured area
 }
 
+// configs
+require_once('inc/config.php');
+
 /**
  * Adds GeoDirectory plugin required admin notice.
  *
@@ -98,9 +101,6 @@ if (!defined('GEODIRECTORY_VERSION')) {
  */
 function sd_enqueue_styles()
 {
-    wp_enqueue_script('supreme', get_stylesheet_directory_uri() . '/assets/js/supreme.min.js', array(), SD_VERSION, true);
-    wp_enqueue_style('directory-theme-child-style', get_stylesheet_directory_uri().'/assets/css/style.css', array('directory-theme-style', 'directory-theme-style-responsive'),SD_VERSION);
-
     ob_start();
     sd_theme_customize_css();
     $customizer_css = ob_get_clean();
@@ -423,38 +423,47 @@ function sd_remove_bp_home_class( $wp_classes, $extra_classes ) {
  * @since 1.0.4
  */
 function sd_feature_area_title_meta(){
-    if (is_singular()) {
+    global $pid;
+    $title_class = "text-white display-3";
+    $pid = $pid ? $pid : get_the_ID();
+    $subtitle = '';
+    if (is_category()) {
+        $pid = '';
         ?>
-        <h1 class="entry-title"><?php the_title(); ?></h1>
+        <h1 class="entry-title <?php echo $title_class ;?>"><?php single_cat_title(); ?></h1>
+        <?php
+    }elseif (is_singular()) {
+        ?>
+        <h1 class="entry-title <?php echo $title_class ;?>"><?php the_title(); ?></h1>
         <?php
     } elseif (function_exists('is_woocommerce') && is_woocommerce()) {
         ?>
-        <h1 class="entry-title"><?php woocommerce_page_title(); ?></h1>
+        <h1 class="entry-title <?php echo $title_class ;?>"><?php woocommerce_page_title(); ?></h1>
         <?php
     } else if ( is_search() ) {
 		?>
-        <h1 class="entry-title"><?php echo apply_filters( 'sd_featured_area_search_page_title', sprintf( __( 'Search Results for: %s', 'supreme-directory' ), '<span>' . get_search_query() . '</span>' ) ); ?></h1>
+        <h1 class="entry-title <?php echo $title_class ;?>"><?php echo apply_filters( 'sd_featured_area_search_page_title', sprintf( __( 'Search Results for: %s', 'supreme-directory' ), '<span>' . get_search_query() . '</span>' ) ); ?></h1>
         <?php
     } else if ( !is_front_page() && is_home() ) {
         ?>
-        <h1 class="entry-title"><?php echo get_the_title( get_option('page_for_posts', true) ); ?></h1>
+        <h1 class="entry-title <?php echo $title_class ;?>"><?php echo get_the_title( get_option('page_for_posts', true) ); ?></h1>
         <?php
     } else {
         /*<!-- <h2 class="entry-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>-->*/
         ?>
-        <h1 class="entry-title"><?php the_title(); ?></h1>
+        <h1 class="entry-title <?php echo $title_class ;?>"><?php the_title(); ?></h1>
         <?php
     }
 
 	if ( is_search() ) {
 		$subtitle = '';
-	} else {
-		$subtitle = get_post_meta(get_the_ID(), 'subtitle', true);
+	} elseif( $pid ) {
+		$subtitle = get_post_meta($pid , 'subtitle', true);
 	}
 
     $subtitle = apply_filters('sd_featured_area_subtitle',$subtitle);
     if ($subtitle) {
-        echo '<div class="entry-subtitle">' . $subtitle . '</div>'; // not escaped by design to allow users to add html here if required
+        echo '<div class="entry-subtitle text-white h5">' . $subtitle . '</div>'; // not escaped by design to allow users to add html here if required
     }
 }
 add_action('sd_feature_area','sd_feature_area_title_meta',10);
@@ -484,7 +493,7 @@ add_filter( 'body_class', 'sd_add_sd_home_class' );
 function sd_feature_area(){
 
     if (is_front_page()) {
-        echo '<div class="home-more"  id="sd-home-scroll" ><a href="#sd-home-scroll"><i class="fas fa-chevron-down"></i></a></div>';
+        echo '<div class="home-more h2"  id="sd-home-scroll" ><a href="#sd-home-scroll" class="text-white"><i class="fas fa-chevron-down"></i></a></div>';
     }
 }
 add_action('sd_feature_area','sd_feature_area',15);
@@ -600,3 +609,28 @@ function sd_footer_copyright_default() {
     }
 }
 add_action( 'dt_footer_copyright', 'sd_footer_copyright_default', 10 );
+
+/**
+ * Change sidebar widget classes.
+ *
+ * @param $class
+ *
+ * @return mixed
+ */
+function sd_sidebar_widget_class($class){
+
+    $class = str_replace(" p-3 "," pb-3 px-3 ",$class);
+
+    return $class;
+}
+add_filter('ds_sidebar_widget_class','sd_sidebar_widget_class');
+
+function sd_header_extra_class( $class ){
+
+    if( is_front_page() ){
+        $class .= ' z-index-1 position-absolute w-100 bg-transparent ';
+    }
+
+    return $class;
+}
+add_filter('dt_header_extra_class','sd_header_extra_class');

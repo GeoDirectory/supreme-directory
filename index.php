@@ -16,8 +16,9 @@ if ( is_home() && get_option( 'page_for_posts' ) ) {
 	</header>
 <?php } ?>
 
-<div class="container">
-	<div class="content-box content-single <?php echo( is_search() ? 'content-search' : '' ); ?>">
+<section class="<?php if(get_theme_mod('dt_container_full', DT_CONTAINER_FULL)){echo 'container-fluid';}else{ echo "container";}?> py-3">
+
+	<div class="content-box content-single <?php echo( is_search() ? 'content-search' : '' ); ?> row">
 		<?php if ( ! have_posts() ) : ?>
 			<div class="alert-error">
 				<p><?php _e( 'Sorry, no results were found.', 'supreme-directory' ); ?></p>
@@ -40,5 +41,5 @@ if ( is_home() && get_option( 'page_for_posts' ) ) {
 		) );
 		?>
 	</div>
-</div>
+</section>
 <?php get_footer(); ?>
