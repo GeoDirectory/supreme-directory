@@ -407,7 +407,7 @@ add_action('wp_enqueue_scripts', 'gd_sd_enqueue_script');
 function gd_sd_script(){
 ob_start();
 if(0){ ?><script><?php }?>
-        jQuery(document).ready(function() {
+        document.addEventListener("DOMContentLoaded", function(event) {
             jQuery("body").on("geodir_setup_search_form", function() {
                 if (jQuery(".featured-area .geodir-cat-list-tax").length) {
                     var postType = jQuery('.featured-area .search_by_post').val();

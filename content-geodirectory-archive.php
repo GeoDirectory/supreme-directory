@@ -7,7 +7,7 @@ $map_shortcode = apply_filters( 'sd_archive_gd_map_shortcode', '[gd_map width="1
     <?php
     if($dt_blog_sidebar_position=='left'){?>
     <div class="sd-sidebar sd-sidebar-left col col-12 col-md-5 px-0 sd-archive-map" id="sd-sidebar-left">
-        <div class="sidebar blog-sidebar page-sidebar sticky-scroll">
+        <div class="sidebar blog-sidebar page-sidebar sticky-top">
             <?php echo do_shortcode( $map_shortcode );?>
         </div>
     </div>
@@ -70,7 +70,7 @@ $map_shortcode = apply_filters( 'sd_archive_gd_map_shortcode', '[gd_map width="1
     <?php
     if($dt_blog_sidebar_position=='right'){?>
         <div class="sd-sidebar sd-sidebar-right sticky-sidebar col col-12 col-md-5 px-0 sd-archive-map d-none d-md-block" id="sd-sidebar-right">
-            <div class="sidebar blog-sidebar page-sidebar sticky-scroll">
+            <div class="sidebar blog-sidebar page-sidebar sticky-top">
                 <?php echo do_shortcode( $map_shortcode );?>
             </div>
         </div>
