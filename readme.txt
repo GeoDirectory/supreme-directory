@@ -3,7 +3,7 @@ Contributors: paoltaia, stiofansisland, ayecode
 Tags: food-and-drink, blog, one-column, two-columns, three-columns, left-sidebar, right-sidebar, custom-header, custom-menu, editor-style, featured-images, microformats, post-formats, rtl-language-support, translation-ready
 Requires at least: 4.0
 Tested up to: 5.5
-Stable tag: 2.1.0.0-beta
+Stable tag: 2.1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -99,5 +99,7 @@ No, this is optional but recommended.
 
 == Upgrade Notice ==
 
+= 2.1.0.0 =
+NOTICE: v2.1 has changed to using bootstrap styles, this is a huge design change that should be checked over.
 
 == Resources ==

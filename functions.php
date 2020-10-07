@@ -17,7 +17,7 @@ SUPREME DIRECTORY CODE STARTS
  * Define some constants for later use.
  */
 if (!defined('SD_DEFAULT_FEATURED_IMAGE')) define('SD_DEFAULT_FEATURED_IMAGE', get_stylesheet_directory_uri() . "/images/featured.jpg");
-if (!defined('SD_VERSION')) define('SD_VERSION', "2.0.0.14");
+if (!defined('SD_VERSION')) define('SD_VERSION', "2.1.0.0");
 if (!defined('SD_CHILD')) define('SD_CHILD', 'supreme-directory');
 
 if(is_admin()){

@@ -31,15 +31,15 @@ do_action( 'sd-detail-details-before' ); ?>
 			if ( function_exists( 'geodir_claim_show_claim_link' ) && GeoDir_Claim_Post::is_claimed( $gd_post->ID ) ) {
 				$is_owned     = true;
 				?>
-				<span class="fa-stack sd-verified-badge" title="<?php _e( 'Verified Owner', 'supreme-directory' ); ?>">
-                                <i class="fas fa-circle fa-inverse"></i>
-                                <i class="fas fa-check-circle"></i>
+				<span class="fa-stack sd-verified-badge position-absolute mt-3 ml-n2 h4" data-toggle="tooltip" title="<?php _e( 'Verified Owner', 'supreme-directory' ); ?>">
+                                <i class="fas fa-circle fa-inverse position-absolute"></i>
+                                <i class="fas fa-check-circle position-absolute text-success"></i>
 				</span>
 				<?php
 			}
 
 			?>
-			<div class="author-avatar mt-n5x mt-3">
+			<div class="author-avatar mt-n5x mt-3 mb-2">
 				<?php echo $author_image; ?>
 			</div>
 

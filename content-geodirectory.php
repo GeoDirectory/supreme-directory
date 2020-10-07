@@ -2,15 +2,6 @@
 <article <?php post_class(); ?>>
     <div class="container" id="home-scroll">
 
-        <?php
-        if($dt_blog_sidebar_position=='left'){?>
-        <div class="sd-sidebar sd-sidebar-left">
-            <div class="sidebar blog-sidebar page-sidebar">
-                <?php dynamic_sidebar('sidebar-gd');?>
-            </div>
-        </div>
-        <?php }?>
-
         <div class="entry-content entry-summary <?php echo $sd_sidebar_class;?>">
             <?php
 
@@ -66,15 +57,6 @@
 
             </footer>
         </div>
-
-        <?php
-        if($dt_blog_sidebar_position=='right'){?>
-            <div class="sd-sidebar sd-sidebar-right">
-                <div class="sidebar blog-sidebar page-sidebar">
-                    <?php dynamic_sidebar('sidebar-gd'); ?>
-                </div>
-            </div>
-        <?php }?>
 
     </div>
 </article>
